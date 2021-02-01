@@ -168,11 +168,17 @@ CREATE TABLE fbfiles
 -- 여행기록 조회수
 CREATE TABLE fbhits
 (
-  idx number(10)   NOT NULL,
   num number(10)   NOT NULL,
   id  VARCHAR2(40),
-  CONSTRAINT PK_fbhits PRIMARY KEY (idx, num)
+  CONSTRAINT PK_fbhits PRIMARY KEY (num, id)
 );
+-- CREATE TABLE fbhits
+-- (
+--   idx number(10)   NOT NULL,
+--   num number(10)   NOT NULL,
+--   id  VARCHAR2(40),
+--   CONSTRAINT PK_fbhits PRIMARY KEY (idx, num)
+-- );
 
 -- 여행기록 추천
 CREATE TABLE recomm
@@ -215,12 +221,9 @@ CREATE TABLE qfile
 CREATE TABLE qhits
 (
   num  number(10)   NOT NULL,
-  fpid varchar2(32) NOT NULL,
-  CONSTRAINT PK_qhits PRIMARY KEY (num, fpid)
+  id  VARCHAR2(40)  NOT NULL,
+  CONSTRAINT PK_qhits PRIMARY KEY (num, id)
 );
-
-ALTER TABLE qhits
-  ADD CONSTRAINT UQ_qhits_fpid UNIQUE (fpid);
 
 
 -- [ 구독자 게시판 ]
@@ -242,12 +245,10 @@ CREATE TABLE subscriberboard
 CREATE TABLE sbhits
 (
   num  number(10)   NOT NULL,
-  fpid varchar2(32) NOT NULL,
-  CONSTRAINT PK_sbhits PRIMARY KEY (num, fpid)
+  id  VARCHAR2(40)  NOT NULL,
+  CONSTRAINT PK_sbhits PRIMARY KEY (num, id)
 );
 
-ALTER TABLE sbhits
-  ADD CONSTRAINT UQ_sbhits_fpid UNIQUE (fpid);
 
 -- 구독자게시판 댓글
 CREATE TABLE scomment
@@ -343,8 +344,18 @@ ALTER TABLE notify
     FOREIGN KEY (id)
     REFERENCES bmembers (id);
 
+ALTER TABLE sbhits
+  ADD CONSTRAINT FK_bmembers_TO_sbhits
+    FOREIGN KEY (id)
+    REFERENCES bmembers (id);
+
 ALTER TABLE fbhits
   ADD CONSTRAINT FK_bmembers_TO_fbhits
+    FOREIGN KEY (id)
+    REFERENCES bmembers (id);
+
+ALTER TABLE qhits
+  ADD CONSTRAINT FK_bmembers_TO_qhits
     FOREIGN KEY (id)
     REFERENCES bmembers (id);
 

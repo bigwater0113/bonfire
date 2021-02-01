@@ -1,7 +1,7 @@
 ---------------------------------------------------------------
--- [ í…Œì´ë¸” ìƒì„± ì‹œìž‘! ]
+-- [ Å×ÀÌºí »ý¼º ½ÃÀÛ! ]
 
--- íšŒì›í…Œì´ë¸”
+-- È¸¿øÅ×ÀÌºí
 CREATE TABLE bmembers
 (
   id      VARCHAR2(40)  NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE bmembers
   CONSTRAINT PK_bmembers PRIMARY KEY (id)
 );
 
--- ê¶Œí•œí…Œì´ë¸”
+-- ±ÇÇÑÅ×ÀÌºí
 CREATE TABLE auth
 (
   id        VARCHAR2(40) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE auth
   CONSTRAINT PK_auth PRIMARY KEY (id, authority)
 );
 
--- ë¡œê·¸ì¸ë‚´ì—­ë“±ë¡ í…Œì´ë¸”
+-- ·Î±×ÀÎ³»¿ªµî·Ï Å×ÀÌºí
 CREATE TABLE loginrecord
 (
   id           VARCHAR2(40)  NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE loginrecord
   CONSTRAINT PK_loginrecord PRIMARY KEY (id, recentaccess)
 );
 
--- memberí”„ë¡œí•„
+-- memberÇÁ·ÎÇÊ
 CREATE TABLE mprofile
 (
   id        VARCHAR2(40)  NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE mprofile
   CONSTRAINT PK_mprofile PRIMARY KEY (id)
 );
 
--- ì‚¬ìš©ìž ì•Œë¦¼
+-- »ç¿ëÀÚ ¾Ë¸²
 CREATE TABLE notify
 (
   idx       number(10)   NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE notify
   CONSTRAINT PK_notify PRIMARY KEY (idx)
 );
 
--- íŒ”ë¡œìš° í…Œì´ë¸”
+-- ÆÈ·Î¿ì Å×ÀÌºí
 CREATE TABLE follow
 (
   id      VARCHAR2(40),
@@ -71,7 +71,7 @@ CREATE TABLE follow
   adddate date        
 );
 
--- ìž‘ê°€í…Œì´ë¸”
+-- ÀÛ°¡Å×ÀÌºí
 CREATE TABLE author
 (
   idx       number(10)    NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE author
   CONSTRAINT PK_author PRIMARY KEY (idx)
 );
 
--- ì¹´í…Œê³ ë¦¬ìŠ¤ í…Œì´ë¸” (ë¬¸ì˜ êµ¬ë…ìž ê²Œì‹œíŒìš©)
+-- Ä«Å×°í¸®½º Å×ÀÌºí (¹®ÀÇ ±¸µ¶ÀÚ °Ô½ÃÆÇ¿ë)
 CREATE TABLE cats
 (
   cname       VARCHAR2(40) NOT NULL,
@@ -92,8 +92,8 @@ CREATE TABLE cats
 );
 
 
--- [ ì¼ê¸°ìž¥ ]
--- ì¼ê¸°ìž¥ í…Œì´ë¸”
+-- [ ÀÏ±âÀå ]
+-- ÀÏ±âÀå Å×ÀÌºí
 CREATE TABLE dailyboard
 (
   num     number(10)    NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE dailyboard
 );
 
 
--- ì¼ê¸°ìž¥ ì²¨ë¶€íŒŒì¼
+-- ÀÏ±âÀå Ã·ºÎÆÄÀÏ
 CREATE TABLE dfile
 (
   idx          number(10)    NOT NULL,
@@ -116,8 +116,8 @@ CREATE TABLE dfile
 );
 
 
--- [ ì—¬í–‰ê¸°ë¡ ]
--- ì—¬í–‰ê¸°ë¡í…Œì´ë¸”
+-- [ ¿©Çà±â·Ï ]
+-- ¿©Çà±â·ÏÅ×ÀÌºí
 CREATE TABLE feedboard
 (
   num       number(10)    NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE feedboard
   CONSTRAINT PK_feedboard PRIMARY KEY (num)
 );
 
--- ìŠ¤í¬ëž© ê²Œì‹œíŒ
+-- ½ºÅ©·¦ °Ô½ÃÆÇ
 CREATE TABLE scrapboard
 (
   id      VARCHAR2(40) NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE scrapboard
   CONSTRAINT PK_scrapboard PRIMARY KEY (id, num)
 );
 
--- ì—¬í–‰ê¸°ë¡ ëŒ“ê¸€ í…Œì´ë¸”
+-- ¿©Çà±â·Ï ´ñ±Û Å×ÀÌºí
 CREATE TABLE fbcomment
 (
   idx     NUMBER(10)   NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE fbcomment
 );
 
 
--- ì—¬í–‰ê¸°ë¡ ì²¨ë¶€íŒŒì¼
+-- ¿©Çà±â·Ï Ã·ºÎÆÄÀÏ
 CREATE TABLE fbfiles
 (
   idx          number(10)    NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE fbfiles
   CONSTRAINT PK_fbfiles PRIMARY KEY (idx, num)
 );
 
--- ì—¬í–‰ê¸°ë¡ ì¡°íšŒìˆ˜
+-- ¿©Çà±â·Ï Á¶È¸¼ö
 CREATE TABLE fbhits
 (
   num number(10)   NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE fbhits
 --   CONSTRAINT PK_fbhits PRIMARY KEY (idx, num)
 -- );
 
--- ì—¬í–‰ê¸°ë¡ ì¶”ì²œ
+-- ¿©Çà±â·Ï ÃßÃµ
 CREATE TABLE recomm
 (
   idx     number(10)   NOT NULL,
@@ -192,8 +192,8 @@ CREATE TABLE recomm
 );
 
 
--- [ ë¬¸ì˜ê²Œì‹œíŒ ]
--- ë¬¸ì˜ê²Œì‹œíŒ
+-- [ ¹®ÀÇ°Ô½ÃÆÇ ]
+-- ¹®ÀÇ°Ô½ÃÆÇ
 CREATE TABLE qnaboard
 (
   num      number(10)    NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE qnaboard
   CONSTRAINT PK_qnaboard PRIMARY KEY (num)
 );
 
--- ë¬¸ì˜ê²Œì‹œíŒ ì²¨ë¶€íŒŒì¼
+-- ¹®ÀÇ°Ô½ÃÆÇ Ã·ºÎÆÄÀÏ
 CREATE TABLE qfile
 (
   idx          number(10)    NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE qfile
   CONSTRAINT PK_qfile PRIMARY KEY (idx, num)
 );
 
--- ë¬¸ì˜ê²Œì‹œíŒ ì¡°íšŒìˆ˜
+-- ¹®ÀÇ°Ô½ÃÆÇ Á¶È¸¼ö
 CREATE TABLE qhits
 (
   num  number(10)   NOT NULL,
@@ -226,8 +226,8 @@ CREATE TABLE qhits
 );
 
 
--- [ êµ¬ë…ìž ê²Œì‹œíŒ ]
--- êµ¬ë…ìžê²Œì‹œíŒ
+-- [ ±¸µ¶ÀÚ °Ô½ÃÆÇ ]
+-- ±¸µ¶ÀÚ°Ô½ÃÆÇ
 CREATE TABLE subscriberboard
 (
   num       number(10)    NOT NULL,
@@ -241,7 +241,7 @@ CREATE TABLE subscriberboard
   CONSTRAINT PK_subscriberboard PRIMARY KEY (num)
 );
 
--- êµ¬ë…ìžê²Œì‹œíŒ ì¡°íšŒìˆ˜
+-- ±¸µ¶ÀÚ°Ô½ÃÆÇ Á¶È¸¼ö
 CREATE TABLE sbhits
 (
   num  number(10)   NOT NULL,
@@ -250,7 +250,7 @@ CREATE TABLE sbhits
 );
 
 
--- êµ¬ë…ìžê²Œì‹œíŒ ëŒ“ê¸€
+-- ±¸µ¶ÀÚ°Ô½ÃÆÇ ´ñ±Û
 CREATE TABLE scomment
 (
   idx     number(10)   NOT NULL,
@@ -261,7 +261,7 @@ CREATE TABLE scomment
   CONSTRAINT PK_scomment PRIMARY KEY (idx, snum)
 );
 
--- êµ¬ë…ìžê²Œì‹œíŒ ì¶”ì²œ
+-- ±¸µ¶ÀÚ°Ô½ÃÆÇ ÃßÃµ
 CREATE TABLE srecomm
 (
   idx     number(10)   NOT NULL,
@@ -272,7 +272,7 @@ CREATE TABLE srecomm
   CONSTRAINT PK_srecomm PRIMARY KEY (idx, num)
 );
 
--- êµ¬ë…ìžê²Œì‹œíŒ ì²¨ë¶€íŒŒì¼
+-- ±¸µ¶ÀÚ°Ô½ÃÆÇ Ã·ºÎÆÄÀÏ
 CREATE TABLE sfiles
 (
   idx          number(10)    NOT NULL,
@@ -282,12 +282,12 @@ CREATE TABLE sfiles
   CONSTRAINT PK_sfiles PRIMARY KEY (idx, num)
 );
 
--- [ í…Œì´ë¸” ìƒì„± ë! ]
+-- [ Å×ÀÌºí »ý¼º ³¡! ]
 ---------------------------------------------------------------
 
 
 
--- [ í…Œì´ë¸”ì— ì¡°ê±´ë¶™ì´ê¸° ]
+-- [ Å×ÀÌºí¿¡ Á¶°ÇºÙÀÌ±â ]
 
 ALTER TABLE author
   ADD CONSTRAINT FK_bmembers_TO_author

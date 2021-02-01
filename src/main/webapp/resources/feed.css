@@ -10,10 +10,17 @@
 	height:20%;
 	background-color: yellow;
 }
+#side{
+	width:25%;
+	height:60%;
+	background-color: lightblue;
+	float:left;
+}
 #content{
-	width:100%;
+	width:75%;
 	height:60%;
 	background-color: orange;
+	float:left;
 }
 #footer{
 	width:100%;

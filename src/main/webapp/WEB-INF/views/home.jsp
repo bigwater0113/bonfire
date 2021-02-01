@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <!-- home.jsp -->
 <div>
-	<h1>main 하이 다은다은다은</h1>
+	<h1>main test 하이하이</h1>
 </div>

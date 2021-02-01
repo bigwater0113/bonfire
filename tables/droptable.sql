@@ -25,9 +25,6 @@ drop table loginrecord;
 drop table auth;
 drop table bmembers;
 
-
-
-
 -- [ drop sequence ]
 
 drop sequence bmembers_seq;

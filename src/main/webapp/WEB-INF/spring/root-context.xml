@@ -16,15 +16,11 @@
 	<!-- 2. SqlSessionFactory <== SqlSessionFactoryBean ( DataSource + XML Mapper파일 ) -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:com/test/spring10/mybatis/mybatis-config.xml"/>
+		<property name="configLocation" value="classpath:com/jhta/bonfire/mybatis/mybatis-config.xml"/>
 	</bean>
 	<!-- 3. Session 설정 <== sqlSessionTemplate (SqlSessionTemplate 주입) -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
-	</bean>
-	<bean id="usersMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.test.spring10.mapper.MyUsersMapper"/>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
 	

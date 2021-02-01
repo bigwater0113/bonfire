@@ -110,7 +110,7 @@ CREATE TABLE fbcomment
   num     number(10)  ,
   id      VARCHAR2(40),
   content clob        ,
-  date    DATE        ,
+  adddate DATE        ,
   CONSTRAINT PK_fbcomment PRIMARY KEY (idx)
 );
 
@@ -124,7 +124,7 @@ COMMENT ON COLUMN fbcomment.id IS '아이디';
 
 COMMENT ON COLUMN fbcomment.content IS '내용';
 
-COMMENT ON COLUMN fbcomment.date IS '작성날짜';
+COMMENT ON COLUMN fbcomment.adddate IS '작성날짜';
 
 CREATE TABLE fbfiles
 (
@@ -233,18 +233,15 @@ COMMENT ON COLUMN loginrecord.status IS '성공?실패?등등';
 
 CREATE TABLE mprofile
 (
-  id           VARCHAR2(40)  NOT NULL,
-  nickname     VARCHAR2(40) ,
-  intro        VARCHAR2(200),
-  follow       NUMBER(10)   ,
-  follower     NUMBER(10)   ,
-  orgfilename  varchar2(200),
-  savefilename varchar2(200) NOT NULL,
+  id        VARCHAR2(40)  NOT NULL,
+  nickname  VARCHAR2(40) ,
+  intro     VARCHAR2(200),
+  follow    NUMBER(10)   ,
+  follower  NUMBER(10)   ,
+  bfilename varchar2(200),
+  pfilename varchar2(200),
   CONSTRAINT PK_mprofile PRIMARY KEY (id)
 );
-
-ALTER TABLE mprofile
-  ADD CONSTRAINT UQ_savefilename UNIQUE (savefilename);
 
 COMMENT ON TABLE mprofile IS '프로필';
 

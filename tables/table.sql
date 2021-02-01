@@ -9,7 +9,7 @@ CREATE TABLE bmembers
   name    VARCHAR2(40) ,
   email   VARCHAR2(50) ,
   birth   DATE         ,
-  gender  varchar2(10) ,
+  gender  VARCHAR2(10) ,
   phone   VARCHAR2(15) ,
   address VARCHAR2(600),
   enabled number(1)    ,

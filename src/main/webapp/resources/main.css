@@ -2,21 +2,21 @@
 
 #wrap{
 	width:1200px;
-	height:800px;
+	height:1000px;
 	margin:auto;
 }
 #header{
-	width:100%;
-	height:20%;
+	width:1200px;
+	height:200px;
 	background-color: yellow;
 }
 #content{
-	width:100%;
-	height:60%;
+	width:1200px;
+	height:600px;
 	background-color: orange;
 }
 #footer{
-	width:100%;
-	height:20%;
+	width:1200px;
+	height:200px;
 	background-color: pink;
 }

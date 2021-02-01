@@ -2,28 +2,29 @@
 
 #wrap{
 	width:1200px;
-	height:800px;
+	height:1000px;
 	margin:auto;
 }
 #header{
-	width:100%;
-	height:20%;
+	width:1200px;
+	height:200px;
 	background-color: yellow;
 }
 #side{
-	width:25%;
-	height:60%;
+	width:300px;
+	height:600px;
 	background-color: lightblue;
 	float:left;
 }
 #content{
-	width:75%;
-	height:60%;
+	width:900px;
+	height:600px;
 	background-color: orange;
 	float:left;
 }
 #footer{
-	width:100%;
-	height:20%;
+	width:1200px;
+	height:200px;
 	background-color: pink;
+	clear:both;
 }

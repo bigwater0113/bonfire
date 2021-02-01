@@ -17,26 +17,26 @@
 	
 	
 	
-	<definition name=".home.*.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
+	<definition name=".home.*.*.*" template="/WEB-INF/views/home/layout.jsp" extends=".home">
 		<put-attribute name="content" value="/WEB-INF/views/home/{1}/{2}/{3}.jsp"/>
 	</definition>
 	
-	<definition name=".home.*.*" template="/WEB-INF/views/layout.jsp" extends=".home">
+	<definition name=".home.*.*" template="/WEB-INF/views/home/layout.jsp" extends=".home">
 		<put-attribute name="content" value="/WEB-INF/views/home/{1}/{2}.jsp"/>
 	</definition>
 	
-	<definition name=".home.*" template="/WEB-INF/views/layout.jsp" extends=".home">
+	<definition name=".home.*" template="/WEB-INF/views/home/layout.jsp" extends=".home">
 		<put-attribute name="content" value="/WEB-INF/views/home/{1}.jsp"/>
 	</definition>
-	<definition name=".feed.*.*.*" template="/WEB-INF/views/layout2.jsp" extends=".feed">
+	<definition name=".feed.*.*.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}/{2}/{3}.jsp"/>
 	</definition>
 	
-	<definition name=".feed.*.*" template="/WEB-INF/views/layout2.jsp" extends=".feed">
+	<definition name=".feed.*.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}/{2}.jsp"/>
 	</definition>
 	
-	<definition name=".feed.*" template="/WEB-INF/views/layout2.jsp" extends=".feed">
+	<definition name=".feed.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}.jsp"/>
 	</definition>
 </tiles-definitions>

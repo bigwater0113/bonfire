@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- home.jsp -->
+<!-- footer.jsp -->
 <div>
-	<h1>main</h1>
+	<h2>footer</h2>
 </div>

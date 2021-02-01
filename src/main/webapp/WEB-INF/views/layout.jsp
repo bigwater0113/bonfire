@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>layout.jsp</title>
+<link rel="stylesheet" type="text/css" href="${cp }/resources/main.css">
+<style>
+	*{margin:0px;padding:0px;}
+</style>
 </head>
 <body>
 <div id="wrap">

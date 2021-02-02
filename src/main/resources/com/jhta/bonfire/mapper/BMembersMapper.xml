@@ -6,4 +6,7 @@
 	<insert id="insert" parameterType="bmembers">
 		insert into bmembers values(#{id},#{pwd},#{name},#{email},#{birth},#{gender},#{phone},#{address},1,sysdate)
 	</insert>
+	<select id="isMember" parameterType="hashmap" resultType="hashmap">
+		select * from bmembers where id=#{id} and pwd=#{pwd}
+	</select>
 </mapper>

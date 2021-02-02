@@ -1,5 +1,7 @@
 package com.jhta.bonfire.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +14,8 @@ public class BMembersService {
 	private BMembersDao dao;
 	public int insert(BMembersVo vo) {
 		return dao.insert(vo);
+	}
+	public HashMap<String, Object> isMember(HashMap<String, String> map) {
+		return dao.isMember(map);
 	}
 }

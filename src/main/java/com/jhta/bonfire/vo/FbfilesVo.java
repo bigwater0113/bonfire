@@ -2,29 +2,29 @@ package com.jhta.bonfire.vo;
 
 public class FbfilesVo {
 
-	private int fidx;
-	private int fnum;
+	private int idx;
+	private int num;
 	private String savefilename;
 	private String orgfilename;
 	public FbfilesVo() {}
-	public FbfilesVo(int fidx, int fnum, String savefilename, String orgfilename) {
+	public FbfilesVo(int idx, int num, String savefilename, String orgfilename) {
 		super();
-		this.fidx = fidx;
-		this.fnum = fnum;
+		this.idx = idx;
+		this.num = num;
 		this.savefilename = savefilename;
 		this.orgfilename = orgfilename;
 	}
-	public int getFidx() {
-		return fidx;
+	public int getIdx() {
+		return idx;
 	}
-	public void setFidx(int fidx) {
-		this.fidx = fidx;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
-	public int getFnum() {
-		return fnum;
+	public int getNum() {
+		return num;
 	}
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public String getSavefilename() {
 		return savefilename;

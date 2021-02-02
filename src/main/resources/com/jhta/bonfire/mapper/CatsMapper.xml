@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.jhta.bonfire.mapper.CatsMapper">
     <select id="catList" resultType="list" parameterType="string">
         select cname from cats where cwhichboard=#{cwhichboard}
     </select>

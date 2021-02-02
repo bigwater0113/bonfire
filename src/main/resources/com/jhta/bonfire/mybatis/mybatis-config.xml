@@ -7,6 +7,10 @@
   	<typeAlias type="com.jhta.bonfire.vo.TestVo" alias="Test"/>
   	<typeAlias type="com.jhta.bonfire.vo.CatsVo" alias="cats"/>
   	<typeAlias type="com.jhta.bonfire.vo.Feedboard_fbjoinVo" alias="fjoin"/>
+  	<typeAlias type="com.jhta.bonfire.vo.FeedboardVo" alias="feedboard"/>
+  	<typeAlias type="com.jhta.bonfire.vo.FbcommentVo" alias="fbcomment"/>
+  	<typeAlias type="com.jhta.bonfire.vo.FbhitsVo" alias="fbhits"/>
+  	<typeAlias type="com.jhta.bonfire.vo.FbrecommVo" alias="fbrecomm"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->

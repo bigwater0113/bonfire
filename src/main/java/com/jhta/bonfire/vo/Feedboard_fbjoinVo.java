@@ -8,7 +8,7 @@ public class Feedboard_fbjoinVo {
 		private String id;
 		private String title;
 		private String content;
-		private int recommand;
+		private int recommend;
 		private int hits;
 		private int scrap;
 		private int ispost;

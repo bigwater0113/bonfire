@@ -15,5 +15,5 @@ insert into cats values('질문', 'subscriberboard');
 insert into cats values('동행', 'subscriberboard');
 insert into cats values('여행지추천', 'subscriberboard');
 insert into cats values('작가추천', 'subscriberboard');
-insert into cats values('기타', 'subscriberboard');
 insert into cats values('자유', 'subscriberboard');
+insert into cats values('팁', 'subscriberboard');

@@ -165,13 +165,13 @@
 		    <version>4.2.20.RELEASE</version>
 		</dependency>
 
-		<!-- test -->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<!-- 단위테스트 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>4.3.30.RELEASE</version>
-		    <scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
 		</dependency>
 	<!-- ////////////////////////////// Tiles관련  ///////////////////////////////////-->
 	<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
@@ -294,7 +294,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>

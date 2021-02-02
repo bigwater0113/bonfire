@@ -6,6 +6,7 @@
   <typeAliases>
   	<typeAlias type="com.jhta.bonfire.vo.TestVo" alias="Test"/>
   	<typeAlias type="com.jhta.bonfire.vo.CatsVo" alias="cats"/>
+  	<typeAlias type="com.jhta.bonfire.vo.SubBoardVo" alias="subboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.Feedboard_fbjoinVo" alias="fjoin"/>
   	<typeAlias type="com.jhta.bonfire.vo.FeedboardVo" alias="feedboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.FbcommentVo" alias="fbcomment"/>
@@ -19,6 +20,7 @@
   	<!-- 읽어올 Mapper파일 설정 -->
     <mapper resource="com/jhta/bonfire/mapper/TestMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/CatsMapper.xml"/>
+    <mapper resource="com/jhta/bonfire/mapper/SubBoardMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/FeedboardMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/BMembersMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>

@@ -11,8 +11,9 @@ CREATE TABLE bmembers
   birth   DATE         ,
   gender  VARCHAR2(10) ,
   phone   VARCHAR2(15) ,
-  address VARCHAR2(600),
+  address VARCHAR2(2000),
   enabled number(1)    ,
+  regdate date		   ,
   CONSTRAINT PK_bmembers PRIMARY KEY (id)
 );
 
@@ -124,7 +125,7 @@ CREATE TABLE feedboard
   id        VARCHAR2(40) ,
   title     VARCHAR2(200),
   content   clob         ,
-  recommand number(10)   ,
+  recommend number(10)   ,
   hits      number(10)   ,
   scrap     number(10)   ,
   ispost    number(1)    ,
@@ -204,6 +205,7 @@ CREATE TABLE qnaboard
   hits     number(10)   ,
   comments clob         ,
   cname    VARCHAR2(40) ,
+  pwd	   VARCHAR2(25) ,
   CONSTRAINT PK_qnaboard PRIMARY KEY (num)
 );
 
@@ -235,7 +237,7 @@ CREATE TABLE subscriberboard
   title     VARCHAR2(200),
   content   clob         ,
   adddate   DATE         ,
-  recommand number(10)   ,
+  recommend number(10)   ,
   hits      number(10)   ,
   cname     VARCHAR2(40) ,
   CONSTRAINT PK_subscriberboard PRIMARY KEY (num)

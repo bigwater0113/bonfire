@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <!--     
+CREATE TABLE subscriberboard
+(
+  num       number(10)    NOT NULL,
+  id        VARCHAR2(40) ,
+  title     VARCHAR2(200),
+  content   clob         ,
+  adddate   DATE         ,
+  recommand number(10)   ,
+  hits      number(10)   ,
+  cname     VARCHAR2(40) ,
+  CONSTRAINT PK_subscriberboard PRIMARY KEY (num)
+);
+   -->
+<mapper namespace="com.jhta.bonfire.mapper.SubBoardMapper">
+    <sql id="search">
+        <where>
+            <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(#{cname})">
+                cname=#{cname}
+            </if>
+            <choose>
+                <when test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'id')">
+                    and id=#{keyword}
+                </when>
+                <otherwise>
+                    <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(#{field})">
+                        and id=#{keyword}
+                    </if>
+                </otherwise>
+            </choose>
+            <!-- <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'titleandcontent')">
+                <![CDATA[
+                and contains(title, '%'||#{keyword}||'%')>0 and contains(content, '%'||#{keyword}||'%')>0
+                ]]>
+            </if>
+            <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'content')">
+                <![CDATA[
+                and contains(content, '%'||#{keyword}||'%')>0
+                ]]>
+            </if>
+            <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'title')">
+                <![CDATA[
+                and contains(title, '%'||#{keyword}||'%')>0
+                ]]>
+            </if> -->
+        </where>
+    </sql>
+    
+    
+    <select id="count" parameterType="hashmap">
+        select nvl(count('idx'),0) cnt 
+        from subscriberboard
+        <include refid="search" />
+    </select>
+
+    <select id="list" resultType="subboard" parameterType="hashmap">
+        <![CDATA[ 
+select b.rnum, b.num, b.id, b.title, b.adddate, b.recommand, b.hits, b.cname
+from (
+select /*+ index_desc(PK_SUBSCRIBERBOARD)*/ rownum rnum, a.num, a.id, a.title, a.adddate, a.recommand, a.hits, a.cname
+from (
+select num, id, title, adddate, recommand, hits, cname
+from SUBSCRIBERBOARD
+        ]]>
+        <include refid="search" />
+        <![CDATA[
+) a
+    where rownum<=#{endRow}
+) b
+where rnum>=#{startRow};
+        ]]> 
+    </select>
+
+</mapper>

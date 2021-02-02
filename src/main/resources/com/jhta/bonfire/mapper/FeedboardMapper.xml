@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.bonfire.mapper.FeedboardMapper">
+
+	<select id="selectAll" resultType="fjoin">
+		select f.num num,f.id id,f.title title,f.content content,f.recommend recommend,f.hits hits,f.scrap scrap,f.ispost ispost,f.postdate postdate,f.adddate adddate,f.cname cname,
+		c.idx comidx, c.num comnum, c.id comid, c.content comcontent, c.adddate comadddate, fb.idx fidx, fb.num fnum, fb.savefilename savefilename, fb.orgfilename orgfilename, 
+		h.num hnum,h.id hid, r.idx ridx, r.num rnum, r.id rid, r.value value, r.adddate radddate 
+		from feedboard f join fbcomment c on f.num=c.num join fbfiles fb on f.num=fb.num join fbhits h on f.num=h.num 
+		join recomm r on f.num=r.num
+	</select>
+	
+	<select id="selectOne" resultType="fjoin">
+		select f.num num,f.id id,f.title title,f.content content,f.recommend recommend,f.hits hits,f.scrap scrap,f.ispost ispost,f.postdate postdate,f.adddate adddate,f.cname cname,
+		c.idx comidx, c.num comnum, c.id comid, c.content comcontent, c.adddate comadddate, fb.idx fidx, fb.num fnum, fb.savefilename savefilename, fb.orgfilename orgfilename, 
+		h.num hnum,h.id hid, r.idx ridx, r.num rnum, r.id rid, r.value value, r.adddate radddate 
+		from feedboard f join fbcomment c on f.num=c.num join fbfiles fb on f.num=fb.num join fbhits h on f.num=h.num 
+		join recomm r on f.num=r.num where f.num=#{num}
+	</select>
+	<insert id="insertPosting" parameterType="feedboard">
+		insert into feedboard values (#{num},#{id},#{title},#{content},#{recommend},#{hits},
+		#{scrap},#{ispost},#{postdate},#{adddate},#{cname})
+	</insert>
+	
+	<insert id="insertFile" parameterType="file">
+		insert into fbfiles values (#{fidx},#{fnum},#{savefilename},#{orgfilename})
+	</insert>
+	
+	<delete id="deletePosting">
+		delete from feedboard where num=#{num}
+	</delete>
+	<delete id="deleteComment">
+		delete from fbcomment where idx=#{comidx}
+	</delete>
+</mapper>

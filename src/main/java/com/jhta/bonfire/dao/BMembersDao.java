@@ -20,4 +20,10 @@ public class BMembersDao {
 	public HashMap<String, Object> isMember(HashMap<String, String> map){
 		return sqlSession.selectOne(NAMESPACE+".isMember", map);
 	}
+	public String searchId(HashMap<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE+".searchId",map);
+	}
+	public String searchPwd(HashMap<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE+".searchPwd",map);
+	}
 }

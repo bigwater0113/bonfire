@@ -9,4 +9,10 @@
 	<select id="isMember" parameterType="hashmap" resultType="hashmap">
 		select * from bmembers where id=#{id} and pwd=#{pwd}
 	</select>
+	<select id="searchId" parameterType="hashmap" resultType="String">
+		select id from bmembers where name=#{name} and email=#{email}
+	</select>
+	<select id="searchPwd" parameterType="hashmap" resultType="String">
+		select pwd from bmembers where id=#{id} and name=#{name} and email=#{email}
+	</select>
 </mapper>

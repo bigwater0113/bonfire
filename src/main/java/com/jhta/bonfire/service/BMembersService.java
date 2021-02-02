@@ -18,4 +18,10 @@ public class BMembersService {
 	public HashMap<String, Object> isMember(HashMap<String, String> map) {
 		return dao.isMember(map);
 	}
+	public String searchId(HashMap<String, String> map) {
+		return dao.searchId(map);
+	}
+	public String searchPwd(HashMap<String, String> map) {
+		return dao.searchPwd(map);
+	}
 }

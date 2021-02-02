@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CatsDao {
     @Autowired private SqlSession sqlSession;
-    public List<String> catList(String cwhichboard) {return sqlSession.selectList("catList");}
+    private static final String NAMESPACE="com.jhta.bonfire.mapper.CatsMapper";
+    public List<String> catList(String cwhichboard) {return sqlSession.selectList(NAMESPACE+".catList", cwhichboard);}
 }

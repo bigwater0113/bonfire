@@ -23,17 +23,20 @@ CREATE TABLE subscriberboard
             <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(#{cname})">
                 cname=#{cname}
             </if>
-            <choose>
+            <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'id')">
+                and id=#{keyword}
+            </if>
+            <!-- <choose>
                 <when test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'id')">
                     and id=#{keyword}
                 </when>
                 <otherwise>
                     <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(#{field})">
-                        and id=#{keyword}
+                        and contains(#{field}, '%'||#{keyword}||'%')>0
                     </if>
                 </otherwise>
-            </choose>
-            <!-- <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'titleandcontent')">
+            </choose> -->
+            <if test="@com.jhta.bonfire.util.CommonUtil@equals(#{field}, 'titlecontent')">
                 <![CDATA[
                 and contains(title, '%'||#{keyword}||'%')>0 and contains(content, '%'||#{keyword}||'%')>0
                 ]]>
@@ -47,7 +50,7 @@ CREATE TABLE subscriberboard
                 <![CDATA[
                 and contains(title, '%'||#{keyword}||'%')>0
                 ]]>
-            </if> -->
+            </if>
         </where>
     </sql>
     
@@ -58,21 +61,21 @@ CREATE TABLE subscriberboard
         <include refid="search" />
     </select>
 
-    <select id="list" resultType="subboard" parameterType="hashmap">
+    <select id="getList" resultType="subboard" parameterType="hashmap">
         <![CDATA[ 
-select b.rnum, b.num, b.id, b.title, b.adddate, b.recommand, b.hits, b.cname
-from (
-select /*+ index_desc(PK_SUBSCRIBERBOARD)*/ rownum rnum, a.num, a.id, a.title, a.adddate, a.recommand, a.hits, a.cname
-from (
-select num, id, title, adddate, recommand, hits, cname
-from SUBSCRIBERBOARD
+            select b.rnum, b.num, b.id, b.title, b.adddate, b.recommand, b.hits, b.cname
+            from (
+            select /*+ index_desc(PK_SUBSCRIBERBOARD)*/ rownum rnum, a.num, a.id, a.title, a.adddate, a.recommand, a.hits, a.cname
+            from (
+            select num, id, title, adddate, recommand, hits, cname
+            from SUBSCRIBERBOARD
         ]]>
         <include refid="search" />
         <![CDATA[
-) a
-    where rownum<=#{endRow}
-) b
-where rnum>=#{startRow};
+            ) a
+                where rownum<=#{endRow}
+            ) b
+            where rnum>=#{startRow};
         ]]> 
     </select>
 

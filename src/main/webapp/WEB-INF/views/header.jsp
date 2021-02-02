@@ -18,7 +18,7 @@
 	<div id="header_login"><a href="${cp }/login">로그인</a></div>
 	<div id="header_slideMenu">
 		<ul id="header_menulist">
-			<li><a href="#">여행게시판</a></li>
+			<li><a href="${cp }/feedboard_main_selectAll">여행게시판</a></li>
 			<li><a href="#">자유게시판</a></li>
 			<li><a href="#">문의게시판</a></li>
 			<li><a href="#">경로게시판</a></li>

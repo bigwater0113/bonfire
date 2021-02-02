@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 public class SubBoardDao {
     @Autowired private SqlSession sqlSession;
     private static final String NAMESPACE = "com.jhta.bonfire.mapper.SubBoardMapper";
-    public int count(HashMap<String, Object> map) {return sqlSession.selectOne(NAMESPACE+".list", map);}
+    
+    public int count(HashMap<String, Object> map) {return sqlSession.selectOne(NAMESPACE+".count", map);}
     public List<SubBoardVo> getList(HashMap<String, Object> map) {return sqlSession.selectList(NAMESPACE + ".getList", map);}
 
 }

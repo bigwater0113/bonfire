@@ -90,4 +90,18 @@ public class SubBoardVo {
         this.cname = cname;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " num='" + getNum() + "'" +
+            ", id='" + getId() + "'" +
+            ", title='" + getTitle() + "'" +
+            ", content='" + getContent() + "'" +
+            ", adddate='" + getAdddate() + "'" +
+            ", recommand='" + getRecommand() + "'" +
+            ", hits='" + getHits() + "'" +
+            ", cname='" + getCname() + "'" +
+            "}";
+    }
+
 }

@@ -12,6 +12,7 @@
   	<!-- 읽어올 Mapper파일 설정 -->
     <mapper resource="com/jhta/bonfire/mapper/TestMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/CatsMapper.xml"/>
+    <mapper resource="com/jhta/bonfire/mapper/SubBoardMapper.xml"/>
  
   </mappers>
 </configuration>

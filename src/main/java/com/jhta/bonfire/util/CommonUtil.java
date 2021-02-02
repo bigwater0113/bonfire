@@ -23,14 +23,18 @@ public class CommonUtil {
             return obj == null;
     }
 
+    public static Boolean isNotEmpty(Object obj) {return !isEmpty(obj);}
+
     /**
      * 주어진 모든 인자가 비어있지 않는지 체크 한다.
      * @param objects
      * @return
      */
-    public static Boolean isNotEmpty(Object... objects) {
+    public static Boolean isAllNotEmpty(Object... objects) {
     	if(objects == null || objects.length == 0) {return false;}
     	for(Object obj : objects) {
+            System.out.println((String) obj);
+            System.out.println(objects.length);
     		if(isEmpty(obj)) {return false;}
     	}
     	return true;

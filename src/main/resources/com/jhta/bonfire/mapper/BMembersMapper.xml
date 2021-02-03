@@ -3,8 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.bonfire.mapper.BMembersMapper">
-	<insert id="insert" parameterType="bmembers">
+	<resultMap type="com.jhta.bonfire.security.CustomUserDetail" id="userDetail">
+		<id property="id" column="id"/>
+		<result property="pwd" column="pwd"/>
+		<result property="enabled" column="enabled"/>
+		<collection property="authoList" ofType="com.jhta.bonfire.vo.AuthVo">
+			<result property="id" column="id"/>
+			<result property="authority" column="authority"/>
+		</collection>
+	</resultMap>
+	<select id="getAuths" parameterType="string" resultMap="userDetail">
+		select * from auth a,bmembers b
+		where a.id=b.id and b.id=#{id}
+	</select>
+	<insert id="b_insert" parameterType="bmembers">
 		insert into bmembers values(#{id},#{pwd},#{name},#{email},#{birth},#{gender},#{phone},#{address},1,sysdate)
+	</insert>
+	<insert id="a_insert" parameterType="auth">
+		insert into auth values(#{id},#{authority})
 	</insert>
 	<select id="isMember" parameterType="hashmap" resultType="hashmap">
 		select * from bmembers where id=#{id} and pwd=#{pwd}

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- login/join.jsp -->
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
 	label{width:100px;display:inline-block;}
 </style>
 <div>
-	<form method="post" action="${cp }/join" id="joinForm">
+	<form:form method="post" action="${cp }/join" id="joinForm">
 		<label for="id">아이디</label><input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
 		<label for="pwd">비밀번호</label><input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
 		<label for="check">비밀번호확인</label><input type="password" id="check" required="required"><span id="checkMsg"></span><br>
@@ -19,7 +20,7 @@
 		<label for="phone">핸드폰번호</label><input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
 		<label for="address">주소</label><input type="text" name="address" id="address" required="required"><br>
 		<input type="submit" value="회원가입">
-	</form>
+	</form:form>
 </div>
 <script>
 	$(function(){

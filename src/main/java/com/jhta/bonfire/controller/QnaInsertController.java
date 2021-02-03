@@ -2,7 +2,6 @@ package com.jhta.bonfire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,8 +19,12 @@ public class QnaInsertController {
 		return ".home.qna.insert";
 	}
 	@RequestMapping(value = "qna/insert",method = RequestMethod.POST)
-	public String insert(QnaBoardVo vo,Model model) {
-		service.insert(vo);
-		return ".home.qna.main";
+	public String insert(QnaBoardVo vo) {
+		int n=service.insert(vo);
+		if(n>0) {
+			return "redirect:/qna/main";
+		}else {
+			return ".home.qna.insert";
+		}
 	}
 }

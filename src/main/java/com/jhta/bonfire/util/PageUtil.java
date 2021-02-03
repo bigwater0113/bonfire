@@ -27,8 +27,8 @@ public class PageUtil {
         this.listCount=listCount;
         this.pageCount = listCount/listSize;
         if (listCount%listSize!=0) pageCount++;
-        this.endRow=page*listCount;
-        this.startRow=endRow-listCount+1;
+        this.endRow=page*listSize;
+        this.startRow=endRow-listSize+1;
         this.startPage=((page-1)/pageSize)*pageSize+1;
         this.endPage = startPage+pageSize-1;
         if (endPage>pageCount) endPage=pageCount;

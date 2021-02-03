@@ -10,8 +10,7 @@
 			<c:if test="${id == 'admin' }">
 				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
 			</c:if>
-			<input type="submit" value="추천 ▲" name="feedboard_desc" formaction="">
-			<input type="submit" value="추천 ▼" name="feedboard_asc" formaction="">
+<!-- 			<input type="submit" value="추천 ▲" name="feedboard_desc" formaction=""> -->
 		</div>
 		<div id="feedboard_table">
 			<table>

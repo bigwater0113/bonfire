@@ -1,5 +1,6 @@
 package com.jhta.bonfire.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,16 @@ import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 public class FeedboardService {
 	@Autowired private FeedboardDao dao;
 	
-	public List<Feedboard_fbjoinVo> selectAll(){
-		return dao.selectAll();
+	public int count(HashMap<String,Object> map) {
+		return dao.count(map);
+	}
+	
+	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
+		return dao.selectAll(map);
+	}
+	
+	public Feedboard_fbjoinVo selectOne(int num) {
+		return dao.selectOne(num);
 	}
 	
 }

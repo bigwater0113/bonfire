@@ -1,24 +1,24 @@
 package com.jhta.bonfire.util;
 
 public class PageUtil {
-    private int page;
-    private int listSize;
-    private int pageSize;
-    private int listCount;
-    private int pageCount; //ì „ì²´í˜ì´ì§€ê°¯ìˆ˜
-    private int startRow; 
-    private int endRow;
-    private int startPage;
-    private int endPage;
+    private int page; //ÇöÀç ÆäÀÌÁö ¹øÈ£
+    private int listSize; //ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú ±Û °¹¼ö
+    private int pageSize; //ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú ÆäÀÌÁö °¹¼ö
+    private int listCount; //ÀüÃ¼ ±Û °¹¼ö
+    private int pageCount; //ÀüÃ¼ ÆäÀÌÁö °¹¼ö
+    private int startRow; //½ÃÀÛ Çà ¹øÈ£
+    private int endRow; //³¡ Çà ¹øÈ£
+    private int startPage; //½ÃÀÛ ÆäÀÌÁö ¹øÈ£
+    private int endPage; //³¡ ÆäÀÌÁö ¹øÈ£
 
     public PageUtil(){}
 
     /**
      * 
-     * @param page í˜„ì¬í˜ì´ì§€
-     * @param listSize í™”ë©´ê¸€ê°¯ìˆ˜
-     * @param pageSize í™”ë©´í˜ì´ì§•ê°¯ìˆ˜
-     * @param listCount ì „ì²´ê¸€ê°¯ìˆ˜
+     * @param page ÆäÀÌÁö¹øÈ£
+     * @param listSize ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú ±Û °¹¼ö
+     * @param pageSize ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú ÆäÀÌÁö °¹¼ö
+     * @param listCount ÀüÃ¼ ±ÛÀÇ °¹¼ö
      */
     public PageUtil(int page, int listSize, int pageSize, int listCount) {
         this.page=page;

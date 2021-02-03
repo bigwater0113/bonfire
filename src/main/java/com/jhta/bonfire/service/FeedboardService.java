@@ -21,6 +21,14 @@ public class FeedboardService {
 		return dao.selectAll(map);
 	}
 	
+	public int countbyId(HashMap<String,Object> map) {
+		return dao.countbyId(map);
+	}
+	
+	public List<Feedboard_fbjoinVo> selectAllbyId(HashMap<String,Object> map){
+		return dao.selectAllbyId(map);
+	}
+	
 	public Feedboard_fbjoinVo selectOne(int num) {
 		return dao.selectOne(num);
 	}

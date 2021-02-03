@@ -3,6 +3,9 @@ package com.jhta.bonfire.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +39,27 @@ public class FeedBoardController {
 		model.addAttribute("field", field);
 		model.addAttribute("keyword",keyword);
 		return ".feed.travelersboard.list_main";
+	}
+	@RequestMapping("/feedboard_feed_selectAllbyId")
+	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		String id=(String)session.getAttribute("id");
+		map.put("id", id);
+		map.put("field", field);
+		map.put("keyword",keyword);
+		int listCount=service.countbyId(map);
+		PageUtil pu=new PageUtil(page, 10, 10, listCount);
+		int startRow=pu.getStartRow();
+		int endRow=pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		
+		List<Feedboard_fbjoinVo> list=service.selectAllbyId(map);
+		model.addAttribute("list",list);
+		model.addAttribute("pu",pu);
+		model.addAttribute("field", field);
+		model.addAttribute("keyword",keyword);
+		return ".feed.travelersboard.list_feed";
 	}
 	
 	@GetMapping("/feedboard_detail")

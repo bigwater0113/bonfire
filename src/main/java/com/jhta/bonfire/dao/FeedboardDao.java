@@ -22,6 +22,16 @@ public class FeedboardDao {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
 	
+	public List<Feedboard_fbjoinVo> selectAllbyId(HashMap<String,Object> map){
+		return session.selectList(NAMESPACE+".selectAllbyId",map);
+	}
+	
+	public int countbyId(HashMap<String,Object> map) {
+		return session.selectOne(NAMESPACE+".countbyId",map);
+	}
+	
+	
+	
 	public Feedboard_fbjoinVo selectOne(int num) {
 		return session.selectOne(NAMESPACE + ".selectOne", num);
 	}

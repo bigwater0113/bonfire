@@ -8,17 +8,26 @@
 </style>
 <div>
 	<form:form method="post" action="${cp }/join" id="joinForm">
-		<label for="id">아이디</label><input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
-		<label for="pwd">비밀번호</label><input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
-		<label for="check">비밀번호확인</label><input type="password" id="check" required="required"><span id="checkMsg"></span><br>
-		<label for="name">이름</label><input type="text" name="name" id="name" required="required"><br>
-		<label for="email">이메일</label><input type="email" name="email" id="email" required="required"><br>
-		<label for="birth">생년월일</label><input type="date" name="birth" id="birth" required="required"><br>
+		<label for="id">아이디</label>
+		<input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
+		<label for="pwd">비밀번호</label>
+		<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
+		<label for="check">비밀번호확인</label>
+		<input type="password" id="check" required="required"><span id="checkMsg"></span><br>
+		<label for="name">이름</label>
+		<input type="text" name="name" id="name" required="required"><br>
+		<label for="email">이메일</label>
+		<input type="email" name="email" id="email" required="required"><br>
+		<label for="birth">생년월일</label>
+		<input type="date" name="birth" id="birth" required="required"><br>
 		<label for="gender">성별</label>
 		남<input type="radio" name="gender" value="M" checked>
 		여<input type="radio" name="gender" value="W"><br>
-		<label for="phone">핸드폰번호</label><input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
-		<label for="address">주소</label><input type="text" name="address" id="address" required="required"><br>
+		<label for="phone">핸드폰번호</label>
+		<input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
+		<label for="address">주소</label>
+		<input type="text" name="address" id="address" required="required"><br>
+		<a href="${cp }/home/login/Sample.jsp">주소검색</a><br>
 		<input type="submit" value="회원가입">
 	</form:form>
 </div>

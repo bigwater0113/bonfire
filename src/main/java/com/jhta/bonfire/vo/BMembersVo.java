@@ -10,15 +10,16 @@ public class BMembersVo {
 	private Date birth;
 	private String gender;
 	private String phone;
-	private String address;
+	private String roadfulladdr;
 	private int enabled;
 	private Date regdate;
+	private String addrdetail;
+	private String zipno;
 	public BMembersVo() {
 		super();
 	}
-	
 	public BMembersVo(String id, String pwd, String name, String email, Date birth, String gender, String phone,
-			String address, int enabled, Date regdate) {
+			String roadfulladdr, int enabled, Date regdate, String addrdetail, String zipno) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -27,11 +28,12 @@ public class BMembersVo {
 		this.birth = birth;
 		this.gender = gender;
 		this.phone = phone;
-		this.address = address;
+		this.roadfulladdr = roadfulladdr;
 		this.enabled = enabled;
 		this.regdate = regdate;
+		this.addrdetail = addrdetail;
+		this.zipno = zipno;
 	}
-
 	public String getId() {
 		return id;
 	}
@@ -74,11 +76,11 @@ public class BMembersVo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
+	public String getRoadfulladdr() {
+		return roadfulladdr;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setRoadfulladdr(String roadfulladdr) {
+		this.roadfulladdr = roadfulladdr;
 	}
 	public int getEnabled() {
 		return enabled;
@@ -86,13 +88,23 @@ public class BMembersVo {
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
-
 	public Date getRegdate() {
 		return regdate;
 	}
-
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public String getAddrdetail() {
+		return addrdetail;
+	}
+	public void setAddrdetail(String addrdetail) {
+		this.addrdetail = addrdetail;
+	}
+	public String getZipno() {
+		return zipno;
+	}
+	public void setZipno(String zipno) {
+		this.zipno = zipno;
 	}
 	
 }

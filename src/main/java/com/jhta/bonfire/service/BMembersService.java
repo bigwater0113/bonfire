@@ -34,6 +34,9 @@ public class BMembersService {
 		dao.insert(avo);
 		return 1;
 	}
+	public HashMap<String, Object> idCheck(String id) {
+		return dao.idCheck(id);
+	}
 	public HashMap<String, Object> isMember(HashMap<String, String> map) {
 		return dao.isMember(map);
 	}
@@ -42,5 +45,11 @@ public class BMembersService {
 	}
 	public String searchPwd(HashMap<String, String> map) {
 		return dao.searchPwd(map);
+	}
+	
+	public int delete(String id) {
+		dao.a_delete(id);
+		dao.b_delete(id);
+		return 1;
 	}
 }

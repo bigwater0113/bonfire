@@ -22,8 +22,9 @@
 		<a href="${cp }/login">로그인</a>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-		[<sec:authentication property="principal.username"/>]님 
-		<a href="${cp }/logout">로그아웃</a>
+		[<sec:authentication property="principal.username"/>]님 <br>
+		<a href="${cp }/logout">로그아웃</a><br>
+		<a href="${cp }/withdraw">회원탈퇴</a><br>
 	</sec:authorize>
 	</div>
 	<div id="header_slideMenu">

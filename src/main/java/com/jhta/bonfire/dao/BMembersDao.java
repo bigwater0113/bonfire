@@ -24,6 +24,15 @@ public class BMembersDao {
 	public int insert(AuthVo vo) {
 		return sqlSession.insert(NAMESPACE+".a_insert",vo);
 	}
+	public int b_delete(String id) {
+		return sqlSession.delete(NAMESPACE+".b_delete",id);
+	}
+	public int a_delete(String id) {
+		return sqlSession.delete(NAMESPACE+".a_delete",id);
+	}
+	public HashMap<String, Object> idCheck(String id) {
+		return sqlSession.selectOne(NAMESPACE+".idCheck",id);
+	}
 	public HashMap<String, Object> isMember(HashMap<String, String> map){
 		return sqlSession.selectOne(NAMESPACE+".isMember", map);
 	}
@@ -33,4 +42,5 @@ public class BMembersDao {
 	public String searchPwd(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE+".searchPwd",map);
 	}
+	
 }

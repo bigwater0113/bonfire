@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.bonfire.dao.FeedboardDao;
+import com.jhta.bonfire.vo.FbcommentVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
 @Service
@@ -29,8 +30,16 @@ public class FeedboardService {
 		return dao.selectAllbyId(map);
 	}
 	
+	public int delete(int num) {
+		return dao.delete(num);
+	}
+
 	public Feedboard_fbjoinVo selectOne(int num) {
 		return dao.selectOne(num);
+	}
+	
+	public List<FbcommentVo> showComm(int num){
+		return dao.showComm(num);
 	}
 	
 }

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
 		<h2>${id }님의 여행게시판</h2>
 	</div>
-	<form method="post">
+	<form:form method="post">
 		<div id="feedboard_table">
 			<table>
 				<tr>
@@ -32,7 +34,7 @@
 					<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
 			</div>
 		</div>
-	</form>
+	</form:form>
 </div>
 	<div>
 	<c:if test="${pu.startPage > 10}">

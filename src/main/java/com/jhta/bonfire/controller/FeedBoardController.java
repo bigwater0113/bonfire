@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.bonfire.service.FeedboardService;
 import com.jhta.bonfire.util.PageUtil;
+import com.jhta.bonfire.vo.FbcommentVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
 @Controller
@@ -65,14 +68,31 @@ public class FeedBoardController {
 	@GetMapping("/feedboard_detail")
 	public String selectOne(int num,Model model) {
 		Feedboard_fbjoinVo vo=service.selectOne(num);
+		System.out.println(num);
 		model.addAttribute("vo",vo);
 		return ".home.travelersboard.detail_main";
 	}
 	
 	
-	@GetMapping("/feedboard_delete")
-	public String delete(Model model) {
-		
-		return "";
+	@PostMapping("/feedboard_delete")
+	public String delete(Model model, HttpServletRequest req) {
+		String[] params=req.getParameterValues("checkk");
+		int n=0;
+		for(String i : params) {
+			n=service.delete(Integer.parseInt(i));
+		}
+		if(n>0) {
+			return "redirect:/feedboard_main_selectAll";
+		}else {
+			return ".home.error";
+		}
+	}
+	
+	@GetMapping(value = "/feedboad_showComm",produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public List<FbcommentVo> showComm(int num,Model model) {
+		List<FbcommentVo> list=service.showComm(num);
+		model.addAttribute("list",list);
+		return list;
 	}
 }

@@ -65,21 +65,21 @@
 		select * from feedboard where num=#{num}
 	</select>
 	
-	<resultMap type="comm" id="fbcomm">
-		<result property="id" column="id"/>
-
-	<collection property="commList" ofType="com.jhta.bonfire.vo.Feedboard_fbjoinVo">
+	<resultMap type="fbcomment" id="commList">
 		<result property="idx" column="idx"/>
 		<result property="num" column="num"/>
 		<result property="id" column="id"/>
 		<result property="content" column="content"/>
 		<result property="adddate" column="adddate"/>
-	</collection>
 	</resultMap>
 	
-	<select id="showComm" resultMap="fbcomm">
-		select * from fbcomment where num=#{num} order by idx asc
+	<select id="showComm" resultMap="commList">
+		select * from fbcomment where num=#{num} order by idx desc
 	</select>
+	
+	<insert id="insertComm" parameterType="fbcomment">
+		insert into fbcomment values(fbcomment_seq.nextval,#{num},#{id},#{content},sysdate)
+	</insert>
 	
 	<insert id="insertPosting" parameterType="feedboard">
 		insert into feedboard values (#{num},#{id},#{title},#{content},#{recommend},#{hits},

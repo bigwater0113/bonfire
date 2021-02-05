@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.bonfire.service.FeedboardService;
 import com.jhta.bonfire.util.PageUtil;
 import com.jhta.bonfire.vo.FbcommentVo;
+import com.jhta.bonfire.vo.FeedboardVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
 @Controller
@@ -67,7 +68,7 @@ public class FeedBoardController {
 	
 	@GetMapping("/feedboard_detail")
 	public String selectOne(int num,Model model) {
-		Feedboard_fbjoinVo vo=service.selectOne(num);
+		FeedboardVo vo=service.selectOne(num);
 		System.out.println(num);
 		model.addAttribute("vo",vo);
 		return ".home.travelersboard.detail_main";
@@ -88,11 +89,20 @@ public class FeedBoardController {
 		}
 	}
 	
-	@GetMapping(value = "/feedboad_showComm",produces = "application/xml;charset=utf-8")
+	@GetMapping(value = "/feedboard_showComm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<FbcommentVo> showComm(int num,Model model) {
 		List<FbcommentVo> list=service.showComm(num);
 		model.addAttribute("list",list);
+		return list;
+	}
+	
+	@GetMapping(value="/feedboard_insertComm")
+	@ResponseBody
+	public List<FbcommentVo> insertComm(int num, String id, String content) {
+		FbcommentVo vo=new FbcommentVo(0, num, id, content, null);
+		service.insertComm(vo);
+		List<FbcommentVo> list=service.showComm(num);
 		return list;
 	}
 }

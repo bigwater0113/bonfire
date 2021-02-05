@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.bonfire.dao.FeedboardDao;
 import com.jhta.bonfire.vo.FbcommentVo;
+import com.jhta.bonfire.vo.FeedboardVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
 @Service
@@ -34,12 +35,16 @@ public class FeedboardService {
 		return dao.delete(num);
 	}
 
-	public Feedboard_fbjoinVo selectOne(int num) {
+	public FeedboardVo selectOne(int num) {
 		return dao.selectOne(num);
 	}
 	
 	public List<FbcommentVo> showComm(int num){
 		return dao.showComm(num);
+	}
+	
+	public int insertComm(FbcommentVo vo) {
+		return dao.insertComm(vo);
 	}
 	
 }

@@ -2,13 +2,20 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- editPwd -->
 
 <div>
 <input type="hidden" id="error" value="${error }">
 	<form:form method="post" action="${cp }/editPwd">
-		<label for="rawPwd">기존 비밀번호</label>
-		<input type="password" name="rawPwd" id="rawPwd"><br>
+		<sec:authorize access="isAnonymous()">
+			<label for="id">아이디</label>
+			<input type="text" name="id" id="id" value="${searchId }"><br>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+			<label for="rawPwd">기존 비밀번호</label>
+			<input type="password" name="rawPwd" id="rawPwd"><br>
+		</sec:authorize>
 		<label for="pwd">변경할 비밀번호</label>
 		<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
 		<label for="check">변경할 비밀번호확인</label>

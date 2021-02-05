@@ -36,15 +36,22 @@ public class BMembersController {
 		return ".home.login.info";
 	}
 	@GetMapping("/editPwd")
-	public String editPwdForm() {
+	public String editPwdForm(String searchId,Model model) {
+		model.addAttribute("searchId",searchId);
 		return ".home.login.editPwd";
 	}
 	@PostMapping("/editPwd")
-	public String editPwd(String rawPwd,String pwd,HttpSession session,Model model) {
-		String id=(String)session.getAttribute("id");
-		boolean b=service.pwdMatch(id, rawPwd);
-		if(b) {
+	public String editPwd(String id,String rawPwd,String pwd,HttpSession session,Model model) {
+		String sessionId=(String)session.getAttribute("id");
+		boolean b=false;
+		if(sessionId!=null) {
+			b=service.pwdMatch(sessionId, rawPwd);
+		}else {
 			service.updatePwd(id, pwd);
+			return ".home.login.login";
+		}
+		if(b) {
+			service.updatePwd(sessionId, pwd);
 			return "redirect:/logout";
 		}else {
 			model.addAttribute("error","1");

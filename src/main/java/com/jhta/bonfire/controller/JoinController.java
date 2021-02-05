@@ -38,6 +38,8 @@ public class JoinController {
 			return ".home.login.join";
 		}
 	}
+	
+	// 이미 존재하는 회원인지 id 체크
 	@RequestMapping(value="/idcheck",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
 	public HashMap<String, String> member(String id) {
@@ -51,7 +53,8 @@ public class JoinController {
 		return code;
 	}
 	
-	@GetMapping("/withdraw")
+	// 회원탈퇴
+	@GetMapping("/withdraw") 
 	public String withdraw(HttpServletRequest req,HttpSession session) {
 		String id=(String)session.getAttribute("id");
 		int n=service.delete(id);

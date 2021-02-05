@@ -3,6 +3,7 @@ package com.jhta.bonfire;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,10 +36,14 @@ public class TestBoard {
     public void setup(){
         map.put("startRow", 1);
         map.put("endRow", 10);
-        map.put("cname", "자유");
-        map.put("id", "");
-        map.put("field", "content");
-        map.put("keyword", "t");
+        List<String> fields = new ArrayList<String>();
+        fields.add("id");
+        fields.add("content");
+
+        map.put("cname", "ㅁ");
+        map.put("fields",fields);
+        // map.put("field", "content");
+        map.put("keyword", "id");
     }
     
     @Test public void cname(){
@@ -50,21 +55,17 @@ public class TestBoard {
     }
 
     @Test public void counttest() {
-        
-        // List<SubBoardVo> list = service.getList(map);
-        // list.forEach(e->{
-        //     logger.info(e.toString());
-        // });
         int n = service.count(map);
         logger.info("----->"+n);
-        assertTrue(n==1000000);
+        assertTrue(n==2);
     }
 
     @Test public void listtest(){
         List<SubBoardVo> list = service.getList(map);
         for (SubBoardVo subBoardVo : list) {
-            logger.info(subBoardVo.toString());
-            assertNotNull(list);
+            logger.info("INFO : "+subBoardVo.toString());
         }
+        logger.info("size:"+list.size());
+        assertNotNull(list);
     }
 }

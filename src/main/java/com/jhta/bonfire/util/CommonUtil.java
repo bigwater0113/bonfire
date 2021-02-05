@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonUtil {
+
     /**
      * Object type 변수가 비어있는지 체크
      * @param obj
@@ -30,11 +31,9 @@ public class CommonUtil {
      * @param objects
      * @return
      */
-    public static Boolean isAllNotEmpty(Object... objects) {
+    public static Boolean isNotEmpty(Object... objects) {
     	if(objects == null || objects.length == 0) {return false;}
     	for(Object obj : objects) {
-            System.out.println((String) obj);
-            System.out.println(objects.length);
     		if(isEmpty(obj)) {return false;}
     	}
     	return true;
@@ -53,5 +52,16 @@ public class CommonUtil {
     	}
     	else if( obj1 == null || obj2 == null) return false;
     	return false;
+    }
+
+    public static String arrayToString(Object objects) {
+        // if (objects.length==0) return null;
+        StringBuilder sb = new StringBuilder();
+        if (objects instanceof String[]) {
+            for (Object string : (String[]) objects) {
+                sb.append("field : "+string+"\n");
+            }
+            return (sb.length()==0)? null : sb.toString();
+        } else return null;
     }
 }

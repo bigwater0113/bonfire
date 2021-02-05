@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
 		<h2>여행자게시판</h2>
 	</div>
-	<form method="post">
+	<form:form method="post">
 		<div id="feedboard_editlist">
-			<c:if test="${id == 'admin' }">
+			<c:if test="${id == 'admin'}">
 				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
 			</c:if>
 <!-- 			<input type="submit" value="추천 ▲" name="feedboard_desc" formaction=""> -->
@@ -15,7 +17,7 @@
 		<div id="feedboard_table">
 			<table>
 				<tr>
-				<c:if test="${id == 'admin' }">
+				<c:if test="${id == 'admin'}">
 					<th><input type="checkbox" id="allcheck"></th>
 				</c:if>
 					<th>글번호</th>
@@ -29,9 +31,10 @@
 				</tr>
 				<c:forEach var="vo" items="${list }">
 					<tr>
-						<c:if test="${id == 'admin' }">
+						<c:if test="${id == 'admin'}">
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 						</c:if>
+<%-- 							<c:set var="num" value="${vo.num }"/> --%>
 							<td>${vo.num }</td>
 							<td>${vo.cname }</td>
 							<td>${vo.id }</td>
@@ -44,7 +47,7 @@
 				</c:forEach>
 			</table>
 		</div>
-	</form>
+	</form:form>
 </div>
 	<div>
 	<c:if test="${pu.startPage > 10}">

@@ -22,17 +22,17 @@ public class SubBoardController {
     private SubBoardService service;
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RequestMapping(value = "/board/{cname}")
-    public String getList
-    (
-        @PathVariable String cname, 
-        Model model, 
-        @RequestParam(required = false, defaultValue = "10") int listSize, 
-        @RequestParam(required = false, defaultValue = "10") int pageSize, 
-        String keyword,
-        String...field
-    ) 
-    {return getList(Optional.of(1), cname, model, listSize, pageSize, keyword, field);}
+    // @RequestMapping(value = "/board/{cname}")
+    // public String getList
+    // (
+    //     @PathVariable String cname, 
+    //     Model model, 
+    //     @RequestParam(required = false, defaultValue = "10") int listSize, 
+    //     @RequestParam(required = false, defaultValue = "10") int pageSize, 
+    //     String keyword,
+    //     String...field
+    // ) 
+    // {return getList(Optional.of(1), cname, model, listSize, pageSize, keyword, field);}
     
     // @RequestMapping(value = "/board/all")
     // public String getList
@@ -57,10 +57,14 @@ public class SubBoardController {
     //     String...field
     // ) 
     // {return getList(page, null, model, listSize, pageSize, keyword, field);}
+    @RequestMapping(value = "/board/view/{num}")
+    public String getData(Model model, @PathVariable int num){
+        service.addHit(vo)
 
+        return ".home.board.subboardview";
+    }
 
-    @RequestMapping(value="/board/{cname}/{page}")
-    // public String getList(@PathVariable Optional<Integer> page, @PathVariable String cname, HashMap<String, Object> map, Model model) {
+    @RequestMapping(value={"/board/{cname}/{page}", "/board/{cname}"})
     public String getList(
         @PathVariable Optional<Integer> page, 
         @PathVariable String cname, 
@@ -81,7 +85,6 @@ public class SubBoardController {
         // map.put("endRow", pu.getEndRow());
         
         PageUtil pu = new PageUtil(page.orElse(1), listSize, pageSize, service.count(map));
-        // PageUtil pu = new PageUtil(page.isPresent()?page.get():1, listSize, pageSize, service.count(map));
         map.put("startRow", pu.getStartRow());
         map.put("endRow", pu.getEndRow());
         logger.debug("keyword : "+keyword);
@@ -93,6 +96,7 @@ public class SubBoardController {
         model.addAttribute("list", service.getList(map));
         model.addAttribute("pu", pu);
         String beforeparams="?";
+        
         if (CommonUtil.isNotEmpty(field)){
             for (String string : field) {beforeparams+="field="+string+"&";}
         }
@@ -100,4 +104,6 @@ public class SubBoardController {
         model.addAttribute("beforeparams", beforeparams);
         return ".home.board.subboard";
     }
+
+    
 }

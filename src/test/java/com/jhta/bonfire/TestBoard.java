@@ -1,6 +1,7 @@
 package com.jhta.bonfire;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.jhta.bonfire.service.SubBoardService;
+import com.jhta.bonfire.vo.SbhitsVo;
 import com.jhta.bonfire.vo.SubBoardVo;
 
 import org.junit.Before;
@@ -67,5 +69,12 @@ public class TestBoard {
         }
         logger.info("size:"+list.size());
         assertNotNull(list);
+    }
+
+    @Test public void addhittest(){
+        SbhitsVo vo = new SbhitsVo(10000024, "id");
+        logger.info("aaaaaa"+vo.toString());
+        int n = service.addHit(vo);
+        assertSame(0, n);
     }
 }

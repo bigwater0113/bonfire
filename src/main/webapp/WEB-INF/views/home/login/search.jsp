@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- search.jsp -->
 <style>
 	label{width:100px;display:inline-block;}
@@ -8,18 +9,18 @@
 </style>
 <div>
 	<div id="search_left">
-		<form method="post" action="searchId">
+		<form:form method="post" action="searchId">
 			<label for="name">이름</label><input type="text" name="name" id="name"><br>
 			<label for="email">이메일</label><input type="email" name="email" id="email"><br>
 			<input type="submit" value="찾기">
-		</form>
+		</form:form>
 	</div>
 	<div id="search_right">
-		<form method="post" action="searchPwd">
+		<form:form method="post" action="searchPwd">
 			<label for="id">아이디</label><input type="text" name="id" id="id"><br>
 			<label for="name">이름</label><input type="text" name="name" id="name"><br>
 			<label for="email">이메일</label><input type="email" name="email" id="email"><br>
 			<input type="submit" value="찾기">
-		</form>
+		</form:form>
 	</div>
 </div>

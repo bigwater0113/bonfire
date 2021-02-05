@@ -11,9 +11,11 @@ CREATE TABLE bmembers
   birth   DATE         ,
   gender  VARCHAR2(10) ,
   phone   VARCHAR2(15) ,
-  address VARCHAR2(2000),
+  roadfulladdr VARCHAR2(1000),
   enabled number(1)    ,
   regdate date		   ,
+  addrdetail VARCHAR2(1000),
+  zipNo	  number(10)   ,
   CONSTRAINT PK_bmembers PRIMARY KEY (id)
 );
 

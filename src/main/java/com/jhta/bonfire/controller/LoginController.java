@@ -25,20 +25,20 @@ public class LoginController {
 	public String loginForm() {
 		return ".home.login.login";
 	}
-	@PostMapping("/login")
-	public String login(String id,String pwd,Model model,HttpSession session) {
-		HashMap<String, String> map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pwd", pwd);
-		HashMap<String, Object> user=service.isMember(map);
-		if(user!=null) {
-			session.setAttribute("id", id);
-			return "redirect:/";
-		}else {
-			model.addAttribute("id",id);
-			return ".home.login.login";
-		}
-	}
+//	@PostMapping("/login")
+//	public String login(String id,String pwd,Model model,HttpSession session) {
+//		HashMap<String, String> map=new HashMap<String, String>();
+//		map.put("id", id);
+//		map.put("pwd", pwd);
+//		HashMap<String, Object> user=service.isMember(map);
+//		if(user!=null) {
+//			session.setAttribute("id", id);
+//			return "redirect:/";
+//		}else {
+//			model.addAttribute("id",id);
+//			return ".home.login.login";
+//		}
+//	}
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

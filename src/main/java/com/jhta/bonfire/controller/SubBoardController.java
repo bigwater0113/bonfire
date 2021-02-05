@@ -3,13 +3,17 @@ package com.jhta.bonfire.controller;
 import java.util.HashMap;
 import java.util.Optional;
 
+import com.jhta.bonfire.security.CustomUserDetail;
+import com.jhta.bonfire.security.CustomUserDetailService;
 import com.jhta.bonfire.service.SubBoardService;
 import com.jhta.bonfire.util.CommonUtil;
 import com.jhta.bonfire.util.PageUtil;
+import com.jhta.bonfire.vo.SbhitsVo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,12 +61,7 @@ public class SubBoardController {
     //     String...field
     // ) 
     // {return getList(page, null, model, listSize, pageSize, keyword, field);}
-    @RequestMapping(value = "/board/view/{num}")
-    public String getData(Model model, @PathVariable int num){
-        service.addHit(vo)
-
-        return ".home.board.subboardview";
-    }
+    
 
     @RequestMapping(value={"/board/{cname}/{page}", "/board/{cname}"})
     public String getList(
@@ -73,8 +72,7 @@ public class SubBoardController {
         @RequestParam(required = false, defaultValue = "10") int pageSize, 
         String keyword,
         String...field
-        ) 
-    {
+    ) {
         HashMap<String, Object> map = new HashMap<>();
                 
         map.put("cname", cname.equals("all")? null : cname);
@@ -104,6 +102,20 @@ public class SubBoardController {
         model.addAttribute("beforeparams", beforeparams);
         return ".home.board.subboard";
     }
+    @RequestMapping(value={"/board/{cname}/{page}/{num}", "/board/{cname}/{num}"})
+    public String getData(
+        Model model, 
+        @PathVariable Optional<Integer> page, 
+        @PathVariable String cname, 
+        @PathVariable int num, 
+        @AuthenticationPrincipal CustomUserDetail CustomUserDetail
+    ){
+        Optional<String> username = Optional.ofNullable(CustomUserDetail.getUsername());
+        username.ifPresent(user->{service.addHit(new SbhitsVo(num, user));});
 
+        model.addAttribute("vo", service.getData(num));
+        model.addAttribute("vo", service.getData(num));
+        return ".home.board.subboardview";
+    }
     
 }

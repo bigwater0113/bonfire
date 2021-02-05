@@ -77,4 +77,6 @@ public class TestBoard {
         int n = service.addHit(vo);
         assertSame(0, n);
     }
+
+    
 }

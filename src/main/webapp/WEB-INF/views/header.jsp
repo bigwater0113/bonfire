@@ -24,6 +24,8 @@
 	<sec:authorize access="isAuthenticated()">
 		[<sec:authentication property="principal.username"/>]님 <br>
 		<a href="${cp }/logout">로그아웃</a><br>
+		<a href="${cp }/userInfo">회원정보</a><br>
+		<a href="${cp }/userModify">정보수정</a><br>
 		<a href="${cp }/withdraw">회원탈퇴</a><br>
 	</sec:authorize>
 	</div>

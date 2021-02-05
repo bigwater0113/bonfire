@@ -15,6 +15,15 @@ public class BMembersDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.jhta.bonfire.mapper.BMembersMapper";
+	public BMembersVo userInfo(String id) {
+		return sqlSession.selectOne(NAMESPACE+".userInfo",id);
+	}
+	public int update(BMembersVo vo) {
+		return sqlSession.update(NAMESPACE+".update",vo);
+	}
+	public int updatePwd(HashMap<String,String> map) {
+		return sqlSession.update(NAMESPACE+".updatePwd",map);
+	}
 	public CustomUserDetail getAuthsList(String userid){
 		return sqlSession.selectOne(NAMESPACE+".getAuths",userid);
 	}
@@ -41,6 +50,9 @@ public class BMembersDao {
 	}
 	public String searchPwd(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE+".searchPwd",map);
+	}
+	public String pwdMatch(String id) {
+		return sqlSession.selectOne(NAMESPACE+".pwdMatch",id);
 	}
 	
 }

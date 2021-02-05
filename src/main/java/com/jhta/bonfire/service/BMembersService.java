@@ -52,4 +52,23 @@ public class BMembersService {
 		dao.b_delete(id);
 		return 1;
 	}
+	public BMembersVo userInfo(String id) {
+		return dao.userInfo(id);
+		
+	}
+	public int update(BMembersVo vo) {
+		return dao.update(vo);
+		
+	}
+	
+	public boolean pwdMatch(String id,String rawPwd) {
+		String encodedPwd=dao.pwdMatch(id);
+		return encoder.matches(rawPwd, encodedPwd);
+	}
+	public int updatePwd(String id,String pwd) {
+		HashMap<String, String> map=new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pwd", encoder.encode(pwd));
+		return dao.updatePwd(map);
+	}
 }

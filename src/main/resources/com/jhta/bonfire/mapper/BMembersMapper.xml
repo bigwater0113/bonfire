@@ -16,18 +16,41 @@
 		select * from auth a,bmembers b
 		where a.id=b.id and b.id=#{id}
 	</select>
+	<select id="userInfo" parameterType="string" resultType="bmembers">
+		select * from bmembers where id=#{id}
+	</select>
+	
+	
 	<insert id="b_insert" parameterType="bmembers">
 		insert into bmembers values(#{id},#{pwd},#{name},#{email},#{birth},#{gender},#{phone},#{roadfulladdr},1,sysdate,#{addrdetail},#{zipno})
 	</insert>
 	<insert id="a_insert" parameterType="auth">
 		insert into auth values(#{id},#{authority})
 	</insert>
+	
+	<update id="update" parameterType="bmembers">
+		update bmembers set name=#{name},email=#{email},birth=#{birth},gender=#{gender},phone=#{phone},
+		zipno=#{zipno},roadfulladdr=#{roadfulladdr},addrdetail=#{addrdetail}
+		where id=#{id}
+	</update>
+	<update id="updatePwd" parameterType="hashmap">
+		update bmembers set pwd=#{pwd}
+		where id=#{id}
+	</update>
+	
+	
 	<delete id="b_delete" parameterType="String">
 		delete from bmembers where id=#{id}
 	</delete>
 	<delete id="a_delete" parameterType="String">
 		delete from auth where id=#{id}
 	</delete>
+	
+	
+	<select id="pwdMatch" parameterType="string" resultType="string">
+		select pwd from bmembers where id=#{id}
+	</select>
+	
 	<select id="idCheck" parameterType="String" resultType="hashmap">
 		select * from bmembers where id=#{id}
 	</select>

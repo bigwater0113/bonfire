@@ -186,12 +186,11 @@ CREATE TABLE fbhits
 -- 여행기록 추천
 CREATE TABLE recomm
 (
-  idx     number(10)   NOT NULL,
-  num     number(10)  ,
-  id      VARCHAR2(40),
-  value   number(1)   ,
+  num     number(10)   NOT NULL,
+  id      VARCHAR2(40) NOT NULL,
+  value   number(1)   NOT NULL,
   adddate DATE        ,
-  CONSTRAINT PK_recomm PRIMARY KEY (idx)
+  CONSTRAINT PK_recomm PRIMARY KEY (num, id, value)
 );
 
 
@@ -268,12 +267,11 @@ CREATE TABLE scomment
 -- 구독자게시판 추천
 CREATE TABLE srecomm
 (
-  idx     number(10)   NOT NULL,
   num     number(10)   NOT NULL,
-  id      VARCHAR2(40),
-  value   number(1)   ,
+  id      VARCHAR2(40) NOT NULL,
+  value   number(1)   NOT NULL,
   adddate date        ,
-  CONSTRAINT PK_srecomm PRIMARY KEY (idx, num)
+  CONSTRAINT PK_srecomm PRIMARY KEY (num, id, value)
 );
 
 -- 구독자게시판 첨부파일

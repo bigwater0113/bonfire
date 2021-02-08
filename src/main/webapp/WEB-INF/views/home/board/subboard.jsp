@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="board" value="${cp }/board/${cname}" />
+<c:set var="board" value="${cp }/board/${cname}/list" />
+<c:set var="article" value="${cp }/board/${cname}/article" />
 <c:forEach items='${fields}' var='field'>
     <c:if test='${field=="id" }'><c:set var="fieldid" value="checked='checked'" /></c:if>
     <c:if test='${field=="title" }'><c:set var="fieldtitle" value="checked='checked'" /></c:if>
@@ -17,7 +18,7 @@
         <div class="card-header">
             TODO:tableintro
         </div>
-        <form action="${board}" method="get">
+        <form action="${board}/" method="get">
             <div class="card-body">
                 <div class="d-flex">
                     <!-- tabledoption & search -->
@@ -86,7 +87,7 @@
                             <th>title</th>
                             <th>id</th>
                             <th>hits</th>
-                            <th>recommand</th>
+                            <th>recommend</th>
                             <th>adddate</th>
                         </tr>
                     </thead>
@@ -111,7 +112,7 @@
                                     </div>
                                 </td>
                                 <td>${vo.hits}</td>
-                                <td>${vo.recommand}</td>
+                                <td>${vo.recommend}</td>
                                 <td>${vo.adddate}</td>
                             </tr>
                         </c:forEach>
@@ -169,30 +170,7 @@
         </sec:authorize>
     </sec:authorize> -->
 </div>
-<!-- listSize=10&pageSize=10&field=content&keyword= -->
-<!-- field=content& -->
 <script type="text/javascript">
-    // let fieldarr = [];
-
-    // let reusedparam='?';
-    // <c:forEach items='${fields}' var='field'>
-    //     fieldarr.push('${field}');
-    //     reusedparam+='field='+'${field}&';
-    // </c:forEach>
-
-    //jstl에서 처리
-    // $('input[name="field"]').each((i, e)=>{
-    //     fieldarr.forEach(elem=> {if ($(e).val()==elem) $(e).attr('checked', true);});
-    // });
-    
-    // let listSize = $('input[name=listSize]').val();
-    // let keyword = $('input[name=keyword]').val();
-    // reusedparam+='keyword='+keyword+'&listSize=${pu.listSize}&pageSize=${pu.pageSize}';
-    // let pageSize = $('input[name=pageSize]').val();
-    // let reusedparam = '?'+fi+'keyword='+keyword+'listSize='+listSize+'&pageSize='+pageSize;
-    // $('input[value=test]').on('click', function(){
-    //     console.log(reusedparam);
-    // });
     $('.page-link').each((i, e)=>{$(e).attr('href', $(e).attr('href')+'${beforeparams}');})
     $('a[title="clear search"]').on('click', function(){
         $('input[name="keyword"]').val('');

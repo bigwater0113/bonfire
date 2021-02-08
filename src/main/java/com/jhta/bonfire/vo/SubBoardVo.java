@@ -2,17 +2,13 @@ package com.jhta.bonfire.vo;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 public class SubBoardVo {
     private int num;
     private String id;
     private String title;
     private String content;
     private Date adddate;
-    private int recommand;
+    private int recommend;
     private int hits;
     private String cname;
 
@@ -56,12 +52,12 @@ public class SubBoardVo {
         this.adddate = adddate;
     }
 
-    public int getRecommand() {
-        return this.recommand;
+    public int getrecommend() {
+        return this.recommend;
     }
 
-    public void setRecommand(int recommand) {
-        this.recommand = recommand;
+    public void setrecommend(int recommend) {
+        this.recommend = recommend;
     }
 
     public int getHits() {
@@ -83,13 +79,13 @@ public class SubBoardVo {
     public SubBoardVo() {
     }
 
-    public SubBoardVo(int num, String id, String title, String content, Date adddate, int recommand, int hits, String cname) {
+    public SubBoardVo(int num, String id, String title, String content, Date adddate, int recommend, int hits, String cname) {
         this.num = num;
         this.id = id;
         this.title = title;
         this.content = content;
         this.adddate = adddate;
-        this.recommand = recommand;
+        this.recommend = recommend;
         this.hits = hits;
         this.cname = cname;
     }
@@ -102,7 +98,7 @@ public class SubBoardVo {
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
             ", adddate='" + getAdddate() + "'" +
-            ", recommand='" + getRecommand() + "'" +
+            ", recommend='" + getrecommend() + "'" +
             ", hits='" + getHits() + "'" +
             ", cname='" + getCname() + "'" +
             "}";

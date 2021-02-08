@@ -7,4 +7,5 @@
     <insert id="addhit" parameterType="sbhits">
         insert into sbhits values(#{num}, #{id})
     </insert>
+    <!-- TODO: 주기적으로 합치고 비워야 함 -->
 </mapper>

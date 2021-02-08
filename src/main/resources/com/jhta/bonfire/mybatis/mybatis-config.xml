@@ -18,6 +18,7 @@
   	<typeAlias type="com.jhta.bonfire.vo.BMembersVo" alias="bmembers"/>
   	<typeAlias type="com.jhta.bonfire.vo.AuthVo" alias="auth"/>
   	<typeAlias type="com.jhta.bonfire.vo.QnaBoardVo" alias="qnaboard"/>
+  	<typeAlias type="com.jhta.bonfire.vo.QhitsVo" alias="qhits"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body>
 <h1>글등록</h1>
-<form action="${cp }/qna/insert" method="post">
+<form:form action="${cp }/qna/insert" method="post">
 	문의유형
 	<select name="cname">
 		<option value="작가문의">작가문의</option>
@@ -25,6 +26,6 @@
 	첨부파일<br>
 	<input type="file"><br>
 	<input type="submit" value="등록">
-</form>
+</form:form>
 </body>
 </html>

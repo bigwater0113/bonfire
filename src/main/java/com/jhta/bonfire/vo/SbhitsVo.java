@@ -1,11 +1,5 @@
 package com.jhta.bonfire.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 public class SbhitsVo {
     private int num;
     private String id;
@@ -33,13 +27,4 @@ public class SbhitsVo {
         this.num = num;
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " num='" + getNum() + "'" +
-            ", id='" + getId() + "'" +
-            "}";
-    }
-
 }

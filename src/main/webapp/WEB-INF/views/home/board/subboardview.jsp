@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+
 <div>
     ${vo.toString()}
     <br>num : ${vo.num}
@@ -28,6 +29,22 @@
         }
     );
     $('#tglrecomm').on('click', function(){
+        // console.log('tglrecomm='+$('#tglrecomm').text());
+        // $.ajax({
+        //     url: "${cp }/board/${cname }/article/${vo.num}/recomm",
+        //     data: {tglrecomm: $('#tglrecomm').text()},
+        //     dataType: "json",
+        //     beforeSend: function(jqXHR, settings) {
+        //         console.log(settings.url);
+        //     },
+
+        //     success: function (response) {
+        //         console.log(response);
+        //     if (response.value=='1') $('#tglrecomm').text('recomm_down');
+        //     else $('#tglrecomm').text('recomm_up');
+        //     }
+        // });
+        
         $.getJSON("${cp }/board/${cname }/article/${vo.num}/recomm", {tglrecomm: $('#tglrecomm').text()}, 
             function (response) {
                 console.log(response);

@@ -8,6 +8,6 @@
 		비밀번호<input type="password" name="password" required><br>
 		<input type="submit" value="로그인"><br>
 		<a href="${cp }/join">회원가입</a><br>
-		<a href="${cp }/searchId">id/pwd 찾기</a>
+		<a href="${cp }/searchIdPwd">id/pwd 찾기</a>
 	</form:form>
 </div>

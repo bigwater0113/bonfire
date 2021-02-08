@@ -54,11 +54,9 @@ public class BMembersService {
 	}
 	public BMembersVo userInfo(String id) {
 		return dao.userInfo(id);
-		
 	}
 	public int update(BMembersVo vo) {
 		return dao.update(vo);
-		
 	}
 	
 	public boolean pwdMatch(String id,String rawPwd) {

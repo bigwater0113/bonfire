@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,6 @@
 <body>
 <h1>문의게시판</h1>
 <div>
-	<form action="${cp }/qna" method="post">
 	<table border="1" width="500">
 	<tr>
 		<th>글번호</th>
@@ -24,7 +25,7 @@
 		<tr>
 			<td>${vo.num }</td>
 			<td>${vo.id }</td>
-			<td>${vo.title }</td>
+			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 			<td>${vo.hits }</td>
 		</tr>	
@@ -49,7 +50,17 @@
       </c:if>
 </div>	
 	<a href="${cp }/qna/insert">글쓰기</a>
-	</form>
+<div>
+	<form:form method="post" action="${cp }/qna/main">
+		<select name="field">
+			<option value="title" <c:if test="${field=='title' }">selected</c:if>>제목</option>
+  			<option value="content" <c:if test="${field=='content' }">selected</c:if>>내용</option>
+      		<option value="cc" <c:if test="${field=='cc' }">selected</c:if>>제목+내용</option>
+		</select>
+		<input type="text" name="keyword">
+		<input type="submit" value="검색">
+	</form:form>
+</div>	
 </div>
 </body>
 </html>

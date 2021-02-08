@@ -97,14 +97,14 @@ public class SubBoardController {
         Model model
         , @PathVariable String cname
         , @PathVariable int num
-        , String recomm
+        , @RequestParam(required = false) String tglrecomm
         , @AuthenticationPrincipal Authentication authentication
     ){
         SRecommVo vo = new SRecommVo(num, null, 0, null);
         if (authentication!=null) {
             vo.setId(authentication.getName());
             vo.setValue(service.isRecommed(vo));
-            if (CommonUtil.isNotEmpty(recomm)) {
+            if (CommonUtil.isNotEmpty(tglrecomm)) {
                 vo.setValue((vo.getValue()==1)?-1:1);
                 service.setRecomm(vo);
             }

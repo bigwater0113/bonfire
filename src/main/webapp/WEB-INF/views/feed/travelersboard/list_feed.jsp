@@ -46,18 +46,18 @@
 				<a href="${cp }/feedboard_feed_selectAllbyId?page=${i}&field=${field}&keyword=${keyword}"><span style='color:blue'>[${i }]</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }//feedboard_feed_selectAllbyId?page=${i}&field=${field}&keyword=${keyword}"><span style='color:gray'>[${i }]</span></a>
+				<a href="${cp }/feedboard_feed_selectAllbyId?page=${i}&field=${field}&keyword=${keyword}"><span style='color:gray'>[${i }]</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${pu.endPage < pu.pageCount}">
-     	<a href="${cp }//feedboard_feed_selectAllbyId?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
+     	<a href="${cp }/feedboard_feed_selectAllbyId?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
     </c:if>
 </div>
 <a href="${cp }/feedboard_feed_selectAllbyId">전체글보기</a><br>
 <a href="${cp }/">메인페이지로</a>
 <div>
-	<form method="post" action="${cp }//feedboard_feed_selectAllbyId">
+	<form method="post" action="${cp }/feedboard_feed_selectAllbyId">
 		<select name="field">
 			<option value="cname" <c:if test="${field=='cname'}">selected</c:if>>지역</option>
 			<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>

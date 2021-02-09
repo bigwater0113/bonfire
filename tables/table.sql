@@ -190,7 +190,7 @@ CREATE TABLE recomm
   id      VARCHAR2(40) NOT NULL,
   value   number(1)   NOT NULL,
   adddate DATE        ,
-  CONSTRAINT PK_recomm PRIMARY KEY (num, id, value)
+  CONSTRAINT PK_recomm PRIMARY KEY (num,id,adddate)
 );
 
 

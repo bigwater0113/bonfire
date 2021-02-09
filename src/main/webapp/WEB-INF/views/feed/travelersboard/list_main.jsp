@@ -10,7 +10,7 @@
 	<form:form method="post">
 		<div id="feedboard_editlist">
 			<c:if test="${id == 'admin'}">
-				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
+				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_deleteList">
 			</c:if>
 <!-- 			<input type="submit" value="추천 ▲" name="feedboard_desc" formaction=""> -->
 		</div>
@@ -70,7 +70,7 @@
 <a href="${cp }/feedboard_main_selectAll">전체글보기</a><br>
 <a href="${cp }/">메인페이지로</a>
 <div>
-	<form method="post" action="${cp }/feedboard_main_selectAll">
+	<form:form method="post" action="${cp }/feedboard_main_selectAll">
 		<select name="field">
 			<option value="id" <c:if test="${field=='id'}">selected</c:if>>작성자</option>
 			<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
@@ -79,7 +79,7 @@
 		</select>
 		<input type="text" name="keyword" value="${keyword }">
 		<input type="submit" value="검색">
-	</form>
+	</form:form>
 </div>
 
 <script>

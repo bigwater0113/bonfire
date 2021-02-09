@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.bonfire.dao.FeedboardDao;
 import com.jhta.bonfire.vo.FbcommentVo;
+import com.jhta.bonfire.vo.FbrecommVo;
 import com.jhta.bonfire.vo.FeedboardVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
@@ -31,8 +32,14 @@ public class FeedboardService {
 		return dao.selectAllbyId(map);
 	}
 	
-	public int delete(int num) {
-		return dao.delete(num);
+	public int deletePosting(int num) {
+		dao.deletePostingA(num);
+		dao.deletePostingB(num);
+		dao.deletePostingC(num);
+		dao.deletePostingD(num);
+		dao.deletePostingE(num);
+		int f=dao.deletePostingF(num);
+		return f;
 	}
 
 	public FeedboardVo selectOne(int num) {
@@ -47,4 +54,34 @@ public class FeedboardService {
 		return dao.insertComm(vo);
 	}
 	
+	public int deleteComm(int idx) {
+		return dao.deleteComm(idx);
+	}
+	
+	public int selectRecomm(int num,String id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("id",id);
+		return dao.selectRecomm(map);
+	}
+	
+	public int selectRecommTot(int num) {
+		return dao.selectRecommTot(num);
+	}
+	public int insertRecomm(FbrecommVo vo,int num) {
+		int a=dao.insertRecomm(vo);
+		int b=0;
+		if(vo.getValue()==1) {
+			System.out.println("서비스 추천 누름");
+			b=dao.updateRecomm(num);
+		}else {
+			System.out.println("서비스 추천 취소");
+			b=dao.cancelRecomm(num);
+		}
+		if(a>0 && b>0) {
+			return b;
+		}else {
+			return -1;
+		}
+	}
 }

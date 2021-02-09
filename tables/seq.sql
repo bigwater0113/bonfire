@@ -13,7 +13,6 @@ create sequence scrapboard_seq;
 create sequence fbcomment_seq;
 create sequence fbfiles_seq;
 create sequence fbhits_seq;
-create sequence recomm_seq;
 create sequence qnaboard_seq;
 create sequence qfile_seq;
 create sequence qhits_seq;

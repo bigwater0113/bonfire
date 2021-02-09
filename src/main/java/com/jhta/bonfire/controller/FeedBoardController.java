@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.bonfire.service.FeedboardService;
 import com.jhta.bonfire.util.PageUtil;
 import com.jhta.bonfire.vo.FbcommentVo;
+import com.jhta.bonfire.vo.FbrecommVo;
 import com.jhta.bonfire.vo.FeedboardVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 
@@ -75,12 +76,12 @@ public class FeedBoardController {
 	}
 	
 	
-	@PostMapping("/feedboard_delete")
+	@PostMapping("/feedboard_deleteList")
 	public String delete(Model model, HttpServletRequest req) {
 		String[] params=req.getParameterValues("checkk");
 		int n=0;
 		for(String i : params) {
-			n=service.delete(Integer.parseInt(i));
+			n=service.deletePosting(Integer.parseInt(i));
 		}
 		if(n>0) {
 			return "redirect:/feedboard_main_selectAll";
@@ -97,12 +98,49 @@ public class FeedBoardController {
 		return list;
 	}
 	
-	@GetMapping(value="/feedboard_insertComm")
+	@GetMapping(value="/feedboard_insertComm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<FbcommentVo> insertComm(int num, String id, String content) {
 		FbcommentVo vo=new FbcommentVo(0, num, id, content, null);
 		service.insertComm(vo);
 		List<FbcommentVo> list=service.showComm(num);
 		return list;
+	}
+	@GetMapping(value="/feedboard_deleteComm",produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public List<FbcommentVo> deleteComm(int num,int idx) {
+		service.deleteComm(idx);
+		List<FbcommentVo> list=service.showComm(num);
+		return list;
+	}
+	
+	@GetMapping(value="/feedboard_showRecommTot",produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public HashMap<String, Integer> showRecommTot(int num) {
+		int r=service.selectRecommTot(num);
+		HashMap<String, Integer>map=new HashMap<String, Integer>();
+		map.put("r",r);
+		return map;
+	}
+	
+	@GetMapping(value="/feedboard_insertRecomm",produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public HashMap<String, Integer> insertRecomm(int num,String id) {
+		System.out.println("num:" + num);
+		System.out.println("id:" + id);
+		int v=service.selectRecomm(num, id);
+		if(v==1) {
+			FbrecommVo vo=new FbrecommVo(num, id, -1, null);
+			service.insertRecomm(vo,num);
+			System.out.println("컨트롤러 추천 취소");
+		}else {
+			FbrecommVo vo=new FbrecommVo(num, id, 1, null);
+			service.insertRecomm(vo,num);
+			System.out.println("컨트롤러 추천 누름");
+		}
+		int r=service.selectRecommTot(num);
+		HashMap<String, Integer>map=new HashMap<String, Integer>();
+		map.put("r",r);
+		return map;
 	}
 }

@@ -4,30 +4,21 @@ import java.sql.Date;
 
 public class FbrecommVo {
 
-	private int idx;
 	private int num;
-	private int id;
+	private String id;
 	private int value;
 	private Date adddate;
 	
 	public FbrecommVo() {}
 
-	public FbrecommVo(int idx, int num, int id, int value, Date adddate) {
+	public FbrecommVo(int num, String id, int value, Date adddate) {
 		super();
-		this.idx = idx;
 		this.num = num;
 		this.id = id;
 		this.value = value;
 		this.adddate = adddate;
 	}
 
-	public int getIdx() {
-		return idx;
-	}
-
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
 
 	public int getNum() {
 		return num;
@@ -37,11 +28,11 @@ public class FbrecommVo {
 		this.num = num;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

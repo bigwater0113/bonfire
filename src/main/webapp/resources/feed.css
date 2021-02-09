@@ -21,6 +21,7 @@
 	height:600px;
 	background-color: orange;
 	float:left;
+	overflow: auto;
 }
 #footer{
 	width:1200px;

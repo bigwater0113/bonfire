@@ -81,19 +81,62 @@
 		insert into fbcomment values(fbcomment_seq.nextval,#{num},#{id},#{content},sysdate)
 	</insert>
 	
+	<delete id="deleteComm" parameterType="int">
+		delete from fbcomment where idx=#{idx}
+	</delete>
+
+	<insert id="insertRecomm">
+		insert into recomm values(#{num},#{id},#{value},sysdate)
+	</insert>
+	
+	<update id="updateRecomm">
+		update feedboard set recommend = recommend + 1 where num=#{num}
+	</update>
+	<update id="cancelRecomm">
+		update feedboard set recommend= recommend -1 where num=#{num} 
+	</update>
+	
+	<select id="selectRecommTot" resultType="int">
+		select recommend from feedboard where num=#{num}
+	</select>
+	<select id="selectRecomm" parameterType="hashmap"  resultType="int">
+		select NVL(sum(value),0) r from recomm where num=#{num} and id=#{id}
+	</select>
+	
+	<insert id="insertScrap">
+		
+	</insert>
+	<select id="selectScrap">
+
+	</select>
+	<insert id="deleteScrap">
+	</insert>
+
 	<insert id="insertPosting" parameterType="feedboard">
-		insert into feedboard values (#{num},#{id},#{title},#{content},#{recommend},#{hits},
-		#{scrap},#{ispost},#{postdate},#{adddate},#{cname})
+		insert into feedboard values (#{num},#{id},#{title},#{content},0,0,
+		0,#{ispost},#{postdate},#{adddate},#{cname})
 	</insert>
 	
 	<insert id="insertFile" parameterType="file">
 		insert into fbfiles values (#{idx},#{num},#{savefilename},#{orgfilename})
 	</insert>
 	
-	<delete id="deletePosting">
-		delete from feedboard where num=#{num}
+	<delete id="deletePostingA">
+		delete from fbcomment where num=#{num}
 	</delete>
-	<delete id="deleteComm">
-		delete from fbcomment where idx=#{idx}
+	<delete id="deletePostingB">
+		delete from recomm where num=#{num}
+	</delete>
+	<delete id="deletePostingC">
+		delete from fbhits where num=#{num}
+	</delete>
+	<delete id="deletePostingD">
+		delete from scrapboard where num=#{num}
+	</delete>
+	<delete id="deletePostingE">
+		delete from fbfiles where num=#{num}
+	</delete>
+	<delete id="deletePostingF">
+		delete from feedboard where num=#{num}
 	</delete>
 </mapper>

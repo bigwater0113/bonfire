@@ -6,64 +6,145 @@
 <h2>디테일 페이지</h2>
 <div id="t_wrap">
 	<div id="t_content">
-	<form:form>
-		<h3>제목 : ${vo.title }</h3>
-		<input type="hidden" value="${vo.num }" id="num">
-		아이디 : ${vo.id }<br>
-		<input type="hidden" value="${vo.id }" id="writer">
-		카테고리 : ${vo.cname }<br>
-		<input type="hidden" value="${vo.cname }" id="cname">
-		본문 : ${vo.content}<br>
-		<input type="hidden" value="${vo.content }" id="content">
-	<div id="t_recommendNscrap">
-		<input type="button" id="recomm" value="추천" name="btn_recomm">
-		<input type="button" id="scrap" value="스크랩" name="btn_scrap">
-	</div>
-	</form:form>
+		<form:form>
+			<h3>제목 : ${vo.title }</h3>
+			<input type="hidden" value="${vo.num }" id="num">
+			아이디 : ${vo.id }<br>
+			<input type="hidden" value="${vo.id }" id="writer">
+			카테고리 : ${vo.cname }<br>
+			<input type="hidden" value="${vo.cname }" id="cname">
+			본문 : ${vo.content}<br>
+			<input type="hidden" value="${vo.content }" id="content">
+		</form:form>
+
+		<div id="t_recommend">
+		</div>
+		
+	<c:if test="${id != null }">
+		<input type="button" id="btn_recomm" value="추천" name="btn_recomm">
+		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
+	</c:if>
 	</div>
 	
 	<div id="t_comments">
 	</div>
-
-	<br>
-	아이디: ${id }<input type="hidden" id="cid" value="${id }"><br>
-	댓글:<input type="text" id="comm"><input type="button" value="등록" id="btn1"><br>
+	
+	<c:if test="${id != null }">
+		아이디: ${id }<input type="hidden" id="cid" value="${id }"><br>
+		댓글:<input type="text" id="comm"><input type="button" value="등록" id="btn_ins"><br>
+	</c:if>
 </div>
-
 <script type="text/javascript">
+
 	var num=$("#num").val();
+	var cid=$("#cid").val();
 	$.ajax({
 		url:'/bonfire/feedboard_showComm?num='+num,
 		dataType: 'xml',
 		success: function(data){
 			$("#t_comments").empty();
-			var id=$(data).find('item').each(function(){
+			$(data).find('item').each(function(){
 				var idx=$(this).find('idx').text();
-				console.log(idx);
 				var id=$(this).find('id').text();
 				var content=$(this).find('content').text();
-				$("#t_comments").append("<div style='border: 1px solid black; width: 500px; height: 70px;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"</div>")
+				var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+				str+="<input type='hidden' value='"+idx+"' id='idx'>"
+				str+="<input type='hidden' value='"+id+"' id='ccid'>"
+				str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+				if(cid=='admin'){
+					str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+				}
+				str+="</div>";
+				$("#t_comments").append(str)
 			});
 		}
 	});
 	
-	$("#btn1").click(function(){
-		var id=$("#cid").val();
+	$("#btn_ins").click(function(){
+		var cid=$("#cid").val();
 		var num=$("#num").val();
 		var content=$("#comm").val();
 		$.ajax({
-			url:'/bonfire/feedboard_insertComm?num='+num+'&id='+id+'&content='+content,
+			url:'/bonfire/feedboard_insertComm?num='+num+'&id='+cid+'&content='+content,
 			dataType: 'xml',
 			success:function(data){
 				$("#t_comments").empty();
-				var id=$(data).find('item').each(function(){
+				$(data).find('item').each(function(){
 					var idx=$(this).find('idx').text();
-					console.log(idx);
 					var id=$(this).find('id').text();
 					var content=$(this).find('content').text();
-					$("#t_comments").append("<div style='border: 1px solid black; width: 500px; height: 70px;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"</div>")
+					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+					str+="<input type='hidden' value='"+idx+"' id='idx'>"
+					str+="<input type='hidden' value='"+id+"' id='ccid'>"
+					str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+					if(cid=='admin'){
+						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+					}
+					str+="</div>";
+					$("#t_comments").append(str)
 				});
 			}
 		});
 	});
+	
+	function delCom(){
+		var idx=$("#idx").val();
+		var num=$("#num").val();
+		$.ajax({
+			url:'/bonfire/feedboard_deleteComm?num='+num+'&idx='+idx,
+			dataType: 'xml',
+			success:function(data){
+				$("#t_comments").empty();
+				$(data).find('item').each(function(){
+					var idx=$(this).find('idx').text();
+					var id=$(this).find('id').text();
+					var content=$(this).find('content').text();
+					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+					str+="<input type='hidden' value='"+idx+"' id='idx'>"
+					str+="<input type='hidden' value='"+id+"' id='ccid'>"
+					str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+					if(cid=='admin'){
+						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+					}
+					str+="</div>";
+					$("#t_comments").append(str)
+				});
+			}
+		});
+	}
+	
+////////////////////////////////추천수 에이작스로 숫자올리기 로그인시 안뜸. 로그인 안하면 뜨는 상태 
+	var id="<%=(String)session.getAttribute("id")%>";
+	var num=$("#num").val();
+	$.ajax({
+			url:'/bonfire/feedboard_showRecommTot?num='+num,
+			dataType : 'xml',
+			success:function(data){
+				$("#t_recommend").empty();
+				console.log($(data).find('r').text());
+				var r=$(data).find('r').text();
+				var str="추천수:  " + r;
+				$("#t_recommend").append(str);
+			}
+		});
+	
+	
+	$("#btn_recomm").click(function(){
+		console.log("클릭클릭");
+		var num=$("#num").val();
+		var id="<%=(String)session.getAttribute("id")%>";
+		$.ajax({
+			url:'/bonfire/feedboard_insertRecomm?num='+num+'&id='+id,
+			dataType : 'xml',
+			success:function(data){
+				console.log("석세스펑션!!!!!")
+				$("#t_recommend").empty();
+				var r=$(data).find('r').text();
+				var str="추천수:  " + r;
+				$("#t_recommend").append(str);
+			}
+			});
+		});
+	/////////////////////////////////////////////
+	
 </script>

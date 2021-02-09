@@ -84,4 +84,21 @@ public class FeedboardService {
 			return -1;
 		}
 	}
+	public int insertHits(String id, int num) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("num", num);
+		HashMap<String, Object> map1=dao.selectHits(map);
+		if(map1==null) {
+			int a=dao.insertHits(map);
+			int b=dao.updateHits(num);
+			if(a>0 && b>0) { 
+				return b;
+			}else {
+				return -1;
+			}
+		}else {
+			return -1;
+		}
+	}
 }

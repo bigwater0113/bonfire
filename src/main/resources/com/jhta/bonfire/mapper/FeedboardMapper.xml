@@ -76,32 +76,41 @@
 	<select id="showComm" resultMap="commList">
 		select * from fbcomment where num=#{num} order by idx desc
 	</select>
-	
 	<insert id="insertComm" parameterType="fbcomment">
 		insert into fbcomment values(fbcomment_seq.nextval,#{num},#{id},#{content},sysdate)
 	</insert>
-	
 	<delete id="deleteComm" parameterType="int">
 		delete from fbcomment where idx=#{idx}
 	</delete>
 
+
 	<insert id="insertRecomm">
 		insert into recomm values(#{num},#{id},#{value},sysdate)
 	</insert>
-	
 	<update id="updateRecomm">
 		update feedboard set recommend = recommend + 1 where num=#{num}
 	</update>
 	<update id="cancelRecomm">
 		update feedboard set recommend= recommend -1 where num=#{num} 
 	</update>
-	
 	<select id="selectRecommTot" resultType="int">
 		select recommend from feedboard where num=#{num}
 	</select>
 	<select id="selectRecomm" parameterType="hashmap"  resultType="int">
 		select NVL(sum(value),0) r from recomm where num=#{num} and id=#{id}
 	</select>
+
+	
+	<select id="selectHits" parameterType="hashmap" resultType="hashmap">
+		select * from fbhits where num=#{num} and id=#{id}
+	</select>
+	<insert id="insertHits" parameterType="hashmap">
+		insert into fbhits values(#{num},#{id})
+	</insert>
+	<update id="updateHits">
+		update feedboard set hits = hits + 1 where num=#{num}
+	</update>
+
 	
 	<insert id="insertScrap">
 		
@@ -111,6 +120,7 @@
 	</select>
 	<insert id="deleteScrap">
 	</insert>
+
 
 	<insert id="insertPosting" parameterType="feedboard">
 		insert into feedboard values (#{num},#{id},#{title},#{content},0,0,

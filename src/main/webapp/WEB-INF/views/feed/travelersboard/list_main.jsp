@@ -12,10 +12,9 @@
 			<c:if test="${id == 'admin'}">
 				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_deleteList">
 			</c:if>
-<!-- 			<input type="submit" value="추천 ▲" name="feedboard_desc" formaction=""> -->
 		</div>
 		<div id="feedboard_table">
-			<table>
+			<table border="1" width="500px">
 				<tr>
 				<c:if test="${id == 'admin'}">
 					<th><input type="checkbox" id="allcheck"></th>
@@ -34,11 +33,17 @@
 						<c:if test="${id == 'admin'}">
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 						</c:if>
-<%-- 							<c:set var="num" value="${vo.num }"/> --%>
 							<td>${vo.num }</td>
 							<td>${vo.cname }</td>
 							<td>${vo.id }</td>
-							<td><a href="${cp }/feedboard_detail?num=${vo.num }">${vo.title }</a></td>
+							<c:choose>
+								<c:when test="${id != null }">
+									<td><a href="${cp }/feedboard_detail?num=${vo.num }&id=${id}">${vo.title }</a></td>
+								</c:when>
+								<c:otherwise>
+									<td><a href="${cp }/login">${vo.title }</a></td>
+								</c:otherwise>
+							</c:choose>
 							<td>${vo.postdate }</td>
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>

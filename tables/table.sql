@@ -258,11 +258,11 @@ CREATE TABLE sbhits
 CREATE TABLE scomment
 (
   idx     number(10)   NOT NULL,
-  snum    number(10)   NOT NULL,
+  num    number(10)   NOT NULL,
   id      VARCHAR2(40),
   content clob        ,
   adddate date        ,
-  CONSTRAINT PK_scomment PRIMARY KEY (idx, snum)
+  CONSTRAINT PK_scomment PRIMARY KEY (idx, num)
 );
 
 -- 구독자게시판 추천
@@ -365,7 +365,7 @@ ALTER TABLE qhits
 
 ALTER TABLE scomment
   ADD CONSTRAINT FK_subscriberboard_TO_scomment
-    FOREIGN KEY (snum)
+    FOREIGN KEY (num)
     REFERENCES subscriberboard (num);
 
 ALTER TABLE scomment

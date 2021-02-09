@@ -78,5 +78,8 @@ public class TestBoard {
         assertSame(0, n);
     }
 
+    @Test public void commenttest(){
+        
+    }
     
 }

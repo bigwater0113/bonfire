@@ -7,9 +7,9 @@
 <div id="t_wrap">
 	<div id="t_content">
 		<form:form>
-			<h3>제목 : ${vo.title }</h3>
+			<h3>제목 : ${vo.title } </h3>
 			<input type="hidden" value="${vo.num }" id="num">
-			아이디 : ${vo.id }<br>
+			아이디 : ${vo.id } &nbsp; 조회수 : ${vo.hits} <br>
 			<input type="hidden" value="${vo.id }" id="writer">
 			카테고리 : ${vo.cname }<br>
 			<input type="hidden" value="${vo.cname }" id="cname">
@@ -18,6 +18,9 @@
 		</form:form>
 
 		<div id="t_recommend">
+		</div>
+		
+		<div id="t_scrap">
 		</div>
 		
 	<c:if test="${id != null }">
@@ -113,7 +116,6 @@
 		});
 	}
 	
-////////////////////////////////추천수 에이작스로 숫자올리기 로그인시 안뜸. 로그인 안하면 뜨는 상태 
 	var id="<%=(String)session.getAttribute("id")%>";
 	var num=$("#num").val();
 	$.ajax({
@@ -145,6 +147,5 @@
 			}
 			});
 		});
-	/////////////////////////////////////////////
 	
 </script>

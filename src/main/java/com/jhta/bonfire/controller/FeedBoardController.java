@@ -68,9 +68,9 @@ public class FeedBoardController {
 	}
 	
 	@GetMapping("/feedboard_detail")
-	public String selectOne(int num,Model model) {
+	public String selectOne(String id,int num,Model model) {
+		service.insertHits(id,num);
 		FeedboardVo vo=service.selectOne(num);
-		System.out.println(num);
 		model.addAttribute("vo",vo);
 		return ".home.travelersboard.detail_main";
 	}

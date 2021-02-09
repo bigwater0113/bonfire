@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.bonfire.vo.FbcommentVo;
+import com.jhta.bonfire.vo.FbhitsVo;
 import com.jhta.bonfire.vo.FbrecommVo;
 import com.jhta.bonfire.vo.FeedboardVo;
 import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
@@ -83,5 +84,14 @@ public class FeedboardDao {
 	}
 	public int selectRecommTot(int num) {
 		return session.selectOne(NAMESPACE+".selectRecommTot",num);
+	}
+	public HashMap<String, Object> selectHits(HashMap<String, Object> map){
+		return session.selectOne(NAMESPACE+".selectHits",map);
+	}
+	public int insertHits(HashMap<String, Object> map) {
+		return session.insert(NAMESPACE+".insertHits",map);
+	}
+	public int updateHits(int num) {
+		return session.update(NAMESPACE+".updateHits",num);
 	}
 }

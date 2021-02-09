@@ -3,7 +3,6 @@ package com.jhta.bonfire.controller;
 import java.util.HashMap;
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.jhta.bonfire.service.SubBoardService;
 import com.jhta.bonfire.util.CommonUtil;
 import com.jhta.bonfire.util.PageUtil;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class SubBoardController {
@@ -90,21 +88,29 @@ public class SubBoardController {
     }
 
 
-
+    /**
+     * 
+     * @param model
+     * @param cname
+     * @param num
+     * @param tglrecomm not null이면 추천/비추천이 토글 형식으로 전환된다.
+     * @param authentication
+     * @return
+     */
     @RequestMapping(value={"/board/{cname}/article/{num}/recomm"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseBody
     public SRecommVo recomm(
         Model model
         , @PathVariable String cname
         , @PathVariable int num
-        , String recomm
+        , @RequestParam(required = false) String tglrecomm
         , @AuthenticationPrincipal Authentication authentication
     ){
         SRecommVo vo = new SRecommVo(num, null, 0, null);
         if (authentication!=null) {
             vo.setId(authentication.getName());
             vo.setValue(service.isRecommed(vo));
-            if (CommonUtil.isNotEmpty(recomm)) {
+            if (CommonUtil.isNotEmpty(tglrecomm)) {
                 vo.setValue((vo.getValue()==1)?-1:1);
                 service.setRecomm(vo);
             }

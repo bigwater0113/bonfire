@@ -30,6 +30,7 @@
 	<mapper resource="com/jhta/bonfire/mapper/SbhitsMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/SRecommMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/SCommentMapper.xml"/>
+    <mapper resource="com/jhta/bonfire/mapper/FeedMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/FeedboardMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/BMembersMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>

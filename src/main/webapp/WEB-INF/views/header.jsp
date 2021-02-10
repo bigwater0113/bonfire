@@ -8,25 +8,36 @@
 	#header_logo{width:300px;height:100px;float:left;background-color: #aaaaaa;}
 	#header_menu{width:100px;height:100px;float:right;background-color: #aaaaaa;}
 	#header_login{width:100px;height:100px;float:right;background-color: #bbbbbb;}
-	#header_slideMenu{width:1200px;height:200px;background-color: lightblue;clear:both;
-	position:absolute;z-index:999;top:200px; display:none;}
+	#header_slideMenu{width:1200px;height:100px;background-color: lightblue;clear:both;
+	position:absolute;z-index:998;top:100px; display:none;}
 	#header_menulist{list-style:none; }
 	#header_menulist li{display:inline-block; width:200px; }
+	#profile_slide{width:200px;background-color: lightgreen;clear:both;
+	position:absolute;z-index:999;top:100px; display:none;}
 	
 </style>
 <div>
-	<div id="header_logo">모닥불</div>
-	<div id="header_menu"><button id="menuBtn">메뉴</button></div>
+	<div id="header_logo" onclick="location.href='${cp}/'">
+		<img src="${cp }/resources/images/bonfire_logo.png" style="width:140px;height:100px;">
+		<span style="font-size:50px;position:relative;top:-30px;">모닥불</span>
+	</div>
+	<div id="header_menu"><img src="${cp }/resources/images/menuIcon.png" style="width:100px;height:100px;" id="menuBtn"></div>
 	<div id="header_login">
 	<sec:authorize access="isAnonymous()">
-		<a href="${cp }/login">로그인</a>
+		<img src="${cp }/resources/images/loginIcon.png" onclick="location.href='${cp }/login'" style="width:100px;height:100px;">
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-		[<sec:authentication property="principal.username"/>]님 <br>
-		<a href="${cp }/logout">로그아웃</a><br>
-		<a href="${cp }/userInfo">회원정보</a><br>
-		<a href="${cp }/userModify">정보수정</a><br>
-		<a href="${cp }/withdraw">회원탈퇴</a><br>
+		<img src="${cp }/resources/images/profileIcon.png" id="profileImg" style="width:100px;height:100px;">
+		<div id="profile_slide">
+			[<sec:authentication property="principal.username"/>]님 <br>
+			<a href="${cp }/logout">로그아웃</a><br>
+			<a href="${cp }/@${id}">마이페이지</a><br>
+			<a href="#">일기장</a><br>
+			<a href="#">여행기록</a><br>
+			<a href="${cp }/userInfo">회원정보</a><br>
+			<a href="${cp }/userModify">정보수정</a><br>
+			<a href="${cp }/withdraw">회원탈퇴</a><br>
+		</div>
 	</sec:authorize>
 	</div>
 	<div id="header_slideMenu">
@@ -42,6 +53,9 @@
 	$(function(){
 		$("#menuBtn").click(function(){
 			$("#header_slideMenu").slideToggle(500);
+		});
+		$("#profileImg").click(function(){
+			$("#profile_slide").slideToggle(500);
 		});
 	});
 </script>

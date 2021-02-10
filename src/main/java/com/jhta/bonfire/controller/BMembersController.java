@@ -33,7 +33,7 @@ public class BMembersController {
 		String id=(String)session.getAttribute("id");
 		BMembersVo vo=service.userInfo(id);
 		model.addAttribute("vo",vo);
-		return ".home.login.info";
+		return ".feed.mypage.info";
 	}
 	@GetMapping("/editPwd")
 	public String editPwdForm(String searchId,Model model) {

@@ -54,6 +54,9 @@
 	<select id="idCheck" parameterType="String" resultType="hashmap">
 		select * from bmembers where id=#{id}
 	</select>
+	<select id="feedCheck" parameterType="String" resultType="hashmap">
+		select * from bmembers where id=#{feedId}
+	</select>
 	<select id="isMember" parameterType="hashmap" resultType="hashmap">
 		select * from bmembers where id=#{id} and pwd=#{pwd}
 	</select>

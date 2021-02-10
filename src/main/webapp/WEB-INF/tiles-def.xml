@@ -11,7 +11,7 @@
 	<definition name=".feed" template="/WEB-INF/views/feed/layout2.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
 		<put-attribute name="side" value="/WEB-INF/views/side.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/feed/main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
 	
@@ -29,10 +29,12 @@
 		<put-attribute name="content" value="/WEB-INF/views/home/{1}.jsp"/>
 	</definition>
 	<definition name=".feed.*.*.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
-		<put-attribute name="content" value="/WEB-INF/views/feed/{1}/{2}/{3}.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/feed/{1}/{2}.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/feed/{1}/{3}.jsp"/>
 	</definition>
 	
 	<definition name=".feed.*.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
+	
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}/{2}.jsp"/>
 	</definition>
 	

@@ -42,5 +42,7 @@ public class QnaBoardDao {
 	public int addHit(int num) {
 		return sqlSession.update(NAMESPACE+".addHit",num);
 	}
-
+	public int update(QnaBoardVo vo) {
+		return sqlSession.update(NAMESPACE+".update",vo);
+	}
 }

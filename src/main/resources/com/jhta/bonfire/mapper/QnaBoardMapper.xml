@@ -75,4 +75,9 @@
 	<insert id="qhits" parameterType="qhits">
 		insert into qhits values(#{num},#{id})
 	</insert>
+	<!-- 수정 -->
+	<update id="update" parameterType="qnaboard">
+		update qnaboard set id=#{id},title=#{title},content=#{content},cname=#{cname},pwd=#{pwd}
+		where num=#{num}
+	</update>
 </mapper>

@@ -44,4 +44,7 @@ public class QnaBoardService {
 			return -1;
 		}
 	}
+	public int update(QnaBoardVo vo) {
+		return dao.update(vo);
+	}
 }

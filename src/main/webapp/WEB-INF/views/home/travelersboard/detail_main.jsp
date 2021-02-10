@@ -6,16 +6,32 @@
 <h2>디테일 페이지</h2>
 <div id="t_wrap">
 	<div id="t_content">
-		<form:form>
-			<h3>제목 : ${vo.title } </h3>
+		<table>
+			<tr>
+				<td>제목</td><td>${vo.title }</td>
+			</tr>
+			<tr>
+				<td>작성자</td><td>${vo.id }</td>
+			</tr>
+			<tr>
+				<td>카테고리</td><td>${vo.cname }</td>
+			</tr>
+			<tr>
+				<td>본문</td><td>${vo.content }</td>
+			</tr>
+		</table>
 			<input type="hidden" value="${vo.num }" id="num">
-			아이디 : ${vo.id } &nbsp; 조회수 : ${vo.hits} <br>
 			<input type="hidden" value="${vo.id }" id="writer">
-			카테고리 : ${vo.cname }<br>
 			<input type="hidden" value="${vo.cname }" id="cname">
-			본문 : ${vo.content}<br>
 			<input type="hidden" value="${vo.content }" id="content">
-		</form:form>
+<%-- 			<h3>제목 : ${vo.title } </h3> --%>
+<%-- 			<input type="hidden" value="${vo.num }" id="num"> --%>
+<%-- 			아이디 : ${vo.id } &nbsp; 조회수 : ${vo.hits} <br> --%>
+<%-- 			<input type="hidden" value="${vo.id }" id="writer"> --%>
+<%-- 			카테고리 : ${vo.cname }<br> --%>
+<%-- 			<input type="hidden" value="${vo.cname }" id="cname"> --%>
+<%-- 			본문 : ${vo.content}<br> --%>
+<%-- 			<input type="hidden" value="${vo.content }" id="content"> --%>
 
 		<div id="t_recommend">
 		</div>
@@ -53,7 +69,7 @@
 				var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
 				str+="<input type='hidden' value='"+idx+"' id='idx'>"
 				str+="<input type='hidden' value='"+id+"' id='ccid'>"
-				str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+				str+="<input type='hidden' value='"+content+"' id='ccontent'>"
 				if(cid=='admin'){
 					str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 				}
@@ -79,7 +95,7 @@
 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
 					str+="<input type='hidden' value='"+idx+"' id='idx'>"
 					str+="<input type='hidden' value='"+id+"' id='ccid'>"
-					str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
 					if(cid=='admin'){
 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 					}
@@ -105,7 +121,7 @@
 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
 					str+="<input type='hidden' value='"+idx+"' id='idx'>"
 					str+="<input type='hidden' value='"+id+"' id='ccid'>"
-					str+="<input type='hidden' value='"+content+"' content='ccontent'>"
+					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
 					if(cid=='admin'){
 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 					}

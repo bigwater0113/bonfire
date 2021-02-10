@@ -51,4 +51,9 @@ public class SubBoardServiceImpl implements SubBoardService{
 	public int isRecommed(SRecommVo vo) {
 		return srecommDao.isRecommed(vo);
 	}
+	@Override
+	public int write(SubBoardVo vo) {
+		return subBoardDao.write(vo);
+	}
+	
 }

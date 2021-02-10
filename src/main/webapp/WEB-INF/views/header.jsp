@@ -32,7 +32,7 @@
 	<div id="header_slideMenu">
 		<ul id="header_menulist">
 			<li><a href="${cp }/feedboard_main_selectAll">여행게시판</a></li>
-			<li><a href="#">자유게시판</a></li>
+			<li><a href="${cp }/board/all/list/">자유게시판</a></li>
 			<li><a href="${cp }/qna/main">문의게시판</a></li>
 			<li><a href="#">경로게시판</a></li>
 		</ul>

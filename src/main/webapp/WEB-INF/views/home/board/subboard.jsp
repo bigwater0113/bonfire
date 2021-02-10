@@ -158,10 +158,7 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
-                <button class="btn">
-                    <a href=""></a>
-                    글쓰기
-                </button>
+                    <a class="btn" href="${cp }/member/write/${cname}/">글쓰기</a>
             </div>
         </form>
     </div>

@@ -55,7 +55,7 @@ where num=#{num}
     </update>
 
     <insert id="write" parameterType="subboard">
-        insert into SUBSCRIBERBOARD values(subscriberboard_seq, #{id}, #{title}, #{content}, sysdate, 0, 0, #{cname})
+        insert into SUBSCRIBERBOARD values(subscriberboard_seq.nextval, #{id}, #{title}, #{content}, sysdate, 0, 0, #{cname})
     </insert>
     
 </mapper>

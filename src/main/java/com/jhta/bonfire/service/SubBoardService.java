@@ -14,7 +14,6 @@ public interface SubBoardService {
     public SubBoardVo getData(int num);
     public int addHit(SbhitsVo vo);
     public int setRecomm(SRecommVo vo);
-    // public int addRecomm(SRecommVo vo);
-    // public int rmvRecomm(SRecommVo vo);
     public int isRecommed(SRecommVo vo);
+    public int write(SubBoardVo vo);
 }

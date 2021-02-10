@@ -20,5 +20,6 @@ public class SubBoardDao {
     public SubBoardVo getData(int num) {return sqlSession.selectOne(NAMESPACE+".getData", num);}
     public int addHit(int num) {return sqlSession.update(NAMESPACE+".addHit", num);}
     public int recomm(SRecommVo vo) {return sqlSession.insert(NAMESPACE+".recomm", vo);}
+    public int write(SubBoardVo vo) {return sqlSession.insert(NAMESPACE+".write", vo);}
 }
  

@@ -1,5 +1,7 @@
 package com.jhta.bonfire;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -22,11 +24,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/security-config.xml"})
 // @WebAppConfiguration
 public class TestBoard {
     // @Autowired WebApplicationContext ctx;
-    @Autowired private SubBoardService service;
+    // @Autowired private SubBoardService service;
     Logger logger = LoggerFactory.getLogger(getClass());
     // private MockMvc mockMVC;
     // @Before
@@ -48,38 +50,43 @@ public class TestBoard {
         map.put("keyword", "id");
     }
     
-    @Test public void cname(){
-        List<String> list = service.catList("subscriberboard");
-        list.forEach(e->{
-            logger.info(e.toString());
-        });
-        assertTrue(!list.isEmpty());
-    }
+    // @Test public void cname(){
+    //     List<String> list = service.catList("subscriberboard");
+    //     list.forEach(e->{
+    //         logger.info(e.toString());
+    //     });
+    //     assertTrue(!list.isEmpty());
+    // }
 
-    @Test public void counttest() {
-        int n = service.count(map);
-        logger.info("----->"+n);
-        assertTrue(n==2);
-    }
+    // @Test public void counttest() {
+    //     int n = service.count(map);
+    //     logger.info("----->"+n);
+    //     assertTrue(n==2);
+    // }
 
-    @Test public void listtest(){
-        List<SubBoardVo> list = service.getList(map);
-        for (SubBoardVo subBoardVo : list) {
-            logger.info("INFO : "+subBoardVo.toString());
-        }
-        logger.info("size:"+list.size());
-        assertNotNull(list);
-    }
+    // @Test public void listtest(){
+    //     List<SubBoardVo> list = service.getList(map);
+    //     for (SubBoardVo subBoardVo : list) {
+    //         logger.info("INFO : "+subBoardVo.toString());
+    //     }
+    //     logger.info("size:"+list.size());
+    //     assertNotNull(list);
+    // }
 
-    @Test public void addhittest(){
-        SbhitsVo vo = new SbhitsVo(10000024, "id");
-        logger.info("aaaaaa"+vo.toString());
-        int n = service.addHit(vo);
-        assertSame(0, n);
-    }
+    // @Test public void addhittest(){
+    //     SbhitsVo vo = new SbhitsVo(10000024, "id");
+    //     logger.info("aaaaaa"+vo.toString());
+    //     int n = service.addHit(vo);
+    //     assertSame(0, n);
+    // }
 
     @Test public void commenttest(){
-        
+        String context = "";
+        String boardName = "bbbbbbb";
+        String changed = context.replaceAll("(src=\\\"/bonfire/resources/)(TemporalFileStorage)(/.{36}[.]\\w{1,}\\\"><br></p>)", "$1"+boardName+"$3");
+        // logger.info(context);
+        logger.info("changed: "+changed);
+        assertFalse(changed.contains("TemporalFileStorage"));
     }
     
 }

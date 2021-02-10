@@ -29,11 +29,12 @@
 	<tr>
 		<td>작성일</td><td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 	</tr>
-	<tr>
-		<td><a href="${cp }/qna/delete?num=${vo.num}">삭제</a></td>
-		<td><a href="#">수정</a></td>
-	</tr>
 </table>
+<div>
+		<a href="${cp }/qna/delete?num=${vo.num}">삭제</a>
+		<a href="${cp }/qna/update?num=${vo.num}">수정</a>
+</div>
+
 답글목록
 <div id="commList">
 

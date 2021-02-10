@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <h1>글등록</h1>
@@ -20,12 +21,11 @@
 	제목<br>
 	<input type="text" name="title"><br>
 	내용<br>
-	<textarea rows="10" cols="50" name="content"></textarea><br>
+	<textarea rows="10" cols="100" name="content"></textarea><br>
 	비밀번호<br>
 	<input type="password" name="pwd"><br>
-	첨부파일<br>
-	<input type="file"><br>
 	<input type="submit" value="등록">
 </form:form>
+
 </body>
 </html>

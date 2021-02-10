@@ -43,7 +43,7 @@ public class FeedBoardController {
 		model.addAttribute("pu",pu);
 		model.addAttribute("field", field);
 		model.addAttribute("keyword",keyword);
-		return ".feed.travelersboard.list_main";
+		return ".feed.travelersboard.side.list_main";
 	}
 	@RequestMapping("/feedboard_feed_selectAllbyId")
 	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {

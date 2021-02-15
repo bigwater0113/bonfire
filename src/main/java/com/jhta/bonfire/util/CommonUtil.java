@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class CommonUtil {
     private static Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
     /**
-     * Object type 변수가 비어있는지 체크
+     * Object type 蹂��닔媛� 鍮꾩뼱�엳�뒗吏� 泥댄겕
      * 
      * @param obj
      * @return Boolean : true / false
@@ -42,7 +43,7 @@ public class CommonUtil {
     }
 
     /**
-     * 주어진 모든 인자가 비어있지 않는지 체크 한다.
+     * 二쇱뼱吏� 紐⑤뱺 �씤�옄媛� 鍮꾩뼱�엳吏� �븡�뒗吏� 泥댄겕 �븳�떎.
      * 
      * @param objects
      * @return
@@ -60,7 +61,7 @@ public class CommonUtil {
     }
 
     /**
-     * mapper용 비교
+     * mapper�슜 鍮꾧탳
      * 
      * @param str
      * @param obj
@@ -120,4 +121,27 @@ public class CommonUtil {
     // public static String changeContext(String content, String boardName) {
     //     return content.replaceAll("(<img src=\"/bonfire/resources/)(TemporalFileStorage)", "$1"+boardName);
     // }
+    
+    
+    public static Boolean pageBlock(String id,String feedId,String feedRole,HashMap<String, Object> map) {
+    	if(id==null) {
+			return true;
+		}else {
+			if(map!=null) {
+				if(feedRole.equals("ROLE_MEMBER")) {
+					if(id.equals(feedId) || id.equals("admin")) {
+						return false;
+					}else {
+						return true;
+					}
+				}else if(feedRole.equals("ROLE_AUTHOR")) {
+					return false;
+				}else {
+					return true;
+				}
+			}else {
+				return true;
+			}
+		}
+    }
 }

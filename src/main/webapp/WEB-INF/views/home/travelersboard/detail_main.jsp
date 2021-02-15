@@ -8,30 +8,19 @@
 	<div id="t_content">
 		<table>
 			<tr>
-				<td>제목</td><td>${vo.title }</td>
+				<td>제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"></td>
 			</tr>
 			<tr>
-				<td>작성자</td><td>${vo.id }</td>
+				<td>작성자</td><td>${vo.id }<input type="hidden" value="${vo.id }" id="writer"></td>
+
 			</tr>
 			<tr>
-				<td>카테고리</td><td>${vo.cname }</td>
+				<td>카테고리</td><td>${vo.cname }<input type="hidden" value="${vo.cname }" id="cname"></td>
 			</tr>
 			<tr>
-				<td>본문</td><td>${vo.content }</td>
+				<td>본문</td><td>${vo.content }<input type="hidden" value="${vo.content }" id="content"></td>
 			</tr>
 		</table>
-			<input type="hidden" value="${vo.num }" id="num">
-			<input type="hidden" value="${vo.id }" id="writer">
-			<input type="hidden" value="${vo.cname }" id="cname">
-			<input type="hidden" value="${vo.content }" id="content">
-<%-- 			<h3>제목 : ${vo.title } </h3> --%>
-<%-- 			<input type="hidden" value="${vo.num }" id="num"> --%>
-<%-- 			아이디 : ${vo.id } &nbsp; 조회수 : ${vo.hits} <br> --%>
-<%-- 			<input type="hidden" value="${vo.id }" id="writer"> --%>
-<%-- 			카테고리 : ${vo.cname }<br> --%>
-<%-- 			<input type="hidden" value="${vo.cname }" id="cname"> --%>
-<%-- 			본문 : ${vo.content}<br> --%>
-<%-- 			<input type="hidden" value="${vo.content }" id="content"> --%>
 
 		<div id="t_recommend">
 		</div>

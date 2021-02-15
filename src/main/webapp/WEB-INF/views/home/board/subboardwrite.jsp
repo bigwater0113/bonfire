@@ -21,7 +21,7 @@
         <div id="editorarea_header"></div>
         <div id="editorarea_body">
             <form:form id="write" action="${cp }/member/write" method="post">
-            <input type="hidden" name="boardName" value="${boardName }">
+                <input type="hidden" name="boardName" value="${boardName }">
                 <div id="titlename">
                     <input type="text" name="title">
                 </div>
@@ -94,7 +94,7 @@
                 processData: false,	
                 //이 둘은 multipart/form을 사용할때 false로 사용해야 한다. formdata를 string으로 변환하지 않는 옵션
                 beforeSend: function (jqXHR, settings) {
-                    jqXHR.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                    jqXHR.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");//spring security header 설정 
                     console.log(settings.url);
                 },
                 success: function(img_name) {	// ajax로 넘어온 data parameter변수이름을 임의로 img_name으로 설정

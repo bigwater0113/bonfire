@@ -14,6 +14,7 @@
 <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
 <div>
+    TODO:아이디 눌러서 검색, 댓글수 체크
     <div class="card">
         <div class="card-header">
             TODO:tableintro
@@ -93,22 +94,24 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${list}" var="vo">
-                            TODO:아이디 눌러서 검색
                             <tr>
                                 <td>${vo.num}</td>
                                 <td>${vo.cname}</td>
-                                <td>${vo.title}</td>
-                                <td class="dropdown">
-                                    <a href='#' class="btn dropdown-toggle">
-                                        ${vo.id}
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" style="margin: 0px;">
-                                        <a class="dropdown-item" href="#">
-                                            Action
+                                <td><a href="${cp}/board/${vo.cname}/article/${vo.num}">${vo.title}</a></td>
+                                <td>
+                                    <div class="dropdown">
+
+                                        <a href='#' class="btn dropdown-toggle">
+                                            ${vo.id}
                                         </a>
-                                        <a class="dropdown-item" href="#">
-                                            Another action
-                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end" style="margin: 0px;">
+                                            <a class="dropdown-item" href="#">
+                                                Action
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                Another action
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                                 <td>${vo.hits}</td>

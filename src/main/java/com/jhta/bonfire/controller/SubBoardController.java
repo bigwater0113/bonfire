@@ -1,7 +1,7 @@
 package com.jhta.bonfire.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -9,6 +9,8 @@ import javax.servlet.ServletContext;
 import com.jhta.bonfire.service.SubBoardService;
 import com.jhta.bonfire.util.CommonUtil;
 import com.jhta.bonfire.util.PageUtil;
+import com.jhta.bonfire.vo.SCommDetail;
+import com.jhta.bonfire.vo.SCommentVo;
 import com.jhta.bonfire.vo.SRecommVo;
 import com.jhta.bonfire.vo.SbhitsVo;
 import com.jhta.bonfire.vo.SubBoardVo;
@@ -42,8 +44,10 @@ public class SubBoardController {
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("cname", cname.equals("all") ? null : cname);
-        map.put("fields", field);
-        map.put("keyword", keyword);
+        if (CommonUtil.isNotEmpty(keyword, field)) {
+            map.put("fields", field);
+            map.put("keyword", keyword);
+        }
         // ---count용 검색 제한 설정---
         // map.put("startRow", pu.getStartRow());
         // map.put("endRow", pu.getEndRow());
@@ -93,18 +97,6 @@ public class SubBoardController {
         return "/board/"+cname+"/list/";
     }
 
-    // @RequestMapping(value={"/@{feedId}/article/{num}"})
-    // public String getFeedData(
-    //     Model model, 
-    //     @PathVariable Optional<Integer> page, 
-    //     @PathVariable String cname, 
-    //     @PathVariable int num, 
-    //     @AuthenticationPrincipal Authentication authentication
-    // ) {
-    //     return getData(model, page, cname, num, authentication);
-    // }
-
-
     @RequestMapping(value={"/board/{cname}/article/{num}"})
     public String getData(
         Model model, 
@@ -124,14 +116,15 @@ public class SubBoardController {
         return ".home.board.subboardview";
     }
 
+    
+
     /**
      * @param tglrecomm not null이면 추천/비추천이 토글 형식으로 전환된다.
      */
     @RequestMapping(value={"/board/{cname}/article/{num}/recomm"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseBody
     public SRecommVo recomm(
-        Model model
-        , @PathVariable String cname
+        @PathVariable String cname
         , @PathVariable int num
         , @RequestParam(required = false) String tglrecomm
         , @AuthenticationPrincipal Authentication authentication
@@ -147,4 +140,37 @@ public class SubBoardController {
         }
         return vo;
     }
+
+    @RequestMapping(value={"/board/{cname}/article/{num}/comment"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public List<SCommDetail> getComments(
+        @PathVariable String cname
+        , @PathVariable int num
+    ){
+        List<SCommDetail> commlist = service.getComment(num);
+        return commlist;
+    }
+    
+    @RequestMapping(value={"/board/{cname}/article/{num}/commentwrite"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public HashMap<String, Object> addComment(
+        @PathVariable String cname
+        , @PathVariable int num
+        , @AuthenticationPrincipal Authentication authentication
+        , @RequestParam String content
+    ) {
+        HashMap<String, Object> map = new HashMap<>();
+        // Optional<Integer> maxidx = Optional.ofNullable(service.getMax(num));
+        // int idx = maxidx.orElse(0);
+        int idx = service.getMax(num);
+        int result=0;
+        if (authentication!=null){
+            result = service.addComment(new SCommentVo(idx, num, authentication.getName(), content, null));
+        }
+
+        map.put("idx", idx);
+        map.put("success", (result==1)? true:false);
+        return map;
+    }
+
 }

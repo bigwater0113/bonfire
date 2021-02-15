@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>        
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +31,14 @@
 		<td>작성일</td><td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 	</tr>
 </table>
+
+<c:if test="${sessionScope.id==vo.id || sessionScope.id=='admin'}">
+
 <div>
 		<a href="${cp }/qna/delete?num=${vo.num}">삭제</a>
 		<a href="${cp }/qna/update?num=${vo.num}">수정</a>
 </div>
+</c:if>
 
 답글목록
 <div id="commList">

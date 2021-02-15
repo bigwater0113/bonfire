@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.bonfire.mapper.QnaBoardMapper">
 	<!-- 등록 -->
 	<insert id="insert" parameterType="qnaboard">
-		insert into qnaboard values(qnaboard_seq.nextval,#{id},#{title},#{content},sysdate,#{hits},null,#{cname},#{pwd})
+		insert into qnaboard values(qnaboard_seq.nextval,#{id},#{title},#{content},sysdate,#{hits},null,#{cname},#{pwd},#{pin})
 	</insert>
 
 	<select id="count" resultType="int" parameterType="hashmap">
@@ -19,7 +19,7 @@
 			(
 				select * from qnaboard 
 				<include refid="search"/>
-				order by num desc
+				order by pin desc, num desc
 				) a 
 			)	
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>

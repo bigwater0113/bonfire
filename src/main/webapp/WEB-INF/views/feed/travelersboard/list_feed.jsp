@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<script>
+/*
+	일반 회원 페이지 >> (본인 + 관리자만 접근 가능) 
+		글등록하기
+		작성페이지 - 등록버튼
+		글목록 - 등록 날짜 표시(adddate)
+	
+	작가회원 페이지 >> (본인 + 모든 회원 + 관리자 접근 가능)
+		글등록하기
+		작성페이지 - 등록버튼 / 발행버튼 (등록 - 본인만 보이기 / 발행 - 전체공개)
+		글목록 - 
+			로그인아이디==작가본인 : 모든 글 노출(등록날짜 발행날짜 표시)
+	 		로그인아이디!=작가본인 : 발행 글 노출(발행날짜 표시)
+ */
+</script>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
 		<h2>${id }님의 여행게시판</h2>
@@ -23,7 +38,7 @@
 					<tr>
 							<td>${vo.cname }</td>
 							<td><a href="${cp }/feedboard_detail?num=${vo.num }">${vo.title }</a></td>
-							<td>${vo.postdate }</td>
+							<td>${vo.adddate }</td>
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>
 							<td>${vo.scrap}</td>
@@ -32,6 +47,7 @@
 			</table>
 			<div id="feedboard_editlist">
 					<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
+					<input type="button" value="글쓰기" name="feedboard_write" formaction="${cp }/feedboard_write">
 			</div>
 		</div>
 	</form:form>

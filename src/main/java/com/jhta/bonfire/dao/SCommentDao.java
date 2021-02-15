@@ -13,10 +13,9 @@ import org.springframework.stereotype.Repository;
 public class SCommentDao {
     @Autowired private SqlSession sqlSession;
     private static final String NAMESPACE = "com.jhta.bonfire.mapper.SCommentMapper";
-
     public List<SCommDetail> getComment(int num) {return sqlSession.selectList(NAMESPACE+".getComment", num);}
-    public int getMin(int num) {return sqlSession.selectOne(NAMESPACE+".getMin", num);}
-    public int getMax(int num) {return sqlSession.selectOne(NAMESPACE+".getMax", num);}
+    public Integer getMin(int num) {return sqlSession.selectOne(NAMESPACE+".getMin", num);}
+    public Integer getMax(int num) {return sqlSession.selectOne(NAMESPACE+".getMax", num);}
     public int addComment(SCommentVo vo) {return sqlSession.insert(NAMESPACE+".addComment", vo);}
     public int editComment(SCommentVo vo) {return sqlSession.update(NAMESPACE+".editComment", vo);}
 }

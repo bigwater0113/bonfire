@@ -1,57 +1,141 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<style type="text/css">
+    
+table, th, td{
+    border: 1px solid black;
+}
+textarea.autosize {
+    min-height: 50px;
+}
+</style>
 <div>
-    ${vo.toString()}
-    <br>num : ${vo.num}
-    <br>id : ${vo.id}
-    <br>title : ${vo.title}
-    <br>content : ${vo.content}
-    <br>adddate : ${vo.adddate}
-    <!-- <br>recommend : ${vo.recommend} -->
-    <br>hits : ${vo.hits}
-    <br>cname : ${vo.cname}
-    <div>
-        <p>recomm by me?</p>
-        <div id="myrecomm">
-            추천수: <span id="recommend"></span>
-            <button id="tglrecomm" class="btn"></button>
+    <div id="article">
+        <div id="article_header"></div>
+        <div id="article_body">
+            <div class="table-responsive">
+                <table class="table table-vcenter">
+                    <tbody>
+                        <tr class="article_metadata">
+                            <td colspan="2"><h1>${vo.title}</h1></td>
+                            <td>${vo.adddate}</td>
+                        </tr>
+                        <tr class="article_metadata">
+                            <td>${vo.hits}</td>
+                            <td>
+                                <div>id : ${vo.id}</div>
+                            </td>
+                            <td>
+                                <div id="myrecomm">
+                                    <span id="recommend"></span>
+                                    <svg id="tglrecomm" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                                    </svg>
+                                    <!-- <button id="tglrecomm" class="btn btn-sm"></button> -->
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id = "article_content">
+                            <td colspan="3">
+                                ${vo.content}
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody id="article_comment">
+                    </tbody>
+                    <!-- TODO:멤버 이상 권한 있을때 사용가능하도록 변경 -->
+                    <tbody id="article_comment_write">
+                        <tr>
+                            <td colspan="3">
+                                <form:form id="comment_write">
+                                    <!-- TODO:여기도 summernote? -->
+                                    <div>
+                                        <textarea name="content"></textarea>
+                                        <button type="submit" class="btn">작성하기</button>
+                                    </div>
+                                </form:form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div id="article_foot"></div>
     </div>
+
 </div>
 <script type="text/javascript">
     let recommend = '${vo.recommend}';
     $('#recommend').text(recommend);
     $.getJSON("${cp }/board/${cname }/article/${vo.num}/recomm",
         function (response) {
-            if (response.value=='1') $('#tglrecomm').text('recomm_down');
-            else $('#tglrecomm').text('recomm_up');
+            if (response.value=='1') $('#tglrecomm').attr('fill', 'currentColor');
+            else $('#tglrecomm').attr('fill', 'none');
         }
     );
     $('#tglrecomm').on('click', function(){
-        // console.log('tglrecomm='+$('#tglrecomm').text());
-        // $.ajax({
-        //     url: "${cp }/board/${cname }/article/${vo.num}/recomm",
-        //     data: {tglrecomm: $('#tglrecomm').text()},
-        //     dataType: "json",
-        //     beforeSend: function(jqXHR, settings) {
-        //         console.log(settings.url);
-        //     },
-
-        //     success: function (response) {
-        //         console.log(response);
-        //     if (response.value=='1') $('#tglrecomm').text('recomm_down');
-        //     else $('#tglrecomm').text('recomm_up');
-        //     }
-        // });
-        
-        $.getJSON("${cp }/board/${cname }/article/${vo.num}/recomm", {tglrecomm: $('#tglrecomm').text()}, 
+        $.getJSON("${cp }/board/${cname }/article/${vo.num}/recomm", {tglrecomm: $('#tglrecomm').hasClass('recommstar')?1:-1}, 
             function (response) {
                 console.log(response);
-                if (response.value=='1') $('#tglrecomm').text('recomm_down');
-                else $('#tglrecomm').text('recomm_up');
+                if (response.value=='1') $('#tglrecomm').attr('fill', 'currentColor');
+                else $('#tglrecomm').attr('fill', 'none');
                 $('#recommend').text(parseInt(recommend)+(response.value));
             }
         );
     })
+    
+    function getComment() {
+        $.ajax({
+            type: "get",
+            url: "${cp}/board/${cname}/article/${vo.num}/comment",
+            // data: "data",
+            // dataType: "dataType",
+            success: function (response) {
+                console.log(response);
+                $('#article_comment').empty();
+                response.forEach(detail => {
+                    console.log(detail);
+                    let html = 
+                    `<tr data-idx="`+detail.idx+`">
+                        <td>
+                            <div id="username">`+detail.id+`</div>
+                            <div>`+detail.adddate+`</div>
+                            <div>추천:`+detail.value+`</div>
+                        </td>
+                        <td colspan="2">`+detail.content+`</td>
+                    </tr>`;
+                    $('#article_comment').append(html);
+                });
+            }
+        });
+    };
+
+    getComment();
+
+
+    $("textarea.autosize").on('keydown keyup', function () {
+        $(this).height(1).height($(this).prop('scrollHeight') + 12);
+    });
+
+    $("#comment_write").on('submit', function(e){
+        e.preventDefault();
+        console.log($(comment_write).serialize());
+        $.ajax({
+            type: "get",
+            url: "${cp }/board/${cname }/article/${vo.num}/commentwrite",
+            data: $(comment_write).serialize(),
+            beforeSend(jqXHR, settings) {
+                console.log(settings.url)
+            },
+            // dataType: "dataType",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+
 </script>

@@ -22,13 +22,26 @@
 		<th>조회수</th>
 	</tr>
 	<c:forEach var="vo" items="${list }">
+	<c:choose>
+	<c:when test="${vo.pin==1}">
 		<tr>
+			<td>공지사항</td>
+			<td>${vo.id }</td>
+			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
+			<td>${vo.hits }</td>
+		</tr>	
+		</c:when>
+		<c:otherwise>
+	<tr>
 			<td>${vo.num }</td>
 			<td>${vo.id }</td>
 			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 			<td>${vo.hits }</td>
 		</tr>	
+		</c:otherwise>
+			</c:choose>
 	</c:forEach>
 	</table>
 <div>

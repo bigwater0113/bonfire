@@ -12,11 +12,12 @@ public class QnaBoardVo {
 	private String comments;
 	private String cname;
 	private String pwd;
+	private int pin;
 	
 	public QnaBoardVo() {}
 
 	public QnaBoardVo(int num, String id, String title, String content, Date adddate, int hits,
-			String comments, String cname, String pwd) {
+			String comments, String cname, String pwd,int pin) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -27,6 +28,8 @@ public class QnaBoardVo {
 		this.hits = hits;
 		this.comments = comments;
 		this.cname = cname;
+		this.pwd = pwd;
+		this.pin = pin;
 	}
 
 	public int getNum() {
@@ -61,14 +64,6 @@ public class QnaBoardVo {
 		this.content = content;
 	}
 
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
 	public Date getAdddate() {
 		return adddate;
 	}
@@ -100,6 +95,24 @@ public class QnaBoardVo {
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+
 	
 	
 }

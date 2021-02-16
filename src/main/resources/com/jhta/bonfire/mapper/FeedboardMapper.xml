@@ -162,16 +162,18 @@
 	</insert>
 
 <!-- 발행 - 1. 글등록과 동시에 발행 (작가)-->
-	<insert id="postPosting">
+	<insert id="postPosting" parameterType="feedboard">
 		insert into feedboard values (#{num},#{id},#{title},#{content},0,0,
 		0,1,sysdate,sysdate,#{cname})
 	</insert>
 	
 <!-- 발행 - 2. 글목록에서 이미 등록된 글 발행 (작가)-->
-	<update id="updatePostingStatus">
-		update feedboard set postdate
+	<update id="updatePostingDate">
+		update feedboard set postdate=sysdate where num=#{num}
 	</update>
-	
+	<update id="updatePostingStatus">
+		update feedboard set ispost=1 where num=#{num}
+	</update>	
 	
 <!-- 글삭제 -->
 	<delete id="deletePostingA">

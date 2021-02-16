@@ -18,6 +18,21 @@ public class FeedboardDao {
 	@Autowired private SqlSession session;
 	private final String NAMESPACE="com.jhta.bonfire.mapper.FeedboardMapper";
 	
+	public int addPosting(FeedboardVo vo) {
+		return session.insert(NAMESPACE+".addPosting");
+	}
+	
+	public int postPosting(FeedboardVo vo) {
+		return session.insert(NAMESPACE+".postPosting");
+	}
+
+	public int updatePostingStatus(int num) {
+		session.update(NAMESPACE+".updatePostingStatus");
+		int b=session.update(NAMESPACE+".updatePostingDate");
+		return b;
+	}
+	
+	
 	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
 		return session.selectList(NAMESPACE+".selectAll",map);
 	}

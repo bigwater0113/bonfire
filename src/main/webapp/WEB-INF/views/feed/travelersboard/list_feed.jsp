@@ -46,8 +46,8 @@
 				</c:forEach>
 			</table>
 			<div id="feedboard_editlist">
-					<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_delete">
-					<input type="button" value="글쓰기" name="feedboard_write" formaction="${cp }/feedboard_write">
+					<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_deleteList">
+					<input type="button" value="글쓰기" name="feedboard_write" formaction="${cp }/member/feedboard_Towrite">
 			</div>
 		</div>
 	</form:form>

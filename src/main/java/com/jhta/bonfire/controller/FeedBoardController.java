@@ -3,16 +3,14 @@ package com.jhta.bonfire.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,29 +27,30 @@ import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 @Controller
 public class FeedBoardController {
 	@Autowired private FeedboardService service;
+	@Autowired private ServletContext sc;
 	
-	@PostMapping("/member/feedboard_Towrite")
-	public String feedboard_write() {
-		return ".home.board.feedboardwrite";
+	@GetMapping("/member/feedboard_Towrite")
+	public String gofeedboard_write() {
+		return ".home.travelersboard.feedboardwrite";
 	}
 	
-//	@PostMapping(value = { "/member/write" })
-//    public String write(
-//        @RequestParam String cname, 
-//        @AuthenticationPrincipal Authentication authentication, 
-//        Model model,
-//        @RequestParam String title, 
-//        @RequestParam String content, 
-//        @RequestParam String boardName,
-//        @RequestParam(required = false) String... fileName
-//        ) 
-//    {
-//        String id = authentication.getName();
-//        content = CommonUtil.changePath(sc, content, boardName, fileName);
-//        FeedboardVo vo = new FeedboardVo(0, id, title, content, 0, 0, 0, ispost,postdate,sysdate,cname);
-//        service.write(vo);
-//        return "/travelersboard/"+cname+"/list/";
-//    }
+	@PostMapping(value = "/member/feedboard_write")
+    public String write(String content, String writer, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
+        int ispost=0;
+        if(ispost1!=0) {
+        	ispost = ispost1;
+        }else if(ispost2!=0) {
+        	ispost = ispost2;
+        }
+        content=CommonUtil.changePath(sc, content, "feedboard", fileName);
+        FeedboardVo vo=new FeedboardVo(0, writer, title, content, 0, 0, 0, ispost, null, null, cname);
+        int a=service.insertPosting(vo, ispost);
+        if(a>0) {
+        	return "redirect:/feedboard_feed_selectAllbyId";
+        }else {
+        	return ".home.travelersboard.feedboardwrite";
+        }
+    }
 	
 	@RequestMapping("/feedboard_main_selectAll")
 	public String selectAll(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model) {

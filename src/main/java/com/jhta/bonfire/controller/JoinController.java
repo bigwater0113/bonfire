@@ -1,6 +1,5 @@
 package com.jhta.bonfire.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.bonfire.service.BMembersService;
+import com.jhta.bonfire.service.MProfileService;
 import com.jhta.bonfire.vo.BMembersVo;
+import com.jhta.bonfire.vo.MProfileVo;
 
 
 @Controller
 public class JoinController {
 	@Autowired
 	private BMembersService service;
+	
+	@Autowired
+	private MProfileService servicePro;
 	
 	@GetMapping("/join")
 	public String joinform() {
@@ -31,7 +35,9 @@ public class JoinController {
 	public String join(BMembersVo vo) {
 		vo.setEnabled(1);
 		vo.setRegdate(null);
+		MProfileVo vo1=new MProfileVo(vo.getId(), null, null, 0, 0, null, null);
 		int n=service.insert(vo);
+		servicePro.insert(vo1);
 		if(n>0) {
 			return ".home.login.login";
 		}else {

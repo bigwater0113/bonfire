@@ -19,8 +19,6 @@ public class FeedController {
 	@GetMapping(value="/@{feedId}")
 	public String feed(@PathVariable("feedId") String feedId,HttpSession session,Model model) {
 		String id=(String)session.getAttribute("id");
-		System.out.println(id);
-		System.out.println(feedId);
 		HashMap<String, Object> map=service.feedCheck(feedId);
 		String feedRole=service.roleCheck(feedId);
 		Boolean pageBlock=CommonUtil.pageBlock(id, feedId, feedRole, map);

@@ -39,13 +39,19 @@
     						style="width:110px;height:110px;position:relative;top:-65px;">
     				</li>
     				<li>
-    					<div class="authorDiv" id="author1"></div>
+    					<div class="authorDiv" id="author1">
+    						
+    					</div>
     				</li>
     				<li>
-    					<div class="authorDiv" id="author2"></div>
+    					<div class="authorDiv" id="author2">
+    					
+    					</div>
     				</li>
     				<li>
-    					<div class="authorDiv" id="author3"></div>
+    					<div class="authorDiv" id="author3">
+    					
+    					</div>
     				</li>
     				<li>
     					<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon"
@@ -62,7 +68,10 @@
     		</li>
     		<li>
     			<ul id="home_articleList">
-    				<li><div class="articleDiv" id="article1"></div></li>
+    				<li>
+    					<div class="articleDiv" id="article1">
+    					</div>
+    				</li>
     				<li><div class="articleDiv" id="article2"></div></li>
     				<li><div class="articleDiv" id="article3"></div></li>
     				<li><div class="articleDiv" id="article4"></div></li>
@@ -96,6 +105,7 @@
 		if(errorMsg!=''){
 			alert(errorMsg);
 		}
+		$("#author3").css("backgroundColor","yellow");
 	})
 </script>
 

@@ -16,6 +16,18 @@ import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
 public class FeedboardService {
 	@Autowired private FeedboardDao dao;
 	
+	public int insertPosting(FeedboardVo vo, int ispost) {
+		if(ispost==1) {
+			return dao.addPosting(vo);
+		}else{
+			return dao.postPosting(vo);
+		}
+	}
+	
+	public int updatePostingStatus(int num) {
+		return dao.updatePostingStatus(num);
+	}
+	
 	public int count(HashMap<String,Object> map) {
 		return dao.count(map);
 	}

@@ -12,7 +12,7 @@
 		<c:if test="${feedId==id }">
 			<li><a href="#">일기장</a></li>
 		</c:if>
-		<li><a href="#">여행글</a></li>
+		<li><a href="${cp }/feedboard_feed_selectAllbyId">여행글</a></li>
 		<li><a href="#">스크랩</a></li>
 		<li><a href="#">경로게시판</a></li>
 		<c:if test="${feedId==id }">

@@ -16,27 +16,37 @@
     <div id='editorarea'>
         <div id="editorarea_header"></div>
         <div id="editorarea_body">
-            <form:form id="write" action="${cp }/member/feedboard_write" method="post">
-            <input type="hidden" name="boardName" value="${boardName }">
+            <form:form id="write" method="post">
+            	<div id="writer">
+            		작성자 : <input type="text" name="writer" value="${id }" readonly="readonly">
+            	</div>
                 <div id="titlename">
-                    <input type="text" name="title">
+                	제목 : <input type="text" name="title">
                 </div>
                 <div id="categoryname">
-                    //TODO:db에서 가져오기
-                    <select class="form-select" name="cname" aria-label="category">
-                        <option selected value="서울">서울</option>
+					여행 지역
+					<select name="cname">
+                        <option value="서울">서울</option>
+                        <option value="경기">경기</option>
+                        <option value="강원">강원</option>
+                        <option value="충남">충남</option>
+                        <option value="충북">충북</option>
+                        <option value="경남">경남</option>
+                        <option value="경북">경북</option>
+                        <option value="전남">전남</option>
+                        <option value="전북">전북</option>
+                        <option value="제주">제주</option>
                     </select>
                 </div>
                 <div id=editorbox>
                     <textarea name="content" id="summernote"></textarea>
                 </div>
-                <input type="hidden" value="-1" name="add">
-                <input type="submit" value="작성하기">
+                <input type="hidden" value="-1" name="ispost1">
+                <input type="submit" value="작성하기" formaction="${cp }/member/feedboard_write">
                 <c:if test="${feedRole == ROLE.AUTHOR}">
-                	<input type="hidden" value="1" name="ispost">
-                	<input type="submit" value="발행하기">
+                	<input type="hidden" value="1" name="ispost2">
+                	<input type="submit" value="발행하기" formaction="${cp }/member/feedboard_write">
                 </c:if>
-                ${feedRole }
             </form:form>
         </div>
         <div id="editorarea_foot"></div>

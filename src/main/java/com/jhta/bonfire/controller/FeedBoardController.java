@@ -35,7 +35,7 @@ public class FeedBoardController {
 	}
 	
 	@PostMapping(value = "/member/feedboard_write")
-    public String write(String content, String writer, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
+    public String write(String content, @RequestParam(value="writer") String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
         int ispost=0;
         if(ispost1!=0) {
         	ispost = ispost1;
@@ -43,7 +43,7 @@ public class FeedBoardController {
         	ispost = ispost2;
         }
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-        FeedboardVo vo=new FeedboardVo(0, writer, title, content, 0, 0, 0, ispost, null, null, cname);
+        FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
         int a=service.insertPosting(vo, ispost);
         if(a>0) {
         	return "redirect:/feedboard_feed_selectAllbyId";

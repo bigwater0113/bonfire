@@ -13,11 +13,12 @@ public class QnaBoardVo {
 	private String cname;
 	private String pwd;
 	private int pin;
+	private int secret;
 	
 	public QnaBoardVo() {}
 
 	public QnaBoardVo(int num, String id, String title, String content, Date adddate, int hits,
-			String comments, String cname, String pwd,int pin) {
+			String comments, String cname, String pwd, int pin, int secret) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -30,6 +31,7 @@ public class QnaBoardVo {
 		this.cname = cname;
 		this.pwd = pwd;
 		this.pin = pin;
+		this.secret = secret;
 	}
 
 	public int getNum() {
@@ -112,7 +114,12 @@ public class QnaBoardVo {
 		this.pin = pin;
 	}
 
+	public int getSecret() {
+		return secret;
+	}
 
-	
+	public void setSecret(int secret) {
+		this.secret = secret;
+	}
 	
 }

@@ -207,6 +207,8 @@ CREATE TABLE qnaboard
   comments clob         ,
   cname    VARCHAR2(40) ,
   pwd	   VARCHAR2(25) ,
+  pin number(1),
+  secret number(1)
   CONSTRAINT PK_qnaboard PRIMARY KEY (num)
 );
 

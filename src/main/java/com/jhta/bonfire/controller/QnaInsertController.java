@@ -27,7 +27,9 @@ public class QnaInsertController {
 		return ".home.qna.insert";
 	}
 	@RequestMapping(value = "qna/insert",method = RequestMethod.POST)
-	public String insert(@RequestParam( value= "pin1", defaultValue = "off") String pin1,
+	public String insert(
+			@RequestParam( value= "pin1", defaultValue = "off") String pin1,
+			@RequestParam( value= "secret1", defaultValue = "off") String secret1,
 			QnaBoardVo vo,
 			@RequestParam(required = false) String... fileName
 			) {
@@ -38,7 +40,9 @@ public class QnaInsertController {
 		if(pin1.equals("on")) { 
 			vo.setPin(1);
 					}
-
+		if(secret1.equals("on")) { 
+			vo.setSecret(1);
+					}
 		
 		
 		int n=service.insert(vo);

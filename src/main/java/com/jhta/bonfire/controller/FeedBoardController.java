@@ -72,13 +72,9 @@ public class FeedBoardController {
 		return ".feed.travelersboard.side.list_main";
 	}
 	
-	//특정ID 글목록
+	//특정 feedId 글목록
 	@RequestMapping("/feedboard_feed_selectAllbyId")
-	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {
-		String id=(String)session.getAttribute("id");
-		String feedid=null;
-		//본인 피드 글목록 불러오기
-		if(id==feedid) {
+	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,String id,Model model,HttpSession session) {
 			HashMap<String,Object> map=new HashMap<String, Object>();
 			map.put("id", id);
 			map.put("field", field);
@@ -96,26 +92,6 @@ public class FeedBoardController {
 			model.addAttribute("field", field);
 			model.addAttribute("keyword",keyword);
 			return ".feed.travelersboard.list_feed";
-		}else {
-			//타인 피드 글목록 불러오기
-			HashMap<String,Object> map=new HashMap<String, Object>();
-			map.put("feedid", feedid);
-			map.put("field", field);
-			map.put("keyword",keyword);
-			int listCount=service.countbyId(map);
-			PageUtil pu=new PageUtil(page, 10, 10, listCount);
-			int startRow=pu.getStartRow();
-			int endRow=pu.getEndRow();
-			map.put("startRow",startRow);
-			map.put("endRow",endRow);
-			
-			List<Feedboard_fbjoinVo> list=service.selectAllbyId(map);
-			model.addAttribute("list",list);
-			model.addAttribute("pu",pu);
-			model.addAttribute("field", field);
-			model.addAttribute("keyword",keyword);
-			return ".feed.travelersboard.list_feed";
-		}
 	}
 	
 	@GetMapping("/feedboard_detail")
@@ -136,6 +112,20 @@ public class FeedBoardController {
 		}
 		if(n>0) {
 			return "redirect:/feedboard_main_selectAll";
+		}else {
+			return ".home.error";
+		}
+	}
+	
+	@PostMapping("/feedboard_deleteMyList")
+	public String deleteMine(Model model, HttpServletRequest req) {
+		String[] params=req.getParameterValues("checkk");
+		int n=0;
+		for(String i : params) {
+			n=service.deletePosting(Integer.parseInt(i));
+		}
+		if(n>0) {
+			return "redirect:/feedboard_feed_selectAllbyId";
 		}else {
 			return ".home.error";
 		}

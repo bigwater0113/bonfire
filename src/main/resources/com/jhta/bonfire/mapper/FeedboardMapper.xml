@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.bonfire.mapper.FeedboardMapper">
 
-<!-- 모든 id 여행게시판 게시글 목록 -->
+<!-- 메인페이지 모든 id 여행게시판 게시글 목록 -->
 	<sql id="search1">
 		<if test="field=='title' or field=='content'or field=='id'">
   			where ${field} like '%'||#{keyword}||'%'
@@ -24,6 +24,7 @@
  			select a.*,rownum rnum from 
  			(
   				select * from feedboard
+  				where ispost=1
   				<include refid="search1"/>
   				order by num desc
   			) a
@@ -31,7 +32,7 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 
-<!-- 특정 id - 본인 피드 여행게시글 목록 -->
+<!-- 피드페이지 특정 id - 본인 피드 여행게시글 목록 -->
 	<sql id="search2">
 		<if test="field=='title' or field=='content' or field=='cname'">
   			and ${field} like '%'||#{keyword}||'%'
@@ -61,7 +62,7 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 
-<!-- 특정 id - 타인 피드 여행게시글 목록 -->
+<!-- 작가피드 페이지 특정 id - 작가 피드 여행게시글 목록 -->
 	<sql id="search3">
 		<if test="field=='title' or field=='content' or field=='cname'">
   			and ${field} like '%'||#{keyword}||'%'

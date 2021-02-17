@@ -9,4 +9,12 @@
 	<select id="select" parameterType="string" resultType="mprofile">
 		select * from mprofile where id=#{id}
 	</select>
+	<update id="updateProfile" parameterType="mprofile">
+		update mprofile 
+		set nickname=#{nickname},
+			intro=#{intro},
+			bfilename=#{bfilename},
+			pfilename=#{pfilename} 
+		where id=#{id}
+	</update>
 </mapper>

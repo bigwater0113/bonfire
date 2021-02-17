@@ -5,16 +5,26 @@
 <!-- side.jsp -->
 <style>
 	li{list-style:none;}
+	#profileImg img{width:100px;height:100px;border-radius: 50%;}
 </style>
 <div>
 	<div id="feed_profile" style="border:1px solid black;text-align:center;">
-		<div id="profileImg"><img src="#"></div>
-		<span>닉네임</span><br>
-		<p>소개</p>
-		<span>팔로우</span><br>
-		<span>팔로워</span><br>
+		<div id="profileImg">
+			<c:choose>
+				<c:when test="${proVo.pfilename!=null }">
+					<img src="${cp }/resources/upload/profile/${proVo.pfilename}">
+				</c:when>
+				<c:otherwise>
+					<img src="${cp }/resources/images/profileIcon.png">
+				</c:otherwise>			
+			</c:choose>
+		</div>
+		<span style="font-weight: bold;">${proVo.nickname }</span><br>
+		<p>${proVo.intro }</p>
+		<span>팔로우 ${proVo.follow }</span><br>
+		<span>팔로워 ${proVo.follower }</span><br>
 		<c:if test="${feedId==id }">
-			<a href="#">프로필수정</a>
+			<a href="${cp }/editProfile">프로필수정</a>
 		</c:if>
 	</div>
 	<h3>메뉴</h3>

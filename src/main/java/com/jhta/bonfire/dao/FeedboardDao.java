@@ -19,19 +19,22 @@ public class FeedboardDao {
 	private final String NAMESPACE="com.jhta.bonfire.mapper.FeedboardMapper";
 	
 	public int addPosting(FeedboardVo vo) {
-		return session.insert(NAMESPACE+".addPosting");
+		return session.insert(NAMESPACE+".addPosting",vo);
 	}
 	
 	public int postPosting(FeedboardVo vo) {
-		return session.insert(NAMESPACE+".postPosting");
+		return session.insert(NAMESPACE+".postPosting",vo);
 	}
 
-	public int updatePostingStatus(int num) {
-		session.update(NAMESPACE+".updatePostingStatus");
-		int b=session.update(NAMESPACE+".updatePostingDate");
-		return b;
-	}
+//	public int updatePostingStatus(int num) {
+//		session.update(NAMESPACE+".updatePostingStatus");
+//		int b=session.update(NAMESPACE+".updatePostingDate");
+//		return b;
+//	}
 	
+	public int modify(FeedboardVo vo) {
+		return session.update(NAMESPACE+".modify",vo);
+	}
 	
 	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
 		return session.selectList(NAMESPACE+".selectAll",map);

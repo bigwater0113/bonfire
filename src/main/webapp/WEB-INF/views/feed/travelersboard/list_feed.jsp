@@ -47,7 +47,7 @@
 			</table>
 			<div id="feedboard_editlist">
 					<input type="submit" value="삭제" name="feedboard_deleteMine" formaction="${cp }/feedboard_deleteMyList">
-					<input type="button" value="글쓰기" name="feedboard_write" formaction="${cp }/member/feedboard_Towrite">
+					<input type="button" value="글쓰기" name="feedboard_write" onclick="location.href='${cp}/member/feedboard_Towrite'">
 			</div>
 		</div>
 	</form:form>
@@ -72,7 +72,7 @@
 </div>
 <a href="${cp }/">메인페이지로</a>
 <div>
-	<form method="post" action="${cp }/feedboard_feed_selectAllbyId">
+	<form:form method="post" action="${cp }/feedboard_feed_selectAllbyId">
 		<select name="field">
 			<option value="cname" <c:if test="${field=='cname'}">selected</c:if>>지역</option>
 			<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
@@ -81,7 +81,7 @@
 		</select>
 		<input type="text" name="keyword" value="${keyword }">
 		<input type="submit" value="검색">
-	</form>
+	</form:form>
 </div>
 
 <script>

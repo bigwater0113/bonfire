@@ -21,7 +21,7 @@
             		작성자 : <input type="text" name="id" value="${id }" readonly="readonly">
             	</div>
                 <div id="titlename">
-                	제목 : <input type="text" name="title">
+                	제목 : <input type="text" name="title" value="${vo.title }">
                 </div>
                 <div id="categoryname">
 					여행 지역
@@ -39,13 +39,16 @@
                     </select>
                 </div>
                 <div id=editorbox>
-                    <textarea name="content" id="summernote"></textarea>
+                    <textarea name="content" id="summernote" value="${vo.content }"></textarea>
                 </div>
-                <input type="hidden" value="-1" name="ispost1">
-                <input type="submit" value="작성하기" formaction="${cp }/member/feedboard_write">
+	                <input type="hidden" value="${vo.ispost }" name="before1">
+                <c:if test="${vo.ispost == -1 }"><!-- 이미 발행된 글은 재발행만. -->
+	                <input type="hidden" value="-1" name="ispost1">
+	                <input type="submit" value="수정하기" formaction="${cp }/feedboard_mod">
+                </c:if>
                 <c:if test="${feedRole == ROLE.AUTHOR}">
                 	<input type="hidden" value="1" name="ispost2">
-                	<input type="submit" value="발행하기" formaction="${cp }/member/feedboard_write">
+                	<input type="submit" value="(재)발행하기" formaction="${cp }/feedboard_mod">
                 </c:if>
             </form:form>
         </div>

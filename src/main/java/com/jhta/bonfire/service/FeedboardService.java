@@ -17,15 +17,19 @@ public class FeedboardService {
 	@Autowired private FeedboardDao dao;
 	
 	public int insertPosting(FeedboardVo vo, int ispost) {
-		if(ispost==1) {
+		if(ispost==-1) {
 			return dao.addPosting(vo);
 		}else{
 			return dao.postPosting(vo);
 		}
 	}
 	
-	public int updatePostingStatus(int num) {
-		return dao.updatePostingStatus(num);
+//	public int updatePostingStatus(int num) {
+//		return dao.updatePostingStatus(num);
+//	}
+	
+	public int modify(FeedboardVo vo, int ispost) {
+		return dao.modify(vo);
 	}
 	
 	public int count(HashMap<String,Object> map) {

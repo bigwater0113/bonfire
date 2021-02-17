@@ -35,7 +35,7 @@ public class FeedBoardController {
 	}
 	
 	@PostMapping(value = "/member/feedboard_write")
-    public String write(String content, @RequestParam(value="writer") String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
+    public String write(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
         int ispost=0;
         if(ispost1!=0) {
         	ispost = ispost1;
@@ -74,9 +74,10 @@ public class FeedBoardController {
 	
 	//특정 feedId 글목록
 	@RequestMapping("/feedboard_feed_selectAllbyId")
-	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,String id,Model model,HttpSession session) {
+	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {
 			HashMap<String,Object> map=new HashMap<String, Object>();
-			map.put("id", id);
+			String feedId=(String)session.getAttribute("feedId");
+			map.put("id", feedId);
 			map.put("field", field);
 			map.put("keyword",keyword);
 			int listCount=service.countbyId(map);
@@ -95,13 +96,38 @@ public class FeedBoardController {
 	}
 	
 	@GetMapping("/feedboard_detail")
-	public String selectOne(String id,int num,Model model) {
+	public String selectOne(HttpSession session,int num,Model model) {
+		String id=(String)session.getAttribute("id");
 		service.insertHits(id,num);
 		FeedboardVo vo=service.selectOne(num);
 		model.addAttribute("vo",vo);
 		return ".home.travelersboard.detail_main";
 	}
 	
+	@GetMapping("/feedboard_goupdate")
+	public String gotoUpdatePage(int num,Model model) {
+		FeedboardVo vo=service.selectOne(num);
+		model.addAttribute("vo",vo);
+		return ".home.travelersboard.feedboardupdate";
+	}
+	
+	@GetMapping("/feedboard_mod")
+	  public String modify(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
+        int ispost=0;
+        if(ispost1!=0) {
+        	ispost = ispost1;
+        }else if(ispost2!=0) {
+        	ispost = ispost2;
+        }
+        content=CommonUtil.changePath(sc, content, "feedboard", fileName);
+        FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
+        int a=service.modify(vo, ispost);
+        if(a>0) {
+        	return "redirect:/feedboard_feed_selectAllbyId";
+        }else {
+        	return ".home.travelersboard.feedboardwrite";
+        }
+    }
 	
 	@PostMapping("/feedboard_deleteList")
 	public String delete(Model model, HttpServletRequest req) {

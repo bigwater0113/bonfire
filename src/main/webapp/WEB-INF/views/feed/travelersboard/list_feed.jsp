@@ -46,7 +46,7 @@
 				</c:forEach>
 			</table>
 			<div id="feedboard_editlist">
-					<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_deleteList">
+					<input type="submit" value="삭제" name="feedboard_deleteMine" formaction="${cp }/feedboard_deleteMyList">
 					<input type="button" value="글쓰기" name="feedboard_write" formaction="${cp }/member/feedboard_Towrite">
 			</div>
 		</div>
@@ -70,7 +70,6 @@
      	<a href="${cp }/feedboard_feed_selectAllbyId?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
     </c:if>
 </div>
-<a href="${cp }/feedboard_feed_selectAllbyId">전체글보기</a><br>
 <a href="${cp }/">메인페이지로</a>
 <div>
 	<form method="post" action="${cp }/feedboard_feed_selectAllbyId">

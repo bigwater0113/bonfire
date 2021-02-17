@@ -13,6 +13,9 @@
 <body>
 <table border="1" width="500">
 	<tr>
+		<td>카테고리</td><td>${vo.cname }</td>
+	</tr>
+	<tr>
 		<td>글번호</td><td>${vo.num }</td>
 	</tr>
 	<tr>
@@ -38,8 +41,8 @@
 		<a href="${cp }/qna/delete?num=${vo.num}">삭제</a>
 		<a href="${cp }/qna/update?num=${vo.num}">수정</a>
 </div>
-</c:if>
 
+</c:if>
 답글목록
 <div id="commList">
 
@@ -48,9 +51,13 @@
 
 <div id="commAdd">
 		<input type="hidden" value="${vo.num }" id="commnum">
-		답글 <textarea rows="1" cols="40" id="comments"></textarea>
+		<c:if test="${sessionScope.id=='admin'}">
+		답글 <textarea rows="6" cols="40" id="comments"></textarea>
 		<input type="button" value="등록" id="addBtn">
+		</c:if>
 </div>
+
+
 <script type="text/javascript">
 $(function(){
 	$("#addBtn").click(function(){

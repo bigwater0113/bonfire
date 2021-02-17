@@ -32,15 +32,32 @@
 			<td>${vo.hits }</td>
 		</tr>	
 		</c:when>
-		<c:otherwise>
-	<tr>
+		<c:when test="${vo.secret==1}">
+			<td>${vo.num }</td>
+			<td>${vo.id }</td>
+			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">비밀글입니다.</a></td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
+			<td>${vo.hits }</td>
+		</c:when>
+		<c:when test="${! id ==null}">
+			<tr>
 			<td>${vo.num }</td>
 			<td>${vo.id }</td>
 			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 			<td>${vo.hits }</td>
 		</tr>	
-		</c:otherwise>
+		</c:when>
+			<c:otherwise>
+			<tr>
+			<td>${vo.num }</td>
+			<td>${vo.id }</td>
+			<td><a href="${cp }/login">${vo.title }</a></td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
+			<td>${vo.hits }</td>
+		</tr>	
+
+	</c:otherwise>
 			</c:choose>
 	</c:forEach>
 	</table>
@@ -61,9 +78,13 @@
 	<c:if test="${pu.endPageNum < pu.totalPageCount}">
             <a href="${cp }/qna/main?pageNum=${pu.endPageNum + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>▷</span> </a>
       </c:if>
+
 </div>	
+<c:if test="${id != null }">
 	<a href="${cp }/qna/insert">글쓰기</a>
+	</c:if>
 <div>
+
 	<form:form method="post" action="${cp }/qna/main">
 		<select name="field">
 			<option value="title" <c:if test="${field=='title' }">selected</c:if>>제목</option>

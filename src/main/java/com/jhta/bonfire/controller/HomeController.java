@@ -35,6 +35,9 @@ public class HomeController {
 		List<RecommAuthorVo> list=new ArrayList<RecommAuthorVo>();
 		int Cnt=service.authorCnt();
 		int viewCnt=12;
+		if(Cnt<12) {
+			viewCnt=1;
+		}
 		boolean matchCnt=false;
 		int[] selectAuthors=new int[viewCnt];
 		for(int i=0;i<viewCnt;i++) {

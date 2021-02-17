@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.bonfire.mapper.HomeMapper">
+	<select id="authorCnt" resultType="int">
+		select count(id) from
+		(
+		select b.id,b.name,b.email,b.gender,b.phone,
+		a.authority,m.nickname,m.intro,m.pfilename,m.bfilename
+		from bmembers b full outer join auth a on b.id=a.id 
+		full outer join mprofile m on m.id=b.id
+		where authority='ROLE_MEMBER'
+		)
+	</select>
+	<select id="select" resultType="recommauthor" parameterType="int">
+		select * from
+		(
+			select b.id,b.name,b.email,b.gender,b.phone,
+			a.authority,m.nickname,m.intro,m.pfilename,m.bfilename,rownum
+			from bmembers b 
+			full outer join auth a on b.id=a.id 
+			full outer join mprofile m on m.id=b.id
+			<![CDATA[ where authority='ROLE_MEMBER' and rownum<=#{selectAuthor}  ]]>
+			order by rownum desc
+		)
+		where rownum=1
+	</select>
+</mapper>

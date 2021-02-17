@@ -19,6 +19,7 @@
   	<typeAlias type="com.jhta.bonfire.vo.FbrecommVo" alias="fbrecomm"/>
   	<typeAlias type="com.jhta.bonfire.vo.BMembersVo" alias="bmembers"/>
   	<typeAlias type="com.jhta.bonfire.vo.MProfileVo" alias="mprofile"/>
+  	<typeAlias type="com.jhta.bonfire.vo.RecommAuthorVo" alias="recommauthor"/>
   	<typeAlias type="com.jhta.bonfire.vo.AuthVo" alias="auth"/>
   	<typeAlias type="com.jhta.bonfire.vo.QnaBoardVo" alias="qnaboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.QhitsVo" alias="qhits"/>
@@ -35,6 +36,7 @@
     <mapper resource="com/jhta/bonfire/mapper/FeedboardMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/BMembersMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/MProfileMapper.xml"/>
+    <mapper resource="com/jhta/bonfire/mapper/HomeMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>
   </mappers>
 </configuration>

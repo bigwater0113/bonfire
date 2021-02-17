@@ -30,10 +30,9 @@
 		
 	<c:if test="${id != null }">
 		<input type="button" id="btn_recomm" value="추천" name="btn_recomm">
-		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
 	</c:if>
 	<c:if test="${vo.id==id }">
-		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate'">
+		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard/mod'">
 	</c:if>
 	</div>
 	

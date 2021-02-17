@@ -92,12 +92,31 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 	
+<!-- 본인만 보는 글등록(일반 회원, 작가) -->
+	<insert id="addPosting" parameterType="feedboard">
+		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
+		0,-1,null,sysdate,#{cname})
+	</insert>
+
+<!-- 발행 - 1. 글등록과 동시에 발행 (작가)-->
+	<insert id="postPosting" parameterType="feedboard">
+		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
+		0,1,sysdate,sysdate,#{cname})
+	</insert>
 	
+<!-- 발행 - 2. 글목록에서 이미 등록된 글 발행 (작가)-->
+	<update id="updatePostingStatus">
+		update feedboard set postdate=sysdate,ispost=1 where num=#{num}
+	</update>
+		
 <!-- 글 상세페이지-->
 	<select id="selectOne" resultType="feedboard">
 		select * from feedboard where num=#{num}
 	</select>
-	
+<!-- 글 수정하기 -->
+	<update id="modify" parameterType="hashmap">
+		update feedboard set title=#{title},content=#{content},ispost=#{ispost},cname=#{cname} where num=#{num}
+	</update>
 	
 <!-- 댓글 -->	
 	<resultMap type="fbcomment" id="commList">
@@ -156,26 +175,6 @@
 	<insert id="deleteScrap">
 	</insert>
 
-<!-- 본인만 보는 글등록(일반 회원, 작가) -->
-	<insert id="addPosting" parameterType="feedboard">
-		insert into feedboard values (#{num},#{id},#{title},#{content},0,0,
-		0,-1,null,sysdate,#{cname})
-	</insert>
-
-<!-- 발행 - 1. 글등록과 동시에 발행 (작가)-->
-	<insert id="postPosting" parameterType="feedboard">
-		insert into feedboard values (#{num},#{id},#{title},#{content},0,0,
-		0,1,sysdate,sysdate,#{cname})
-	</insert>
-	
-<!-- 발행 - 2. 글목록에서 이미 등록된 글 발행 (작가)-->
-	<update id="updatePostingDate">
-		update feedboard set postdate=sysdate where num=#{num}
-	</update>
-	<update id="updatePostingStatus">
-		update feedboard set ispost=1 where num=#{num}
-	</update>	
-	
 <!-- 글삭제 -->
 	<delete id="deletePostingA">
 		delete from fbcomment where num=#{num}

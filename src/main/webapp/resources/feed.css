@@ -10,6 +10,11 @@
 	height:100px;
 	background-color: yellow;
 }
+#banner{
+	width:1200px;
+	height:300px;
+	background-color: #8080ff;
+}
 #side{
 	width:300px;
 	height:600px;

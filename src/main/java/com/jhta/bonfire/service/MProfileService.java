@@ -17,4 +17,7 @@ public class MProfileService {
 	public MProfileVo select(String id) {
 		return dao.select(id);
 	}
+	public int updateProfile(MProfileVo vo) {
+		return dao.updateProfile(vo);
+	}
 }

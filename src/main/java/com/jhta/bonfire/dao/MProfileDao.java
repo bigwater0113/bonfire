@@ -18,4 +18,7 @@ public class MProfileDao {
 	public MProfileVo select(String id) {
 		return sqlSession.selectOne(NAMESPACE+".select",id);
 	}
+	public int updateProfile(MProfileVo vo) {
+		return sqlSession.update(NAMESPACE+".updateProfile",vo);
+	}
 }

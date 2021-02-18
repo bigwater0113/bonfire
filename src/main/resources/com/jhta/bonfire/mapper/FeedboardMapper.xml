@@ -128,7 +128,7 @@
 		0,-1,null,sysdate,#{cname})
 	</insert>
 
-<!-- 발행 - 1. 글등록 + 발행 (작가)-->
+<!-- 발행 - 1. 글작성시 발행 (작가)-->
 	<insert id="postPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
 		0,1,sysdate,sysdate,#{cname})

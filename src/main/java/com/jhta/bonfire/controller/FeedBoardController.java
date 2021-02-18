@@ -92,7 +92,8 @@ public class FeedBoardController {
 			map.put("id", feedId);
 			map.put("field", field);
 			map.put("keyword",keyword);
-			if(id==feedId) { //내 피드 목록
+			
+			if(id.equals(feedId)) { //내 피드 목록
 				int listCount=service.countbyId(map);
 				PageUtil pu=new PageUtil(page, 10, 10, listCount);
 				int startRow=pu.getStartRow();

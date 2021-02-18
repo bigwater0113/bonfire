@@ -18,15 +18,29 @@
 	.btnIcon:hover{opacity:1;}
 	.aHover{color:#aaaaaa;text-decoration:none; }
 	.aHover:hover{color:black;}
+	#home_mask{
+		position:absolute;
+		z-index:9000;
+		left:0px;
+		top:0px;
+		background-color:black;
+		opacity: 0.6;
+		display:none;
+	}
+	#home_searchResult{position:absolute;z-index:9999;left:0px;top:0px;
+			width:500px;height:500px;background-color:#cccccc;display:none;}
 </style>
 <div id="home_wrap">
+	<div id="home_mask">
+	</div>
+	<div id="home_searchResult">
+	</div>
     <div id="home_search">
     	<form>
     		<select name="field">
     			<option value="author">작가</option>
-    			<option value="place">여행지</option>
     		</select>
-	    	<input type="text" name="keyword" style="width:500px;"><input type="submit" value="검색">
+	    	<input type="text" name="keyword" style="width:500px;"><a href="javascript:popupDiv()">검색</a>
     	</form>
     </div>
     <div id="home_recommAuthor">
@@ -82,14 +96,21 @@
     </div>
 </div>
 <script>
+	var windowWidth = $(window).width();
+	var windowHeight = $(window).height();
+	$(window).resize(function(){
+		windowWidth = $(window).width();
+		windowHeight = $(window).height();
+		$("#home_mask").css('width',windowWidth).css('height',windowHeight);
+		$("#home_searchResult").css('left',windowWidth/2-250)
+		.css('top',windowHeight/2-250);
+	});
 	$(function(){
 		var errorMsg="${errorMsg}";
 		if(errorMsg!=''){
 			alert(errorMsg);
 		}
 		var authorPage=1;
-		
-		
 		
 		//home 화면 오면 추천작가 새로고침
 		$.ajax({
@@ -184,6 +205,19 @@
 		});
 		
 	})
+	
+	//search버튼 누를시 function
+	function popupDiv(){
+		$("#home_mask").css('width',windowWidth).css('height',windowHeight)
+		.css('display','block')
+		.click(function(){
+			$(this).css('display','none');
+			$("#home_searchResult").css('display','none');
+		});
+		$("#home_searchResult").css('left',windowWidth/2-250)
+		.css('top',windowHeight/2-250).css('display','block');
+	}
+	
 	//인기글 조회수별 새로고침
 	function popularHits(){
 		$.ajax({
@@ -235,6 +269,7 @@
 		});
 	}
 	
+	//인기여행지 (해당카테고리 글 갯수 기준)
 	$.ajax({
 		url:"${cp}/popularPlace",
 		dataType: 'xml',

@@ -20,6 +20,8 @@
   	<typeAlias type="com.jhta.bonfire.vo.BMembersVo" alias="bmembers"/>
   	<typeAlias type="com.jhta.bonfire.vo.MProfileVo" alias="mprofile"/>
   	<typeAlias type="com.jhta.bonfire.vo.RecommAuthorVo" alias="recommauthor"/>
+  	<typeAlias type="com.jhta.bonfire.vo.PopularArticleHitsVo" alias="populararticlehits"/>
+  	<typeAlias type="com.jhta.bonfire.vo.PopularArticleRecommVo" alias="populararticlerecomm"/>
   	<typeAlias type="com.jhta.bonfire.vo.AuthVo" alias="auth"/>
   	<typeAlias type="com.jhta.bonfire.vo.QnaBoardVo" alias="qnaboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.QhitsVo" alias="qhits"/>

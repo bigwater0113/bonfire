@@ -26,4 +26,20 @@
 		)
 		where rownum=1
 	</select>
+	<select id="popularArticle_hits" resultType="populararticlehits">
+		select * from (
+		select fb.num,fb.id,m.nickname,fb.title,fb.hits 
+		from feedboard fb join mprofile m 
+		on fb.id=m.id 
+		order by hits desc)
+		<![CDATA[ where rownum>=1 and rownum<=5  ]]>
+	</select>
+	<select id="popularArticle_recomm" resultType="populararticlerecomm">
+		select * from (
+		select fb.num,fb.id,m.nickname,fb.title,fb.recommend 
+		from feedboard fb join mprofile m 
+		on fb.id=m.id 
+		order by recommend desc)
+		<![CDATA[ where rownum>=1 and rownum<=5  ]]>
+	</select>
 </mapper>

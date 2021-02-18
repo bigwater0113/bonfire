@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.bonfire.service.HomeService;
+import com.jhta.bonfire.vo.PopularArticleHitsVo;
+import com.jhta.bonfire.vo.PopularArticleRecommVo;
 import com.jhta.bonfire.vo.RecommAuthorVo;
 
 @Controller
@@ -55,6 +57,18 @@ public class HomeController {
 		for(int selectAuthor:selectAuthors) {
 			list.add(service.select(selectAuthor));
 		}
+		return list;
+	}
+	@GetMapping(value="/popularArticle_hits",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_XML_VALUE})
+	@ResponseBody
+	public List<PopularArticleHitsVo> popularArticle_hits(){
+		List<PopularArticleHitsVo> list=service.popularArticle_hits();
+		return list;
+	}
+	@GetMapping(value="/popularArticle_recomm",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_XML_VALUE})
+	@ResponseBody
+	public List<PopularArticleRecommVo> popularArticle_recomm(){
+		List<PopularArticleRecommVo> list=service.popularArticle_recomm();
 		return list;
 	}
 }

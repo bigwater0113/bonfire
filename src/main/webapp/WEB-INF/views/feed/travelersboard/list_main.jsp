@@ -14,7 +14,7 @@
 			</c:if>
 		</div>
 		<div id="feedboard_table">
-			<table border="1" width="500px">
+			<table border="1" width="800px">
 				<tr>
 				<c:if test="${id == 'admin'}">
 					<th><input type="checkbox" id="allcheck"></th>
@@ -38,7 +38,7 @@
 							<td>${vo.id }</td>
 							<c:choose>
 								<c:when test="${id != null }">
-									<td><a href="${cp }/feedboard_detail?num=${vo.num }&id=${id}">${vo.title }</a></td>
+									<td><a href="${cp }/feedboard_detail?num=${vo.num }&id=${id}&recentpage=main">${vo.title }</a></td>
 								</c:when>
 								<c:otherwise>
 									<td><a href="${cp }/login">${vo.title }</a></td>

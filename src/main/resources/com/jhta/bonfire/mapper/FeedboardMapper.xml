@@ -4,18 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.bonfire.mapper.FeedboardMapper">
 
-<!-- 메인페이지 모든 id 여행게시판 게시글 목록 -->
+<!-- 메인페이지 - 모든 작가 공개글 목록 -->
 	<sql id="search1">
 		<if test="field=='title' or field=='content'or field=='id'">
-  			where ${field} like '%'||#{keyword}||'%'
+  			and ${field} like '%'||#{keyword}||'%'
   		</if>
 		<if test="field=='toc'">
-  			where title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
   		</if>
 	</sql>
 	
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) cnt from feedboard
+		where ispost=1
 		<include refid="search1"/>
 	</select>
 	<select id="selectAll" resultType="feedboard" parameterType="hashmap">
@@ -31,8 +32,37 @@
   		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
+	
+<!-- 메인페이지 - 지역별 글목록-->
+	<sql id="search4">
+		<if test="field=='title' or field=='content'or field=='id'">
+  			and ${field} like '%'||#{keyword}||'%'
+  		</if>
+		<if test="field=='toc'">
+  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  		</if>
+	</sql>
+	
+	<select id="count2" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from feedboard
+		where ispost=1 and cname=#{cname}
+		<include refid="search4"/>
+	</select>
+	<select id="selectByRegion" resultType="feedboard" parameterType="hashmap">
+		select * from
+		(
+ 			select a.*,rownum rnum from 
+ 			(
+  				select * from feedboard
+  				where ispost=1 and cname=#{cname}
+  				<include refid="search4"/>
+  				order by num desc
+  			) a
+  		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
+	</select>
 
-<!-- 피드페이지 특정 id - 본인 피드 여행게시글 목록 -->
+<!-- 본인피드 - 공/비공 여행게시글 목록 -->
 	<sql id="search2">
 		<if test="field=='title' or field=='content' or field=='cname'">
   			and ${field} like '%'||#{keyword}||'%'
@@ -62,7 +92,7 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 
-<!-- 작가피드 페이지 특정 id - 작가 피드 여행게시글 목록 -->
+<!-- 작가피드 - 공개 여행게시글 목록 -->
 	<sql id="search3">
 		<if test="field=='title' or field=='content' or field=='cname'">
   			and ${field} like '%'||#{keyword}||'%'
@@ -74,7 +104,7 @@
 	
 	<select id="countbyId2" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) cnt from feedboard
-		where id=#{feedid} and ispost=1
+		where id=#{id} and ispost=1
 		<include refid="search3"/>
 	</select>
 	
@@ -84,7 +114,7 @@
  			select a.*,rownum rnum from 
  			(
   				select * from feedboard
-  				where id=#{feedid} and ispost=1
+  				where id=#{id} and ispost=1
   				<include refid="search3"/>
   				order by num desc
   			) a
@@ -98,13 +128,13 @@
 		0,-1,null,sysdate,#{cname})
 	</insert>
 
-<!-- 발행 - 1. 글등록과 동시에 발행 (작가)-->
+<!-- 발행 - 1. 글등록 + 발행 (작가)-->
 	<insert id="postPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
 		0,1,sysdate,sysdate,#{cname})
 	</insert>
 	
-<!-- 발행 - 2. 글목록에서 이미 등록된 글 발행 (작가)-->
+<!-- 발행 - 2. 이미 등록된 글 발행 (작가)-->
 	<update id="updatePostingStatus">
 		update feedboard set postdate=sysdate,ispost=1 where num=#{num}
 	</update>
@@ -113,10 +143,17 @@
 	<select id="selectOne" resultType="feedboard">
 		select * from feedboard where num=#{num}
 	</select>
-<!-- 글 수정하기 -->
-	<update id="modify" parameterType="hashmap">
-		update feedboard set title=#{title},content=#{content},ispost=#{ispost},cname=#{cname} where num=#{num}
+	
+<!-- 글 수정 1.비공>비공  / 공>공-->
+	<update id="modifyA" parameterType="feedboard">
+		update feedboard set title=#{title},content=#{content},cname=#{cname} where num=#{num}
 	</update>
+	
+<!-- 글 수정2.비공>공 -->
+	<update id="modifyB" parameterType="feedboard">
+		update feedboard set title=#{title},content=#{content},ispost=#{ispost},postdate=sysdate,cname=#{cname} where num=#{num}
+	</update>
+	
 	
 <!-- 댓글 -->	
 	<resultMap type="fbcomment" id="commList">

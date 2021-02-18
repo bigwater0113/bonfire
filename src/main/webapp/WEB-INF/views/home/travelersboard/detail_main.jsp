@@ -6,19 +6,19 @@
 <h2>디테일 페이지</h2>
 <div id="t_wrap">
 	<div id="t_content">
-		<table>
+		<table border="1" width="800px">
 			<tr>
-				<td>제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"></td>
+				<td>제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"><input type="hidden" value="${vo.title }" id="title"></td>
 			</tr>
 			<tr>
-				<td>작성자</td><td>${vo.id }<input type="hidden" value="${vo.id }" id="writer"></td>
+				<td>작성자</td><td>${vo.id }</td>
 
 			</tr>
 			<tr>
-				<td>카테고리</td><td>${vo.cname }<input type="hidden" value="${vo.cname }" id="cname"></td>
+				<td>카테고리</td><td>${vo.cname }</td>
 			</tr>
 			<tr>
-				<td>본문</td><td>${vo.content }<input type="hidden" value="${vo.content }" id="content"></td>
+				<td>본문</td><td>${vo.content }</td>
 			</tr>
 		</table>
 
@@ -33,7 +33,7 @@
 		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
 	</c:if>
 	<c:if test="${vo.id==id }">
-		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate'">
+		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate?num=${vo.num }&recentpage=main'">
 	</c:if>
 	</div>
 	

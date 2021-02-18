@@ -20,11 +20,11 @@
 </script>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
-		<h2>${id }님의 여행게시판</h2>
+		<h2>${feedId }님의 여행게시판</h2>
 	</div>
 	<form:form method="post">
 		<div id="feedboard_table">
-			<table>
+			<table border="1" width="800px">
 				<tr>
 					<th>카테고리</th>
 					<th>제목</th>
@@ -32,22 +32,33 @@
 					<th>조회수</th>
 					<th>추천</th>
 					<th>스크랩</th>
-					<th><input type="checkbox" id="allcheck"></th>
+					<c:if test="${id == feedId}">
+						<th>발행여부</th>
+						<th><input type="checkbox" id="allcheck"></th>
+					</c:if>
 				</tr>
 				<c:forEach var="vo" items="${list }">
 					<tr>
 							<td>${vo.cname }</td>
-							<td><a href="${cp }/feedboard_detail?num=${vo.num }">${vo.title }</a></td>
+							<td><a href="${cp }/feedboard_detail?num=${vo.num }&recentpage=feed">${vo.title }</a></td>
 							<td>${vo.adddate }</td>
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>
 							<td>${vo.scrap}</td>
-							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
+							<c:if test="${id == feedId}">
+								<td>
+									<c:if test="${vo.ispost=='1' }">발행o</c:if>
+									<c:if test="${vo.ispost=='-1' }">발행x</c:if>
+								</td>
+								<td><input type="checkbox" name="checkk" value=${vo.num }></td>
+							</c:if>
 				</c:forEach>
 			</table>
 			<div id="feedboard_editlist">
+				<c:if test="${id == feedId}">
 					<input type="submit" value="삭제" name="feedboard_deleteMine" formaction="${cp }/feedboard_deleteMyList">
 					<input type="button" value="글쓰기" name="feedboard_write" onclick="location.href='${cp}/member/feedboard_Towrite'">
+				</c:if>
 			</div>
 		</div>
 	</form:form>

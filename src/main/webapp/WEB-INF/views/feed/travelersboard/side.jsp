@@ -9,15 +9,15 @@
 <div>
 	<h3>지역별</h3>
 	<ul>
-		<li><a href="#">서울</a></li>
-		<li><a href="#">강원</a></li>
-		<li><a href="#">경기</a></li>
-		<li><a href="#">경남</a></li>
-		<li><a href="#">경북</a></li>
-		<li><a href="#">충남</a></li>
-		<li><a href="#">충북</a></li>
-		<li><a href="#">전남</a></li>
-		<li><a href="#">전북</a></li>
-		<li><a href="#">제주</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=서울">서울</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=강원">강원</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=경기">경기</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=경남">경남</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=경북">경북</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=충남">충남</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=충북">충북</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=전남">전남</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=전북">전북</a></li>
+		<li><a href="${cp }/feedboard_selectByRegion?cname=제주">제주</a></li>
 	</ul>
 </div>

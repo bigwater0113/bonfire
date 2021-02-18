@@ -28,8 +28,12 @@ public class FeedboardService {
 //		return dao.updatePostingStatus(num);
 //	}
 	
-	public int modify(FeedboardVo vo, int ispost) {
-		return dao.modify(vo);
+	public int modify(FeedboardVo vo,int judge) {
+		if(judge==-1) {
+			return dao.modifyA(vo);
+		}else{
+			return dao.modifyB(vo);
+		}
 	}
 	
 	public int count(HashMap<String,Object> map) {
@@ -39,6 +43,13 @@ public class FeedboardService {
 	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
 		return dao.selectAll(map);
 	}
+	public int count2(HashMap<String,Object> map) {
+		return dao.count2(map);
+	}
+	
+	public List<Feedboard_fbjoinVo> selectByRegion(HashMap<String,Object> map){
+		return dao.selectByRegion(map);
+	}
 	
 	public int countbyId(HashMap<String,Object> map) {
 		return dao.countbyId(map);
@@ -46,6 +57,17 @@ public class FeedboardService {
 	
 	public List<Feedboard_fbjoinVo> selectAllbyId(HashMap<String,Object> map){
 		return dao.selectAllbyId(map);
+	}
+	public int countbyId2(HashMap<String,Object> map) {
+		return dao.countbyId2(map);
+	}
+	
+	public List<Feedboard_fbjoinVo> selectAllbyId2(HashMap<String,Object> map){
+		return dao.selectAllbyId2(map);
+	}
+	
+	public int updatePostingStatus(int num) {
+		return dao.updatePostingStatus(num);
 	}
 	
 	public int deletePosting(int num) {

@@ -32,8 +32,11 @@ public class FeedboardDao {
 //		return b;
 //	}
 	
-	public int modify(FeedboardVo vo) {
-		return session.update(NAMESPACE+".modify",vo);
+	public int modifyA(FeedboardVo vo) {
+		return session.update(NAMESPACE+".modifyA",vo);
+	}
+	public int modifyB(FeedboardVo vo) {
+		return session.update(NAMESPACE+".modifyB",vo);
 	}
 	
 	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
@@ -50,6 +53,24 @@ public class FeedboardDao {
 	
 	public int countbyId(HashMap<String,Object> map) {
 		return session.selectOne(NAMESPACE+".countbyId",map);
+	}
+	public List<Feedboard_fbjoinVo> selectAllbyId2(HashMap<String,Object> map){
+		return session.selectList(NAMESPACE+".selectAllbyId2",map);
+	}
+	
+	public int countbyId2(HashMap<String,Object> map) {
+		return session.selectOne(NAMESPACE+".countbyId2",map);
+	}
+	public List<Feedboard_fbjoinVo> selectByRegion(HashMap<String,Object> map){
+		return session.selectList(NAMESPACE+".selectByRegion",map);
+	}
+	
+	public int count2(HashMap<String,Object> map) {
+		return session.selectOne(NAMESPACE+".count2",map);
+	}
+	
+	public int updatePostingStatus(int num) {
+		return session.update(NAMESPACE+".updatePostingStatus",num);
 	}
 	
 	public int deletePostingA(int num) {

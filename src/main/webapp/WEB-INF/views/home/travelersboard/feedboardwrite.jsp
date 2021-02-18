@@ -42,10 +42,10 @@
                     <textarea name="content" id="summernote"></textarea>
                 </div>
                 <input type="hidden" value="-1" name="ispost1">
-                <input type="submit" value="작성하기" formaction="${cp }/member/feedboard_write">
-                <c:if test="${feedRole == ROLE.AUTHOR}">
+                <input type="submit" value="작성하기" formaction="${cp }/member/feedboard_add">
+                <c:if test="${feedRole == 'ROLE_AUTHOR'}">
                 	<input type="hidden" value="1" name="ispost2">
-                	<input type="submit" value="발행하기" formaction="${cp }/member/feedboard_write">
+                	<input type="submit" value="발행하기" formaction="${cp }/member/feedboard_post">
                 </c:if>
             </form:form>
         </div>

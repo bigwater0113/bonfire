@@ -1,5 +1,6 @@
 package com.jhta.bonfire.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,19 +30,15 @@ public class FeedBoardController {
 	@Autowired private FeedboardService service;
 	@Autowired private ServletContext sc;
 	
+	//글작성 페이지로
 	@GetMapping("/member/feedboard_Towrite")
 	public String gofeedboard_write() {
 		return ".home.travelersboard.feedboardwrite";
 	}
 	
-	@PostMapping(value = "/member/feedboard_write")
-    public String write(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
-        int ispost=0;
-        if(ispost1!=0) {
-        	ispost = ispost1;
-        }else if(ispost2!=0) {
-        	ispost = ispost2;
-        }
+	//글 작성(나만보기)
+	@PostMapping(value = "/member/feedboard_add")
+    public String add(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
         FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
         int a=service.insertPosting(vo, ispost);
@@ -52,6 +49,20 @@ public class FeedBoardController {
         }
     }
 	
+	//글 작성(발행)
+	@PostMapping(value = "/member/feedboard_post")
+	public String post(String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
+		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
+		FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
+		int a=service.insertPosting(vo, ispost);
+		if(a>0) {
+			return "redirect:/feedboard_feed_selectAllbyId";
+		}else {
+			return ".home.travelersboard.feedboardwrite";
+		}
+	}
+	
+	//메인페이지 작가 전체 글목록
 	@RequestMapping("/feedboard_main_selectAll")
 	public String selectAll(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
@@ -76,59 +87,155 @@ public class FeedBoardController {
 	@RequestMapping("/feedboard_feed_selectAllbyId")
 	public String selectAllbyId(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {
 			HashMap<String,Object> map=new HashMap<String, Object>();
+			String id=(String)session.getAttribute("id");
 			String feedId=(String)session.getAttribute("feedId");
 			map.put("id", feedId);
 			map.put("field", field);
 			map.put("keyword",keyword);
-			int listCount=service.countbyId(map);
-			PageUtil pu=new PageUtil(page, 10, 10, listCount);
-			int startRow=pu.getStartRow();
-			int endRow=pu.getEndRow();
-			map.put("startRow",startRow);
-			map.put("endRow",endRow);
-			
-			List<Feedboard_fbjoinVo> list=service.selectAllbyId(map);
-			model.addAttribute("list",list);
-			model.addAttribute("pu",pu);
-			model.addAttribute("field", field);
-			model.addAttribute("keyword",keyword);
-			return ".feed.travelersboard.list_feed";
+			if(id==feedId) { //내 피드 목록
+				int listCount=service.countbyId(map);
+				PageUtil pu=new PageUtil(page, 10, 10, listCount);
+				int startRow=pu.getStartRow();
+				int endRow=pu.getEndRow();
+				map.put("startRow",startRow);
+				map.put("endRow",endRow);
+				List<Feedboard_fbjoinVo> list=service.selectAllbyId(map);
+				model.addAttribute("list",list);
+				model.addAttribute("pu",pu);
+				model.addAttribute("field", field);
+				model.addAttribute("keyword",keyword);
+				return ".feed.travelersboard.list_feed";
+			}else { // 타인이 본 작가피드 목록
+				int listCount=service.countbyId2(map);
+				PageUtil pu=new PageUtil(page, 10, 10, listCount);
+				int startRow=pu.getStartRow();
+				int endRow=pu.getEndRow();
+				map.put("startRow",startRow);
+				map.put("endRow",endRow);
+				List<Feedboard_fbjoinVo> list=service.selectAllbyId2(map);
+				model.addAttribute("list",list);
+				model.addAttribute("pu",pu);
+				model.addAttribute("field", field);
+				model.addAttribute("keyword",keyword);
+				return ".feed.travelersboard.list_feed";
+			}
 	}
 	
+	//메인페이지 - 지역별 목록
+	@GetMapping("/feedboard_selectByRegion")
+	public String selectByRegion(String cname,@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model) {
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		map.put("field", field);
+		map.put("keyword",keyword);
+		map.put("cname",cname);
+		int listCount=service.count2(map);
+		PageUtil pu=new PageUtil(page, 10, 10, listCount);
+		int startRow=pu.getStartRow();
+		int endRow=pu.getEndRow();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		
+		List<Feedboard_fbjoinVo> list=service.selectByRegion(map);
+		model.addAttribute("list",list);
+		model.addAttribute("pu",pu);
+		model.addAttribute("field", field);
+		model.addAttribute("keyword",keyword);
+		return ".feed.travelersboard.side.list_main";
+	}
+	
+	//상세페이지
 	@GetMapping("/feedboard_detail")
-	public String selectOne(HttpSession session,int num,Model model) {
+	public String selectOne(HttpSession session,int num,Model model,String recentpage) {
 		String id=(String)session.getAttribute("id");
 		service.insertHits(id,num);
 		FeedboardVo vo=service.selectOne(num);
 		model.addAttribute("vo",vo);
-		return ".home.travelersboard.detail_main";
+		if(recentpage.equals("feed")) {
+        	return ".home.travelersboard.detail_feed";
+        }else {
+        	return ".home.travelersboard.detail_main";
+        }
 	}
 	
+	//수정페이지
 	@GetMapping("/feedboard_goupdate")
-	public String gotoUpdatePage(int num,Model model) {
+	public String gotoUpdatePage(int num,String recentpage,Model model) {
 		FeedboardVo vo=service.selectOne(num);
 		model.addAttribute("vo",vo);
+		model.addAttribute("recentpage",recentpage);
 		return ".home.travelersboard.feedboardupdate";
 	}
 	
-	@GetMapping("/feedboard_mod")
-	  public String modify(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost1,@RequestParam(value = "ispost1", defaultValue = "0") int ispost2, @RequestParam(required = false) String... fileName){
-        int ispost=0;
-        if(ispost1!=0) {
-        	ispost = ispost1;
-        }else if(ispost2!=0) {
-        	ispost = ispost2;
-        }
+	//수정(비공>비공)
+	@PostMapping("/feedboard_mod_add")
+	  public String modify_add(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-        FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
-        int a=service.modify(vo, ispost);
-        if(a>0) {
+        FeedboardVo vv=service.selectOne(num);
+        int rec=vv.getRecommend();
+        int hits=vv.getHits();
+        int scrap=vv.getScrap();
+        Date adddate=vv.getAdddate();
+        int judge=-1;
+       	FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, null, cname);
+        service.modify(vo,judge);
+        System.out.println(recentpage);
+        if(recentpage.equals("feed")) {
         	return "redirect:/feedboard_feed_selectAllbyId";
         }else {
-        	return ".home.travelersboard.feedboardwrite";
+        	return "redirect:/feedboard_main_selectAll";
         }
     }
 	
+	//수정(공>공)
+	@PostMapping("/feedboard_mod_postA")
+	public String modify_postA(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
+		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
+		FeedboardVo vv=service.selectOne(num);
+		int rec=vv.getRecommend();
+		int hits=vv.getHits();
+		int scrap=vv.getScrap();
+		Date adddate=vv.getAdddate();
+		int judge=1;
+		FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, null, cname);
+		service.modify(vo,judge);
+		 System.out.println(recentpage);
+		 if(recentpage.trim().equals("feed")) {
+	        	return "redirect:/feedboard_feed_selectAllbyId";
+	        }else {
+	        	return "redirect:/feedboard_main_selectAll";
+	        }
+	}
+	
+	//수정(비공>공)
+	@PostMapping("/feedboard_mod_postB")
+	public String modify_postB(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
+		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
+		FeedboardVo vv=service.selectOne(num);
+		int rec=vv.getRecommend();
+		int hits=vv.getHits();
+		int scrap=vv.getScrap();
+		Date adddate=vv.getAdddate();
+		Date postdate=vv.getPostdate();
+		int judge=-1;
+		FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, postdate, cname);
+		service.modify(vo,judge);
+		 System.out.println(recentpage);
+		 if(recentpage.equals("feed")) {
+	        	return "redirect:/feedboard_feed_selectAllbyId";
+	        }else {
+	        	return "redirect:/feedboard_main_selectAll";
+	        }
+	}
+	
+	// ispost만 수정(글 디테일pg에서 발행 클릭시)
+	@GetMapping("/feedboard_changeStatus")
+	public String updatePostingStatus(int num) {
+		service.updatePostingStatus(num);
+		return "redirect:/feedboard_feed_selectAllbyId";
+	}
+	
+	
+	//관리자 - 다중선택 삭제
 	@PostMapping("/feedboard_deleteList")
 	public String delete(Model model, HttpServletRequest req) {
 		String[] params=req.getParameterValues("checkk");
@@ -143,6 +250,7 @@ public class FeedBoardController {
 		}
 	}
 	
+	//작성자 - 다중선택 삭제
 	@PostMapping("/feedboard_deleteMyList")
 	public String deleteMine(Model model, HttpServletRequest req) {
 		String[] params=req.getParameterValues("checkk");
@@ -157,6 +265,7 @@ public class FeedBoardController {
 		}
 	}
 	
+	//댓글 표시
 	@GetMapping(value = "/feedboard_showComm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<FbcommentVo> showComm(int num,Model model) {
@@ -165,6 +274,7 @@ public class FeedBoardController {
 		return list;
 	}
 	
+	//댓글 작성
 	@GetMapping(value="/feedboard_insertComm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<FbcommentVo> insertComm(int num, String id, String content) {
@@ -173,6 +283,8 @@ public class FeedBoardController {
 		List<FbcommentVo> list=service.showComm(num);
 		return list;
 	}
+	
+	//댓글 삭제
 	@GetMapping(value="/feedboard_deleteComm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public List<FbcommentVo> deleteComm(int num,int idx) {
@@ -181,6 +293,7 @@ public class FeedBoardController {
 		return list;
 	}
 	
+	//총 추천 수
 	@GetMapping(value="/feedboard_showRecommTot",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public HashMap<String, Integer> showRecommTot(int num) {
@@ -190,6 +303,7 @@ public class FeedBoardController {
 		return map;
 	}
 	
+	//추천 더하기&취소
 	@GetMapping(value="/feedboard_insertRecomm",produces = "application/xml;charset=utf-8")
 	@ResponseBody
 	public HashMap<String, Integer> insertRecomm(int num,String id) {

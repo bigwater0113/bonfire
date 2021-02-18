@@ -22,34 +22,40 @@
             	</div>
                 <div id="titlename">
                 	제목 : <input type="text" name="title" value="${vo.title }">
+                	<input type="hidden" name="num" value="${vo.num }">
                 </div>
                 <div id="categoryname">
 					여행 지역
 					<select name="cname">
-                        <option value="서울">서울</option>
-                        <option value="경기">경기</option>
-                        <option value="강원">강원</option>
-                        <option value="충남">충남</option>
-                        <option value="충북">충북</option>
-                        <option value="경남">경남</option>
-                        <option value="경북">경북</option>
-                        <option value="전남">전남</option>
-                        <option value="전북">전북</option>
-                        <option value="제주">제주</option>
+                        <option value="서울"<c:if test="${vo.cname eq '서울' }">selected</c:if>>서울</option>
+                        <option value="경기"<c:if test="${vo.cname eq '경기' }">selected</c:if>>경기</option>
+                        <option value="강원"<c:if test="${vo.cname eq '강원' }">selected</c:if>>강원</option>
+                        <option value="충남"<c:if test="${vo.cname eq '충남' }">selected</c:if>>충남</option>
+                        <option value="충북"<c:if test="${vo.cname eq '충북' }">selected</c:if>>충북</option>
+                        <option value="경남"<c:if test="${vo.cname eq '경남' }">selected</c:if>>경남</option>
+                        <option value="경북"<c:if test="${vo.cname eq '경북' }">selected</c:if>>경북</option>
+                        <option value="전남"<c:if test="${vo.cname eq '전남' }">selected</c:if>>전남</option>
+                        <option value="전북"<c:if test="${vo.cname eq '전북' }">selected</c:if>>전북</option>
+                        <option value="제주"<c:if test="${vo.cname eq '제주' }">selected</c:if>>제주</option>
                     </select>
                 </div>
                 <div id=editorbox>
-                    <textarea name="content" id="summernote" value="${vo.content }"></textarea>
+                    <textarea name="content" id="summernote">${vo.content }</textarea>
                 </div>
 	                <input type="hidden" value="${vo.ispost }" name="before1">
-                <c:if test="${vo.ispost == -1 }"><!-- 이미 발행된 글은 재발행만. -->
-	                <input type="hidden" value="-1" name="ispost1">
-	                <input type="submit" value="수정하기" formaction="${cp }/feedboard_mod">
-                </c:if>
-                <c:if test="${feedRole == ROLE.AUTHOR}">
-                	<input type="hidden" value="1" name="ispost2">
-                	<input type="submit" value="(재)발행하기" formaction="${cp }/feedboard_mod">
-                </c:if>
+	                <input type="hidden" value="${recentpage }" name="recentpage">
+	            <c:choose>
+	            	<c:when test="${vo.ispost == -1 }">
+		                <input type="hidden" value="-1" name="ispost1">
+		                <input type="submit" value="수정하기" formaction="${cp }/feedboard_mod_add">
+	                	<input type="hidden" value="1" name="ispost2">
+	                	<input type="submit" value="(재)발행하기" formaction="${cp }/feedboard_mod_postA">
+	            	</c:when>
+					<c:otherwise>
+	                	<input type="hidden" value="1" name="ispost2">
+	                	<input type="submit" value="(재)발행하기" formaction="${cp }/feedboard_mod_postB">
+					</c:otherwise>	            
+	            </c:choose>
             </form:form>
         </div>
         <div id="editorarea_foot"></div>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.bonfire.vo.PopularArticleHitsVo;
 import com.jhta.bonfire.vo.PopularArticleRecommVo;
+import com.jhta.bonfire.vo.PopularPlaceVo;
 import com.jhta.bonfire.vo.RecommAuthorVo;
 
 
@@ -29,5 +30,8 @@ public class HomeDao {
 	}
 	public List<PopularArticleRecommVo> popularArticle_recomm(){
 		return sqlSession.selectList(NAMESPACE+".popularArticle_recomm");
+	}
+	public List<PopularPlaceVo> popularPlace(){
+		return sqlSession.selectList(NAMESPACE+".popularPlace");
 	}
 }

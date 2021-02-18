@@ -42,4 +42,17 @@
 		order by recommend desc)
 		<![CDATA[ where rownum>=1 and rownum<=5  ]]>
 	</select>
+	<select id="popularPlace" resultType="popularplace">
+		select * from
+		(
+		select c.cname,count(fb.cname) cnameCnt
+		from cats c
+		full outer join feedboard fb 
+		on fb.cname=c.cname 
+		where c.cwhichboard='feedboard'
+		group by c.cname
+		order by cnameCnt desc
+		)
+		<![CDATA[ where rownum>=1 and rownum<=3  ]]>
+	</select>
 </mapper>

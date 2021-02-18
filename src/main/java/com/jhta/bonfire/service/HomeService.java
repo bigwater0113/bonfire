@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jhta.bonfire.dao.HomeDao;
 import com.jhta.bonfire.vo.PopularArticleHitsVo;
 import com.jhta.bonfire.vo.PopularArticleRecommVo;
+import com.jhta.bonfire.vo.PopularPlaceVo;
 import com.jhta.bonfire.vo.RecommAuthorVo;
 
 @Service
@@ -27,5 +28,8 @@ public class HomeService {
 	}
 	public List<PopularArticleRecommVo> popularArticle_recomm(){
 		return dao.popularArticle_recomm();
+	}
+	public List<PopularPlaceVo> popularPlace(){
+		return dao.popularPlace();
 	}
 }

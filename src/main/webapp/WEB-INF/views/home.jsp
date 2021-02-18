@@ -13,7 +13,7 @@
 	#home_placeList li{display: inline-block;}
 	.authorDiv{width:230px;height:230px; margin-left:10px;margin-right:10px;background-color: lightgreen; float:left}
 	.articleDiv{width:180px;height:180px; margin-left:5px;margin-right:5px; background-color: lightblue;}
-	.placeDiv{width:230px;height:230px; margin-left:10px;margin-right:10px; background-color: lightblue;}
+	.placeDiv{width:300px;height:300px; margin-left:10px;margin-right:10px; background-color: lightblue;}
 	.btnIcon{opacity:0.5;}
 	.btnIcon:hover{opacity:1;}
 	.aHover{color:#aaaaaa;text-decoration:none; }
@@ -184,6 +184,7 @@
 		});
 		
 	})
+	//인기글 조회수별 새로고침
 	function popularHits(){
 		$.ajax({
 			url:"${cp}/popularArticle_hits",
@@ -208,6 +209,7 @@
 			}
 		});
 	}
+	//인기글 추천수 별 새로고침
 	function popularRecomm(){
 		$.ajax({
 			url:"${cp}/popularArticle_recomm",
@@ -232,5 +234,25 @@
 			}
 		});
 	}
+	
+	$.ajax({
+		url:"${cp}/popularPlace",
+		dataType: 'xml',
+		success:function(data){
+			var i=1;
+			$(data).find("item").each(function(){
+				$("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+				$("#place"+(i)).css('backgroundSize', '100% 100%');
+				var cname=$(this).find('cname').text();
+				var cnamecnt=$(this).find('cnamecnt').text();
+				$("#place"+(i)).click(function(){
+					location.href="#";
+				});
+				$("#place"+(i++)).append(`
+						<p>cname:`+cname+`</p><p>cnamecnt:`+cnamecnt+`</p>
+						`);
+			});
+		}
+	});
 </script>
 

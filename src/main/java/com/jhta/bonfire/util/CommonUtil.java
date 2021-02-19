@@ -19,7 +19,7 @@ public class CommonUtil {
     private static Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
     /**
-     * Object type 蹂��닔媛� 鍮꾩뼱�엳�뒗吏� 泥댄겕
+     * Object type 癰귨옙占쎈땾揶쏉옙 �뜮袁⑸선占쎌뿳占쎈뮉筌욑옙 筌ｋ똾寃�
      * 
      * @param obj
      * @return Boolean : true / false
@@ -42,7 +42,7 @@ public class CommonUtil {
     }
 
     /**
-     * 二쇱뼱吏� 紐⑤뱺 �씤�옄媛� 鍮꾩뼱�엳吏� �븡�뒗吏� 泥댄겕 �븳�떎.
+     * 雅뚯눘堉깍쭪占� 筌뤴뫀諭� 占쎌뵥占쎌쁽揶쏉옙 �뜮袁⑸선占쎌뿳筌욑옙 占쎈륫占쎈뮉筌욑옙 筌ｋ똾寃� 占쎈립占쎈뼄.
      * 
      * @param objects
      * @return
@@ -60,7 +60,7 @@ public class CommonUtil {
     }
 
     /**
-     * mapper�슜 鍮꾧탳
+     * mapper占쎌뒠 �뜮袁㏉꺍
      * 
      * @param str
      * @param obj
@@ -103,7 +103,7 @@ public class CommonUtil {
                 Path source = Paths.get(sc.getRealPath("/resources/TemporalFileStorage"), file);
                 Path target = Paths.get(sc.getRealPath("/resources/"),boardName, file);
                 logger.info(source.toString());
-                // logger.info(target.toString());
+                 logger.info(target.toString());
                 File parent = target.getParent().toFile();
                 if (!parent.isDirectory()) parent.mkdirs();
                 try {

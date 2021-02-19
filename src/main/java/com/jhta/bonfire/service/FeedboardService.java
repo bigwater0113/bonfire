@@ -95,6 +95,9 @@ public class FeedboardService {
 	public int deleteComm(int idx) {
 		return dao.deleteComm(idx);
 	}
+	public int editComm(HashMap<String, Object> map) {
+		return dao.editComm(map);
+	}
 	
 	public int selectRecomm(int num,String id) {
 		HashMap<String, Object> map=new HashMap<String, Object>();

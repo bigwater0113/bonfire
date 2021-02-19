@@ -293,7 +293,17 @@ public class FeedBoardController {
 		List<FbcommentVo> list=service.showComm(num);
 		return list;
 	}
-	
+	//´ñ±Û ¼öÁ¤
+	@GetMapping(value="/feedboard_editComm",produces = "application/xml;charset=utf-8")
+	@ResponseBody
+	public List<FbcommentVo> editComm(int num,int idx,String content) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("idx", idx);
+		map.put("content", content);
+		service.editComm(map);
+		List<FbcommentVo> list=service.showComm(num);
+		return list;
+	}
 	//ÃÑ ÃßÃµ ¼ö
 	@GetMapping(value="/feedboard_showRecommTot",produces = "application/xml;charset=utf-8")
 	@ResponseBody

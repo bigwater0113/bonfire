@@ -12,8 +12,8 @@
 </head>
 <body>
 <h1>문의게시판</h1>
-<div>
-	<table border="1" width="500">
+<div >
+	<table border="1" width="1000">
 	<tr>
 		<th>글번호</th>
 		<th>작성자</th>
@@ -26,20 +26,37 @@
 	<c:when test="${vo.pin==1}">
 		<tr>
 			<td>공지사항</td>
-			<td>${vo.id }</td>
-			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
+			<td>관리자</td>
+			<c:choose>
+			<c:when test="${! empty id}">
+				<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">${vo.title }</a></td>
+			</c:when>
+			<c:otherwise>
+				<td><a href="${cp }/login">${vo.title }</a></td>
+			</c:otherwise>
+			</c:choose>
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 			<td>${vo.hits }</td>
 		</tr>	
 		</c:when>
 		<c:when test="${vo.secret==1}">
+		<tr>
 			<td>${vo.num }</td>
 			<td>${vo.id }</td>
-			<td><a href="${cp }/qna/detail?num=${vo.num}&id=${id}">비밀글입니다.</a></td>
+			<c:choose>
+				<c:when test="${! empty id}">
+			<td><a href="${cp }/qna/secretpwd?num=${vo.num}&id=${id}">비밀글입니다.</a></td>
+			</c:when>
+			<c:otherwise>
+				<td><a href="${cp }/login">비밀글입니다</a></td>
+			</c:otherwise>
+			
+			</c:choose>
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 			<td>${vo.hits }</td>
+			</tr>
 		</c:when>
-		<c:when test="${! id ==null}">
+		<c:when test="${! empty id}">
 			<tr>
 			<td>${vo.num }</td>
 			<td>${vo.id }</td>
@@ -61,6 +78,7 @@
 			</c:choose>
 	</c:forEach>
 	</table>
+	</div>
 <div>
 <c:if test="${pu.startPageNum > 10}">
          <a href="${cp }/qna/main?pageNum=${pu.startPageNum - 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>◁</span> </a>
@@ -95,6 +113,5 @@
 		<input type="submit" value="검색">
 	</form:form>
 </div>	
-</div>
 </body>
 </html>

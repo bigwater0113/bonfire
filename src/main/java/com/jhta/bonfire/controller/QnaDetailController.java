@@ -22,8 +22,10 @@ public class QnaDetailController {
 	@GetMapping("/qna/detail")
 	public ModelAndView detail(int num, QhitsVo vo,HttpSession session) {
 		ModelAndView mv=new ModelAndView(".home.qna.detail");
-		
+		System.out.println(num);
+		System.out.println(vo.getId());
 		String id=(String)session.getAttribute("id");
+		
 		HashMap<String, Object> hm=new HashMap<String, Object>();
 		hm.put("id",id);
 		hm.put("num",num);

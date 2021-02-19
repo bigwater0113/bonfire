@@ -32,6 +32,8 @@ public class QnaCommController {
 		HashMap<String, Object> hm=new HashMap<String, Object>();
 		hm.put("num",commnum);
 		hm.put("comments",comments);
+
+		
 		System.out.println(commnum);
 		int n=service.updatecomm(hm);
 		HashMap<String, Object> map =new HashMap<String, Object>();
@@ -46,6 +48,12 @@ public class QnaCommController {
 	@RequestMapping(value = "/qna/commlist",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public QnaBoardVo selectComm(int commnum) {
 		QnaBoardVo vo=service.select(commnum);
+		
+		//상세페이지에 줄바꿈하게하는거임!
+		String comments=vo.getComments();
+		comments=comments.replaceAll("\n", "<br>");
+		vo.setComments(comments);
+		
 		return vo;
 	}
 }

@@ -45,7 +45,7 @@
 	</select>
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
-		delete from qnaboard where num=#{num}
+		delete from qnaboard where num=#{num} 
 	</delete>
 	<!-- 한명 조회 -->
 	<select id="select" resultType="qnaboard" parameterType="int">

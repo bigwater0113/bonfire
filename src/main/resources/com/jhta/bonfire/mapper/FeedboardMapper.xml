@@ -207,7 +207,7 @@
 
 
 
-<!-- <!-- 스크랩 당한 글 : 스크랩 수 올리기 & 측정  -->
+<!--  스크랩 당한 글 : 스크랩 수 올리기 & 측정  -->
 <!-- 	<update id="updasteScrap"> -->
 <!-- 		update feedboard set scrap=scrap + 1 where num=#{num} -->
 <!-- 	</update> -->
@@ -217,7 +217,7 @@
 <!-- 	<insert id="insertScrapboard"> -->
 <!-- 		insert into scrapboard values(#{}) -->
 <!-- 	</insert> -->
-<!-- <!-- 스크랩 한 사람 입장 : 스크랩 게시판에 표시  -->
+<!--  스크랩 한 사람 입장 : 스크랩 게시판에 표시  -->
 <!-- 	<insert id="insertScrap"> -->
 <!-- 		insert into scrapboard  -->
 <!-- 	</insert> -->

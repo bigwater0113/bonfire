@@ -36,8 +36,11 @@
 		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate?num=${vo.num }&recentpage=main'">
 	</c:if>
 	</div>
-	
-	<div id="t_comments">
+	<a href="${cp }/feedboard_main_selectAll">목록으로</a>
+	<div>
+	<h4>Comments</h4>
+		<div id="t_comments">
+		</div>
 	</div>
 	<input type="hidden" id="postingId" value="${vo.id }">
 	<c:if test="${id != null }">
@@ -186,7 +189,7 @@
 		});
 	}
 	
-	
+	//추천 수 표시
 	var id="<%=(String)session.getAttribute("id")%>";
 	var num=$("#num").val();
 	$.ajax({
@@ -201,7 +204,7 @@
 			}
 		});
 	
-	
+	//추천 버튼
 	$("#btn_recomm").click(function(){
 		console.log("클릭클릭");
 		var num=$("#num").val();

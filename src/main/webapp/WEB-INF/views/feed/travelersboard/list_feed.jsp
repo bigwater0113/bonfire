@@ -29,10 +29,10 @@
 					<th>카테고리</th>
 					<th>제목</th>
 					<th>게시날짜</th>
-					<th>조회수</th>
-					<th>추천</th>
-					<th>스크랩</th>
-					<c:if test="${id == feedId}">
+					<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">
+						<th>조회수</th>
+						<th>추천</th>
+						<th>스크랩</th>
 						<th>발행여부</th>
 						<th><input type="checkbox" id="allcheck"></th>
 					</c:if>
@@ -42,10 +42,10 @@
 							<td>${vo.cname }</td>
 							<td><a href="${cp }/feedboard_detail?num=${vo.num }&recentpage=feed">${vo.title }</a></td>
 							<td>${vo.adddate }</td>
-							<td>${vo.hits}</td>
-							<td>${vo.recommend}</td>
-							<td>${vo.scrap}</td>
-							<c:if test="${id == feedId}">
+							<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">
+								<td>${vo.hits}</td>
+								<td>${vo.recommend}</td>
+								<td>${vo.scrap}</td>
 								<td>
 									<c:if test="${vo.ispost=='1' }">발행o</c:if>
 									<c:if test="${vo.ispost=='-1' }">발행x</c:if>

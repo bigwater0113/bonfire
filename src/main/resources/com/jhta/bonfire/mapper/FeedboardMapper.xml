@@ -165,7 +165,7 @@
 	</resultMap>
 	
 	<select id="showComm" resultMap="commList">
-		select * from fbcomment where num=#{num} order by idx desc
+		select * from fbcomment where num=#{num} order by idx asc
 	</select>
 	<insert id="insertComm" parameterType="fbcomment">
 		insert into fbcomment values(fbcomment_seq.nextval,#{num},#{id},#{content},sysdate)

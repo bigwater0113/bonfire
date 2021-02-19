@@ -39,12 +39,18 @@
 	</c:if>
 	</div>
 	
-	<div id="t_comments">
+	<a href="${cp }/feedboard_feed_selectAllbyId">목록으로</a>
+	
+	<div>
+	<h4>Comments</h4>
+		<div id="t_comments">
+		</div>
 	</div>
 	
 	<c:if test="${id != null }">
 		<label for="comm">아이디: </label>${id }<input type="hidden" id="cid" value="${id }"><br>
-		<label for="comm">댓글: </label><input type="text" id="comm"><input type="button" value="등록" id="btn_ins"><br>
+		<label for="comm">댓글: </label><input type="text" id="comm"><input type="button" value="등록" id="btn_ins">
+		<input type="button" value="수정완료" id="btn_edit" style="display: none"><br>
 	</c:if>
 </div>
 <script type="text/javascript">
@@ -52,6 +58,7 @@
 	var num=$("#num").val();
 	var cid=$("#cid").val();
 	
+	//댓글 불러오기
 	$.ajax({
 		url:'/bonfire/feedboard_showComm?num='+num,
 		dataType: 'xml',
@@ -62,11 +69,14 @@
 				var id=$(this).find('id').text();
 				var content=$(this).find('content').text();
 				var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
-				str+="<input type='hidden' value='"+idx+"' id='idx'>"
-				str+="<input type='hidden' value='"+id+"' id='ccid'>"
-				str+="<input type='hidden' value='"+content+"' id='ccontent'>"
+				str+="<input type='hidden' value='"+idx+"'>"
+				str+="<input type='hidden' value='"+id+"'>"
+				str+="<input type='hidden' value='"+content+"'>"
 				if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
-					str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+					str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+				}
+				if(id==cid){
+					str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
 				}
 				str+="</div>";
 				$("#t_comments").append(str)
@@ -74,6 +84,7 @@
 		}
 	});
 	
+	//댓글 추가
 	$("#btn_ins").click(function(){
 		var cid=$("#cid").val();
 		var num=$("#num").val();
@@ -88,11 +99,14 @@
 					var id=$(this).find('id').text();
 					var content=$(this).find('content').text();
 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
-					str+="<input type='hidden' value='"+idx+"' id='idx'>"
-					str+="<input type='hidden' value='"+id+"' id='ccid'>"
-					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
-					if(cid=='admin' || id == cid){
-						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+					str+="<input type='hidden' value='"+idx+"'>"
+					str+="<input type='hidden' value='"+id+"'>"
+					str+="<input type='hidden' value='"+content+"'>"
+					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+					}
+					if(id==cid){
+						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
 					}
 					str+="</div>";
 					$("#t_comments").append(str);
@@ -102,8 +116,10 @@
 		});
 	});
 	
-	function delCom(){
-		var idx=$("#idx").val();
+	//댓글 삭제
+	function delCom(e){
+		var idx=$(e.target).prev().prev().prev().val();
+		console.log(idx);
 		var num=$("#num").val();
 		$.ajax({
 			url:'/bonfire/feedboard_deleteComm?num='+num+'&idx='+idx,
@@ -115,11 +131,14 @@
 					var id=$(this).find('id').text();
 					var content=$(this).find('content').text();
 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
-					str+="<input type='hidden' value='"+idx+"' id='idx'>"
-					str+="<input type='hidden' value='"+id+"' id='ccid'>"
-					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
-					if(cid=='admin' || id == cid){
-						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
+					str+="<input type='hidden' value='"+idx+"'>"
+					str+="<input type='hidden' value='"+id+"'>"
+					str+="<input type='hidden' value='"+content+"'>"
+					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+					}
+					if(id==cid){
+						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
 					}
 					str+="</div>";
 					$("#t_comments").append(str);
@@ -128,6 +147,55 @@
 		});
 	}
 	
+	//댓글 수정하기 버튼
+	function editCom(e){
+		var content=$(e.target).prev().prev().val();
+		$("#comm").val(content);
+		$("#btn_ins").css('display','none');
+		$("#btn_edit").css('display','');
+		
+		//댓글 수정 완료 버튼
+		$("#btn_edit").unbind("click").bind("click",function() {
+			var content2=$("#comm").val();
+			var idx=$(e.target).prev().prev().prev().prev().val();
+			var num=$("#num").val();
+			console.log(content2);
+			console.log(idx);
+			console.log(num);
+			$.ajax({
+	 			url:'/bonfire/feedboard_editComm?num='+num+'&idx='+idx+'&content='+content2,
+	 			dataType: 'xml',
+	 			success:function(data){
+	 				$("#t_comments").empty();
+	 				$(data).find('item').each(function(){
+	 					var idx=$(this).find('idx').text();
+	 					var id=$(this).find('id').text();
+	 					var content=$(this).find('content').text();
+	 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+	 					str+="<input type='hidden' value='"+idx+"'>"
+	 					str+="<input type='hidden' value='"+id+"'>"
+	 					str+="<input type='hidden' value='"+content+"'>"
+	 					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+	 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+	 					}
+	 					if(id==cid){
+	 						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
+	 					}
+	 					str+="</div>";
+	 					$("#t_comments").append(str);
+	 					var idx='';
+	 					var num='';
+	 					var content='';
+						$("#btn_edit").css('display','none');
+						$("#btn_ins").css('display','');
+	 				});
+	 			}
+	 		});
+		});
+	}
+	
+	
+	//추천 수 표시
 	var id="<%=(String)session.getAttribute("id")%>";
 	var num=$("#num").val();
 	$.ajax({
@@ -142,7 +210,7 @@
 			}
 		});
 	
-	
+	//추천 버튼
 	$("#btn_recomm").click(function(){
 		console.log("클릭클릭");
 		var num=$("#num").val();
@@ -159,5 +227,6 @@
 			}
 			});
 		});
+
 	
 </script>

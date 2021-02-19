@@ -1,6 +1,7 @@
 package com.jhta.bonfire.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,9 @@ public class BMembersDao {
 	}
 	public String pwdMatch(String id) {
 		return sqlSession.selectOne(NAMESPACE+".pwdMatch",id);
+	}
+	public List<BMembersVo> selectAll(){
+		return sqlSession.selectList(NAMESPACE+".selectAll");
 	}
 	
 }

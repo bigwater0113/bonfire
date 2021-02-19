@@ -127,7 +127,9 @@ public class CommonUtil {
 			return true;
 		}else {
 			if(map!=null) {
-				if(feedRole.equals("ROLE_MEMBER")) {
+				if(feedRole.equals("ROLE_ADMIN")) {
+					return false;
+				}else if(feedRole.equals("ROLE_MEMBER")) {
 					if(id.equals(feedId) || id.equals("admin")) {
 						return false;
 					}else {

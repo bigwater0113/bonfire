@@ -19,7 +19,9 @@
 	<select id="userInfo" parameterType="string" resultType="bmembers">
 		select * from bmembers where id=#{id}
 	</select>
-	
+	<select id="selectAll" resultType="bmembers">
+		select * from bmembers
+	</select>
 	
 	<insert id="b_insert" parameterType="bmembers">
 		insert into bmembers values(#{id},#{pwd},#{name},#{email},#{birth},#{gender},#{phone},#{roadfulladdr},1,sysdate,#{addrdetail},#{zipno})

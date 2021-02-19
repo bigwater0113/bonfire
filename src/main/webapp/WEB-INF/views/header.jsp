@@ -31,6 +31,9 @@
 		<div id="profile_slide">
 			[<sec:authentication property="principal.username"/>]님 <br>
 			<a href="${cp }/logout">로그아웃</a><br>
+			<c:if test="${id=='admin' }">
+				<a href="${cp }/adminpage">관리자페이지</a><br>
+			</c:if>
 			<a href="${cp }/@${id}">마이페이지</a><br>
 			<a href="#">일기장</a><br>
 			<a href="#">여행기록</a><br>

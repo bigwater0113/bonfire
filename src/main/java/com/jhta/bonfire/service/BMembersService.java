@@ -1,6 +1,7 @@
 package com.jhta.bonfire.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,5 +69,8 @@ public class BMembersService {
 		map.put("id", id);
 		map.put("pwd", encoder.encode(pwd));
 		return dao.updatePwd(map);
+	}
+	public List<BMembersVo> selectAll(){
+		return dao.selectAll();
 	}
 }

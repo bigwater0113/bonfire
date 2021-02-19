@@ -43,14 +43,15 @@
 	</div>
 	
 	<c:if test="${id != null }">
-		아이디: ${id }<input type="hidden" id="cid" value="${id }"><br>
-		댓글:<input type="text" id="comm"><input type="button" value="등록" id="btn_ins"><br>
+		<label for="comm">아이디: </label>${id }<input type="hidden" id="cid" value="${id }"><br>
+		<label for="comm">댓글: </label><input type="text" id="comm"><input type="button" value="등록" id="btn_ins"><br>
 	</c:if>
 </div>
 <script type="text/javascript">
 	
 	var num=$("#num").val();
 	var cid=$("#cid").val();
+	
 	$.ajax({
 		url:'/bonfire/feedboard_showComm?num='+num,
 		dataType: 'xml',
@@ -64,7 +65,7 @@
 				str+="<input type='hidden' value='"+idx+"' id='idx'>"
 				str+="<input type='hidden' value='"+id+"' id='ccid'>"
 				str+="<input type='hidden' value='"+content+"' id='ccontent'>"
-				if(cid=='admin'){
+				if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
 					str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 				}
 				str+="</div>";
@@ -90,11 +91,12 @@
 					str+="<input type='hidden' value='"+idx+"' id='idx'>"
 					str+="<input type='hidden' value='"+id+"' id='ccid'>"
 					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
-					if(cid=='admin'){
+					if(cid=='admin' || id == cid){
 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 					}
 					str+="</div>";
-					$("#t_comments").append(str)
+					$("#t_comments").append(str);
+					$("#comm").val('');
 				});
 			}
 		});
@@ -116,11 +118,11 @@
 					str+="<input type='hidden' value='"+idx+"' id='idx'>"
 					str+="<input type='hidden' value='"+id+"' id='ccid'>"
 					str+="<input type='hidden' value='"+content+"' id='ccontent'>"
-					if(cid=='admin'){
+					if(cid=='admin' || id == cid){
 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" id=\"btn_del\" onclick=\"delCom()\"></div>";
 					}
 					str+="</div>";
-					$("#t_comments").append(str)
+					$("#t_comments").append(str);
 				});
 			}
 		});

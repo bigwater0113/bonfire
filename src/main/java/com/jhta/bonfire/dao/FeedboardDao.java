@@ -108,6 +108,9 @@ public class FeedboardDao {
 	public int deleteComm(int idx) {
 		return session.delete(NAMESPACE+".deleteComm",idx);
 	}
+	public int editComm(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".updateComm",map);
+	}
 	
 	public int insertRecomm(FbrecommVo vo) {
 		return session.insert(NAMESPACE+".insertRecomm",vo);

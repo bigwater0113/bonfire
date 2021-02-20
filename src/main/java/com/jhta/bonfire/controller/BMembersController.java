@@ -1,5 +1,6 @@
 package com.jhta.bonfire.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,19 @@ public class BMembersController {
 		}else {
 			model.addAttribute("error","1");
 			return ".home.login.editPwd";
+		}
+	}
+	@PostMapping("/manage_deleteList")
+	public String delete(Model model, HttpServletRequest req) {
+		String[] params=req.getParameterValues("checkk");
+		int n=0;
+		for(String i : params) {
+			n=service.delete(i);
+		}
+		if(n>0) {
+			return ".feed.adminpage.adminside.manageMembers";
+		}else {
+			return ".home.error";
 		}
 	}
 }

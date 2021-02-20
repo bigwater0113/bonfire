@@ -25,9 +25,8 @@
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
 	</select><br><br>
-	<input type="checkbox" name="secret1">비밀글 여부<br><br>
 <c:if test="${sessionScope.id=='admin'}">
-	<input type="checkbox" name="pin1">공지사항<br><br>
+	<input type="checkbox" name="pin1" checked="checked">공지사항<br><br>
 </c:if>	
 	작성자<br>
 	<span>${sessionScope.id}</span><br>
@@ -36,6 +35,7 @@
 	<input type="text" name="title"><br>
 	내용<br>
  	<textarea name="content" id="summernote"></textarea><br>
+ 	<input type="checkbox" name="secret1">비밀글 여부<br><br>
 	비밀번호<br>
 	<input type="password" name="pwd"><br>
 	<input type="submit" value="등록">

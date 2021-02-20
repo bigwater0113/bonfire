@@ -3,13 +3,17 @@ package com.jhta.bonfire.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhta.bonfire.service.BMembersService;
 import com.jhta.bonfire.service.ManageMembersService;
 import com.jhta.bonfire.util.PageUtil;
 import com.jhta.bonfire.vo.ManageMembersVo;
@@ -18,7 +22,6 @@ import com.jhta.bonfire.vo.ManageMembersVo;
 public class ManageMembersController {
 	@Autowired
 	private ManageMembersService service;
-	
 	@RequestMapping("/manageMembers_List_All")
 	public String manameMembers_List_All(@RequestParam(value="pageNum",defaultValue="1") int pageNum,
 			@RequestParam(value="field",defaultValue="") String field,

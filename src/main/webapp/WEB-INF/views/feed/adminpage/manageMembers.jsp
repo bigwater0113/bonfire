@@ -5,8 +5,11 @@
 <!-- manageMember.jsp -->
 <div>
 	<h1>회원관리</h1>
+	<form:form method="post">
+	<input type="submit" value="삭제" name="manage_delete" formaction="${cp }/manage_deleteList">
 	<table border="1" width="900">
 		<tr>
+			<th><input type="checkbox" id="allcheck"></th>
 			<th>아이디</th>
 			<th>이름</th>
 			<th>이메일</th>
@@ -16,6 +19,7 @@
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
+				<th><input type="checkbox" name="checkk" value=${vo.id }></th>
 				<th>${vo.id }</th>
 				<th>${vo.name}</th>
 				<th>${vo.email}</th>
@@ -25,6 +29,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</form:form>
 	<div>
 		<c:choose>
 			<c:when test="${pu.startPage>10 }">
@@ -68,3 +73,21 @@
 		</form:form>
 	</div>
 </div>
+<script>
+		var check=0;
+		document.getElementById("allcheck").addEventListener("click", function(e) {
+		if(check==0){
+			check=1;
+		}else{
+			check=0;
+		}
+		var checkk=document.getElementsByName("checkk");
+		for(var i=0;i<=checkk.length;i++){
+			if(check==1){
+				checkk[i].checked=true;
+			}else{
+				checkk[i].checked=false;
+			}
+		}
+	}, true);
+</script>

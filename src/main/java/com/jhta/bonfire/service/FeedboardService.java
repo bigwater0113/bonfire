@@ -165,7 +165,10 @@ public class FeedboardService {
 	public List<FeedboardJoinScrapboardVo> showScrapList(HashMap<String, Object> map) {
 		return dao.showScrapList(map);
 	}
-	public int deleteScrap(HashMap<String, Object> map) {
+	public int deleteScrap(int num,String id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("id", id);
 		return dao.deleteScrap(map);
 	}
 	

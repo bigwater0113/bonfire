@@ -14,7 +14,6 @@
 					<th>카테고리</th>
 					<th>작성자</th>
 					<th>제목</th>
-					<th>게시날짜</th>
 					<th>조회수</th>
 					<th>추천</th>
 					<th>스크랩 수</th>
@@ -26,7 +25,6 @@
 							<td>${vo.cname }</td>
 							<td>${vo.writer}</td>
 							<td><a href="${cp }/scrapboard_detail?num=${vo.num }">${vo.title }</a></td>
-							<td>${vo.postdate }</td>
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>
 							<td>${vo.scrap}</td>

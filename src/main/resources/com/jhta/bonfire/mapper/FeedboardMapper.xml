@@ -234,9 +234,11 @@
   			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
   		</if>
 	</sql>
+	
 	<select id="countScrap" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from scrapboard
-		where id=#{id}
+		select NVL(count(*),0) cnt 
+		from scrapboard s join feedboard fb on fb.num=s.num
+		where s.id=#{id}
 		<include refid="searchScrap"/>
 	</select>
 	<select id="showScrapList" resultType="fbjoinsc" parameterType="hashmap">

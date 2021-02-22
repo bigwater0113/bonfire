@@ -23,7 +23,7 @@ import com.jhta.bonfire.util.PageUtil;
 import com.jhta.bonfire.vo.FbcommentVo;
 import com.jhta.bonfire.vo.FbrecommVo;
 import com.jhta.bonfire.vo.FeedboardVo;
-import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
+import com.jhta.bonfire.vo.ScrapboardVo;
 
 @Controller
 public class FeedBoardController {
@@ -75,7 +75,7 @@ public class FeedBoardController {
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		
-		List<Feedboard_fbjoinVo> list=service.selectAll(map);
+		List<FeedboardVo> list=service.selectAll(map);
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
 		model.addAttribute("field", field);
@@ -100,7 +100,7 @@ public class FeedBoardController {
 				int endRow=pu.getEndRow();
 				map.put("startRow",startRow);
 				map.put("endRow",endRow);
-				List<Feedboard_fbjoinVo> list=service.selectAllbyId(map);
+				List<FeedboardVo> list=service.selectAllbyId(map);
 				model.addAttribute("list",list);
 				model.addAttribute("pu",pu);
 				model.addAttribute("field", field);
@@ -113,7 +113,7 @@ public class FeedBoardController {
 				int endRow=pu.getEndRow();
 				map.put("startRow",startRow);
 				map.put("endRow",endRow);
-				List<Feedboard_fbjoinVo> list=service.selectAllbyId2(map);
+				List<FeedboardVo> list=service.selectAllbyId2(map);
 				model.addAttribute("list",list);
 				model.addAttribute("pu",pu);
 				model.addAttribute("field", field);
@@ -136,7 +136,7 @@ public class FeedBoardController {
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		
-		List<Feedboard_fbjoinVo> list=service.selectByRegion(map);
+		List<FeedboardVo> list=service.selectByRegion(map);
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
 		model.addAttribute("field", field);
@@ -144,7 +144,7 @@ public class FeedBoardController {
 		return ".feed.travelersboard.side.list_main";
 	}
 	
-	//상세페이지
+	//상세페이지 (+조회수)
 	@GetMapping("/feedboard_detail")
 	public String selectOne(HttpSession session,int num,Model model,String recentpage) {
 		String id=(String)session.getAttribute("id");
@@ -304,6 +304,7 @@ public class FeedBoardController {
 		List<FbcommentVo> list=service.showComm(num);
 		return list;
 	}
+	
 	//총 추천 수
 	@GetMapping(value="/feedboard_showRecommTot",produces = "application/xml;charset=utf-8")
 	@ResponseBody
@@ -335,4 +336,36 @@ public class FeedBoardController {
 		map.put("r",r);
 		return map;
 	}
+	
+	//총 스크랩 수
+		@GetMapping(value="/feedboard_selectScrap",produces = "application/xml;charset=utf-8")
+		@ResponseBody
+		public HashMap<String, Integer> selectScrap(int num) {
+			int s=service.selectScrap(num);
+			HashMap<String, Integer>map=new HashMap<String, Integer>();
+			map.put("s",s);
+			return map;
+		}
+	//스크랩 하기
+		@GetMapping(value="/feedboard_insertScrapboard",produces = "application/xml;charset=utf-8")
+		@ResponseBody
+		public HashMap<String, Object> insertScrapboard(int num,String id) {
+			int checkScrap=service.checkScrap(num,id);
+			if(checkScrap == 0) {
+				service.updateScrap(num);
+				ScrapboardVo vo=new ScrapboardVo(id, num, null);
+				service.insertScrapboard(vo);
+				int s=service.selectScrap(num);
+				HashMap<String, Object>map=new HashMap<String, Object>();
+				map.put("msg","success");
+				map.put("s",s);
+				return map;
+			}else {
+				int s=service.selectScrap(num);
+				HashMap<String, Object>map=new HashMap<String, Object>();
+				map.put("msg","fail");
+				map.put("s",s);
+				return  map;
+			}
+		}
 }

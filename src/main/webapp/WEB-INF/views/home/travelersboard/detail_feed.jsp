@@ -30,6 +30,7 @@
 		
 	<c:if test="${id != null }">
 		<input type="button" id="btn_recomm" value="추천" name="btn_recomm">
+		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
 	</c:if>
 	<c:if test="${vo.id==id }">
 		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate?num=${vo.num }&recentpage=feed'">
@@ -228,5 +229,45 @@
 			});
 		});
 
+	//스크랩 수 표시
+	var id="<%=(String)session.getAttribute("id")%>";
+	var num=$("#num").val();
+	$.ajax({
+			url:'/bonfire/feedboard_selectScrap?num='+num,
+			dataType : 'xml',
+			success:function(data){
+				$("#t_scrap").empty();
+				console.log($(data).find('s').text());
+				var s=$(data).find('s').text();
+				var str="스크랩:  " + s;
+				$("#t_scrap").append(str);
+			}
+		});
+	
+	//스크랩 버튼
+	$("#btn_scrap").click(function(){
+		var num=$("#num").val();
+		var id="<%=(String)session.getAttribute("id")%>";
+		if(confirm("스크랩 하시겠습니까?") == true){
+		$.ajax({
+			url:'/bonfire/feedboard_insertScrapboard?num='+num+'&id='+id,
+			dataType : 'xml',
+			success:function(data){
+				var msg=$(data).find('msg').text();
+				if(msg == 'success'){
+					alert("스크랩되었습니다.");
+				}else{
+					alert("이미 스크랩한 글입니다.");
+				}
+				$("#t_scrap").empty();
+				var s=$(data).find('s').text();
+				var str="스크랩:  " + s;
+				$("#t_scrap").append(str);
+			}
+			});
+		}else{
+			return false;
+		}
+	});
 	
 </script>

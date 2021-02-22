@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import com.jhta.bonfire.dao.FeedboardDao;
 import com.jhta.bonfire.vo.FbcommentVo;
 import com.jhta.bonfire.vo.FbrecommVo;
+import com.jhta.bonfire.vo.FeedboardJoinScrapboardVo;
 import com.jhta.bonfire.vo.FeedboardVo;
-import com.jhta.bonfire.vo.Feedboard_fbjoinVo;
+import com.jhta.bonfire.vo.ScrapboardVo;
 
 @Service
 public class FeedboardService {
@@ -40,14 +41,14 @@ public class FeedboardService {
 		return dao.count(map);
 	}
 	
-	public List<Feedboard_fbjoinVo> selectAll(HashMap<String,Object> map){
+	public List<FeedboardVo> selectAll(HashMap<String,Object> map){
 		return dao.selectAll(map);
 	}
 	public int count2(HashMap<String,Object> map) {
 		return dao.count2(map);
 	}
 	
-	public List<Feedboard_fbjoinVo> selectByRegion(HashMap<String,Object> map){
+	public List<FeedboardVo> selectByRegion(HashMap<String,Object> map){
 		return dao.selectByRegion(map);
 	}
 	
@@ -55,14 +56,14 @@ public class FeedboardService {
 		return dao.countbyId(map);
 	}
 	
-	public List<Feedboard_fbjoinVo> selectAllbyId(HashMap<String,Object> map){
+	public List<FeedboardVo> selectAllbyId(HashMap<String,Object> map){
 		return dao.selectAllbyId(map);
 	}
 	public int countbyId2(HashMap<String,Object> map) {
 		return dao.countbyId2(map);
 	}
 	
-	public List<Feedboard_fbjoinVo> selectAllbyId2(HashMap<String,Object> map){
+	public List<FeedboardVo> selectAllbyId2(HashMap<String,Object> map){
 		return dao.selectAllbyId2(map);
 	}
 	
@@ -142,4 +143,30 @@ public class FeedboardService {
 			return -1;
 		}
 	}
+	
+	public int selectScrap(int num) {
+		return dao.selectScrap(num);
+	}
+	public int checkScrap(int num,String id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("id", id);
+		return dao.checkScrap(map);
+	}
+	public int updateScrap(int num) {
+		return dao.updateScrap(num);
+	}
+	public int insertScrapboard(ScrapboardVo vo) {
+		return dao.insertScrapboard(vo);
+	}
+	public int countScrap(HashMap<String, Object> map) {
+		return dao.countScrap(map);
+	}
+	public List<FeedboardJoinScrapboardVo> showScrapList(HashMap<String, Object> map) {
+		return dao.showScrapList(map);
+	}
+	public int deleteScrap(HashMap<String, Object> map) {
+		return dao.deleteScrap(map);
+	}
+	
 }

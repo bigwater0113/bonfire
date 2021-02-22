@@ -177,6 +177,17 @@
 		update fbcomment set content=#{content} where idx=#{idx}
 	</update>
 
+<!-- 조회수 -->
+	<select id="selectHits" parameterType="hashmap" resultType="hashmap">
+		select * from fbhits where num=#{num} and id=#{id}
+	</select>
+	<insert id="insertHits" parameterType="hashmap">
+		insert into fbhits values(#{num},#{id})
+	</insert>
+	<update id="updateHits">
+		update feedboard set hits = hits + 1 where num=#{num}
+	</update>
+
 <!-- 추천 -->
 	<insert id="insertRecomm">
 		insert into recomm values(#{num},#{id},#{value},sysdate)
@@ -194,34 +205,59 @@
 		select NVL(sum(value),0) r from recomm where num=#{num} and id=#{id}
 	</select>
 
-<!-- 조회수 -->
-	<select id="selectHits" parameterType="hashmap" resultType="hashmap">
-		select * from fbhits where num=#{num} and id=#{id}
+ <!-- 스크랩  --> 
+
+<!-- 스크랩수 화면에 표시 -->
+	<select id="selectScrap" resultType="int">
+		select scrap from feedboard where num=#{num}
 	</select>
-	<insert id="insertHits" parameterType="hashmap">
-		insert into fbhits values(#{num},#{id})
-	</insert>
-	<update id="updateHits">
-		update feedboard set hits = hits + 1 where num=#{num}
+	
+ <!-- 스크랩 수 올리기 -->
+	<update id="updateScrap">
+		update feedboard set scrap=scrap + 1 where num=#{num}
 	</update>
-
-
-
-<!--  스크랩 당한 글 : 스크랩 수 올리기 & 측정  -->
-<!-- 	<update id="updasteScrap"> -->
-<!-- 		update feedboard set scrap=scrap + 1 where num=#{num} -->
-<!-- 	</update> -->
-<!-- 	<select id="selectScrap"> -->
-<!-- 		select scrap from feedboard where num=#{num} -->
-<!-- 	</select> -->
-<!-- 	<insert id="insertScrapboard"> -->
-<!-- 		insert into scrapboard values(#{}) -->
-<!-- 	</insert> -->
-<!--  스크랩 한 사람 입장 : 스크랩 게시판에 표시  -->
-<!-- 	<insert id="insertScrap"> -->
-<!-- 		insert into scrapboard  -->
-<!-- 	</insert> -->
-
+<!-- 스크랩테이블에  정보 추가 -->
+	<insert id="insertScrapboard" parameterType="scrapboard">
+		insert into scrapboard values(#{id},#{num},sysdate)
+	</insert>
+<!-- 중복스크랩인지 확인하기 -->
+	<select id="checkScrap" resultType="int" parameterType="hashmap">
+		select NVL(count(id),0) from scrapboard where id=#{id} and num=#{num}
+	</select>
+	
+ <!-- 스크랩 한 사람 입장 : 스크랩 게시판에 목록 표시 --> 
+	<sql id="searchScrap">
+		<if test="field=='title' or field=='content' or field=='cname'">
+  			and ${field} like '%'||#{keyword}||'%'
+  		</if>
+		<if test="field=='toc'">
+  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  		</if>
+	</sql>
+	<select id="countScrap" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from scrapboard
+		where id=#{id}
+		<include refid="searchScrap"/>
+	</select>
+	<select id="showScrapList" resultType="fbjoinsc" parameterType="hashmap">
+		select * from
+			(
+	 			select a.*,rownum rnum from 
+	 			(
+					select fb.num num,fb.title title,fb.id writer,fb.content content,fb.recommend recommend,
+					fb.hits hits,fb.scrap scrap,fb.postdate postdate,fb.cname cname,s.id id,s.adddate adddate 
+					from feedboard fb join scrapboard s on fb.num=s.num
+					where s.id=#{id}
+					<include refid="searchScrap"/>
+					order by adddate desc
+				)a
+			)
+			<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
+	</select>
+<!-- 스크랩 목록 삭제(해당 글 스크랩 수에는 영향x, 스크랩한 사람 스크랩게시판에서만 삭제) -->
+	<delete id="deleteScrap" parameterType="hashmap">
+		delete from scrapboard where num=#{num} and id=#{id}
+	</delete>
 	
 	
 	

@@ -221,6 +221,36 @@
 			}
 			});
 		});
-
+	//스크랩 수 표시
+	var id="<%=(String)session.getAttribute("id")%>";
+	var num=$("#num").val();
+	$.ajax({
+			url:'/bonfire/feedboard_selectScrap?num='+num,
+			dataType : 'xml',
+			success:function(data){
+				$("#t_scrap").empty();
+				console.log($(data).find('s').text());
+				var s=$(data).find('s').text();
+				var str="스크랩:  " + s;
+				$("#t_scrap").append(str);
+			}
+		});
+	
+	//스크랩 버튼
+	$("#btn_scrap").click(function(){
+		var num=$("#num").val();
+		var id="<%=(String)session.getAttribute("id")%>";
+		$.ajax({
+			url:'/bonfire/feedboard_insertScrapboard?num='+num+'&id='+id,
+			dataType : 'xml',
+			success:function(data){
+				console.log("스크랩 석세스펑션!!!!!")
+				$("#t_scrap").empty();
+				var s=$(data).find('s').text();
+				var str="스크랩:  " + s;
+				$("#t_scrap").append(str);
+			}
+			});
+	});
 	
 </script>

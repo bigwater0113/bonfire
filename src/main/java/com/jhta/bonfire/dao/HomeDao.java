@@ -1,6 +1,7 @@
 package com.jhta.bonfire.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,7 @@ import com.jhta.bonfire.vo.PopularArticleHitsVo;
 import com.jhta.bonfire.vo.PopularArticleRecommVo;
 import com.jhta.bonfire.vo.PopularPlaceVo;
 import com.jhta.bonfire.vo.RecommAuthorVo;
+import com.jhta.bonfire.vo.SearchAuthorVo;
 
 
 @Repository
@@ -33,5 +35,11 @@ public class HomeDao {
 	}
 	public List<PopularPlaceVo> popularPlace(){
 		return sqlSession.selectList(NAMESPACE+".popularPlace");
+	}
+	public int searchAuthorCnt(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".searchAuthorCnt",map);
+	}
+	public SearchAuthorVo searchAuthor(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".searchAuthor",map);
 	}
 }

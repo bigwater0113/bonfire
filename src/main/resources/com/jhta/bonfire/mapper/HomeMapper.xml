@@ -55,4 +55,29 @@
 		)
 		<![CDATA[ where rownum>=1 and rownum<=3  ]]>
 	</select>
+	<select id="searchAuthorCnt" resultType="int" parameterType="hashmap">
+		select count(*) from
+		(
+		    select b.id,m.nickname,m.bfilename,m.pfilename,a.authority
+		    from bmembers b
+		    join auth a on b.id=a.id
+		    join mprofile m on b.id=m.id
+		    where a.authority='ROLE_MEMBER'
+		    	and (b.id like '%'||#{keyword}||'%' or m.nickname like '%'||#{keyword}||'%')
+		)
+	</select>
+	<select id="searchAuthor" resultType="searchauthor" parameterType="hashmap">
+		select * from(
+		    select a.*,rownum rnum from
+		    (
+		        select b.id,m.nickname,m.bfilename,m.pfilename,a.authority
+		        from bmembers b
+		        join auth a on b.id=a.id
+		        join mprofile m on b.id=m.id
+		        where a.authority='ROLE_MEMBER'
+		    		and (b.id like '%'||#{keyword}||'%' or m.nickname like '%'||#{keyword}||'%')
+		       ) a
+		    )
+		where rnum=#{slideNum}
+	</select>
 </mapper>

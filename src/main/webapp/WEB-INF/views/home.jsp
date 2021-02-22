@@ -27,20 +27,54 @@
 		opacity: 0.6;
 		display:none;
 	}
-	#home_searchResult{position:absolute;z-index:9999;left:0px;top:0px;
-			width:500px;height:500px;background-color:#cccccc;display:none;}
+	#home_searchResult{position:absolute;z-index:9999;left:0px;top:0px; text-align:center;
+			width:750px;height:400px;background-color:#cccccc;display:none;}
+	.resultDiv{margin-left:10px;margin-right:10px;margin-top:10px;}
+	#leftResult{background-color: red;width:180px;height:250px;
+		position:absolute;left:20px;top:65px;}
+	#leftResultBack{background-color: black;width:180px;height:250px;
+		position:absolute;left:20px;top:65px;display:none;}
+	#centerResult{background-color: green;width:230px;height:380px;
+		position:absolute;left:250px;top:0px;}
+	#rightResult{background-color: blue;width:180px;height:250px;
+		position:absolute;left:530px;top:65px;}
+	#rightResultBack{background-color: black;width:180px;height:250px;
+		position:absolute;left:530px;top:65px;display:none;}
 </style>
 <div id="home_wrap">
 	<div id="home_mask">
 	</div>
 	<div id="home_searchResult">
+		<img src="${cp }/resources/images/leftArrowIcon.png"  class="btnIcon" id="resultLeft"
+						style="width:50px;height:50px;position:absolute;left:0px;top:170px;;z-index:10000">
+		<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon" id="resultRight"
+						style="width:50px;height:50px;position:absolute;left:700px;top:170px;z-index:10000">
+		<div class="resultDiv" id="leftResultBack">
+		</div>
+		<div class="resultDiv" id="leftResult">
+			<img src="${cp }/resources/images/profileIcon.png" id="leftProfile"
+				style="width:150px;height:150px;border-radius: 50%;margin-top:50px;">
+		</div>
+		<div class="resultDiv" id="centerResult">
+			<img src="${cp }/resources/images/profileIcon.png" id="centerProfile"
+				style="width:150px;height:150px;border-radius: 50%;margin-top:50px;margin-bottom:10px;">
+			<div id="centerDetail" style="text-align: center;width:100%;height:100px;background-color: yellow;">
+				<h2></h2><h3></h3>
+			</div>
+		</div>
+		<div class="resultDiv" id="rightResult">
+			<img src="${cp }/resources/images/profileIcon.png" id="rightProfile"
+				 style="width:150px;height:150px;border-radius: 50%;margin-top:50px;">
+		</div>
+		<div class="resultDiv" id="rightResultBack">
+		</div>
 	</div>
     <div id="home_search">
     	<form>
     		<select name="field">
     			<option value="author">작가</option>
     		</select>
-	    	<input type="text" name="keyword" style="width:500px;"><a href="javascript:popupDiv()">검색</a>
+	    	<input type="text" name="keyword" style="width:500px;" id="searchKeyword"><a href="javascript:popupDiv()">검색</a>
     	</form>
     </div>
     <div id="home_recommAuthor">
@@ -96,15 +130,18 @@
     </div>
 </div>
 <script>
+	var slideNum_g;
+	var Cnt;
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
 	$(window).resize(function(){
 		windowWidth = $(window).width();
 		windowHeight = $(window).height();
 		$("#home_mask").css('width',windowWidth).css('height',windowHeight);
-		$("#home_searchResult").css('left',windowWidth/2-250)
+		$("#home_searchResult").css('left',windowWidth/2-350)
 		.css('top',windowHeight/2-250);
 	});
+	
 	$(function(){
 		var errorMsg="${errorMsg}";
 		if(errorMsg!=''){
@@ -112,6 +149,176 @@
 		}
 		var authorPage=1;
 		
+		// resultDiv Right 버튼
+		$("#resultRight").click(function(){
+			$("#centerDetail").hide();
+			$("#leftResult").fadeOut(1000);
+			$("#centerResult").animate({
+				width:180,
+				height:250,
+				left:20,
+				top:65
+			},1000,function(){
+				$.ajax({
+					url:"${cp}/searchAuthor.json",
+					data:{
+						slideNum:slideNum_g+1,
+						keyword:$("#searchKeyword").val()
+					},
+					dataType: 'json',
+					success:function(data){
+						slideNum_g=$(data)[0].slideNum;
+						if(slideNum_g!=Cnt){
+							$("#resultLeft").show();
+							let pfilenameL=$(data)[0].list[0].pfilename;
+							let idL=$(data)[0].list[0].id;
+							let nicknameL=$(data)[0].list[0].nickname;
+							let pfilenameC=$(data)[0].list[1].pfilename;
+							let idC=$(data)[0].list[1].id;
+							let nicknameC=$(data)[0].list[1].nickname;
+							let pfilenameR=$(data)[0].list[2].pfilename;
+							let idR=$(data)[0].list[2].id;
+							let nicknameR=$(data)[0].list[2].nickname;
+							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							$("#leftResult h2").html(idL);
+							$("#leftResult h3").html(nicknameL);
+							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							$("#centerResult h2").html(idC);
+							$("#centerResult h3").html(nicknameC);
+							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							$("#rightResult h2").html(idR);
+							$("#rightResult h3").html(nicknameR);
+						}else{
+							let pfilenameL=$(data)[0].list[0].pfilename;
+							let idL=$(data)[0].list[0].id;
+							let nicknameL=$(data)[0].list[0].nickname;
+							let pfilenameC=$(data)[0].list[1].pfilename;
+							let idC=$(data)[0].list[1].id;
+							let nicknameC=$(data)[0].list[1].nickname;
+							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							$("#leftResult h2").html(idL);
+							$("#leftResult h3").html(nicknameL);
+							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							$("#centerResult h2").html(idC);
+							$("#centerResult h3").html(nicknameC);
+							$("#resultRight").hide();
+						}
+						$("#centerResult").css({
+							width:230,
+							height:380,
+							left:250,
+							top:0
+						});
+					}
+				});
+				$("#leftResult").show();
+				$("#centerDetail").show();
+				
+			});
+			$("#rightResult").animate({
+				width:230,
+				height:380,
+				left:250,
+				top:0
+			},1000,function(){
+				$("#rightResult").css({
+					width:180,
+					height:250,
+					left:530,
+					top:65
+				});
+				$("#rightResultBack").hide();
+				
+			});
+			$("#rightResultBack").fadeIn(1000);
+			console.log(slideNum_g);
+			console.log(slideNum_g+1);
+			
+		});
+		// resultDiv Left 버튼
+		$("#resultLeft").click(function(){
+			$("#centerDetail").hide();
+			$("#rightResult").fadeOut(1000);
+			$("#centerResult").animate({
+				width:180,
+				height:250,
+				left:530,
+				top:65
+			},1000,function(){
+				$.ajax({
+					url:"${cp}/searchAuthor.json",
+					data:{
+						slideNum:slideNum_g-1,
+						keyword:$("#searchKeyword").val()
+					},
+					dataType: 'json',
+					success:function(data){
+						slideNum_g=$(data)[0].slideNum;
+						if(slideNum_g!=1){
+							$("#resultRight").show();
+							let pfilenameL=$(data)[0].list[0].pfilename;
+							let idL=$(data)[0].list[0].id;
+							let nicknameL=$(data)[0].list[0].nickname;
+							let pfilenameC=$(data)[0].list[1].pfilename;
+							let idC=$(data)[0].list[1].id;
+							let nicknameC=$(data)[0].list[1].nickname;
+							let pfilenameR=$(data)[0].list[2].pfilename;
+							let idR=$(data)[0].list[2].id;
+							let nicknameR=$(data)[0].list[2].nickname;
+							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							$("#leftResult h2").html(idL);
+							$("#leftResult h3").html(nicknameL);
+							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							$("#centerResult h2").html(idC);
+							$("#centerResult h3").html(nicknameC);
+							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							$("#rightResult h2").html(idR);
+							$("#rightResult h3").html(nicknameR);
+						}else{
+							let pfilenameC=$(data)[0].list[0].pfilename;
+							let idC=$(data)[0].list[0].id;
+							let nicknameC=$(data)[0].list[0].nickname;
+							let pfilenameR=$(data)[0].list[1].pfilename;
+							let idR=$(data)[0].list[1].id;
+							let nicknameR=$(data)[0].list[1].nickname;
+							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							$("#centerResult h2").html(idC);
+							$("#centerResult h3").html(nicknameC);
+							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							$("#rightResult h2").html(idR);
+							$("#rightResult h3").html(nicknameR);
+							$("#leftResult").hide();
+							$("#resultLeft").hide();
+						}
+					}
+				});
+				$("#centerDetail").show();
+				$("#rightResult").show();
+				$("#centerResult").css({
+					width:230,
+					height:380,
+					left:250,
+					top:0
+				});
+			});
+			$("#leftResult").animate({
+				width:230,
+				height:380,
+				left:250,
+				top:0
+			},1000,function(){
+				$("#leftResult").css({
+					width:180,
+					height:250,
+					left:20,
+					top:65
+				});
+				$("#leftResultBack").hide();
+				
+			});
+			$("#leftResultBack").fadeIn(1000);
+			
+		});
 		//home 화면 오면 추천작가 새로고침
 		$.ajax({
 			url:"${cp}/recommAuthor",
@@ -213,10 +420,56 @@
 		.click(function(){
 			$(this).css('display','none');
 			$("#home_searchResult").css('display','none');
+// 			$("#home_searchResult").empty().css('display','none');
 		});
-		$("#home_searchResult").css('left',windowWidth/2-250)
+		$("#home_searchResult").css('left',windowWidth/2-350)
 		.css('top',windowHeight/2-250).css('display','block');
+		$.ajax({
+			url:"${cp}/searchAuthor.json",
+			data:{
+				slidesNum:1,
+				keyword:$("#searchKeyword").val()
+			},
+			dataType: 'json',
+			success:function(data){
+				$("#resultLeft").show();
+				$("#resultRight").show();
+				slideNum_g=$(data)[0].slideNum;
+				Cnt=$(data)[0].Cnt;
+				if(Cnt==0){
+					$("#home_searchResult").hide();
+					alert("해당회원이 존재하지않습니다.");
+				}else if(Cnt!=1){
+					$("#resultLeft").hide();
+					$("#leftResult").hide();
+					let pfilenameC=$(data)[0].list[0].pfilename;
+					let idC=$(data)[0].list[0].id;
+					let nicknameC=$(data)[0].list[0].nickname;
+					let pfilenameR=$(data)[0].list[1].pfilename;
+					let idR=$(data)[0].list[1].id;
+					let nicknameR=$(data)[0].list[1].nickname;
+					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					$("#centerResult h2").html(idC);
+					$("#centerResult h3").html(nicknameC);
+					$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+					$("#rightResult h2").html(idR);
+					$("#rightResult h3").html(nicknameR);
+				}else{
+					$("#resultLeft").hide();
+					$("#resultRight").hide();
+					$("#leftResult").hide();
+					$("#rightResult").hide();
+					let pfilenameC=$(data)[0].vo.pfilename;
+					let idC=$(data)[0].vo.id;
+					let nicknameC=$(data)[0].vo.nickname;
+					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					$("#centerResult h2").html(idC);
+					$("#centerResult h3").html(nicknameC);
+				}
+			}
+		});
 	}
+	
 	
 	//인기글 조회수별 새로고침
 	function popularHits(){

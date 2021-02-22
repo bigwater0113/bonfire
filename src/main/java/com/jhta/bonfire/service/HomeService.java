@@ -1,6 +1,7 @@
 package com.jhta.bonfire.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.jhta.bonfire.vo.PopularArticleHitsVo;
 import com.jhta.bonfire.vo.PopularArticleRecommVo;
 import com.jhta.bonfire.vo.PopularPlaceVo;
 import com.jhta.bonfire.vo.RecommAuthorVo;
+import com.jhta.bonfire.vo.SearchAuthorVo;
 
 @Service
 public class HomeService {
@@ -31,5 +33,11 @@ public class HomeService {
 	}
 	public List<PopularPlaceVo> popularPlace(){
 		return dao.popularPlace();
+	}
+	public int searchAuthorCnt(HashMap<String, Object> map) {
+		return dao.searchAuthorCnt(map);
+	}
+	public SearchAuthorVo searchAuthor(HashMap<String, Object> map) {
+		return dao.searchAuthor(map);
 	}
 }

@@ -40,7 +40,14 @@
 	</c:if>
 	</div>
 	
-	<a href="${cp }/feedboard_feed_selectAllbyId">목록으로</a>
+	<c:choose>
+		<c:when test="${from == null }">
+			<a href="${cp }/feedboard_feed_selectAllbyId">목록으로</a>
+		</c:when>
+		<c:otherwise>
+			<a href="${cp }/scrapboard_feed_scraplist">목록으로</a>
+		</c:otherwise>
+	</c:choose>
 	
 	<div>
 	<h4>Comments</h4>
@@ -55,7 +62,7 @@
 	</c:if>
 </div>
 <script type="text/javascript">
-	
+	console.log("${from}");
 	var num=$("#num").val();
 	var cid=$("#cid").val();
 	

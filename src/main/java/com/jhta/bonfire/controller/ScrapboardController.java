@@ -19,7 +19,6 @@ import com.jhta.bonfire.service.FeedboardService;
 import com.jhta.bonfire.util.PageUtil;
 import com.jhta.bonfire.vo.FeedboardJoinScrapboardVo;
 import com.jhta.bonfire.vo.FeedboardVo;
-import com.jhta.bonfire.vo.ScrapboardVo;
 
 @Controller
 public class ScrapboardController {
@@ -51,9 +50,10 @@ public class ScrapboardController {
 		
 	//글 상세페이지
 		@GetMapping("/scrapboard_detail")
-		public String selectOne(HttpSession session,int num,Model model,String recentpage) {
+		public String selectOne(HttpSession session,String from,int num,Model model,String recentpage) {
 			FeedboardVo vo=service.selectOne(num);
 			model.addAttribute("vo",vo);
+			model.addAttribute("from",from);
 	        	return ".home.travelersboard.detail_feed";
 		}
 		

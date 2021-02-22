@@ -24,7 +24,7 @@
 					<tr>
 							<td>${vo.cname }</td>
 							<td>${vo.writer}</td>
-							<td><a href="${cp }/scrapboard_detail?num=${vo.num }">${vo.title }</a></td>
+							<td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>
 							<td>${vo.scrap}</td>

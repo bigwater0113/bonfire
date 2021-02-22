@@ -240,17 +240,26 @@
 	$("#btn_scrap").click(function(){
 		var num=$("#num").val();
 		var id="<%=(String)session.getAttribute("id")%>";
+		if(confirm("스크랩 하시겠습니까?") == true){
 		$.ajax({
 			url:'/bonfire/feedboard_insertScrapboard?num='+num+'&id='+id,
 			dataType : 'xml',
 			success:function(data){
-				console.log("스크랩 석세스펑션!!!!!")
+				var msg=$(data).find('msg').text();
+				if(msg == 'success'){
+					alert("스크랩되었습니다.");
+				}else{
+					alert("이미 스크랩한 글입니다.");
+				}
 				$("#t_scrap").empty();
 				var s=$(data).find('s').text();
 				var str="스크랩:  " + s;
 				$("#t_scrap").append(str);
 			}
 			});
+		}else{
+			return false;
+		}
 	});
 	
 </script>

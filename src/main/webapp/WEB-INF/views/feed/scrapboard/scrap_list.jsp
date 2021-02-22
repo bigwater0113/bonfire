@@ -18,7 +18,7 @@
 					<th>조회수</th>
 					<th>추천</th>
 					<th>스크랩 수</th>
-					<th>스크랩 날짜</th>
+					<th>게시 날짜</th>
 					<th><input type="checkbox" id="allcheck"></th>
 				</tr>
 				<c:forEach var="vo" items="${list }">
@@ -30,7 +30,7 @@
 							<td>${vo.hits}</td>
 							<td>${vo.recommend}</td>
 							<td>${vo.scrap}</td>
-							<td>${vo.adddate}</td>
+							<td>${vo.postdate}</td>
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 				</c:forEach>
 			</table>

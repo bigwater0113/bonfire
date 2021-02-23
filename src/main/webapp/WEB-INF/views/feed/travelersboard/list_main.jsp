@@ -7,7 +7,7 @@
 	<div id="feedboard_main">
 		<h2>여행자게시판</h2>
 	</div>
-	<form:form method="post">
+	<form:form method="post" onsubmit="checkDel(event)">
 		<div id="feedboard_editlist">
 			<c:if test="${id == 'admin'}">
 				<input type="submit" value="삭제" name="feedboard_delete" formaction="${cp }/feedboard_deleteList">
@@ -104,4 +104,26 @@
 			}
 		}
 	}, true);
+		
+		function checkDel(e){
+			let cnt=0;
+	         $("input:checkbox[name='checkk']").each(function(){
+	            if($(this).is(":checked")==true){
+	            	cnt++;
+	               console.log(cnt);
+	            }else{
+	               console.log(cnt);
+	            }
+	         });
+	         if(cnt==0){
+	        	 	alert("삭제할 글을 1개 이상 선택하세요.");
+	        	 	e.preventDefault();
+ 				}else{
+	        	 	if(confirm("삭제하시겠습니까?")==true){
+ 						return true;
+	        	 	}else{
+	        	 		e.preventDefault();
+	        	 	}
+ 				}
+		}
 </script>

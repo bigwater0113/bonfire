@@ -7,31 +7,38 @@
 	<div id="feedboard_main">
 		<h2>${feedId }님의 스크랩게시판</h2>
 	</div>
-	<form:form method="post">
+	<form:form method="post" onsubmit="chechDel(event)">
 		<div id="scrapboard_table">
-			<table border="1" width="800px">
-				<tr>
-					<th>카테고리</th>
-					<th>작성자</th>
-					<th>제목</th>
-					<th>조회수</th>
-					<th>추천</th>
-					<th>스크랩 수</th>
-					<th>게시 날짜</th>
-					<th><input type="checkbox" id="allcheck"></th>
-				</tr>
-				<c:forEach var="vo" items="${list }">
+			<c:choose>
+			<c:when test="${list == null}">
+				스크랩한 게시글이 없습니다!
+			</c:when>
+			<c:otherwise>
+				<table border="1" width="800px">
 					<tr>
-							<td>${vo.cname }</td>
-							<td>${vo.writer}</td>
-							<td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
-							<td>${vo.hits}</td>
-							<td>${vo.recommend}</td>
-							<td>${vo.scrap}</td>
-							<td>${vo.postdate}</td>
-							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
-				</c:forEach>
-			</table>
+						<th>카테고리</th>
+						<th>작성자</th>
+						<th>제목</th>
+						<th>조회수</th>
+						<th>추천</th>
+						<th>스크랩 수</th>
+						<th>게시 날짜</th>
+						<th><input type="checkbox" id="allcheck"></th>
+					</tr>
+					<c:forEach var="vo" items="${list }">
+						<tr>
+								<td>${vo.cname }</td>
+								<td>${vo.writer}</td>
+								<td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
+								<td>${vo.hits}</td>
+								<td>${vo.recommend}</td>
+								<td>${vo.scrap}</td>
+								<td>${vo.postdate}</td>
+								<td><input type="checkbox" name="checkk" value=${vo.num }></td>
+					</c:forEach>
+				</table>
+				</c:otherwise>
+			</c:choose>
 			<div id="scrap_editlist">
 				<c:if test="${id == feedId}">
 					<input type="submit" value="삭제" name="scrapboard_delete" formaction="${cp }/scrapboard_delete">
@@ -89,4 +96,26 @@
 			}
 		}
 	}, true);
+		
+		function checkDel(e){
+			let cnt=0;
+	         $("input:checkbox[name='checkk']").each(function(){
+	            if($(this).is(":checked")==true){
+	            	cnt++;
+	               console.log(cnt);
+	            }else{
+	               console.log(cnt);
+	            }
+	         });
+	         if(cnt==0){
+	        	 	alert("삭제할 글을 1개 이상 선택하세요.");
+	        	 	e.preventDefault();
+ 				}else{
+	        	 	if(confirm("삭제하시겠습니까?")==true){
+ 						return true;
+	        	 	}else{
+	        	 		e.preventDefault();
+	        	 	}
+ 				}
+		}
 </script>

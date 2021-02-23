@@ -30,6 +30,8 @@
 		
 	<c:if test="${id != null }">
 		<input type="button" id="btn_recomm" value="추천" name="btn_recomm">
+	</c:if>
+	<c:if test="${id != null && vo.id!=id}">
 		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
 	</c:if>
 	<c:if test="${vo.id==id }">

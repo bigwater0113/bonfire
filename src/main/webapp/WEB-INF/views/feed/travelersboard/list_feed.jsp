@@ -22,7 +22,7 @@
 	<div id="feedboard_main">
 		<h2>${feedId }님의 여행게시판</h2>
 	</div>
-	<form:form method="post" onsubmit="checkDel(event)">
+	<form:form method="post" onsubmit="return checkDel(event)">
 		<div id="feedboard_table">
 			<table border="1" width="800px" >
 				<tr>
@@ -137,7 +137,7 @@
 // 			alert("why!!");
 // 			var checkk=document.getElementsByName("checkk");
 // 			var cnt=0;
-// 			for(var i=0;i<=checkk.length;i++){
+// 			for(var i=0;i<checkk.length;i++){
 // 				if(checkk[i].checked==true){
 // 					cnt++;
 // 					console.log(cnt);

@@ -5,8 +5,9 @@
 <!-- manageMember.jsp -->
 <div>
 	<h1>회원관리</h1>
-	<form:form method="post">
+	<form:form method="post" onsubmit="checkDel(event)">
 	<input type="submit" value="삭제" name="manage_delete" formaction="${cp }/manage_deleteList">
+	<input type="hidden">
 	<table border="1" width="900">
 		<tr>
 			<th><input type="checkbox" id="allcheck"></th>
@@ -76,18 +77,37 @@
 <script>
 		var check=0;
 		document.getElementById("allcheck").addEventListener("click", function(e) {
-		if(check==0){
-			check=1;
-		}else{
-			check=0;
-		}
+			if(check==0){
+				check=1;
+			}else{
+				check=0;
+			}
 		var checkk=document.getElementsByName("checkk");
+		
 		for(var i=0;i<=checkk.length;i++){
 			if(check==1){
 				checkk[i].checked=true;
 			}else{
 				checkk[i].checked=false;
 			}
+
 		}
 	}, true);
+		function checkDel(e){
+            let cnt=0;
+               $("input:checkbox[name='checkk']").each(function(){
+                  if($(this).is(":checked")==true){
+                     cnt++;
+                     console.log(cnt);
+                  }else{
+                     console.log(cnt);
+                  }
+               });
+               if(cnt==0){
+                     alert("삭제할 글을 1개 이상 선택하세요.");
+                     e.preventDefault();
+                }else{
+                   return true;
+                }
+         }
 </script>

@@ -11,9 +11,9 @@
 	li{list-style: none;}
 	#home_articleList li{display: inline-block;}
 	#home_placeList li{display: inline-block;}
-	.authorDiv{width:230px;height:230px; margin-left:10px;margin-right:10px;background-color: lightgreen; float:left}
-	.articleDiv{width:180px;height:180px; margin-left:5px;margin-right:5px; background-color: lightblue;}
-	.placeDiv{width:300px;height:300px; margin-left:10px;margin-right:10px; background-color: lightblue;}
+	.authorDiv{width:230px;height:230px; margin-left:10px;margin-right:10px; float:left}
+	.articleDiv{width:180px;height:180px; margin-left:5px;margin-right:5px; }
+	.placeDiv{width:300px;height:300px; margin-left:10px;margin-right:10px; }
 	.btnIcon{opacity:0.5;}
 	.btnIcon:hover{opacity:1;}
 	.aHover{color:#aaaaaa;text-decoration:none; }

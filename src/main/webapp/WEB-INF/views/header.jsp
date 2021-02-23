@@ -5,14 +5,14 @@
     <!-- header.jsp -->
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
-	#header_logo{width:300px;height:100px;float:left;background-color: #aaaaaa;}
-	#header_menu{width:100px;height:100px;float:right;background-color: #aaaaaa;}
-	#header_login{width:100px;height:100px;float:right;background-color: #bbbbbb;}
-	#header_slideMenu{width:1200px;height:100px;background-color: lightblue;clear:both;
+	#header_logo{width:300px;height:100px;float:left;}
+	#header_menu{width:100px;height:100px;float:right;}
+	#header_login{width:100px;height:100px;float:right;}
+	#header_slideMenu{width:1200px;height:100px;clear:both;
 	position:absolute;z-index:998;top:100px; display:none;}
 	#header_menulist{list-style:none; }
 	#header_menulist li{display:inline-block; width:200px; }
-	#profile_slide{width:200px;background-color: lightgreen;clear:both;
+	#profile_slide{width:200px;clear:both;
 	position:absolute;z-index:999;top:100px; display:none;}
 	
 </style>

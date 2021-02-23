@@ -8,16 +8,16 @@
 #header{
 	width:1200px;
 	height:100px;
-	background-color: yellow;
+/* 	background-color: yellow; */
 }
 #content{
 	width:1200px;
 	height:600px;
-	background-color: orange;
+/* 	background-color: orange; */
 	overflow: auto;
 }
 #footer{
 	width:1200px;
 	height:200px;
-	background-color: pink;
+/* 	background-color: pink; */
 }

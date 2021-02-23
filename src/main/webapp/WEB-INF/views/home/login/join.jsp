@@ -5,35 +5,41 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
 	label{width:100px;display:inline-block;}
+	#join_form{width:280px;margin:auto;margin-top:50px;}
+	#join_form input{margin-bottom:10px;}
+	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center;
+		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;}
 </style>
-<div>
-	<form:form method="post" action="${cp }/join" id="joinForm">
-		<label for="id">아이디</label>
-		<input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
-		<label for="pwd">비밀번호</label>
-		<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
-		<label for="check">비밀번호확인</label>
-		<input type="password" id="check" required="required"><span id="checkMsg"></span><br>
-		<label for="name">이름</label>
-		<input type="text" name="name" id="name" required="required"><br>
-		<label for="email">이메일</label>
-		<input type="email" name="email" id="email" required="required"><br>
-		<label for="birth">생년월일</label>
-		<input type="date" name="birth" id="birth" required="required"><br>
-		<label for="gender">성별</label>
-		남<input type="radio" name="gender" value="M" checked>
-		여<input type="radio" name="gender" value="W"><br>
-		<label for="phone">핸드폰번호</label>
-		<input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
-		<label for="zipNo">우편번호</label>
-		<input type="text" name="zipno" id="zipno" readonly style="width:100px" required="required">
-		<input type="button" value="주소검색" onclick="goPopup();"><br>
-		<label for="roadfulladdr">도로명주소</label>
-		<input type="text" name="roadfulladdr" id="roadfulladdr" style="width:500px" required="required"><br>
-		<label for="addrdetail">상세주소</label>
-		<input type="text" name="addrdetail" id="addrdetail" style="width:500px" value=""><br>
-		<input type="submit" value="회원가입">
-	</form:form>
+<div style="width:1200px;">
+	<div id="join_form">
+		<form:form method="post" action="${cp }/join" id="joinForm">
+			<label for="id">아이디</label>
+			<input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
+			<label for="pwd">비밀번호</label>
+			<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
+			<label for="check">비밀번호확인</label>
+			<input type="password" id="check" required="required"><span id="checkMsg"></span><br>
+			<label for="name">이름</label>
+			<input type="text" name="name" id="name" required="required"><br>
+			<label for="email">이메일</label>
+			<input type="email" name="email" id="email" required="required"><br>
+			<label for="birth">생년월일</label>
+			<input type="date" name="birth" id="birth" required="required"><br>
+			<label for="gender">성별</label>
+			남<input type="radio" name="gender" value="M" checked>
+			여<input type="radio" name="gender" value="W"><br>
+			<label for="phone">핸드폰번호</label>
+			<input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
+			<label for="zipNo">우편번호</label>
+			<input type="text" name="zipno" id="zipno" readonly style="width:100px" required="required">
+			<input type="button" value="주소검색" onclick="goPopup();"><br>
+			<label for="roadfulladdr">도로명주소</label>
+			<input type="text" name="roadfulladdr" id="roadfulladdr" style="width:280px" required="required"><br>
+			<label for="addrdetail">상세주소</label>
+			<input type="text" name="addrdetail" id="addrdetail" style="width:280px" value=""><br>
+			<a href="javascript:joinForm.submit()">가입하기</a>
+		</form:form>
+	</div>
 </div>
 <script>
 	$(function(){

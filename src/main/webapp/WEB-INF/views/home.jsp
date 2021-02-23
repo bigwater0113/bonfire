@@ -153,11 +153,29 @@
 		$("#resultRight").click(function(){
 			$("#centerDetail").hide();
 			$("#leftResult").fadeOut(1000);
+			
 			$("#centerResult").animate({
 				width:180,
 				height:250,
 				left:20,
 				top:65
+			},1000,function(){
+				
+				$("#centerResult").css({
+					width:230,
+					height:380,
+					left:250,
+					top:0
+				});
+				$("#leftResult").show();
+				$("#centerDetail").show();
+				
+			});
+			$("#rightResult").animate({
+				width:230,
+				height:380,
+				left:250,
+				top:0
 			},1000,function(){
 				$.ajax({
 					url:"${cp}/searchAuthor.json",
@@ -165,6 +183,7 @@
 						slideNum:slideNum_g+1,
 						keyword:$("#searchKeyword").val()
 					},
+					async: false,
 					dataType: 'json',
 					success:function(data){
 						slideNum_g=$(data)[0].slideNum;
@@ -203,30 +222,15 @@
 							$("#centerResult h3").html(nicknameC);
 							$("#resultRight").hide();
 						}
-						$("#centerResult").css({
-							width:230,
-							height:380,
-							left:250,
-							top:0
+						$("#rightResult").css({
+							width:180,
+							height:250,
+							left:530,
+							top:65
 						});
 					}
 				});
-				$("#leftResult").show();
-				$("#centerDetail").show();
 				
-			});
-			$("#rightResult").animate({
-				width:230,
-				height:380,
-				left:250,
-				top:0
-			},1000,function(){
-				$("#rightResult").css({
-					width:180,
-					height:250,
-					left:530,
-					top:65
-				});
 				$("#rightResultBack").hide();
 				
 			});
@@ -239,11 +243,28 @@
 		$("#resultLeft").click(function(){
 			$("#centerDetail").hide();
 			$("#rightResult").fadeOut(1000);
+			
 			$("#centerResult").animate({
 				width:180,
 				height:250,
 				left:530,
 				top:65
+			},1000,function(){
+				
+				$("#centerDetail").show();
+				$("#rightResult").show();
+				$("#centerResult").css({
+					width:230,
+					height:380,
+					left:250,
+					top:0
+				});
+			});
+			$("#leftResult").animate({
+				width:230,
+				height:380,
+				left:250,
+				top:0
 			},1000,function(){
 				$.ajax({
 					url:"${cp}/searchAuthor.json",
@@ -251,6 +272,7 @@
 						slideNum:slideNum_g-1,
 						keyword:$("#searchKeyword").val()
 					},
+					async:false,
 					dataType: 'json',
 					success:function(data){
 						slideNum_g=$(data)[0].slideNum;
@@ -290,29 +312,15 @@
 							$("#leftResult").hide();
 							$("#resultLeft").hide();
 						}
+						$("#leftResult").css({
+							width:180,
+							height:250,
+							left:20,
+							top:65
+						});
 					}
 				});
-				$("#centerDetail").show();
-				$("#rightResult").show();
-				$("#centerResult").css({
-					width:230,
-					height:380,
-					left:250,
-					top:0
-				});
-			});
-			$("#leftResult").animate({
-				width:230,
-				height:380,
-				left:250,
-				top:0
-			},1000,function(){
-				$("#leftResult").css({
-					width:180,
-					height:250,
-					left:20,
-					top:65
-				});
+				
 				$("#leftResultBack").hide();
 				
 			});

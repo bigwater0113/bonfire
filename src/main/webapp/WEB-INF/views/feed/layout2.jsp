@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>layout2.jsp</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 <c:set var="cp" value="${pageContext.request.contextPath}" scope="application"/>
 <link rel="stylesheet" type="text/css" href="${cp }/resources/feed.css">
 <style>

@@ -2,12 +2,34 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- home.jsp -->
 <style>
-	#home_search{width:700px;margin:50px auto;}
-	#home_recommAuthor{width:1000px;margin:50px auto;}
-	#home_popularArticle{width:1000px;margin:50px auto;}
-	#home_popularPlace{width:1000px;margin:50px auto;}
+	
+	#home_wrap{font-size:26px;}
+	#aSearch{text-decoration: none;color:white;}
+	
+	input::-webkit-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+	input:-ms-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+	#home_search{width:1200px;height:650px;margin:auto;
+		background-image:url('${cp}/resources/images/testing_banner2.jpg');background-size: 100% 100%;}
+	#home_search_form{width:600px;margin:auto;position:relative;top:580px;}
+	#home_recommAuthor{width:1200px;height:800px;margin:auto;background-color: #eeeeee;}
+	#home_recommAuthor_Div{width:1000px;margin:auto;padding-top:220px;}
+	#home_popularArticle{width:1200px;height:800px;margin:auto;}
+	#home_popularArticle_Div{width:1000px;margin:auto;padding-top:270px;}
+	#home_popularPlace{width:1200px;height:800px;margin:auto;background-color: #eeeeee;}
+	#home_popularPlace_Div{width:1000px;margin:auto;padding-top:220px;}
 	li{list-style: none;}
 	#home_articleList li{display: inline-block;}
 	#home_placeList li{display: inline-block;}
@@ -70,63 +92,69 @@
 		</div>
 	</div>
     <div id="home_search">
-    	<form>
-    		<select name="field">
-    			<option value="author">작가</option>
-    		</select>
-	    	<input type="text" name="keyword" style="width:500px;" id="searchKeyword"><a href="javascript:popupDiv()">검색</a>
-    	</form>
+    	<div id="home_search_form">
+	    	<form>
+		    	<input type="text" name="keyword" style="width:540px;height:30px;font-size: 25px;" id="searchKeyword" placeholder="작가검색">
+		    	<a href="javascript:popupDiv()" id="aSearch">검색</a>
+	    	</form>
+    	</div>
     </div>
     <div id="home_recommAuthor">
-   		<span>추천작가 <img src="${cp }/resources/images/refreshIcon.png" class="btnIcon" id="refreshAuthor" style="width:17px;height:15px;"></span>
-		<div >
-			<img src="${cp }/resources/images/leftArrowIcon.png"  class="btnIcon" id="authorLeft"
-						style="width:110px;height:110px;position:relative;top:-65px;">
-			<div  id="home_authors" style="width:750px;display:inline-block;overflow:hidden;">
-				<div id="home_authorList" style="width:5000px;float:left;position:relative;">
-					<c:forEach var="i" begin="1" end="12">
-						<div class="authorDiv" id="author${i}"></div>
-					</c:forEach>
+    	<div id="home_recommAuthor_Div">
+	   		<span>추천작가 <img src="${cp }/resources/images/refreshIcon.png" class="btnIcon" id="refreshAuthor" style="width:17px;height:15px;"></span>
+			<div >
+				<img src="${cp }/resources/images/leftArrowIcon.png"  class="btnIcon" id="authorLeft"
+							style="width:110px;height:110px;position:relative;top:-65px;">
+				<div  id="home_authors" style="width:750px;display:inline-block;overflow:hidden;">
+					<div id="home_authorList" style="width:5000px;float:left;position:relative;">
+						<c:forEach var="i" begin="1" end="12">
+							<div class="authorDiv" id="author${i}"></div>
+						</c:forEach>
+					</div>
 				</div>
+				<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon" id="authorRight"
+							style="width:110px;height:110px;position:relative;top:-65px;">
 			</div>
-			<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon" id="authorRight"
-						style="width:110px;height:110px;position:relative;top:-65px;">
 		</div>
     </div>
     <div id="home_popularArticle">
-    	<ul>
-    		<li>
-    			인기글 <a href="javascript:popularHits()" class="aHover">조회</a>
-    			<a href="javascript:popularRecomm()" class="aHover">추천</a>
-    		</li>
-    		<li>
-    			<ul id="home_articleList">
-    				<li><div class="articleDiv" id="article1"></div></li>
-    				<li><div class="articleDiv" id="article2"></div></li>
-    				<li><div class="articleDiv" id="article3"></div></li>
-    				<li><div class="articleDiv" id="article4"></div></li>
-    				<li><div class="articleDiv" id="article5"></div></li>
-    			</ul>
-    		</li>
-    	</ul>
+    	<div id="home_popularArticle_Div">
+	    	<ul>
+	    		<li>
+	    			인기글 <a href="javascript:popularHits()" class="aHover">조회</a>
+	    			<a href="javascript:popularRecomm()" class="aHover">추천</a>
+	    		</li>
+	    		<li>
+	    			<ul id="home_articleList">
+	    				<li><div class="articleDiv" id="article1"></div></li>
+	    				<li><div class="articleDiv" id="article2"></div></li>
+	    				<li><div class="articleDiv" id="article3"></div></li>
+	    				<li><div class="articleDiv" id="article4"></div></li>
+	    				<li><div class="articleDiv" id="article5"></div></li>
+	    			</ul>
+	    		</li>
+	    	</ul>
+    	</div>
     </div>
     <div id="home_popularPlace">
-    	<ul>
-    		<li>인기여행지</li>
-    		<li>
-	    		<ul id="home_placeList">
-	   				<li>
-	   					<div class="placeDiv" id="place1"></div>
-	   				</li>
-	   				<li>
-	   					<div class="placeDiv" id="place2"></div>
-	   				</li>
-	   				<li>
-	   					<div class="placeDiv" id="place3"></div>
-	   				</li>
-	   			</ul>
-   			</li>
-    	</ul>
+   		<div id="home_popularPlace_Div">
+	    	<ul>
+	    		<li>인기여행지</li>
+	    		<li>
+		    		<ul id="home_placeList">
+		   				<li>
+		   					<div class="placeDiv" id="place1"></div>
+		   				</li>
+		   				<li>
+		   					<div class="placeDiv" id="place2"></div>
+		   				</li>
+		   				<li>
+		   					<div class="placeDiv" id="place3"></div>
+		   				</li>
+		   			</ul>
+	   			</li>
+	    	</ul>
+    	</div>
     </div>
 </div>
 <script>

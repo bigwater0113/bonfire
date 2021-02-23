@@ -10,7 +10,7 @@
 		box-shadow: 2px 2px 2px black;}
 	input{width:250px;height:20px;margin-bottom:5px;}
 </style>
-<div style="width:1200px;padding-top:200px;">
+<div style="width:1200px;height:400px;padding-top:200px;">
 	<div style="width:250px;height:150px;margin:auto;">
 		<form:form method="post" action="login" id="login_form">
 			<div style="margin-bottom:10px;">

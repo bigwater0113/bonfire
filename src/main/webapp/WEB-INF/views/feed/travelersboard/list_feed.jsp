@@ -22,9 +22,9 @@
 	<div id="feedboard_main">
 		<h2>${feedId }님의 여행게시판</h2>
 	</div>
-	<form:form method="post">
+	<form:form method="post" onsubmit="checkDel(event)">
 		<div id="feedboard_table">
-			<table border="1" width="800px">
+			<table border="1" width="800px" >
 				<tr>
 					<th>카테고리</th>
 					<th>제목</th>
@@ -34,8 +34,8 @@
 						<th>추천</th>
 						<th>스크랩</th>
 						<th>발행여부</th>
-						<th><input type="checkbox" id="allcheck"></th>
 					</c:if>
+						<th><input type="checkbox" id="allcheck"></th>
 				</tr>
 				<c:forEach var="vo" items="${list }">
 					<tr>
@@ -50,8 +50,8 @@
 									<c:if test="${vo.ispost=='1' }">발행o</c:if>
 									<c:if test="${vo.ispost=='-1' }">발행x</c:if>
 								</td>
-								<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 							</c:if>
+							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 				</c:forEach>
 			</table>
 			<div id="feedboard_editlist">
@@ -98,18 +98,59 @@
 <script>
 		var check=0;
 		document.getElementById("allcheck").addEventListener("click", function(e) {
-		if(check==0){
-			check=1;
-		}else{
-			check=0;
-		}
-		var checkk=document.getElementsByName("checkk");
-		for(var i=0;i<=checkk.length;i++){
-			if(check==1){
-				checkk[i].checked=true;
+			if(check==0){
+				check=1;
 			}else{
-				checkk[i].checked=false;
+				check=0;
 			}
+			var checkk=document.getElementsByName("checkk");
+			for(var i=0;i<=checkk.length;i++){
+				if(check==1){
+					checkk[i].checked=true;
+				}else{
+					checkk[i].checked=false;
+				}
+			}
+		}, true);
+		
+			function checkDel(e){
+				let cnt=0;
+		         $("input:checkbox[name='checkk']").each(function(){
+		            if($(this).is(":checked")==true){
+		            	cnt++;
+		               console.log(cnt);
+		            }else{
+		               console.log(cnt);
+		            }
+		         });
+		         if(cnt==0){
+		        	 	alert("삭제할 글을 1개 이상 선택하세요.");
+		        	 	e.preventDefault();
+	 				}else{
+		        	 	if(confirm("삭제하시겠습니까?")==true){
+	 						return true;
+		        	 	}else{
+		        	 		e.preventDefault();
+		        	 	}
+	 				}
+		         
+// 			alert("why!!");
+// 			var checkk=document.getElementsByName("checkk");
+// 			var cnt=0;
+// 			for(var i=0;i<=checkk.length;i++){
+// 				if(checkk[i].checked==true){
+// 					cnt++;
+// 					console.log(cnt);
+// 				}else{
+// 					console.log(cnt);
+// 				}
+// 			}
+// 				if(cnt==0){
+// 					alert("???");
+// 					return false;
+// 				}else{
+// 					alert("!!!");
+// 					return true;
+// 				}
 		}
-	}, true);
 </script>

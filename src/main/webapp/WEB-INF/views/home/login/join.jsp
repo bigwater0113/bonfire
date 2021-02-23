@@ -5,12 +5,12 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
 	label{width:100px;display:inline-block;}
-	#join_form{width:280px;margin:auto;margin-top:50px;}
+	#join_form{width:280px;margin:auto;margin-top:70px;}
 	#join_form input{margin-bottom:10px;}
 	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center;
 		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;}
 </style>
-<div style="width:1200px;">
+<div style="width:1200px;height:530px;">
 	<div id="join_form">
 		<form:form method="post" action="${cp }/join" id="joinForm">
 			<label for="id">아이디</label>
@@ -26,8 +26,8 @@
 			<label for="birth">생년월일</label>
 			<input type="date" name="birth" id="birth" required="required"><br>
 			<label for="gender">성별</label>
-			남<input type="radio" name="gender" value="M" checked>
-			여<input type="radio" name="gender" value="W"><br>
+			남 <input type="radio" name="gender" value="M" checked>
+			여 <input type="radio" name="gender" value="W"><br>
 			<label for="phone">핸드폰번호</label>
 			<input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
 			<label for="zipNo">우편번호</label>

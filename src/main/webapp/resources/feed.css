@@ -1,13 +1,24 @@
 @charset "UTF-8";
 
+@font-face{
+		font-family:'나눔손글씨 사랑해 아들';
+		src:url('/bonfire/resources/font/나눔손글씨 사랑해 아들.ttf') format('truetype');
+		font-style:normal;
+		font-weight:normal;
+	}
 #wrap{
+	font-family:'Caveat','나눔손글씨 사랑해 아들', cursive;
+	
+	font-weight : bold;
 	width:1200px;
 	height:1000px;
 	margin:auto;
 }
 #header{
 	width:1200px;
+	margin-top:10px;
 	height:100px;
+	margin-bottom:10px;
 /* 	background-color: yellow; */
 }
 #banner{
@@ -26,7 +37,6 @@
 	height:600px;
 /* 	background-color: orange; */
 	float:left;
-	overflow: auto;
 }
 #footer{
 	width:1200px;

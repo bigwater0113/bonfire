@@ -6,28 +6,29 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
 	#header_logo{width:300px;height:100px;float:left;}
-	#header_menu{width:100px;height:100px;float:right;}
-	#header_login{width:100px;height:100px;float:right;}
+	#header_menu{width:40px;height:40px;clear:both;position:relative;left:1160px;top:-35px;}
+	#header_login{width:40px;height:40px;clear:both;position:relative;left:1100px;top:-75px;}
 	#header_slideMenu{width:1200px;height:100px;clear:both;
-	position:absolute;z-index:998;top:100px; display:none;}
-	#header_menulist{list-style:none; }
-	#header_menulist li{display:inline-block; width:200px; }
+	position:absolute;z-index:990;top:120px; display:none;background-color: white;opacity:0.7;}
+	#header_slideMenu a{z-index:998;text-decoration: none; color:black; font-size:25px;}
+	#header_menulist{width:740px;list-style:none; margin:auto;padding-top:30px;}
+	#header_menulist li{display:inline-block; width:80px; margin-left:50px;margin-right:50px;}
 	#profile_slide{width:200px;clear:both;
 	position:absolute;z-index:999;top:100px; display:none;}
 	
 </style>
 <div>
 	<div id="header_logo" onclick="location.href='${cp}/'">
-		<img src="${cp }/resources/images/bonfire_logo.png" style="width:140px;height:100px;">
-		<span style="font-size:50px;position:relative;top:-30px;">모닥불</span>
+		<img src="${cp }/resources/images/bonfire_logo2.png" style="width:100px;height:100px;">
+		<span style="font-size:50px;position:relative;top:-30px;">Bonfire</span>
 	</div>
-	<div id="header_menu"><img src="${cp }/resources/images/menuIcon.png" style="width:100px;height:100px;" id="menuBtn"></div>
+	<div id="header_menu"><img src="${cp }/resources/images/menuIcon.png" style="width:40px;height:40px;" id="menuBtn"></div>
 	<div id="header_login">
 	<sec:authorize access="isAnonymous()">
-		<img src="${cp }/resources/images/loginIcon.png" onclick="location.href='${cp }/login'" style="width:100px;height:100px;">
+		<img src="${cp }/resources/images/loginIcon2.png" onclick="location.href='${cp }/login'" style="width:40px;height:40px;">
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-		<img src="${cp }/resources/images/profileIcon.png" id="profileImg" style="width:100px;height:100px;">
+		<img src="${cp }/resources/images/profileIcon.png" id="profileImg" style="width:40px;height:40px;">
 		<div id="profile_slide">
 			[<sec:authentication property="principal.username"/>]님 <br>
 			<a href="${cp }/logout">로그아웃</a><br>

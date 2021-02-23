@@ -24,18 +24,18 @@
 	#home_search{width:1200px;height:650px;margin:auto;
 		background-image:url('${cp}/resources/images/testing_banner2.jpg');background-size: 100% 100%;}
 	#home_search_form{width:600px;margin:auto;position:relative;top:580px;}
-	#home_recommAuthor{width:1200px;height:800px;margin:auto;background-color: #eeeeee;}
+	#home_recommAuthor{width:1200px;height:800px;margin:auto;background-color: #dadcde;}
 	#home_recommAuthor_Div{width:1000px;margin:auto;padding-top:220px;}
 	#home_popularArticle{width:1200px;height:800px;margin:auto;}
 	#home_popularArticle_Div{width:1000px;margin:auto;padding-top:270px;}
-	#home_popularPlace{width:1200px;height:800px;margin:auto;background-color: #eeeeee;}
+	#home_popularPlace{width:1200px;height:800px;margin:auto;background-color: #dadcde;}
 	#home_popularPlace_Div{width:1000px;margin:auto;padding-top:220px;}
 	li{list-style: none;}
 	#home_articleList li{display: inline-block;}
 	#home_placeList li{display: inline-block;}
 	.authorDiv{width:230px;height:230px; margin-left:10px;margin-right:10px; float:left}
-	.articleDiv{width:180px;height:180px; margin-left:5px;margin-right:5px; }
-	.placeDiv{width:300px;height:300px; margin-left:10px;margin-right:10px; }
+	.articleDiv{width:170px;height:170px; margin-left:5px;margin-right:5px; }
+	.placeDiv{width:285px;height:285px; margin-left:10px;margin-right:10px; }
 	.btnIcon{opacity:0.5;}
 	.btnIcon:hover{opacity:1;}
 	.aHover{color:#aaaaaa;text-decoration:none; }
@@ -67,9 +67,9 @@
 	<div id="home_mask">
 	</div>
 	<div id="home_searchResult">
-		<img src="${cp }/resources/images/leftArrowIcon.png"  class="btnIcon" id="resultLeft"
+		<img src="${cp }/resources/images/leftArrowIcon2.png"  class="btnIcon" id="resultLeft"
 						style="width:50px;height:50px;position:absolute;left:0px;top:170px;;z-index:10000">
-		<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon" id="resultRight"
+		<img src="${cp }/resources/images/rightArrowIcon2.png"  class="btnIcon" id="resultRight"
 						style="width:50px;height:50px;position:absolute;left:700px;top:170px;z-index:10000">
 		<div class="resultDiv" id="leftResultBack">
 		</div>
@@ -103,17 +103,17 @@
     	<div id="home_recommAuthor_Div">
 	   		<span>추천작가 <img src="${cp }/resources/images/refreshIcon.png" class="btnIcon" id="refreshAuthor" style="width:17px;height:15px;"></span>
 			<div >
-				<img src="${cp }/resources/images/leftArrowIcon.png"  class="btnIcon" id="authorLeft"
-							style="width:110px;height:110px;position:relative;top:-65px;">
-				<div  id="home_authors" style="width:750px;display:inline-block;overflow:hidden;">
+				<img src="${cp }/resources/images/leftArrowIcon2.png"  class="btnIcon" id="authorLeft"
+							style="width:80px;height:80px;position:relative;top:-80px;left:0px;">
+				<div  id="home_authors" style="width:750px;display:inline-block;overflow:hidden;position:relative;left:40px;">
 					<div id="home_authorList" style="width:5000px;float:left;position:relative;">
 						<c:forEach var="i" begin="1" end="12">
 							<div class="authorDiv" id="author${i}"></div>
 						</c:forEach>
 					</div>
 				</div>
-				<img src="${cp }/resources/images/rightArrowIcon.png"  class="btnIcon" id="authorRight"
-							style="width:110px;height:110px;position:relative;top:-65px;">
+				<img src="${cp }/resources/images/rightArrowIcon2.png"  class="btnIcon" id="authorRight"
+							style="width:80px;height:80px;position:relative;top:-80px;left:80px;">
 			</div>
 		</div>
     </div>
@@ -162,12 +162,16 @@
 	var Cnt;
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
+	$(window).scroll(function(){
+		$("#home_mask").css('top',$(window).scrollTop());
+		$("#home_searchResult").css('top',$(window).scrollTop()+windowHeight/2-250);
+	});
 	$(window).resize(function(){
 		windowWidth = $(window).width();
 		windowHeight = $(window).height();
-		$("#home_mask").css('width',windowWidth).css('height',windowHeight);
+		$("#home_mask").css('width',windowWidth).css('height',windowHeight).css('top',$(window).scrollTop());
 		$("#home_searchResult").css('left',windowWidth/2-350)
-		.css('top',windowHeight/2-250);
+		.css('top',$(window).scrollTop()+windowHeight/2-250);
 	});
 	
 	$(function(){
@@ -451,15 +455,16 @@
 	
 	//search버튼 누를시 function
 	function popupDiv(){
+		var scrollTop=$(window).scrollTop();
 		$("#home_mask").css('width',windowWidth).css('height',windowHeight)
-		.css('display','block')
+		.css('display','block').css('top',scrollTop)
 		.click(function(){
 			$(this).css('display','none');
 			$("#home_searchResult").css('display','none');
 // 			$("#home_searchResult").empty().css('display','none');
 		});
 		$("#home_searchResult").css('left',windowWidth/2-350)
-		.css('top',windowHeight/2-250).css('display','block');
+		.css('top',scrollTop+windowHeight/2-250).css('display','block');
 		$.ajax({
 			url:"${cp}/searchAuthor.json",
 			data:{
@@ -570,7 +575,7 @@
 				var cname=$(this).find('cname').text();
 				var cnamecnt=$(this).find('cnamecnt').text();
 				$("#place"+(i)).click(function(){
-					location.href="#";
+					location.href="${cp}/feedboard_selectByRegion?cname="+cname;
 				});
 				$("#place"+(i++)).append(`
 						<p>cname:`+cname+`</p><p>cnamecnt:`+cnamecnt+`</p>

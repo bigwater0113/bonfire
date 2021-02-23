@@ -18,13 +18,29 @@
 	 		로그인아이디!=작가본인 : 발행 글 노출(발행날짜 표시)
  */
 </script>
+<style>
+	.btn.btn-white.w-100{font-size:20px;font-weight:bold;}
+	.btn.btn-white.w-100.del{
+		float:left;
+		width:10%!important;
+	}
+	.btn.btn-white.w-100.write{
+		float:right;
+		width:10%!important;
+	}
+	.btn.btn-white.w-100.search{
+		float:right;
+		width:20%!important;
+	}
+	
+</style>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
-		<h2>${feedId }님의 여행게시판</h2>
+		<span style="font-size:30px;">${feedId } 님의 여행게시판</span>
 	</div>
 	<form:form method="post" onsubmit="return checkDel(event)">
 		<div id="feedboard_table">
-			<table border="1" width="800px" >
+			<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 				<tr>
 					<th>카테고리</th>
 					<th>제목</th>
@@ -54,16 +70,16 @@
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 				</c:forEach>
 			</table>
-			<div id="feedboard_editlist">
+			<div id="feedboard_editlist" style="width:900px;">
 				<c:if test="${id == feedId}">
-					<input type="submit" value="삭제" name="feedboard_deleteMine" formaction="${cp }/feedboard_deleteMyList">
-					<input type="button" value="글쓰기" name="feedboard_write" onclick="location.href='${cp}/member/feedboard_Towrite'">
+					<input type="submit" value="삭제" class="btn btn-white w-100 del" name="feedboard_deleteMine" formaction="${cp }/feedboard_deleteMyList">
+					<input type="button" value="글쓰기" class="btn btn-white w-100 write" name="feedboard_write" onclick="location.href='${cp}/member/feedboard_Towrite'">
 				</c:if>
 			</div>
 		</div>
 	</form:form>
 </div>
-	<div>
+	<div id="paging" style="width:600px;margin:auto;text-align: center;">
 	<c:if test="${pu.startPage > 10}">
          <a href="${cp }/feedboard_feed_selectAllbyId?page=${pu.startPage - 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[이전]</span> </a>
     </c:if>
@@ -80,19 +96,20 @@
 	<c:if test="${pu.endPage < pu.pageCount}">
      	<a href="${cp }/feedboard_feed_selectAllbyId?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
     </c:if>
-</div>
-<a href="${cp }/">메인페이지로</a>
-<div>
-	<form:form method="post" action="${cp }/feedboard_feed_selectAllbyId">
-		<select name="field">
-			<option value="cname" <c:if test="${field=='cname'}">selected</c:if>>지역</option>
-			<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
-			<option value="content" <c:if test="${field=='content'}">selected</c:if>>내용</option>
-			<option value="toc" <c:if test="${field=='toc'}">selected</c:if>>제목+내용</option>
-		</select>
-		<input type="text" name="keyword" value="${keyword }">
-		<input type="submit" value="검색">
-	</form:form>
+</div><br>
+<div style="width:900px;">
+	<div style="width:400px;float:right">
+		<form:form method="post" action="${cp }/feedboard_feed_selectAllbyId">
+			<select name="field" class="form-select" style="width:90px;display:inline-block;font-size:20px;font-weight:bold;">
+				<option value="cname" <c:if test="${field=='cname'}">selected</c:if>>지역</option>
+				<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
+				<option value="content" <c:if test="${field=='content'}">selected</c:if>>내용</option>
+				<option value="toc" <c:if test="${field=='toc'}">selected</c:if>>제목+내용</option>
+			</select>
+			<input type="text" name="keyword" style="width:220px;height:44px;font-size:20px;font-weight:bold;display:inline-block;" class="form-control" value="${keyword }" >
+			<input type="submit" value="검색" class="btn btn-white w-100 search">
+		</form:form>
+	</div>
 </div>
 
 <script>

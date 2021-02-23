@@ -5,43 +5,59 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
 	label{width:100px;display:inline-block;}
-	#join_form{width:280px;margin:auto;margin-top:70px;}
+	#join_form{width:400px;margin:auto;margin-top:70px;}
 	#join_form input{margin-bottom:10px;}
-	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center;
-		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;}
+	#join_form input[type="text"]{width:280px;}
+	#join_form input[type="email"]{width:280px;}
+	#join_form input[type="password"]{width:280px;}
+	#join_form input[type="date"]{width:280px;}
+/* 	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center; */
+/* 		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;} */
+	.form-control{display:inline-block;font-size:25px;}
+	.btn.btn-white.w-100{display:inline-block;font-size:25px;font-weight:bold;}
+	.btn.btn-white.w-100.zip{width:41%!important;}
+	.btn.btn-white.w-100.join{width:97%!important;}
 </style>
-<div style="width:1200px;height:530px;">
+<div style="width:1200px;height:710px;">
 	<div id="join_form">
 		<form:form method="post" action="${cp }/join" id="joinForm">
 			<label for="id">아이디</label>
-			<input type="text" name="id" id="id" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
+			<input type="text" name="id" id="id" class="form-control" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
 			<label for="pwd">비밀번호</label>
-			<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
+			<input type="password" name="pwd" id="pwd" class="form-control" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
 			<label for="check">비밀번호확인</label>
-			<input type="password" id="check" required="required"><span id="checkMsg"></span><br>
+			<input type="password" id="check" class="form-control" required="required"><span id="checkMsg"></span><br>
 			<label for="name">이름</label>
-			<input type="text" name="name" id="name" required="required"><br>
+			<input type="text" name="name" id="name" class="form-control" required="required"><br>
 			<label for="email">이메일</label>
-			<input type="email" name="email" id="email" required="required"><br>
+			<input type="email" name="email" id="email" class="form-control" required="required"><br>
 			<label for="birth">생년월일</label>
-			<input type="date" name="birth" id="birth" required="required"><br>
+			<input type="date" name="birth" id="birth" class="form-control" required="required"><br>
 			<label for="gender">성별</label>
 			남 <input type="radio" name="gender" value="M" checked>
 			여 <input type="radio" name="gender" value="W"><br>
 			<label for="phone">핸드폰번호</label>
-			<input type="text" name="phone" id="phone" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
+			<input type="text" name="phone" id="phone" class="form-control" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
 			<label for="zipNo">우편번호</label>
-			<input type="text" name="zipno" id="zipno" readonly style="width:100px" required="required">
-			<input type="button" value="주소검색" onclick="goPopup();"><br>
+			<input type="text" name="zipno" id="zipno" class="form-control" readonly style="width:110px" required="required">
+			<input type="button" class="btn btn-white w-100 zip" value="주소검색" onclick="goPopup();"><br>
 			<label for="roadfulladdr">도로명주소</label>
-			<input type="text" name="roadfulladdr" id="roadfulladdr" style="width:280px" required="required"><br>
+			<input type="text" name="roadfulladdr" id="roadfulladdr" class="form-control" style="width:280px" required="required" readonly><br>
 			<label for="addrdetail">상세주소</label>
-			<input type="text" name="addrdetail" id="addrdetail" style="width:280px" value=""><br>
-			<a href="javascript:joinForm.submit()">가입하기</a>
+			<input type="text" name="addrdetail" id="addrdetail" class="form-control" style="width:280px" value=""><br>
+			<a href="javascript:joinForm.submit()" class="btn btn-white w-100 join">가입하기</a>
 		</form:form>
 	</div>
 </div>
 <script>
+	var popupWidth = 770;
+	var popupHeight = 420;
+	
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 	$(function(){
 		var error1=0;
 		var error2=0;
@@ -134,7 +150,9 @@
 	
 	
 	function goPopup(){
-	    var pop = window.open("${pageContext.request.contextPath}/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    var pop = window.open("${pageContext.request.contextPath}/jusoPopup.jsp","pop","width=770,height=420, scrollbars=yes, resizable=yes"); 
+	    
+// 	    var pop = window.open("${pageContext.request.contextPath}/jusoPopup.jsp","pop","width=770,height=420, scrollbars=yes, resizable=yes,left="+ popupX + ", top="+ popupY); 
 	}
 	function jusoCallBack(roadAddrPart1,roadAddrPart2,zipNo){
 		$("#roadfulladdr").val(roadAddrPart1+roadAddrPart2);

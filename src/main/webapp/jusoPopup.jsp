@@ -39,7 +39,7 @@ function getAddr(){
 
 function makeListJson(jsonStr){
 	var htmlStr = "";
-	htmlStr += "<table border='1'>";
+	htmlStr += "<table border='1' class='table table-vcenter table-mobile-md card-table'>";
 	$(jsonStr.results.juso).each(function(){
 		htmlStr += "<tr>";
 		htmlStr += "<td>"+this.roadAddrPart1+this.roadAddrPart2+"</td>";
@@ -96,17 +96,49 @@ function enterSearch() {
 }
 </script>
 <title>Insert title here</title>
+<!-- 테스트용 드랍다운 -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<!--테스트용 부트스트랩 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${cp }/resources/feed.css">
+<style>
+	*{font-family: '나눔손글씨 사랑해 아들';font-size:25px;font-weight:bold;}
+	input::-webkit-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+	input:-ms-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+	.form-control{display:inline-block;font-family: '나눔손글씨 사랑해 아들';font-size:25px;
+		font-weight:bold;width:540px;margin:8px;}
+	.btn.btn-white.w-100{font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;display:inline-block;width:20%!important;position:relative;top:-5px;}
+</style>
 </head>
 <body>
-<form name="form" id="form" method="post">
-	<input type="text" name="currentPage" value="1"/> <!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
-	<input type="text" name="countPerPage" value="10"/><!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
-	<input type="text" name="resultType" value="json"/> <!-- 요청 변수 설정 (검색결과형식 설정, json) --> 
-	<input type="text" name="confmKey" value="devU01TX0FVVEgyMDIxMDIwNDIwMjUxNDExMDc4Mjk="/><!-- 요청 변수 설정 (승인키) -->
-	<input type="text" name="keyword" value="" onkeydown="enterSearch();"/><!-- 요청 변수 설정 (키워드) -->
-	<input type="button" onClick="getAddr();" value="주소검색하기"/>
-	<div id="list" ></div><!-- 검색 결과 리스트 출력 영역 -->
-</form>
+<div style="width:750px;">
+	<form name="form" id="form" method="post">
+		<input type="hidden" name="currentPage" value="1"/> <!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
+		<input type="hidden" name="countPerPage" value="10"/><!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
+		<input type="hidden" name="resultType" value="json"/> <!-- 요청 변수 설정 (검색결과형식 설정, json) --> 
+		<input type="hidden" name="confmKey" value="TESTJUSOGOKR"/><!-- 요청 변수 설정 (승인키) -->
+<!-- 		<input type="hidden" name="confmKey" value="devU01TX0FVVEgyMDIxMDIwNDIwMjUxNDExMDc4Mjk="/>요청 변수 설정 (승인키) -->
+		<input type="text" name="keyword" class="form-control" placeholder="도로명 주소 입력" value="" onkeydown="enterSearch();" /><!-- 요청 변수 설정 (키워드) -->
+		<input type="button" class="btn btn-white w-100" onClick="getAddr();" value="주소검색"/>
+		<div id="list" ></div><!-- 검색 결과 리스트 출력 영역 -->
+	</form>
+</div>
 </body>
 </html>
 						

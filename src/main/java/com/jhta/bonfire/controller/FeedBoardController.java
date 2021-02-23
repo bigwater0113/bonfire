@@ -64,7 +64,7 @@ public class FeedBoardController {
 	
 	//메인페이지 작가 전체 글목록
 	@RequestMapping("/feedboard_main_selectAll")
-	public String selectAll(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model) {
+	public String selectAll(@RequestParam(value = "page",defaultValue = "1")int page,String field,String keyword,Model model,HttpSession session) {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword",keyword);
@@ -76,6 +76,9 @@ public class FeedBoardController {
 		map.put("endRow",endRow);
 		
 		List<FeedboardVo> list=service.selectAll(map);
+		session.setAttribute("feedId", "");
+		session.setAttribute("feedRole", "");
+		session.setAttribute("proVo","");
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
 		model.addAttribute("field", field);
@@ -139,6 +142,7 @@ public class FeedBoardController {
 		List<FeedboardVo> list=service.selectByRegion(map);
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
+		model.addAttribute("cname",cname);
 		model.addAttribute("field", field);
 		model.addAttribute("keyword",keyword);
 		return ".feed.travelersboard.side.list_main";

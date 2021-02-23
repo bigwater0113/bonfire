@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- info.jsp -->
+<style>
+	.btn.btn-white.w-100{font-size:20px;font-weight:bold;}
+	.btn.btn-white.w-100.edit{
+		float:right;
+		width:10%!important;
+	}
+	.btn.btn-white.w-100.withdrawal{
+		float:right;
+		width:10%!important;
+	}
+</style>
 <div>
-	<table border="1">
+	<table border="1" class="table table-vcenter table-mobile-md card-table">
 		<tr>
 			<td>아이디</td>
 			<td>${vo.id }</td>
@@ -40,6 +51,8 @@
 			<td>${vo.addrdetail }</td>
 		</tr>
 	</table>
-	<input type="button" value="수정" onclick="location.href='${cp}/userModify'">
-	<input type="button" value="탈퇴" onclick="location.href='${cp}/withdraw'">
+	<div style="width:900px;">
+		<input type="button" value="탈퇴" onclick="location.href='${cp}/withdraw'" class="btn btn-white w-100 withdrawal">
+		<input type="button" value="수정" onclick="location.href='${cp}/userModify'" class="btn btn-white w-100 edit">
+	</div>
 </div>

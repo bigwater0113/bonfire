@@ -5,9 +5,12 @@
 <!-- travelersboard/side.jsp -->
 <style>
 	li{list-style:none;}
+	#traveler_side a{text-decoration: none;color:#bbbbbb;}
+	#traveler_side a:hover{color: black;}
+	
 </style>
-<div>
-	<h3>지역별</h3>
+<div id="traveler_side">
+	<span style="font-size:30px;position:relative;left:30px;">지역</span>
 	<ul>
 		<li><a href="${cp }/feedboard_selectByRegion?cname=서울">서울</a></li>
 		<li><a href="${cp }/feedboard_selectByRegion?cname=강원">강원</a></li>

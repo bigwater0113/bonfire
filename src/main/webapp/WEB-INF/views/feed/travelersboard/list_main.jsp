@@ -3,9 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<style>
+	.btn.btn-white.w-100{display:inline-block;font-size:22px;font-weight: bold;}
+	.btn.btn-white.w-100.all{width:13%!important;}
+	.btn.btn-white.w-100.main{width:13%!important;}
+	.btn.btn-white.w-100.search{width:20%!important;height:98%!important;}
+</style>
 <div id="feedboard_wrap">
 	<div id="feedboard_main">
-		<h2>여행자게시판</h2>
+		<span style="font-size:30px;">여행자게시판</span>
+		<c:if test="${!empty cname }">
+			<span>[ ${cname } ]</span>
+		</c:if>
 	</div>
 	<form:form method="post" onsubmit="checkDel(event)">
 		<div id="feedboard_editlist">
@@ -14,7 +23,7 @@
 			</c:if>
 		</div>
 		<div id="feedboard_table">
-			<table border="1" width="800px">
+			<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 				<tr>
 				<c:if test="${id == 'admin'}">
 					<th><input type="checkbox" id="allcheck"></th>
@@ -54,37 +63,42 @@
 		</div>
 	</form:form>
 </div>
-	<div>
-	<c:if test="${pu.startPage > 10}">
-         <a href="${cp }/feedboard_main_selectAll?page=${pu.startPage - 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[이전]</span> </a>
-    </c:if>
-	<c:forEach var="i" begin="${pu.startPage }" end="${pu.endPage }">
-		<c:choose>
-			<c:when test="${i==pu.page }">
-				<a href="${cp }/feedboard_main_selectAll?page=${i}&field=${field}&keyword=${keyword}"><span style='color:blue'>[${i }]</span></a>
-			</c:when>
-			<c:otherwise>
-				<a href="${cp }/feedboard_main_selectAll?page=${i}&field=${field}&keyword=${keyword}"><span style='color:gray'>[${i }]</span></a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	<c:if test="${pu.endPage < pu.pageCount}">
-     	<a href="${cp }/feedboard_main_selectAll?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
-    </c:if>
+<div style="width:900px;">
+	<div style="width:600px;margin:auto;text-align: center;">
+		<c:if test="${pu.startPage > 10}">
+	         <a href="${cp }/feedboard_main_selectAll?page=${pu.startPage - 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[이전]</span> </a>
+	    </c:if>
+		<c:forEach var="i" begin="${pu.startPage }" end="${pu.endPage }">
+			<c:choose>
+				<c:when test="${i==pu.page }">
+					<a href="${cp }/feedboard_main_selectAll?page=${i}&field=${field}&keyword=${keyword}"><span style='color:blue'>[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href="${cp }/feedboard_main_selectAll?page=${i}&field=${field}&keyword=${keyword}"><span style='color:gray'>[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${pu.endPage < pu.pageCount}">
+	     	<a href="${cp }/feedboard_main_selectAll?page=${pu.endPage + 1}&field=${field}&keyword=${keyword}"><span style='color:blue'>[다음]</span> </a>
+	    </c:if>
+	</div>
 </div>
-<a href="${cp }/feedboard_main_selectAll">전체글보기</a><br>
-<a href="${cp }/">메인페이지로</a>
-<div>
-	<form:form method="post" action="${cp }/feedboard_main_selectAll">
-		<select name="field">
-			<option value="id" <c:if test="${field=='id'}">selected</c:if>>작성자</option>
-			<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
-			<option value="content" <c:if test="${field=='content'}">selected</c:if>>내용</option>
-			<option value="toc" <c:if test="${field=='toc'}">selected</c:if>>제목+내용</option>
-		</select>
-		<input type="text" name="keyword" value="${keyword }">
-		<input type="submit" value="검색">
-	</form:form>
+<div style="width:900px;display:inline-block;">
+	<a href="${cp }/feedboard_main_selectAll" class="btn btn-white w-100 all">전체글보기</a>
+	<div style="float:right;">
+		<form:form method="post" action="${cp }/feedboard_main_selectAll">
+			<div  style="font-size:25px;width:400px;display:inline-block;">
+				<select name="field" class="form-select" style="width:90px;display:inline-block;font-size:20px;font-weight:bold;">
+					<option value="id" <c:if test="${field=='id'}">selected</c:if>>작성자</option>
+					<option value="title" <c:if test="${field=='title'}">selected</c:if>>제목</option>
+					<option value="content" <c:if test="${field=='content'}">selected</c:if>>내용</option>
+					<option value="toc" <c:if test="${field=='toc'}">selected</c:if>>제목+내용</option>
+				</select>
+				<input type="text" name="keyword" value="${keyword }"  style="width:217px;height:45px;font-size:20px;font-weight:bold;display:inline-block;" class="form-control">
+				<input type="submit" class="btn btn-white w-100 search" value="검색">
+			</div>
+		</form:form>
+	</div>
 </div>
 
 <script>

@@ -9,13 +9,14 @@
 		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;margin-top:10px; margin-bottom:0px;
 		box-shadow: 2px 2px 2px black;}
 	input{width:250px;height:20px;margin-bottom:5px;}
+	.form-control{height:30px;font-size:25px;}
 </style>
-<div style="width:1200px;height:400px;padding-top:200px;">
+<div style="width:1200px;height:650px;padding-top:200px;">
 	<div style="width:250px;height:150px;margin:auto;">
 		<form:form method="post" action="login" id="login_form">
 			<div style="margin-bottom:10px;">
-				<input type="text" name="username" value="${id }" id="id" required placeholder="아이디"><br>
-				<input type="password" name="password" id="pwd" required placeholder="비밀번호"><br>
+				<input type="text" class="form-control" name="username" value="${id }" id="id" required placeholder="아이디">
+				<input type="password" class="form-control" name="password" id="pwd" required placeholder="비밀번호">
 			</div>
 			<div id="login_btns">
 				<a href="javascript:login_form.submit()">로그인</a><br>

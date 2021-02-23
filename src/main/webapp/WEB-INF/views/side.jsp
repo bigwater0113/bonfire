@@ -5,10 +5,15 @@
 <!-- side.jsp -->
 <style>
 	li{list-style:none;}
+	#feed_profile{border-right:2px solid black;border-bottom:2px solid black;text-align:center;
+		border-radius: 10px;}
 	#profileImg img{width:100px;height:100px;border-radius: 50%;}
+	#feed_side_menu a{text-decoration: none; color:#bbbbbb;}
+	#feed_side_menu a:hover{color:black;}
+	
 </style>
 <div>
-	<div id="feed_profile" style="border:1px solid black;text-align:center;">
+	<div id="feed_profile">
 		<div id="profileImg">
 			<c:choose>
 				<c:when test="${proVo.pfilename!=null }">
@@ -26,10 +31,10 @@
 		<c:if test="${feedId==id }">
 			<a href="${cp }/editProfile">프로필수정</a>
 		</c:if>
-	</div>
-	<h3>메뉴</h3>
-	<ul>
+	</div><br>
+	<ul id="feed_side_menu">
 		<c:if test="${feedId==id }">
+			<li></li>
 			<li><a href="#">일기장</a></li>
 			<li><a href="${cp }/scrapboard_feed_scraplist?id=${feedId }">스크랩</a></li>
 		</c:if>

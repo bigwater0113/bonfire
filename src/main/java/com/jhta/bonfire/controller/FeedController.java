@@ -35,7 +35,7 @@ public class FeedController {
 //			model.addAttribute("feedId",feedId);
 //			model.addAttribute("feedRole",feedRole);
 			session.setAttribute("proVo",proVo);
-			return ".feed";
+			return "redirect:/feedboard_feed_selectAllbyId?id="+feedId;
 		}
 	}
 }

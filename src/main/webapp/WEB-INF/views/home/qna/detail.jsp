@@ -11,7 +11,31 @@
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <body>
-<table border="1" width="500">
+<table border="1" width="1200" class="table table-vcenter table-mobile-md card-table">
+<c:choose>
+	<c:when test="${vo.pin==1 }">
+	<tr>
+		<td>카테고리</td><td>${vo.cname }</td>
+	</tr>
+	<tr>
+		<td>작성자</td><td>관리자</td>
+	</tr>
+	<tr>
+		<td>제목</td><td>${vo.title }</td>
+	</tr>
+	<tr>
+		<td>내용</td><td><div style='width:300px;'>${vo.content }</div></td>
+	</tr>
+	<tr>
+		<td>조회수</td><td>${vo.hits }</td>
+	</tr>
+	<tr>
+		<td>작성일</td><td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
+	</tr>
+	
+	
+	</c:when>
+	<c:otherwise>
 	<tr>
 		<td>카테고리</td><td>${vo.cname }</td>
 	</tr>
@@ -25,7 +49,7 @@
 		<td>제목</td><td>${vo.title }</td>
 	</tr>
 	<tr>
-		<td>내용</td><td><div style='width:300px;height: 200px;'>${vo.content }</div></td>
+		<td>내용</td><td><div style='width:300px;'>${vo.content }</div></td>
 	</tr>
 	<tr>
 		<td>조회수</td><td>${vo.hits }</td>
@@ -33,6 +57,8 @@
 	<tr>
 		<td>작성일</td><td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.adddate }"/></td>
 	</tr>
+	</c:otherwise>
+</c:choose>
 </table>
 
 <c:if test="${sessionScope.id==vo.id || sessionScope.id=='admin'}">

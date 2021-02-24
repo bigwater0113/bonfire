@@ -35,7 +35,7 @@
 	<ul id="feed_side_menu">
 		<c:if test="${feedId==id }">
 			<li></li>
-			<li><a href="#">일기장</a></li>
+			<li><a href="${cp }/daily_main">일기장</a></li>
 			<li><a href="${cp }/scrapboard_feed_scraplist?id=${feedId }">스크랩</a></li>
 		</c:if>
 		<li><a href="${cp }/feedboard_feed_selectAllbyId?id=${feedId }">여행글</a></li>

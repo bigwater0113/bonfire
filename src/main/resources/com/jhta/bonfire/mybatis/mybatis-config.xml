@@ -29,6 +29,9 @@
   	<typeAlias type="com.jhta.bonfire.vo.AuthVo" alias="auth"/>
   	<typeAlias type="com.jhta.bonfire.vo.QnaBoardVo" alias="qnaboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.QhitsVo" alias="qhits"/>
+  	<typeAlias type="com.jhta.bonfire.vo.DfileVo" alias="dfile"/>
+  	<typeAlias type="com.jhta.bonfire.vo.DailyBoardVo" alias="dailyboard"/>
+  	<typeAlias type="com.jhta.bonfire.vo.DailyBoard_Dfile_JoinVo" alias="dailyjoin"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->
@@ -45,5 +48,6 @@
     <mapper resource="com/jhta/bonfire/mapper/MProfileMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/HomeMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/DailyBoardMapper.xml"/>
   </mappers>
 </configuration>

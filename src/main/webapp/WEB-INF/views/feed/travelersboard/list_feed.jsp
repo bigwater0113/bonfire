@@ -51,7 +51,9 @@
 						<th>스크랩</th>
 						<th>발행여부</th>
 					</c:if>
+					<c:if test="${id == feedId && feedRole == 'ROLE_ADMIN'}">
 						<th><input type="checkbox" id="allcheck"></th>
+					</c:if>
 				</tr>
 				<c:forEach var="vo" items="${list }">
 					<tr>
@@ -67,7 +69,9 @@
 									<c:if test="${vo.ispost=='-1' }">발행x</c:if>
 								</td>
 							</c:if>
-							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
+							<c:if test="${id == feedId && feedRole == 'ROLE_ADMIN'}">
+								<td><input type="checkbox" name="checkk" value=${vo.num }></td>
+							</c:if>
 				</c:forEach>
 			</table>
 			<div id="feedboard_editlist" style="width:900px;">

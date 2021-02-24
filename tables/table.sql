@@ -22,7 +22,7 @@ CREATE TABLE bmembers
 -- 권한테이블
 CREATE TABLE auth
 (
-  id        VARCHAR2(40) NOT NULL,
+  id        VARCHAR2(40) NOT NULL ON DELETE CASCADE,
   authority varchar2(40) NOT NULL,
   CONSTRAINT PK_auth PRIMARY KEY (id, authority)
 );
@@ -30,7 +30,7 @@ CREATE TABLE auth
 -- 로그인내역등록 테이블
 CREATE TABLE loginrecord
 (
-  id           VARCHAR2(40)  NOT NULL,
+  id           VARCHAR2(40)  NOT NULL ON DELETE CASCADE,
   recentaccess DATE          NOT NULL,
   fingerprint  varchar2(32) ,
   ip           varchar2(15) ,
@@ -42,7 +42,7 @@ CREATE TABLE loginrecord
 -- member프로필
 CREATE TABLE mprofile
 (
-  id        VARCHAR2(40)  NOT NULL,
+  id        VARCHAR2(40)  NOT NULL ON DELETE CASCADE,
   nickname  VARCHAR2(40) ,
   intro     VARCHAR2(200),
   follow    NUMBER(10)   ,
@@ -56,7 +56,7 @@ CREATE TABLE mprofile
 CREATE TABLE notify
 (
   idx       number(10)   NOT NULL,
-  id        VARCHAR2(40),
+  id        VARCHAR2(40) ON DELETE CASCADE,
   context   CLOB        ,
   ref       clob        ,
   sender    varchar2(20),
@@ -69,8 +69,8 @@ CREATE TABLE notify
 -- 팔로우 테이블
 CREATE TABLE follow
 (
-  id      VARCHAR2(40),
-  follow  VARCHAR2(40),
+  id      VARCHAR2(40) ON DELETE CASCADE,
+  follow  VARCHAR2(40) ON DELETE CASCADE,
   adddate date        
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE follow
 CREATE TABLE author
 (
   idx       number(10)    NOT NULL,
-  id        VARCHAR2(40) ,
+  id        VARCHAR2(40)  ON DELETE CASCADE,
   intro     VARCHAR2(200),
   theme     clob         ,
   applydate DATE          NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE cats
 CREATE TABLE dailyboard
 (
   num     number(10)    NOT NULL,
-  id      VARCHAR2(40) ,
+  id      VARCHAR2(40)  ON DELETE CASCADE,
   title   varchar2(200),
   content clob         ,
   adddate date         ,
@@ -112,7 +112,7 @@ CREATE TABLE dailyboard
 CREATE TABLE dfile
 (
   idx          number(10)    NOT NULL,
-  num          number(10)    NOT NULL,
+  num          number(10)    NOT NULL ON DELETE CASCADE,
   savefilename varchar2(200) NOT NULL,
   orgfilename  varchar2(200),
   CONSTRAINT PK_dfile PRIMARY KEY (idx, num)
@@ -124,7 +124,7 @@ CREATE TABLE dfile
 CREATE TABLE feedboard
 (
   num       number(10)    NOT NULL,
-  id        VARCHAR2(40) ,
+  id        VARCHAR2(40)  ON DELETE CASCADE,
   title     VARCHAR2(200),
   content   clob         ,
   recommend number(10)   ,
@@ -133,15 +133,15 @@ CREATE TABLE feedboard
   ispost    number(1)    ,
   postdate  DATE         ,
   adddate   DATE         ,
-  cname     VARCHAR2(40) ,
+  cname     VARCHAR2(40) ON DELETE CASCADE,
   CONSTRAINT PK_feedboard PRIMARY KEY (num)
 );
 
 -- 스크랩 게시판
 CREATE TABLE scrapboard
 (
-  id      VARCHAR2(40) NOT NULL,
-  num     number(10)   NOT NULL,
+  id      VARCHAR2(40) NOT NULL ON DELETE CASCADE,
+  num     number(10)   NOT NULL ON DELETE CASCADE,
   adddate DATE        ,
   CONSTRAINT PK_scrapboard PRIMARY KEY (id, num)
 );
@@ -150,8 +150,8 @@ CREATE TABLE scrapboard
 CREATE TABLE fbcomment
 (
   idx     NUMBER(10)   NOT NULL,
-  num     number(10)  ,
-  id      VARCHAR2(40),
+  num     number(10)   ON DELETE CASCADE,
+  id      VARCHAR2(40) ON DELETE CASCADE,
   content clob        ,
   adddate DATE        ,
   CONSTRAINT PK_fbcomment PRIMARY KEY (idx)
@@ -162,7 +162,7 @@ CREATE TABLE fbcomment
 CREATE TABLE fbfiles
 (
   idx          number(10)    NOT NULL,
-  num          number(10)    NOT NULL,
+  num          number(10)    NOT NULL ON DELETE CASCADE,
   savefilename varchar2(200) NOT NULL,
   orgfilename  varchar2(200),
   CONSTRAINT PK_fbfiles PRIMARY KEY (idx, num)
@@ -171,23 +171,17 @@ CREATE TABLE fbfiles
 -- 여행기록 조회수
 CREATE TABLE fbhits
 (
-  num number(10)   NOT NULL,
-  id  VARCHAR2(40),
+  num number(10)   NOT NULL ON DELETE CASCADE,
+  id  VARCHAR2(40) ON DELETE CASCADE,
   CONSTRAINT PK_fbhits PRIMARY KEY (num, id)
 );
--- CREATE TABLE fbhits
--- (
---   idx number(10)   NOT NULL,
---   num number(10)   NOT NULL,
---   id  VARCHAR2(40),
---   CONSTRAINT PK_fbhits PRIMARY KEY (idx, num)
--- );
+
 
 -- 여행기록 추천
 CREATE TABLE recomm
 (
-  num     number(10)   NOT NULL,
-  id      VARCHAR2(40) NOT NULL,
+  num     number(10)   NOT NULL ON DELETE CASCADE,
+  id      VARCHAR2(40) NOT NULL ON DELETE CASCADE,
   value   number(1)   NOT NULL,
   adddate DATE        ,
   CONSTRAINT PK_recomm PRIMARY KEY (num,id,adddate)
@@ -199,13 +193,13 @@ CREATE TABLE recomm
 CREATE TABLE qnaboard
 (
   num      number(10)    NOT NULL,
-  id       VARCHAR2(40) ,
+  id       VARCHAR2(40)  ON DELETE CASCADE,
   title    VARCHAR2(200),
   content  clob         ,
   adddate  DATE         ,
   hits     number(10)   ,
   comments clob         ,
-  cname    VARCHAR2(40) ,
+  cname    VARCHAR2(40)  ON DELETE CASCADE,
   pwd	   VARCHAR2(25) ,
 
   pin	   number(1) default 0 not null,
@@ -217,7 +211,7 @@ CREATE TABLE qnaboard
 CREATE TABLE qfile
 (
   idx          number(10)    NOT NULL,
-  num          number(10)    NOT NULL,
+  num          number(10)    NOT NULL ON DELETE CASCADE,
   savefilename varchar2(200) NOT NULL,
   orgfilename  varchar2(200),
   CONSTRAINT PK_qfile PRIMARY KEY (idx, num)
@@ -226,8 +220,8 @@ CREATE TABLE qfile
 -- 문의게시판 조회수
 CREATE TABLE qhits
 (
-  num  number(10)   NOT NULL,
-  id  VARCHAR2(40)  NOT NULL,
+  num  number(10)   NOT NULL ON DELETE CASCADE,
+  id  VARCHAR2(40)  NOT NULL ON DELETE CASCADE,
   CONSTRAINT PK_qhits PRIMARY KEY (num, id)
 );
 
@@ -237,21 +231,21 @@ CREATE TABLE qhits
 CREATE TABLE subscriberboard
 (
   num       number(10)    NOT NULL,
-  id        VARCHAR2(40) ,
+  id        VARCHAR2(40)  ON DELETE CASCADE,
   title     VARCHAR2(200),
   content   clob         ,
   adddate   DATE         ,
   recommend number(10)   ,
   hits      number(10)   ,
-  cname     VARCHAR2(40) ,
+  cname     VARCHAR2(40)  ON DELETE CASCADE,
   CONSTRAINT PK_subscriberboard PRIMARY KEY (num)
 );
 
 -- 구독자게시판 조회수
 CREATE TABLE sbhits
 (
-  num  number(10)   NOT NULL,
-  id  VARCHAR2(40)  NOT NULL,
+  num  number(10)   NOT NULL ON DELETE CASCADE,
+  id  VARCHAR2(40)  NOT NULL ON DELETE CASCADE,
   CONSTRAINT PK_sbhits PRIMARY KEY (num, id)
 );
 
@@ -260,8 +254,8 @@ CREATE TABLE sbhits
 CREATE TABLE scomment
 (
   idx     number(10)   NOT NULL,
-  num    number(10)   NOT NULL,
-  id      VARCHAR2(40),
+  num    number(10)   NOT NULL ON DELETE CASCADE,
+  id      VARCHAR2(40) ON DELETE CASCADE,
   content clob        ,
   adddate date        ,
   CONSTRAINT PK_scomment PRIMARY KEY (idx, num)
@@ -270,8 +264,8 @@ CREATE TABLE scomment
 -- 구독자게시판 추천
 CREATE TABLE srecomm
 (
-  num     number(10)   NOT NULL,
-  id      VARCHAR2(40) NOT NULL,
+  num     number(10)   NOT NULL ON DELETE CASCADE,
+  id      VARCHAR2(40) NOT NULL ON DELETE CASCADE,
   value   number(1)   NOT NULL,
   adddate date        ,
   CONSTRAINT PK_srecomm PRIMARY KEY (num, id, value)
@@ -281,7 +275,7 @@ CREATE TABLE srecomm
 CREATE TABLE sfiles
 (
   idx          number(10)    NOT NULL,
-  num          number(10)    NOT NULL,
+  num          number(10)    NOT NULL ON DELETE CASCADE,
   savefilename varchar2(200) NOT NULL,
   orgfilename  varchar2(200),
   CONSTRAINT PK_sfiles PRIMARY KEY (idx, num)

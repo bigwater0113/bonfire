@@ -10,6 +10,8 @@ insert into cats values('전북', 'feedboard');
 insert into cats values('제주', 'feedboard');
 insert into cats values('공지', 'qnaboard');
 insert into cats values('사이트', 'qnaboard');
+insert into cats values('작가문의', 'qnaboard');
+insert into cats values('일반문의', 'qnaboard');
 insert into cats values('자주묻는질문', 'qnaboard');
 insert into cats values('질문', 'subscriberboard');
 insert into cats values('동행', 'subscriberboard');

@@ -4,6 +4,7 @@
 <!-- home.jsp -->
 <div>
     <h1>main test 하이하이</h1>
+	<a href="${cp}/maptest">지도보기</a>
 </div>
 <script>
 	$(function(){

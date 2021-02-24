@@ -21,6 +21,9 @@
   	<typeAlias type="com.jhta.bonfire.vo.AuthVo" alias="auth"/>
   	<typeAlias type="com.jhta.bonfire.vo.QnaBoardVo" alias="qnaboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.QhitsVo" alias="qhits"/>
+  	<typeAlias type="com.jhta.bonfire.vo.TripPlanVo" alias="tripplan"/>
+  	<!-- <typeAlias type="com.jhta.bonfire.vo.geoJsonVo" alias="geojson"/> -->
+  	<typeAlias type="com.jhta.bonfire.vo.LocalMapVo" alias="localmap"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->
@@ -34,5 +37,7 @@
     <mapper resource="com/jhta/bonfire/mapper/FeedboardMapper.xml"/>
     <mapper resource="com/jhta/bonfire/mapper/BMembersMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/LocalMapMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/TripPlanMapper.xml"/>
   </mappers>
 </configuration>

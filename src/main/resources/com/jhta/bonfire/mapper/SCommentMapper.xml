@@ -17,7 +17,8 @@
     <resultMap id="scommDetail" type="scommDetail">
         <result column="value" property="value"/>
         <association property="scommentVo" resultMap="scommentVo"></association>
-    </resultMap> -->
+    </resultMap> 
+-->
         <!-- <collection property="value" resultMap="int"></collection> -->
 
 

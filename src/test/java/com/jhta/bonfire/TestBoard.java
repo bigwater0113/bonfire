@@ -226,23 +226,23 @@ public class TestBoard {
     // #endregion
     // conn.setRequestProperty("Authorization", "KakaoAK " + this.adminKey);
     @Test
-    public void kakaomaptest() {
+    public void kakaoMapTestCategoryAndKeyword() {
         // String httpUrl = "https://httpbin.org/get";
         String httpUrl = "https://dapi.kakao.com/v2/local/search/keyword.json";
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(30000);
-        DefaultResponseErrorHandler errorHandler = new DefaultResponseErrorHandler(){
-            public boolean hasError(ClientHttpResponse response) throws IOException {
-                HttpStatus statusCode=response.getStatusCode();
-                return statusCode.series()==HttpStatus.Series.SERVER_ERROR;
-                //에러나면 true 아니면 false 리턴
-            }
-        };
-        //이게 없으면 401에러가 뜸.
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(requestFactory);
-        restTemplate.setErrorHandler(errorHandler);
-
+        //이게 없으면 401에러가 뜸.
+        // HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        // requestFactory.setConnectTimeout(30000);
+        // DefaultResponseErrorHandler errorHandler = new DefaultResponseErrorHandler(){
+        //     public boolean hasError(ClientHttpResponse response) throws IOException {
+        //         HttpStatus statusCode=response.getStatusCode();
+        //         return statusCode.series()==HttpStatus.Series.SERVER_ERROR;
+        //         //에러나면 true 아니면 false 리턴
+        //     }
+        // };
+        // restTemplate.setRequestFactory(requestFactory);
+        // restTemplate.setErrorHandler(errorHandler);
+        // 아님말고..
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         // 동일한 key를 가진 여러 value들이 존재할 수 있는 Map
@@ -257,7 +257,9 @@ public class TestBoard {
         params.add("query", "밥");
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(httpUrl).queryParams(params);
         URI uri = builder.build().encode().toUri();
+        //get 요청을 URL로 변환함
         logger.info("URI:----------------------------\n"+uri.toString());
+        //CURL에서 Http 인증에 사용할 헤더를 만듬. curl -H 이후에 들어가는 파라미터
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK "+"ddc296c2f9f2c09e7b1c05df318b9cb0");
         HttpEntity entity = new HttpEntity<>(headers);
@@ -270,4 +272,44 @@ public class TestBoard {
 curl -X GET "https://dapi.kakao.com/v2/local/search/keyword.json?page=1&size=15&sort=distance&radius=2000&x=126.978734&y=37.494301&category_group_code=FD6&query=%EB%B0%A5" \
 -H "Authorization: KakaoAK ddc296c2f9f2c09e7b1c05df318b9cb0"
     */
+    @Test public void kakaoCoord2Address(){
+        String httpUrl = "https://dapi.kakao.com/v2/local/geo/coord2address.json";
+        RestTemplate restTemplate = new RestTemplate();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("x", "126.978734");
+        params.add("y", "37.494301");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(httpUrl).queryParams(params);
+        URI uri = builder.build().encode().toUri();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "KakaoAK "+"ddc296c2f9f2c09e7b1c05df318b9cb0");
+        HttpEntity entity = new HttpEntity<>(headers);
+
+        ResponseEntity<JSONObject> result = restTemplate.exchange(uri, HttpMethod.GET, entity, JSONObject.class);
+        logger.info(result.getBody().toJSONString());
+    }
+
+    @Test public void kakaoAddress2Coord(){
+        String httpUrl = "https://dapi.kakao.com/v2/local/search/address.json";
+        RestTemplate restTemplate = new RestTemplate();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("query", "서울 종로구 율곡로10길 105");
+        params.add("page", "1");
+        params.add("size", "10");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(httpUrl).queryParams(params);
+        URI uri = builder.build().encode().toUri();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "KakaoAK "+"ddc296c2f9f2c09e7b1c05df318b9cb0");
+        HttpEntity entity = new HttpEntity<>(headers);
+
+        ResponseEntity<JSONObject> result = restTemplate.exchange(uri, HttpMethod.GET, entity, JSONObject.class);
+        logger.info(result.getBody().toJSONString());
+    }
+    @Test public void testMap(){
+        Map<String, Object> geometry= new HashMap<>();
+        int[] a = {1, 2};
+        geometry.put("type", "value");
+        geometry.put("coordinates", a);
+        logger.info("tostring", geometry.get("type"));
+        logger.info("geometryget", geometry.get("coordinates"));
+    }
 }

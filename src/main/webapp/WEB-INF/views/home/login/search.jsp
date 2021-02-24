@@ -6,32 +6,45 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <style>
-	label{width:100px;display:inline-block;}
-	#search_left{width:600px;float:left;}
-	#search_right{width:600px;float:right;}
+	#searchApp{padding-top:130px;}
+	#left_title{font-size:30px;font-weight: bold;border-bottom: 2px double;margin-bottom:10px;}
+	#right_title{font-size:30px;font-weight: bold;border-bottom: 2px double;margin-bottom:10px;}
+	#search_left{width:600px;height:500px;float:left;border-right: dotted;}
+	#search_right{width:600px;height:500px;float:right;}
+	#left_in{width:300px;margin:auto;}
+	#right_in{width:300px;margin:auto;}
+	.form-control{font-size:25px;font-weight: bold;}
+	input{margin-top:10px;margin-bottom:10px;}
+	.btn.btn-white.w-100{font-size:25px;font-weight: bold;}
 </style>
 <div id="searchApp">
 	<div id="search_left">
-		<label for="id_name">이름</label><input type="text" id="id_name" v-model="id_name"><br>
-		<label for="id_email">이메일</label><input type="email" id="id_email" v-model="id_email"><br>
-		<button @click="searchId">아이디 찾기</button>
-		<br><br>
-		<div >
-			{{idMsg}}<br>
-			<button @click="loginPage" v-show="id_show">로그인 페이지</button>
+		<div id="left_in">
+			<span id="left_title">아이디 찾기</span><br>
+			<input type="text" id="id_name" v-model="id_name" placeholder="name" class="form-control">
+			<input type="email" id="id_email" v-model="id_email" placeholder="email" class="form-control">
+			<button @click="searchId" class="btn btn-white w-100">아이디 찾기</button>
+			<br><br>
+			<div >
+				{{idMsg}}<br>
+				<button @click="loginPage" v-show="id_show" class="btn btn-white w-100">로그인 페이지</button>
+			</div>
 		</div>
 	</div>
 	<div id="search_right">
-		<label for="pwd_id">아이디</label><input type="text" id="pwd_id" v-model="pwd_id"><br>
-		<label for="pwd_name">이름</label><input type="text" id="pwd_name"v-model="pwd_name"><br>
-		<label for="pwd_email">이메일</label><input type="email" id="pwd_email"v-model="pwd_email"><br>
-		<button @click="searchPwd">비밀번호 찾기</button>
-		<br><br>
-		<div>
-			{{pwdMsg}}<br>
-			<input type="text" v-model="codeNum"  v-show="pwd_show">
-			<span v-show="pwd_show">{{mm}}:{{ss}}</span>
-			<button @click="goEditPwd" v-show="pwd_show">비밀번호 변경</button>
+		<div id="right_in">
+			<span id="right_title">비밀번호 찾기</span><br>
+			<input type="text" id="pwd_id" v-model="pwd_id" placeholder="id" class="form-control">
+			<input type="text" id="pwd_name"v-model="pwd_name" placeholder="name" class="form-control">
+			<input type="email" id="pwd_email"v-model="pwd_email" placeholder="email" class="form-control">
+			<button @click="searchPwd" class="btn btn-white w-100">비밀번호 찾기</button>
+			<br><br>
+			<div>
+				{{pwdMsg}}<br>
+				<input type="text" v-model="codeNum"  v-show="pwd_show">
+				<span v-show="pwd_show">{{mm}}:{{ss}}</span>
+				<button @click="goEditPwd" v-show="pwd_show" class="btn btn-white w-100">비밀번호 변경</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -40,7 +53,7 @@
 		el:'#searchApp', 
 		data:{ 
 			idMsg:'',
-			pwdMsg:'test',
+			pwdMsg:'',
 			id_show:false,
 			pwd_show:false,
 			id_name:'',
@@ -48,7 +61,7 @@
 			pwd_id:'test',
 			pwd_name:'윤태수',
 			pwd_email:'xotnwnl@naver.com',
-			timer:125,
+			timer:300,
 			mm:0,
 			ss:0,
 			codeNum:'',

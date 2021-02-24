@@ -10,7 +10,7 @@
 		a.authority,m.nickname,m.intro,m.pfilename,m.bfilename
 		from bmembers b full outer join auth a on b.id=a.id 
 		full outer join mprofile m on m.id=b.id
-		where authority='ROLE_MEMBER'
+		where authority='ROLE_AUTHOR'
 		)
 	</select>
 	<select id="select" resultType="recommauthor" parameterType="int">
@@ -21,7 +21,7 @@
 			from bmembers b 
 			full outer join auth a on b.id=a.id 
 			full outer join mprofile m on m.id=b.id
-			<![CDATA[ where authority='ROLE_MEMBER' and rownum<=#{selectAuthor}  ]]>
+			<![CDATA[ where authority='ROLE_AUTHOR' and rownum<=#{selectAuthor}  ]]>
 			order by rownum desc
 		)
 		where rownum=1
@@ -62,7 +62,7 @@
 		    from bmembers b
 		    join auth a on b.id=a.id
 		    join mprofile m on b.id=m.id
-		    where a.authority='ROLE_MEMBER'
+		    where a.authority='ROLE_AUTHOR'
 		    	and (b.id like '%'||#{keyword}||'%' or m.nickname like '%'||#{keyword}||'%')
 		)
 	</select>
@@ -74,7 +74,7 @@
 		        from bmembers b
 		        join auth a on b.id=a.id
 		        join mprofile m on b.id=m.id
-		        where a.authority='ROLE_MEMBER'
+		        where a.authority='ROLE_AUTHOR'
 		    		and (b.id like '%'||#{keyword}||'%' or m.nickname like '%'||#{keyword}||'%')
 		       ) a
 		    )

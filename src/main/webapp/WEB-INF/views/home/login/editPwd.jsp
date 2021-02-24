@@ -4,24 +4,35 @@
     <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- editPwd -->
-
-<div>
-<input type="hidden" id="error" value="${error }">
-	<form:form method="post" action="${cp }/editPwd">
-		<sec:authorize access="isAnonymous()">
-			<label for="id">아이디</label>
-			<input type="text" name="id" id="id" value="${searchId }"><br>
-		</sec:authorize>
-		<sec:authorize access="isAuthenticated()">
-			<label for="rawPwd">기존 비밀번호</label>
-			<input type="password" name="rawPwd" id="rawPwd"><br>
-		</sec:authorize>
-		<label for="pwd">변경할 비밀번호</label>
-		<input type="password" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
-		<label for="check">변경할 비밀번호확인</label>
-		<input type="password" id="check" required="required"><span id="checkMsg"></span><br>
-		<input type="submit" value="확인">
-	</form:form>
+<style>
+	#editPwd_wrap{width:1200px;height:600px;}
+	#editPwd_form{width:400px;margin:auto;margin-top:50px;}
+	#editPwd_span{font-size:30px;font-weight: bold;border-bottom: double;}
+	label{display: inline-block;width:150px;}
+	.form-control{font-size:25px;font-weight: bold;}
+	input{margin-top:10px;margin-bottom:10px;}
+	.btn.btn-white.w-100{font-size:25px;font-weight: bold;}
+</style>
+<div id="editPwd_wrap">
+	<div id="editPwd_form">
+		<span id="editPwd_span">비밀변호 변경</span><br><br>
+		<input type="hidden" id="error" value="${error }">
+		<form:form method="post" action="${cp }/editPwd">
+			<sec:authorize access="isAnonymous()">
+				<label for="id">아이디</label>
+				<input type="text" class="form-control" name="id" id="id" value="${searchId }" readonly>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<label for="rawPwd">기존 비밀번호</label>
+				<input type="password" class="form-control" name="rawPwd" id="rawPwd">
+			</sec:authorize>
+			<label for="pwd">변경할 비밀번호</label><span id="pwdMsg"></span>
+			<input type="password" class="form-control" name="pwd" id="pwd" required="required" placeholder="영문/숫자 4~8자리">
+			<label for="check">변경할 비밀번호확인</label><span id="checkMsg"></span>
+			<input type="password" class="form-control" id="check" required="required"><br>
+			<input type="submit" class="btn btn-white w-100" value="확인">
+		</form:form>
+	</div>
 </div>
 <script>
 	$(function(){

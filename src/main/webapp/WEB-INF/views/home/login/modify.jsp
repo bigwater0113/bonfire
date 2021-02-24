@@ -93,7 +93,7 @@
 	
 	
 	function goPopup(){
-	    var pop = window.open("${pageContext.request.contextPath}/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    var pop = window.open("${pageContext.request.contextPath}/jusoPopup.jsp","pop","width=770,height=420, scrollbars=yes, resizable=yes"); 
 	}
 	function jusoCallBack(roadAddrPart1,roadAddrPart2,zipNo){
 		$("#roadfulladdr").val(roadAddrPart1+roadAddrPart2);

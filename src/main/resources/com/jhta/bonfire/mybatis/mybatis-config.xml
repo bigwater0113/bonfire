@@ -32,6 +32,9 @@
   	<typeAlias type="com.jhta.bonfire.vo.DfileVo" alias="dfile"/>
   	<typeAlias type="com.jhta.bonfire.vo.DailyBoardVo" alias="dailyboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.DailyBoard_Dfile_JoinVo" alias="dailyjoin"/>
+  	<typeAlias type="com.jhta.bonfire.vo.TripPlanVo" alias="tripplan"/>
+  	<!-- <typeAlias type="com.jhta.bonfire.vo.geoJsonVo" alias="geojson"/> -->
+  	<typeAlias type="com.jhta.bonfire.vo.LocalMapVo" alias="localmap"/>
   </typeAliases>
   <mappers>
   	<!-- 읽어올 Mapper파일 설정 -->
@@ -49,5 +52,7 @@
     <mapper resource="com/jhta/bonfire/mapper/HomeMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/QnaBoardMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/DailyBoardMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/LocalMapMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/TripPlanMapper.xml"/>
   </mappers>
 </configuration>

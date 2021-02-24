@@ -14,7 +14,7 @@ import com.jhta.bonfire.vo.QnaBoardVo;
 public class QnaBoardDao {
 	@Autowired private SqlSession sqlSession;
 	
-	private static String NAMESPACE="com.jhta.bonfire.mapper.QnaBoardMapper";
+	private static final String NAMESPACE="com.jhta.bonfire.mapper.QnaBoardMapper";
 	public int insert(QnaBoardVo vo) {
 		return sqlSession.insert(NAMESPACE +".insert",vo);
 	}

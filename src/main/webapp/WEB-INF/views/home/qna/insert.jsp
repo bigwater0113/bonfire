@@ -20,25 +20,44 @@
 <body>
 <h1>글등록</h1>
 <form:form id="write" action="${cp }/qna/insert" method="post">
+<c:choose>
+<c:when test="${sessionScope.id=='admin'}">
 	문의유형
+	<select name="cname">
+		<option value="공지사항">공지사항</option>
+	</select><br>
+	</c:when>
+	<c:otherwise>
+		문의유형
 	<select name="cname">
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
-	</select><br><br>
+	</select><br>
+	</c:otherwise>
+</c:choose>
 <c:if test="${sessionScope.id=='admin'}">
-	<input type="checkbox" name="pin1" checked="checked">공지사항<br><br>
+	<input type="checkbox" name="pin1" checked="checked">공지사항<br>
 </c:if>	
-	작성자<br>
+	작성자:
 	<span>${sessionScope.id}</span><br>
-	<input type="hidden" name="id" value="${sessionScope.id}"><br>
+	<input type="hidden" name="id" value="${sessionScope.id}">
 	제목<br>
 	<input type="text" name="title"><br>
 	내용<br>
  	<textarea name="content" id="summernote"></textarea><br>
- 	<input type="checkbox" name="secret1">비밀글 여부<br><br>
+<c:choose>
+	<c:when test="${sessionScope.id=='admin'}">
+	<input type="hidden" name="secret1">
+	<input type="hidden" name="pwd">
+	</c:when>
+	<c:otherwise>
+ 	<input type="checkbox" name="secret1">비밀글 여부<br>
 	비밀번호<br>
 	<input type="password" name="pwd"><br>
+</c:otherwise>
+</c:choose>	
 	<input type="submit" value="등록">
+
 </form:form>
         <script>
         let fileName=[];
@@ -56,7 +75,7 @@
 
         $(document).ready(function() {
             $('#summernote').summernote({
-                height: 200,                 // 에디터 높이
+                height: 300,                 // 에디터 높이
                 minHeight: null,             // 최소 높이
                 maxHeight: null,             // 최대 높이
                 focus: true,				 // 처음 사이트들어왔을때 summernote에 focus를 준다. 커서 깜빡임.

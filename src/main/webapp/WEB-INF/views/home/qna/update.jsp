@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>         
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,19 +21,23 @@
 <form:form id="write" action="${cp }/qna/update" method="post">
 글번호<br>
 <input type="text" name="num" value="${vo.num }" readonly="readonly"><br>
+<c:if test="${sessionScope.id!='admin'}">
 문의유형<br>
 	<select name="cname">
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
 	</select><br>
+</c:if>	
 작성자<br>
-<input type="text" name="id" value="${vo.id }"><br>
+<input type="text" name="id" value="${vo.id }" readonly="readonly"><br>
 제목<br>
 <input type="text" name="title" value="${vo.title }"><br>
 내용<br>
 <textarea rows="5" cols="50" name="content" id="summernote">${vo.content }</textarea><br>
+ <c:if test="${sessionScope.id!='admin'}">	
 비밀번호<br>
 <input type="password" name="pwd"><br>
+</c:if>
 <input type="submit" value="등록">
 
 </form:form>

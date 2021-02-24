@@ -10,7 +10,7 @@
   			and ${field} like '%'||#{keyword}||'%'
   		</if>
 		<if test="field=='toc'">
-  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  			and (title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%')
   		</if>
 	</sql>
 	
@@ -19,6 +19,7 @@
 		where ispost=1
 		<include refid="search1"/>
 	</select>
+	
 	<select id="selectAll" resultType="feedboard" parameterType="hashmap">
 		select * from
 		(
@@ -39,7 +40,7 @@
   			and ${field} like '%'||#{keyword}||'%'
   		</if>
 		<if test="field=='toc'">
-  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  			and (title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%')
   		</if>
 	</sql>
 	
@@ -68,7 +69,7 @@
   			and ${field} like '%'||#{keyword}||'%'
   		</if>
 		<if test="field=='toc'">
-  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  			and (title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%')
   		</if>
 	</sql>
 	
@@ -98,7 +99,7 @@
   			and ${field} like '%'||#{keyword}||'%'
   		</if>
 		<if test="field=='toc'">
-  			and title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+  			and (title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%')
   		</if>
 	</sql>
 	

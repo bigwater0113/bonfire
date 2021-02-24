@@ -47,7 +47,7 @@ public class FeedboardDao {
 		return session.selectOne(NAMESPACE+".count",map);
 	}
 	
-	//피드 - 작가 모든 글
+	//피드 - 작가 모든 글(본인)
 	public List<FeedboardVo> selectAllbyId(HashMap<String,Object> map){
 		return session.selectList(NAMESPACE+".selectAllbyId",map);
 	}

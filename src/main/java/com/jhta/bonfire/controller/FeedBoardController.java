@@ -68,6 +68,7 @@ public class FeedBoardController {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("field", field);
 		map.put("keyword",keyword);
+		
 		int listCount=service.count(map);
 		PageUtil pu=new PageUtil(page, 10, 10, listCount);
 		int startRow=pu.getStartRow();

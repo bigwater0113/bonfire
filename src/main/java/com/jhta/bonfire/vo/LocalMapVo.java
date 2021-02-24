@@ -2,20 +2,37 @@ package com.jhta.bonfire.vo;
 
 public class LocalMapVo {
     private String type;
-    private String geometrytype;
-    private double geometrycoordinateslng;
-    private double geometrycoordinatesLat;
-    private String propertiesaddress_name;
-    private String propertiescategory_group_code;
-    private String propertiescategory_group_name;
-    private String propertiescategory_name;
-    private int propertiesdistance;
-    private int propertiesid;
-    private String propertiesphone;
-    private String propertiesplace_name;
-    private String propertiesplace_url;
-    private String propertiesroad_address_name;
+    private String g_type;
+    private String g_coordinateslng;
+    private String g_coordinatesLat;
+    private String p_address_name;
+    private String p_category_group_code;
+    private String p_category_group_name;
+    private String p_category_name;
+    private String p_id;
+    private String p_phone;
+    private String p_place_name;
+    private String p_place_url;
+    private String p_road_address_name;
 
+    public LocalMapVo(String type, String g_type, String g_coordinateslng, String g_coordinatesLat, String p_address_name, String p_category_group_code, String p_category_group_name, String p_category_name, String p_id, String p_phone, String p_place_name, String p_place_url, String p_road_address_name) {
+        this.type = type;
+        this.g_type = g_type;
+        this.g_coordinateslng = g_coordinateslng;
+        this.g_coordinatesLat = g_coordinatesLat;
+        this.p_address_name = p_address_name;
+        this.p_category_group_code = p_category_group_code;
+        this.p_category_group_name = p_category_group_name;
+        this.p_category_name = p_category_name;
+        this.p_id = p_id;
+        this.p_phone = p_phone;
+        this.p_place_name = p_place_name;
+        this.p_place_url = p_place_url;
+        this.p_road_address_name = p_road_address_name;
+    }
+
+    public LocalMapVo() {
+    }
 
     public String getType() {
         return this.type;
@@ -25,128 +42,100 @@ public class LocalMapVo {
         this.type = type;
     }
 
-    public String getGeometrytype() {
-        return this.geometrytype;
+    public String getG_type() {
+        return this.g_type;
     }
 
-    public void setGeometrytype(String geometrytype) {
-        this.geometrytype = geometrytype;
+    public void setG_type(String g_type) {
+        this.g_type = g_type;
     }
 
-    public double getGeometrycoordinateslng() {
-        return this.geometrycoordinateslng;
+    public String getG_coordinateslng() {
+        return this.g_coordinateslng;
     }
 
-    public void setGeometrycoordinateslng(double geometrycoordinateslng) {
-        this.geometrycoordinateslng = geometrycoordinateslng;
+    public void setG_coordinateslng(String g_coordinateslng) {
+        this.g_coordinateslng = g_coordinateslng;
     }
 
-    public double getGeometrycoordinatesLat() {
-        return this.geometrycoordinatesLat;
+    public String getG_coordinatesLat() {
+        return this.g_coordinatesLat;
     }
 
-    public void setGeometrycoordinatesLat(double geometrycoordinatesLat) {
-        this.geometrycoordinatesLat = geometrycoordinatesLat;
+    public void setG_coordinatesLat(String g_coordinatesLat) {
+        this.g_coordinatesLat = g_coordinatesLat;
     }
 
-    public String getPropertiesaddress_name() {
-        return this.propertiesaddress_name;
+    public String getP_address_name() {
+        return this.p_address_name;
     }
 
-    public void setPropertiesaddress_name(String propertiesaddress_name) {
-        this.propertiesaddress_name = propertiesaddress_name;
+    public void setP_address_name(String p_address_name) {
+        this.p_address_name = p_address_name;
     }
 
-    public String getPropertiescategory_group_code() {
-        return this.propertiescategory_group_code;
+    public String getP_category_group_code() {
+        return this.p_category_group_code;
     }
 
-    public void setPropertiescategory_group_code(String propertiescategory_group_code) {
-        this.propertiescategory_group_code = propertiescategory_group_code;
+    public void setP_category_group_code(String p_category_group_code) {
+        this.p_category_group_code = p_category_group_code;
     }
 
-    public String getPropertiescategory_group_name() {
-        return this.propertiescategory_group_name;
+    public String getP_category_group_name() {
+        return this.p_category_group_name;
     }
 
-    public void setPropertiescategory_group_name(String propertiescategory_group_name) {
-        this.propertiescategory_group_name = propertiescategory_group_name;
+    public void setP_category_group_name(String p_category_group_name) {
+        this.p_category_group_name = p_category_group_name;
     }
 
-    public String getPropertiescategory_name() {
-        return this.propertiescategory_name;
+    public String getP_category_name() {
+        return this.p_category_name;
     }
 
-    public void setPropertiescategory_name(String propertiescategory_name) {
-        this.propertiescategory_name = propertiescategory_name;
+    public void setP_category_name(String p_category_name) {
+        this.p_category_name = p_category_name;
     }
 
-    public int getPropertiesdistance() {
-        return this.propertiesdistance;
+    public String getP_id() {
+        return this.p_id;
     }
 
-    public void setPropertiesdistance(int propertiesdistance) {
-        this.propertiesdistance = propertiesdistance;
+    public void setP_id(String p_id) {
+        this.p_id = p_id;
     }
 
-    public int getPropertiesid() {
-        return this.propertiesid;
+    public String getP_phone() {
+        return this.p_phone;
     }
 
-    public void setPropertiesid(int propertiesid) {
-        this.propertiesid = propertiesid;
+    public void setP_phone(String p_phone) {
+        this.p_phone = p_phone;
     }
 
-    public String getPropertiesphone() {
-        return this.propertiesphone;
+    public String getP_place_name() {
+        return this.p_place_name;
     }
 
-    public void setPropertiesphone(String propertiesphone) {
-        this.propertiesphone = propertiesphone;
+    public void setP_place_name(String p_place_name) {
+        this.p_place_name = p_place_name;
     }
 
-    public String getPropertiesplace_name() {
-        return this.propertiesplace_name;
+    public String getP_place_url() {
+        return this.p_place_url;
     }
 
-    public void setPropertiesplace_name(String propertiesplace_name) {
-        this.propertiesplace_name = propertiesplace_name;
+    public void setP_place_url(String p_place_url) {
+        this.p_place_url = p_place_url;
     }
 
-    public String getPropertiesplace_url() {
-        return this.propertiesplace_url;
+    public String getP_road_address_name() {
+        return this.p_road_address_name;
     }
 
-    public void setPropertiesplace_url(String propertiesplace_url) {
-        this.propertiesplace_url = propertiesplace_url;
+    public void setP_road_address_name(String p_road_address_name) {
+        this.p_road_address_name = p_road_address_name;
     }
 
-    public String getPropertiesroad_address_name() {
-        return this.propertiesroad_address_name;
-    }
-
-    public void setPropertiesroad_address_name(String propertiesroad_address_name) {
-        this.propertiesroad_address_name = propertiesroad_address_name;
-    }
-
-    public LocalMapVo(String type, String geometrytype, double geometrycoordinateslng, double geometrycoordinatesLat, String propertiesaddress_name, String propertiescategory_group_code, String propertiescategory_group_name, String propertiescategory_name, int propertiesdistance, int propertiesid, String propertiesphone, String propertiesplace_name, String propertiesplace_url, String propertiesroad_address_name) {
-        this.type = type;
-        this.geometrytype = geometrytype;
-        this.geometrycoordinateslng = geometrycoordinateslng;
-        this.geometrycoordinatesLat = geometrycoordinatesLat;
-        this.propertiesaddress_name = propertiesaddress_name;
-        this.propertiescategory_group_code = propertiescategory_group_code;
-        this.propertiescategory_group_name = propertiescategory_group_name;
-        this.propertiescategory_name = propertiescategory_name;
-        this.propertiesdistance = propertiesdistance;
-        this.propertiesid = propertiesid;
-        this.propertiesphone = propertiesphone;
-        this.propertiesplace_name = propertiesplace_name;
-        this.propertiesplace_url = propertiesplace_url;
-        this.propertiesroad_address_name = propertiesroad_address_name;
-    }
-
-    public LocalMapVo() {
-    }
-    
 }

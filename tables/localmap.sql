@@ -1,20 +1,20 @@
 create table localmap(
     type varchar2(8),
-    geometrytype varchar2(10),
-    geometrycoordinateslng number(3,14),
-    geometrycoordinatesLat number(3,14),
-    propertiesaddress_name varchar2(500),
-    propertiescategory_group_code varchar2(5),
-    propertiescategory_group_name varchar2(20),
-    propertiescategory_name varchar2(500),
-    propertiesdistance number(10),
-    propertiesid number(8) PRIMARY key, 
-    propertiesphone varchar2(15),
-    propertiesplace_name varchar2(100),
-    propertiesplace_url varchar2(500),
-    propertiesroad_address_name varchar2(500)
+    g_type varchar2(10),
+    g_coordinateslng varchar2(20),
+    g_coordinatesLat varchar2(20),
+    p_address_name varchar2(500),
+    p_category_group_code varchar2(5),
+    p_category_group_name varchar2(20),
+    p_category_name varchar2(500),
+    p_id varchar2(10) PRIMARY key, 
+    p_phone varchar2(15),
+    p_place_name varchar2(100),
+    p_place_url varchar2(500),
+    p_road_address_name varchar2(500)
 );
 drop table tripplan;
+drop table localmap;
 create table tripplan(
     idx number(10),
     id varchar2(40),

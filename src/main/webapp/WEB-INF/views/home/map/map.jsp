@@ -797,27 +797,28 @@
             $.ajax({
                 type: "post",
                 url: "${cp}/map/addroutes",
-                data: "data",
+                data: JSON.stringify(addedMarkers),
+                contentType:'application/json;charset=UTF-8',
                 beforeSend(jqXHR, settings) {
                     jqXHR.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
                 },
                 // dataType: "dataType",
                 success: function (response) {
-                    
+                    console.log(response);
                 }
             });
         }
         
         //DB에 지도정보 저장하기
-        function selectedFeatureToDataBase(){
-            for (let index = 0; index < arguments.length; index++) {
+        function selectedFeatureToDataBase(feature){
+            // for (let index = 0; index < arguments.length; index++) {
                 // console.log(arguments[index]);
                 // console.log(JSON.stringify(arguments[index]));
                 // console.log(JSON.parse(arguments[index]));
                 $.ajax({
                     type: "post",
                     url: "${cp}/map/addmap",
-                    data: JSON.stringify(arguments[index]),
+                    data: JSON.stringify(feature),
                     // dataType:'json',
                     contentType:'application/json;charset=UTF-8',
                     beforeSend(jqXHR, settings) {
@@ -827,7 +828,7 @@
                         console.log(response);
                     }
                 });
-            }
+            // }
         }
         
         //저장된 리스트를 데이터베이스에 저장

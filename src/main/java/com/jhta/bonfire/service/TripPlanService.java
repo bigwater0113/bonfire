@@ -20,8 +20,8 @@ public class TripPlanService {
      * @return idx
      */
     public int addPlan(List<TripPlanVo> vo) {
-        int idx = getIndex();
-        for (TripPlanVo tripPlanVo : vo) {tripPlanVo.setIdx(idx);}
+        int idx = getIndex(); idx++;
+        for (TripPlanVo tripPlanVo : vo) {tripPlanVo.setIdx(idx+"");}
         dao.addPlan(vo);
         return idx;
     }

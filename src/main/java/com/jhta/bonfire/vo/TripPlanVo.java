@@ -1,26 +1,16 @@
 package com.jhta.bonfire.vo;
 
 public class TripPlanVo {
-    private int idx;
+    private String idx;
     private String id;
-    private int placeid;
-    private int triporder;
+    private String placeid;
+    private String triporder;
 
-    public TripPlanVo() {
-    }
-
-    public TripPlanVo(int idx, String id, int placeid, int triporder) {
-        this.idx = idx;
-        this.id = id;
-        this.placeid = placeid;
-        this.triporder = triporder;
-    }
-
-    public int getIdx() {
+    public String getIdx() {
         return this.idx;
     }
 
-    public void setIdx(int idx) {
+    public void setIdx(String idx) {
         this.idx = idx;
     }
 
@@ -32,19 +22,29 @@ public class TripPlanVo {
         this.id = id;
     }
 
-    public int getPlaceid() {
+    public String getPlaceid() {
         return this.placeid;
     }
 
-    public void setPlaceid(int placeid) {
+    public void setPlaceid(String placeid) {
         this.placeid = placeid;
     }
 
-    public int getTriporder() {
+    public String getTriporder() {
         return this.triporder;
     }
 
-    public void setTriporder(int triporder) {
+    public void setTriporder(String triporder) {
+        this.triporder = triporder;
+    }
+
+    public TripPlanVo() {
+    }
+
+    public TripPlanVo(String idx, String id, String placeid, String triporder) {
+        this.idx = idx;
+        this.id = id;
+        this.placeid = placeid;
         this.triporder = triporder;
     }
 

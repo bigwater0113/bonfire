@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhta.bonfire.service.LocalMapService;
 import com.jhta.bonfire.service.TripPlanService;
 import com.jhta.bonfire.util.CommonUtil;
@@ -67,17 +66,25 @@ public class MapController {
     public String addmap(
         @RequestBody geoJsonVo vo
     ) {
+        logger.info("vo", vo);
+        HashMap<String, Object> map = new HashMap<>();
+        boolean result=true;
         try{
             mapService.addMap(vo);
-        } catch (DuplicateKeyException|NullPointerException e) {logger.info("samemap, skip "+e);}
-        return "done";
+            logger.info("saved : ", vo);
+        } catch (DuplicateKeyException|NullPointerException e) {
+            logger.info("samemap, skip "+e);
+            result=!result;
+        }
+        map.put("success", result);
+        return new JSONObject(map).toJSONString();
     }
 
     @RequestMapping(value={"/map/addroutes"})
     @ResponseBody
     public String addroutes(
-        @AuthenticationPrincipal Authentication authentication
-        , @RequestBody geoJsonVo...geojsons
+        @RequestBody List<geoJsonVo> addedMarkers
+        , @AuthenticationPrincipal Authentication authentication
     ) {
         HashMap<String, Object> map = new HashMap<>();
         if (authentication==null) {
@@ -87,10 +94,10 @@ public class MapController {
         } else {
             String id = authentication.getName();
             List<TripPlanVo> plans = new ArrayList<>();
-            if (CommonUtil.isNotEmpty(geojsons)) {
-                for (int i = 0; i < geojsons.length; i++) {
-                    int placeid = (int) geojsons[i].getProperties().get("id");
-                    plans.add(new TripPlanVo(0, id, placeid, i));
+            if (CommonUtil.isNotEmpty(addedMarkers)) {
+                for (int i = 0; i < addedMarkers.size(); i++) {
+                    String placeid = (String) addedMarkers.get(i).getProperties().get("id");
+                    plans.add(new TripPlanVo("", id, placeid, i+""));
                 }
                 int idx = planService.addPlan(plans);
                 map.put("success", true);

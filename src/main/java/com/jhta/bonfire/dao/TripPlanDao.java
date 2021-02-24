@@ -14,9 +14,9 @@ public class TripPlanDao {
     @Autowired private SqlSession sqlSession;
 	private static final String NAMESPACE="com.jhta.bonfire.mapper.TripPlanMapper";
     
-    public int addPlan(List<TripPlanVo> vo) {return sqlSession.insert(NAMESPACE+".addplan", vo);}
-    public int getIndex() {return sqlSession.selectOne(NAMESPACE+".getindex");}
-    public List<Integer> getIdxByUser(String id) {return sqlSession.selectList(NAMESPACE+".getidxbyUser", id);}
+    public int addPlan(List<TripPlanVo> vo) {return sqlSession.insert(NAMESPACE+".addPlan", vo);}
+    public int getIndex() {return sqlSession.selectOne(NAMESPACE+".getIndex");}
+    public List<Integer> getIdxByUser(String id) {return sqlSession.selectList(NAMESPACE+".getIdxByUser", id);}
     public List<TripPlanVo> getPlanIdxByIdx(int idx) {return sqlSession.selectList(NAMESPACE+".getPlanIdxByIdx", idx);}
     public List<LocalMapVo> getPlanMapByIdx(int idx) {return sqlSession.selectList(NAMESPACE+".getPlanMapByIdx", idx);}
 }

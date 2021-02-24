@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.bonfire.mapper.TripPlanMapper">
     <insert id="addPlan" parameterType="java.util.List">
-        <foreach collection="list" item="vo" open="insert all">
+        <foreach collection="list" item="vo" open="insert all" close="SELECT * FROM DUAL">
             into tripplan values(#{vo.idx}, #{vo.id}, #{vo.placeid}, #{vo.triporder})
         </foreach>
     </insert>
-    <select id="getIndex">
-        select max(idx) idx from tripplan
+    <select id="getIndex" resultType="int">
+        select nvl(max(idx),0) idx from tripplan
     </select>
     <select id="getIdxByUser" resultType="int" parameterType="string">
         select distinct idx from tripplan where id=#{id}

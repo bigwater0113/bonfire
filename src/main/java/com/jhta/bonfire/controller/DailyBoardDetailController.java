@@ -19,7 +19,6 @@ public class DailyBoardDetailController {
 		ModelAndView mv = new ModelAndView(".feed.daily.detail");
 		String id = (String) session.getAttribute("id");
 		DailyBoardVo vo = service.listOne(num);
-		System.out.println(num);
 		mv.addObject("vo", vo);
 		
 		return mv;

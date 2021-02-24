@@ -49,7 +49,7 @@
 		<![CDATA[
 		select * from 
 		(
-			select * from qnaboard where num<#{num} order by num desc
+			select * from dailyboard where num<#{num} order by num desc
 		)
 		where rownum=1
 		  ]]>
@@ -59,8 +59,8 @@
 		select NVL(count(*), 0) cnt from dailyboard where id = #{id}
 	</select>
 	
-	<delete id="deleteOne" parameterType = "int">
-		delete from board where num = #{num}
+	<delete id="delete" parameterType = "hashmap">
+		delete from dailyboard where num=#{num} and id=#{id}
 	</delete>
 	
 	<update id="updatePost" parameterType = "dailyboard">

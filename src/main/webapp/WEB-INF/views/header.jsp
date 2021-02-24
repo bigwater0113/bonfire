@@ -40,6 +40,7 @@
 			<c:if test="${id=='admin' }">
 				<a href="${cp }/adminpage">관리자페이지</a><br>
 			</c:if>
+			<a href="${cp }/authorReg/insert">작가신청</a><br>
 			<a href="${cp }/logout">로그아웃</a><br>
 			<a href="${cp }/withdraw">회원탈퇴</a><br>
 		</div>

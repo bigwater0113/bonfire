@@ -32,6 +32,8 @@
   	<typeAlias type="com.jhta.bonfire.vo.DfileVo" alias="dfile"/>
   	<typeAlias type="com.jhta.bonfire.vo.DailyBoardVo" alias="dailyboard"/>
   	<typeAlias type="com.jhta.bonfire.vo.DailyBoard_Dfile_JoinVo" alias="dailyjoin"/>
+  	<typeAlias type="com.jhta.bonfire.vo.AuthorReg_Auth_JoinVo" alias = "authorreg"/>
+	<typeAlias type="com.jhta.bonfire.vo.AuthorRegVo" alias = "authorregonly"/>
   	<typeAlias type="com.jhta.bonfire.vo.TripPlanVo" alias="tripplan"/>
   	<!-- <typeAlias type="com.jhta.bonfire.vo.geoJsonVo" alias="geojson"/> -->
   	<typeAlias type="com.jhta.bonfire.vo.LocalMapVo" alias="localmap"/>
@@ -54,5 +56,6 @@
 	<mapper resource="com/jhta/bonfire/mapper/DailyBoardMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/LocalMapMapper.xml"/>
 	<mapper resource="com/jhta/bonfire/mapper/TripPlanMapper.xml"/>
+	<mapper resource="com/jhta/bonfire/mapper/AuthorRegisterMapper.xml"/>
   </mappers>
 </configuration>

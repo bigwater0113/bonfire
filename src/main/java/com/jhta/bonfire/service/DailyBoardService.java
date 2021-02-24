@@ -18,8 +18,11 @@ public class DailyBoardService {
 		return dao.insertPost(vo);
 	}
 	
-	public int delete(DailyBoardVo vo) {
-		return dao.deleteDaily(vo);
+	public int delete(int num, String id) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("id", id);
+		return dao.deleteDaily(map);
 	}
 	
 	public int count(HashMap<String, Object> map) {

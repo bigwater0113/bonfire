@@ -27,8 +27,8 @@ public class DailyBoardDao {
 		return session.insert(NAMESPACE + ".insertDaily", vo);
 	}
 	
-	public int deleteDaily(DailyBoardVo vo) {
-		return session.delete(NAMESPACE + ".deleteOne", vo.getNum());
+	public int deleteDaily(HashMap<String, Object> map) {
+		return session.delete(NAMESPACE + ".delete", map);
 	}
 	
 	public DailyBoardVo listOne(int num) {

@@ -28,7 +28,7 @@
 }
 #side{
 	width:300px;
-	height:600px;
+	height:700px;
 /* 	background-color: lightblue; */
 	float:left;
 }
@@ -44,3 +44,15 @@
 /* 	background-color: pink; */
 	clear:both;
 }
+input::-webkit-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+input:-ms-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}

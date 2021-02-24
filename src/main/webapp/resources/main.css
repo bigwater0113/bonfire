@@ -19,6 +19,8 @@
 	margin-top:10px;
 	height:100px;
 	margin-bottom:10px;
+/* 	padding-bottom:10px; */
+/* 	border-bottom: 1px solid black; */
 /* 	background-color: yellow; */
 }
 #content{
@@ -31,3 +33,15 @@
 	height:200px;
 /* 	background-color: pink; */
 }
+input::-webkit-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}
+input:-ms-input-placeholder {
+	  color: #aaaaaa;
+	  font-family:'나눔손글씨 사랑해 아들';
+	  font-size:25px;
+	  font-weight:bold;
+	}

@@ -49,24 +49,29 @@
 		opacity: 0.6;
 		display:none;
 	}
-	#home_searchResult{position:absolute;z-index:9999;left:0px;top:0px; text-align:center;
-			width:750px;height:400px;background-color:#cccccc;display:none;}
+	#home_searchResult{position:absolute;z-index:9990;left:0px;top:0px; text-align:center;
+			width:750px;height:400px;background-color:#eeeeee;display:none;opacity: 0.6;}
+	#home_searchResult_slide{position:absolute;z-index:9999;left:0px;top:0px; text-align:center;
+			width:750px;height:400px;display:none;}
 	.resultDiv{margin-left:10px;margin-right:10px;margin-top:10px;}
-	#leftResult{background-color: red;width:180px;height:250px;
-		position:absolute;left:20px;top:65px;}
-	#leftResultBack{background-color: black;width:180px;height:250px;
-		position:absolute;left:20px;top:65px;display:none;}
-	#centerResult{background-color: green;width:230px;height:380px;
-		position:absolute;left:250px;top:0px;}
-	#rightResult{background-color: blue;width:180px;height:250px;
-		position:absolute;left:530px;top:65px;}
-	#rightResultBack{background-color: black;width:180px;height:250px;
-		position:absolute;left:530px;top:65px;display:none;}
+	#leftResult{background-color: white;width:180px;height:250px;
+		position:absolute;left:20px;top:65px;box-shadow: 2px 2px 2px black;}
+	#leftResultBack{background-color: white;width:180px;height:250px;
+		position:absolute;left:20px;top:65px;display:none;box-shadow: 2px 2px 2px black;}
+	#centerResult{background-color: white;width:230px;height:380px;
+		position:absolute;left:250px;top:0px;box-shadow: 2px 2px 2px black;}
+	#rightResult{background-color: white;width:180px;height:250px;
+		position:absolute;left:530px;top:65px;box-shadow: 2px 2px 2px black;}
+	#rightResultBack{background-color: white;width:180px;height:250px;
+		position:absolute;left:530px;top:65px;display:none;box-shadow: 2px 2px 2px black;}
+	.form-control{display:inline-block;}
 </style>
 <div id="home_wrap">
 	<div id="home_mask">
 	</div>
 	<div id="home_searchResult">
+	</div>
+	<div id="home_searchResult_slide">
 		<img src="${cp }/resources/images/leftArrowIcon2.png"  class="btnIcon" id="resultLeft"
 						style="width:50px;height:50px;position:absolute;left:0px;top:170px;;z-index:10000">
 		<img src="${cp }/resources/images/rightArrowIcon2.png"  class="btnIcon" id="resultRight"
@@ -79,9 +84,10 @@
 		</div>
 		<div class="resultDiv" id="centerResult">
 			<img src="${cp }/resources/images/profileIcon.png" id="centerProfile"
-				style="width:150px;height:150px;border-radius: 50%;margin-top:50px;margin-bottom:10px;">
-			<div id="centerDetail" style="text-align: center;width:100%;height:100px;background-color: yellow;">
-				<h2></h2><h3></h3>
+				style="width:150px;height:150px;border-radius: 50%;margin-top:50px;margin-bottom:10px;"><br><br>
+			<div id="centerDetail" style="text-align: center;width:100%;height:100px;">
+				<span id="prof_id"style="font-size:24px;font-weight: bold;"></span><br>
+				<span id="prof_nickname"style="font-size:20px;font-weight: bold;"></span>
 			</div>
 		</div>
 		<div class="resultDiv" id="rightResult">
@@ -94,7 +100,7 @@
     <div id="home_search">
     	<div id="home_search_form">
 	    	<form>
-		    	<input type="text" name="keyword" style="width:540px;height:30px;font-size: 25px;" id="searchKeyword" placeholder="작가검색">
+		    	<input type="text" name="keyword" class="form-control" style="width:540px;height:30px;font-size: 25px;" id="searchKeyword" placeholder="작가검색">
 		    	<a href="javascript:popupDiv()" id="aSearch">검색</a>
 	    	</form>
     	</div>
@@ -165,12 +171,15 @@
 	$(window).scroll(function(){
 		$("#home_mask").css('top',$(window).scrollTop());
 		$("#home_searchResult").css('top',$(window).scrollTop()+windowHeight/2-250);
+		$("#home_searchResult_slide").css('top',$(window).scrollTop()+windowHeight/2-250);
 	});
 	$(window).resize(function(){
 		windowWidth = $(window).width();
 		windowHeight = $(window).height();
 		$("#home_mask").css('width',windowWidth).css('height',windowHeight).css('top',$(window).scrollTop());
 		$("#home_searchResult").css('left',windowWidth/2-350)
+		.css('top',$(window).scrollTop()+windowHeight/2-250);
+		$("#home_searchResult_slide").css('left',windowWidth/2-350)
 		.css('top',$(window).scrollTop()+windowHeight/2-250);
 	});
 	
@@ -231,14 +240,17 @@
 							let idR=$(data)[0].list[2].id;
 							let nicknameR=$(data)[0].list[2].nickname;
 							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
-							$("#leftResult h2").html(idL);
-							$("#leftResult h3").html(nicknameL);
+							$("#leftResult #prof_id").html(idL);
+							$("#leftResult #prof_nickname").html(nicknameL);
+							$("#centerResult").unbind('click').bind('click',function(){
+								location.href='${cp}/@'+idC;
+							});
 							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-							$("#centerResult h2").html(idC);
-							$("#centerResult h3").html(nicknameC);
+							$("#centerResult #prof_id").html(idC);
+							$("#centerResult #prof_nickname").html(nicknameC);
 							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
-							$("#rightResult h2").html(idR);
-							$("#rightResult h3").html(nicknameR);
+							$("#rightResult #prof_id").html(idR);
+							$("#rightResult #prof_nickname").html(nicknameR);
 						}else{
 							let pfilenameL=$(data)[0].list[0].pfilename;
 							let idL=$(data)[0].list[0].id;
@@ -247,11 +259,14 @@
 							let idC=$(data)[0].list[1].id;
 							let nicknameC=$(data)[0].list[1].nickname;
 							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
-							$("#leftResult h2").html(idL);
-							$("#leftResult h3").html(nicknameL);
+							$("#leftResult #prof_id").html(idL);
+							$("#leftResult #prof_nickname").html(nicknameL);
+							$("#centerResult").unbind('click').bind('click',function(){
+								location.href='${cp}/@'+idC;
+							});
 							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-							$("#centerResult h2").html(idC);
-							$("#centerResult h3").html(nicknameC);
+							$("#centerResult #prof_id").html(idC);
+							$("#centerResult #prof_nickname").html(nicknameC);
 							$("#resultRight").hide();
 						}
 						$("#rightResult").css({
@@ -320,14 +335,17 @@
 							let idR=$(data)[0].list[2].id;
 							let nicknameR=$(data)[0].list[2].nickname;
 							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
-							$("#leftResult h2").html(idL);
-							$("#leftResult h3").html(nicknameL);
+							$("#leftResult #prof_id").html(idL);
+							$("#leftResult #prof_nickname").html(nicknameL);
+							$("#centerResult").unbind('click').bind('click',function(){
+								location.href='${cp}/@'+idC;
+							});
 							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-							$("#centerResult h2").html(idC);
-							$("#centerResult h3").html(nicknameC);
+							$("#centerResult #prof_id").html(idC);
+							$("#centerResult #prof_nickname").html(nicknameC);
 							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
-							$("#rightResult h2").html(idR);
-							$("#rightResult h3").html(nicknameR);
+							$("#rightResult #prof_id").html(idR);
+							$("#rightResult #prof_nickname").html(nicknameR);
 						}else{
 							let pfilenameC=$(data)[0].list[0].pfilename;
 							let idC=$(data)[0].list[0].id;
@@ -335,12 +353,15 @@
 							let pfilenameR=$(data)[0].list[1].pfilename;
 							let idR=$(data)[0].list[1].id;
 							let nicknameR=$(data)[0].list[1].nickname;
+							$("#centerResult").unbind('click').bind('click',function(){
+								location.href='${cp}/@'+idC;
+							});
 							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-							$("#centerResult h2").html(idC);
-							$("#centerResult h3").html(nicknameC);
+							$("#centerResult #prof_id").html(idC);
+							$("#centerResult #prof_nickname").html(nicknameC);
 							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
-							$("#rightResult h2").html(idR);
-							$("#rightResult h3").html(nicknameR);
+							$("#rightResult #prof_id").html(idR);
+							$("#rightResult #prof_nickname").html(nicknameR);
 							$("#leftResult").hide();
 							$("#resultLeft").hide();
 						}
@@ -461,9 +482,12 @@
 		.click(function(){
 			$(this).css('display','none');
 			$("#home_searchResult").css('display','none');
+			$("#home_searchResult_slide").css('display','none');
 // 			$("#home_searchResult").empty().css('display','none');
 		});
 		$("#home_searchResult").css('left',windowWidth/2-350)
+		.css('top',scrollTop+windowHeight/2-250).css('display','block');
+		$("#home_searchResult_slide").css('left',windowWidth/2-350)
 		.css('top',scrollTop+windowHeight/2-250).css('display','block');
 		$.ajax({
 			url:"${cp}/searchAuthor.json",
@@ -479,7 +503,10 @@
 				Cnt=$(data)[0].Cnt;
 				if(Cnt==0){
 					$("#home_searchResult").hide();
-					alert("해당회원이 존재하지않습니다.");
+					$("#home_searchResult_slide").hide();
+					setTimeout(function() {
+						alert("해당회원이 존재하지않습니다.");
+					}, 100);
 				}else if(Cnt!=1){
 					$("#resultLeft").hide();
 					$("#leftResult").hide();
@@ -489,12 +516,15 @@
 					let pfilenameR=$(data)[0].list[1].pfilename;
 					let idR=$(data)[0].list[1].id;
 					let nicknameR=$(data)[0].list[1].nickname;
+					$("#centerResult").unbind('click').bind('click',function(){
+						location.href='${cp}/@'+idC;
+					});
 					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-					$("#centerResult h2").html(idC);
-					$("#centerResult h3").html(nicknameC);
+					$("#centerResult #prof_id").html(idC);
+					$("#centerResult #prof_nickname").html(nicknameC);
 					$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
-					$("#rightResult h2").html(idR);
-					$("#rightResult h3").html(nicknameR);
+					$("#rightResult #prof_id").html(idR);
+					$("#rightResult #prof_nickname").html(nicknameR);
 				}else{
 					$("#resultLeft").hide();
 					$("#resultRight").hide();
@@ -503,9 +533,12 @@
 					let pfilenameC=$(data)[0].vo.pfilename;
 					let idC=$(data)[0].vo.id;
 					let nicknameC=$(data)[0].vo.nickname;
+					$("#centerResult").unbind('click').bind('click',function(){
+						location.href='${cp}/@'+idC;
+					});
 					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
-					$("#centerResult h2").html(idC);
-					$("#centerResult h3").html(nicknameC);
+					$("#centerResult #prof_id").html(idC);
+					$("#centerResult #prof_nickname").html(nicknameC);
 				}
 			}
 		});

@@ -7,16 +7,16 @@
 	label{width:100px;display:inline-block;}
 	#join_form{width:400px;margin:auto;margin-top:70px;}
 	#join_form input{margin-bottom:10px;}
-	#join_form input[type="text"]{width:280px;}
-	#join_form input[type="email"]{width:280px;}
-	#join_form input[type="password"]{width:280px;}
-	#join_form input[type="date"]{width:280px;}
+	#join_form input[type="text"]{width:285px;}
+	#join_form input[type="email"]{width:285px;}
+	#join_form input[type="password"]{width:285px;}
+	#join_form input[type="date"]{width:285px;}
 /* 	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center; */
 /* 		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;} */
 	.form-control{display:inline-block;font-size:25px;}
 	.btn.btn-white.w-100{display:inline-block;font-size:25px;font-weight:bold;}
 	.btn.btn-white.w-100.zip{width:41%!important;}
-	.btn.btn-white.w-100.join{width:97%!important;}
+	.btn.btn-white.w-100.join{width:98%!important;}
 </style>
 <div style="width:1200px;height:710px;">
 	<div id="join_form">
@@ -39,12 +39,12 @@
 			<label for="phone">핸드폰번호</label>
 			<input type="text" name="phone" id="phone" class="form-control" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
 			<label for="zipNo">우편번호</label>
-			<input type="text" name="zipno" id="zipno" class="form-control" readonly style="width:110px" required="required">
+			<input type="text" name="zipno" id="zipno" class="form-control" readonly style="width:115px" required="required">
 			<input type="button" class="btn btn-white w-100 zip" value="주소검색" onclick="goPopup();"><br>
 			<label for="roadfulladdr">도로명주소</label>
-			<input type="text" name="roadfulladdr" id="roadfulladdr" class="form-control" style="width:280px" required="required" readonly><br>
+			<input type="text" name="roadfulladdr" id="roadfulladdr" class="form-control" style="width:285px" required="required" readonly><br>
 			<label for="addrdetail">상세주소</label>
-			<input type="text" name="addrdetail" id="addrdetail" class="form-control" style="width:280px" value=""><br>
+			<input type="text" name="addrdetail" id="addrdetail" class="form-control" style="width:285px" value=""><br>
 			<a href="javascript:joinForm.submit()" class="btn btn-white w-100 join">가입하기</a>
 		</form:form>
 	</div>

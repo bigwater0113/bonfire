@@ -4,10 +4,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <style>
+	#t_wrap{margin-top: 50px;}
 	.form-control{display:inline-block;font-size:25px;}
-	#comm{width:1050px;}
+	#comm{width:1020px;}
 	.btn.btn-white.w-100{display:inline-block;font-size:25px;font-weight:bold;}
-	.btn.btn-white.w-100.add{width:100%!important;}
+	.btn.btn-white.w-100.add{width:100%!important; margin-bottom: 6px;}
 	.btn.btn-white.w-100.btns{width:30%!important;}
 	.btn.btn-white.w-100.mod{width:100%!important;}
 	.btn.btn-white.w-100.commDel{width:5%!important;position:relative;left:1085px;top:5px;}
@@ -18,7 +19,7 @@
 	<div id="t_content">
 		<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 			<tr>
-				<td width="200px">제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"><input type="hidden" value="${vo.title }" id="title"></td>
+				<td width="150px">제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"><input type="hidden" value="${vo.title }" id="title"></td>
 			</tr>
 			<tr>
 				<td>작성자</td><td>${vo.id }</td>
@@ -61,8 +62,8 @@
 	</div>
 	<input type="hidden" id="postingId" value="${vo.id }">
 	<c:if test="${id != null }">
-		<label for="comm">아이디: </label>${id }<input type="hidden" id="cid" value="${id }"><br>
-		<label for="comm">댓글: </label><input type="text" class="form-control" id="comm">
+		<label for="comm" style="width: 60px;">아이디:&nbsp;</label>${id }<input type="hidden" id="cid" value="${id }"><br>
+		<label for="comm" style="width: 60px;">댓글:&nbsp;</label><input type="text" class="form-control" id="comm">
 		<div style="display:inline-block;width:110px;">
 			<input type="button" value="등록" class="btn btn-white w-100 add" id="btn_ins">
 			<input type="button" value="수정완료" class="btn btn-white w-100 add" id="btn_edit" style="display: none"><br>

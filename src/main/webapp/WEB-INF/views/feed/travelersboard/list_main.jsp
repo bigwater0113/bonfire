@@ -29,6 +29,7 @@
 					<th><input type="checkbox" id="allcheck"></th>
 				</c:if>
 					<th>글번호</th>
+					<th>썸네일</th>
 					<th>카테고리</th>
 					<th>작성자</th>
 					<th>제목</th>
@@ -43,6 +44,7 @@
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 						</c:if>
 							<td>${vo.num }</td>
+							<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
 							<td>${vo.cname }</td>
 							<td>${vo.id }</td>
 							<c:choose>

@@ -145,6 +145,7 @@ CREATE TABLE feedboard
   postdate  DATE         ,
   adddate   DATE         ,
   cname     VARCHAR2(40),
+  thumbnail VARCHAR2(500),
   CONSTRAINT PK_feedboard PRIMARY KEY (num)
 );
 

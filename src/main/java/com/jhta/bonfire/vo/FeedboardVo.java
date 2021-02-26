@@ -7,6 +7,7 @@ public class FeedboardVo {
 	private String id;
 	private String title;
 	private String content;
+	private String thumbnail;
 	private int recommend;
 	private int hits;
 	private int scrap;
@@ -17,13 +18,14 @@ public class FeedboardVo {
 	
 	public FeedboardVo() {}
 
-	public FeedboardVo(int num, String id, String title, String content, int recommend, int hits, int scrap, int ispost,
-			Date postdate, Date adddate, String cname) {
+	public FeedboardVo(int num, String id, String title, String content, String thumbnail, int recommend, int hits,
+			int scrap, int ispost, Date postdate, Date adddate, String cname) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.title = title;
 		this.content = content;
+		this.thumbnail = thumbnail;
 		this.recommend = recommend;
 		this.hits = hits;
 		this.scrap = scrap;
@@ -63,6 +65,14 @@ public class FeedboardVo {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public int getRecommend() {

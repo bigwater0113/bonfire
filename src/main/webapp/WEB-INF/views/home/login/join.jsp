@@ -18,7 +18,7 @@
 	.btn.btn-white.w-100.zip{width:41%!important;}
 	.btn.btn-white.w-100.join{width:98%!important;}
 </style>
-<div style="width:1200px;height:710px;">
+<div style="width:1200px;height:910px;">
 	<div id="join_form">
 		<form:form method="post" action="${cp }/join" id="joinForm">
 			<label for="id">아이디</label>

@@ -7,7 +7,7 @@
 <style>
 	
 	#home_wrap{font-size:26px;}
-	#aSearch{text-decoration: none;color:white;}
+	#aSearch{text-decoration: none;color:white;text-shadow: 2px 2px 5px black;}
 	
 	input::-webkit-input-placeholder {
 	  color: #aaaaaa;
@@ -22,7 +22,7 @@
 	  font-weight:bold;
 	}
 	#home_search{width:1200px;height:650px;margin:auto;
-		background-image:url('${cp}/resources/images/testing_banner2.jpg');background-size: 100% 100%;}
+		background-image:url('${cp}/resources/images/banner1.jpg');background-size: 100% 100%;}
 	#home_search_form{width:600px;margin:auto;position:relative;top:580px;}
 	#home_recommAuthor{width:1200px;height:800px;margin:auto;background-color: #dadcde;}
 	#home_recommAuthor_Div{width:1000px;margin:auto;padding-top:220px;}
@@ -168,6 +168,14 @@
 	var Cnt;
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
+	var bannerNum=2;
+// 	setInterval(function() {
+// 		$("#home_search").css('backgroundImage',"url('${cp}/resources/images/banner"+bannerNum+".jpg')")
+// 		bannerNum++;
+// 		if(bannerNum==7){
+// 			bannerNum=1;
+// 		}
+// 	}, 5000);
 	$(window).scroll(function(){
 		$("#home_mask").css('top',$(window).scrollTop());
 		$("#home_searchResult").css('top',$(window).scrollTop()+windowHeight/2-250);

@@ -21,3 +21,4 @@ create sequence sbhits_seq;
 create sequence scomment_seq;
 create sequence srecomm_seq;
 create sequence sfiles_seq;
+create sequence authorreg_seq;

@@ -43,7 +43,7 @@
 			<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 				<tr>
 					<th>카테고리</th>
-					<th>썸네일</th>
+					<th></th>
 					<th>제목</th>
 					<th>게시날짜</th>
 					<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">

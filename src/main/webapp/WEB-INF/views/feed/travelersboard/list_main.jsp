@@ -29,7 +29,7 @@
 					<th><input type="checkbox" id="allcheck"></th>
 				</c:if>
 					<th>글번호</th>
-					<th>썸네일</th>
+					<th></th>
 					<th>카테고리</th>
 					<th>작성자</th>
 					<th>제목</th>

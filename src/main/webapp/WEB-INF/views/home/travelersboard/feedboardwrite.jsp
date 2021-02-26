@@ -8,9 +8,14 @@
 
 
 <style type="text/css">
-    #editorbox{
-        background-color: white;
-    }
+    #editorbox{background-color: white;}
+    .form-select{ display: inline-block;height: 37px; width: 100px; font-size: 18px; font-weight: bold; }
+    .form-control{ display: inline-block; }
+    .form-control.writer{ height: 37px; width: 100px; font-size: 25px; font-weight: bold;}
+    .form-control.title{ height: 37px; width: 1093px; margin-left: 6px; font-size: 25px; font-weight: bold;}
+    .btn.btn-white.w-100{ display: inline-block; float: right; width: 50%!important; font-size: 25px; font-weight: bold;}
+    #editorarea{margin-bottom: 100px;}
+    label{width: 100px;}
 </style>
 <div>
     <div id='editorarea'>
@@ -18,14 +23,11 @@
         <div id="editorarea_body">
             <form:form id="write" method="post">
             	<div id="writer">
-            		작성자 : <input type="text" name="id" value="${id }" readonly="readonly">
+            		<label for="writer">작성자 </label>  <input type="text" id="writer" name="id" class="form-control writer" value="${id }" readonly="readonly">
             	</div>
-                <div id="titlename">
-                	제목 : <input type="text" name="title">
-                </div>
                 <div id="categoryname">
-					여행 지역
-					<select name="cname">
+					<label for="cname">여행 지역 </label>
+					<select class="form-select" id="cname" name="cname">
                         <option value="서울">서울</option>
                         <option value="경기">경기</option>
                         <option value="강원">강원</option>
@@ -38,15 +40,20 @@
                         <option value="제주">제주</option>
                     </select>
                 </div>
-                <div id=editorbox>
-                    <textarea name="content" id="summernote"></textarea>
+                <div id="titlename">
+                	<label for="title">제목 </label><input type="text" id="title" name="title" class="form-control title" required>
                 </div>
-                <input type="hidden" value="-1" name="ispost1">
-                <input type="submit" value="작성하기" formaction="${cp }/member/feedboard_add">
-                <c:if test="${feedRole == 'ROLE_AUTHOR'}">
-                	<input type="hidden" value="1" name="ispost2">
-                	<input type="submit" value="발행하기" formaction="${cp }/member/feedboard_post">
-                </c:if>
+                <div id=editorbox>
+                    <textarea name="content" id="summernote" required></textarea>
+                </div>
+                <div style="width: 184px; display: inline-block; float: right;">
+	                <input type="hidden" value="-1" name="ispost1">
+	                <input type="submit" class="btn btn-white w-100" value="작성" formaction="${cp }/member/feedboard_add">
+	                <c:if test="${feedRole == 'ROLE_AUTHOR'}">
+	                	<input type="hidden" value="1" name="ispost2">
+	                	<input type="submit" class="btn btn-white w-100" value="발행" formaction="${cp }/member/feedboard_post">
+	                </c:if>
+                </div>
             </form:form>
         </div>
         <div id="editorarea_foot"></div>
@@ -72,7 +79,7 @@
                maxHeight: null,             // 최대 높이
                focus: true,				 // 처음 사이트들어왔을때 summernote에 focus를 준다. 커서 깜빡임.
                lang: "ko-KR",				//toolbar 설명을 한글화.
-               placeholder: '첫 번째 첨부 이미지가 썸네일 이미지로 설정됩니다!',	//summernote에 아무것도 입력안되어있을때 보여지는 설명?
+               placeholder: '내용을 반드시 입력해 주세요.',	//summernote에 아무것도 입력안되어있을때 보여지는 설명?
                // toolbar: [
                //     // [groupName, [list of button]]
                //     ['style', ['bold', 'italic', 'underline', 'clear']],

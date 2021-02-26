@@ -21,15 +21,11 @@
    </div>
    <form:form method="post" onsubmit="chechDel(event)">
       <div id="scrapboard_table" >
-         <c:choose>
-         <c:when test="${list == null}">
-          		 스크랩한 게시글이 없습니다!
-         </c:when>
-         <c:otherwise>
             <table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
                <tr>
                   <th>카테고리</th>
                   <th>작성자</th>
+                  <th></th>
                   <th>제목</th>
                   <th>조회수</th>
                   <th>추천</th>
@@ -38,19 +34,26 @@
                   <th><input type="checkbox" id="allcheck"></th>
                </tr>
                <c:forEach var="vo" items="${list }">
+                <c:choose>
+			         <c:when test="${vo.title != null}">
                   <tr>
                         <td>${vo.cname }</td>
                         <td>${vo.writer}</td>
+                        <td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
                         <td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
                         <td>${vo.hits}</td>
                         <td>${vo.recommend}</td>
                         <td>${vo.scrap}</td>
                         <td>${vo.postdate}</td>
                         <td><input type="checkbox" name="checkk" value=${vo.num }></td>
+               </tr>
+			         </c:when>
+			         <c:otherwise>
+			          		 스크랩한 게시글이 없습니다!
+		            </c:otherwise>
+		         </c:choose>
                </c:forEach>
             </table>
-            </c:otherwise>
-         </c:choose>
          <div id="scrap_editlist" style="float:left:">
             <c:if test="${id == feedId}">
                <input type="submit" value="삭제" name="scrapboard_delete" formaction="${cp }/scrapboard_delete"

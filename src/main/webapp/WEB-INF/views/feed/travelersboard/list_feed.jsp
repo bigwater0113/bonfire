@@ -59,7 +59,14 @@
 				<c:forEach var="vo" items="${list }">
 					<tr>
 							<td>${vo.cname }</td>
-							<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+							<c:choose>
+								<c:when test="${vo.thumbnail!=null }">
+									<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
 							<td><a href="${cp }/feedboard_detail?num=${vo.num }&recentpage=feed">${vo.title }</a></td>
 							<td>${vo.adddate }</td>
 							<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">

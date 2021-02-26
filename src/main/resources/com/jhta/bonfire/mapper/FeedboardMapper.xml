@@ -126,13 +126,13 @@
 <!-- 본인만 보는 글등록(일반 회원, 작가) -->
 	<insert id="addPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
-		0,-1,null,sysdate,#{cname})
+		0,-1,null,sysdate,#{cname},#{thumbnail})
 	</insert>
 
 <!-- 발행 - 1. 글작성시 발행 (작가)-->
 	<insert id="postPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
-		0,1,sysdate,sysdate,#{cname})
+		0,1,sysdate,sysdate,#{cname},#{thumbnail})
 	</insert>
 	
 <!-- 발행 - 2. 이미 등록된 글 발행 (작가)-->

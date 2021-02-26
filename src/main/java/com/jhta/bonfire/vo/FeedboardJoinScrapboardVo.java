@@ -7,6 +7,7 @@ public class FeedboardJoinScrapboardVo {
 	private String writer;
 	private String title;
 	private String content;
+	private String thumbnail;
 	private int recommend;
 	private int hits;
 	private int scrap;
@@ -17,13 +18,14 @@ public class FeedboardJoinScrapboardVo {
 	
 	public FeedboardJoinScrapboardVo() {}
 
-	public FeedboardJoinScrapboardVo(int num, String writer, String title, String content, int recommend, int hits,
-			int scrap, Date postdate, String cname, String id, Date adddate) {
+	public FeedboardJoinScrapboardVo(int num, String writer, String title, String content, String thumbnail,
+			int recommend, int hits, int scrap, Date postdate, String cname, String id, Date adddate) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
+		this.thumbnail = thumbnail;
 		this.recommend = recommend;
 		this.hits = hits;
 		this.scrap = scrap;
@@ -63,6 +65,14 @@ public class FeedboardJoinScrapboardVo {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public int getRecommend() {
@@ -120,4 +130,5 @@ public class FeedboardJoinScrapboardVo {
 	public void setAdddate(Date adddate) {
 		this.adddate = adddate;
 	}
+	
 }

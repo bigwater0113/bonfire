@@ -79,7 +79,7 @@
                maxHeight: null,             // 최대 높이
                focus: true,				 // 처음 사이트들어왔을때 summernote에 focus를 준다. 커서 깜빡임.
                lang: "ko-KR",				//toolbar 설명을 한글화.
-               placeholder: '내용을 반드시 입력해 주세요.',	//summernote에 아무것도 입력안되어있을때 보여지는 설명?
+               placeholder: '필수입력입니다.<br><br>첫 번째 첨부 이미지가 썸네일 이미지로 선택됩니다!<br>수정이 불가하니 신중하게 첨부해주세요 :))',	//summernote에 아무것도 입력안되어있을때 보여지는 설명?
                // toolbar: [
                //     // [groupName, [list of button]]
                //     ['style', ['bold', 'italic', 'underline', 'clear']],

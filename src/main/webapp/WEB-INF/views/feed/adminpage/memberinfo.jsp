@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- info.jsp -->
 <div>
-	<table border="1">
+	<table border="1" class="table table-vcenter table-mobile-md card-table">
 		<tr>
 			<td>아이디</td>
 			<td>${vo.id }</td>

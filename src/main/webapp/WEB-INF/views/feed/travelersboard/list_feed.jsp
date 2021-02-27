@@ -43,7 +43,7 @@
 			<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 				<tr>
 					<th>카테고리</th>
-					<th>썸네일</th>
+					<th></th>
 					<th>제목</th>
 					<th>게시날짜</th>
 					<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">
@@ -59,7 +59,14 @@
 				<c:forEach var="vo" items="${list }">
 					<tr>
 							<td>${vo.cname }</td>
-							<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+							<c:choose>
+								<c:when test="${vo.thumbnail!=null }">
+									<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
 							<td><a href="${cp }/feedboard_detail?num=${vo.num }&recentpage=feed">${vo.title }</a></td>
 							<td>${vo.adddate }</td>
 							<c:if test="${id == feedId && feedRole == 'ROLE_AUTHOR'}">

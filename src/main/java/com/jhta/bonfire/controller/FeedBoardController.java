@@ -40,7 +40,7 @@ public class FeedBoardController {
 	@PostMapping(value = "/member/feedboard_add")
     public String add(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-        String thumbnail=null;
+        String thumbnail="";
 		if(fileName!=null) {
 			thumbnail=fileName[0];
 		}
@@ -57,7 +57,7 @@ public class FeedBoardController {
 	@PostMapping(value = "/member/feedboard_post")
 	public String post(String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
 		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-		String thumbnail=null;
+		String thumbnail="";
 		if(fileName!=null) {
 			thumbnail=fileName[0];
 		}

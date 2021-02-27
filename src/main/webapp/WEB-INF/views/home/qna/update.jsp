@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.form-control{display:inline-block;width:400px;height:40px;font-size:20px;font-weight:bold;}
+.btn.btn-white.w-100{display:inline-block;font-size:22px;font-weight: bold;}
+.btn.btn-white.w-100.all{width:13%!important;}
+.btn.btn-white.w-100.search{width:20%!important;height:98%!important;}
+
+</style>
 <!-- jquery 사용을 위해 import -->
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <!-- bootstrap을 사용하지않은 summernote-lite의 사용을 위해 import -->
@@ -17,28 +24,27 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/summernote/summernote-lite.css">
 </head>
 <body>
-<h1>글수정</h1>
+<span style="font-size:40px;">수정페이지</span>
 <form:form id="write" action="${cp }/qna/update" method="post">
-글번호<br>
-<input type="text" name="num" value="${vo.num }" readonly="readonly"><br>
+<input type="hidden" name="num" value="${vo.num }" readonly="readonly">
 <c:if test="${sessionScope.id!='admin'}">
 문의유형<br>
-	<select name="cname">
+	<select name="cname" class="form-select" style="width:130px;display:inline-block;font-size:20px;font-weight:bold;">
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
 	</select><br>
 </c:if>	
 작성자<br>
-<input type="text" name="id" value="${vo.id }" readonly="readonly"><br>
+<input type="text" name="id" value="${vo.id }" readonly="readonly" class="form-control"><br>
 제목<br>
-<input type="text" name="title" value="${vo.title }"><br>
+<input type="text" name="title" value="${vo.title }" class="form-control"><br>
 내용<br>
 <textarea rows="5" cols="50" name="content" id="summernote">${vo.content }</textarea><br>
  <c:if test="${sessionScope.id!='admin'}">	
 비밀번호<br>
-<input type="password" name="pwd"><br>
+<input type="password" name="pwd" class="form-control"><br>
 </c:if>
-<input type="submit" value="등록">
+<input type="submit" value="등록" class="btn btn-white w-100 all">
 
 </form:form>
  <script>

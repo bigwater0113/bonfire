@@ -39,7 +39,14 @@
                   <tr>
                         <td>${vo.cname }</td>
                         <td>${vo.writer}</td>
-                        <td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+                        <c:choose>
+								<c:when test="${vo.thumbnail!=null }">
+									<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
                         <td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
                         <td>${vo.hits}</td>
                         <td>${vo.recommend}</td>

@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.form-control{display:inline-block;width:400px;height:40px;font-size:20px;font-weight:bold;}
+.btn.btn-white.w-100{display:inline-block;font-size:22px;font-weight: bold;}
+.btn.btn-white.w-100.all{width:13%!important;}
+.btn.btn-white.w-100.search{width:20%!important;height:98%!important;}
+
+</style>
 <!-- jquery 사용을 위해 import -->
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <!-- bootstrap을 사용하지않은 summernote-lite의 사용을 위해 import -->
@@ -18,18 +25,18 @@
 
 </head>
 <body>
-<h1>글등록</h1>
+<span style="font-size:40px;">글등록</span>
 <form:form id="write" action="${cp }/qna/insert" method="post">
 <c:choose>
 <c:when test="${sessionScope.id=='admin'}">
 	문의유형
-	<select name="cname">
+	<select name="cname" class="form-select" style="width:130px;display:inline-block;font-size:20px;font-weight:bold;">
 		<option value="공지사항">공지사항</option>
 	</select><br>
 	</c:when>
 	<c:otherwise>
 		문의유형
-	<select name="cname">
+	<select name="cname" class="form-select" style="width:130px;display:inline-block;font-size:20px;font-weight:bold;">
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
 	</select><br>
@@ -38,11 +45,11 @@
 <c:if test="${sessionScope.id=='admin'}">
 	<input type="checkbox" name="pin1" checked="checked">공지사항<br>
 </c:if>	
-	작성자:
+	작성자
 	<span>${sessionScope.id}</span><br>
-	<input type="hidden" name="id" value="${sessionScope.id}">
+	<input type="hidden" name="id" value="${sessionScope.id}" class="form-control">
 	제목<br>
-	<input type="text" name="title"><br>
+	<input type="text" name="title" class="form-control"><br>
 	내용<br>
  	<textarea name="content" id="summernote"></textarea><br>
 <c:choose>
@@ -53,10 +60,10 @@
 	<c:otherwise>
  	<input type="checkbox" name="secret1">비밀글 여부<br>
 	비밀번호<br>
-	<input type="password" name="pwd"><br>
+	<input type="password" name="pwd" class="form-control"><br>
 </c:otherwise>
 </c:choose>	
-	<input type="submit" value="등록">
+	<input type="submit" value="등록" class="btn btn-white w-100 all">
 
 </form:form>
         <script>

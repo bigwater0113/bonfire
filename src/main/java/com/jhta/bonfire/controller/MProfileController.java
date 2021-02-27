@@ -39,8 +39,15 @@ public class MProfileController {
 	public String edit(HttpSession session,MProfileVo vo, MultipartFile bfile, MultipartFile pfile) {
 		String id=(String)session.getAttribute("id");
 		//저장경로
+		String uPath=sc.getRealPath("/resources/upload");
+		File uFile=new File(uPath);
+		if (!uFile.isDirectory()) uFile.mkdirs();
 		String pPath = sc.getRealPath("/resources/upload/profile");
 		String bPath = sc.getRealPath("/resources/upload/banner");
+		File pFile=new File(pPath);
+		File bFile=new File(bPath);
+		if (!pFile.isDirectory()) pFile.mkdirs();
+		if (!bFile.isDirectory()) bFile.mkdirs();
 		//파일 확장자
 		String bExtension=FilenameUtils.getExtension(bfile.getOriginalFilename());
 		String pExtension=FilenameUtils.getExtension(pfile.getOriginalFilename());

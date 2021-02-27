@@ -49,8 +49,8 @@ public class MProfileController {
 		if (!pFile.isDirectory()) pFile.mkdirs();
 		if (!bFile.isDirectory()) bFile.mkdirs();
 		//파일 확장자
-		String bExtension=FilenameUtils.getExtension(bfile.getOriginalFilename());
-		String pExtension=FilenameUtils.getExtension(pfile.getOriginalFilename());
+		String bExtension=FilenameUtils.getExtension(bfile.getOriginalFilename()).toLowerCase();
+		String pExtension=FilenameUtils.getExtension(pfile.getOriginalFilename()).toLowerCase();
 //		String orgpfilename = pfile.getOriginalFilename(); // 전송된 파일명
 		String savepfilename = id + "." + pExtension; // 중복되지 않는 파일명 만들기
 //		String orgbfilename = bfile.getOriginalFilename(); // 전송된 파일명

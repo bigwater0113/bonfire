@@ -469,7 +469,12 @@
 					var i=1;
 					$(data).find("item").each(function(){
 						$("#author"+(i)).empty();
-						$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+						var pfilename=$(this).find('pfilename').text();
+						if(pfilename!=''){
+							$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/upload/profile/'+pfilename+')');
+						}else{
+							$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/profileIcon.png)');
+						}
 						$("#author"+(i)).css('backgroundSize', '100% 100%');
 						var id=$(this).find('id').text();
 						var nickname=$(this).find('nickname').text();
@@ -478,7 +483,9 @@
 							location.href="${cp}/@"+id;
 						});
 						$("#author"+(i++)).append(`
-								<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>소개:`+intro+`</p>
+								<div style="width : 230px; height : 230px; background-color : #5d5d5d; opacity : 0.8;"></div>
+								<div style="width : 230px; height : 230px; position : relative; top : -230px; text-align : center; color : white; text-shadow : 1px 1px 4px black;"><div style="font-size : 38px; margin-top : 40px;">`+id+`</div>
+								<div style="font-size : 20px; margin-top : 5px;">`+nickname+`</div><div style="font-size : 20px; margin : 5px auto; overflow : hidden; width : 200px; height : 60px;">`+intro+`</div></div>
 								`);
 					});
 				}

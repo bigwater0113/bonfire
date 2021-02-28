@@ -1,9 +1,9 @@
 
 const mapbounds = [[123.90100238675655, 32.622157846402175], [133.207154730507, 39.40342567614195]];
 const kakaoHeader = { Authorization: "KakaoAK " + "ddc296c2f9f2c09e7b1c05df318b9cb0" }
-$('body').append('<form id="geocoder"></form>');
+// $('body').append('<form id="geocoder"></form>');
 let map;
-let addedMarkers = [];
+let addedMarkers=[];
 
 
 if (!savedidx) {
@@ -175,8 +175,8 @@ function psuedoMapboxGeocoding() {
             inputQueryDelay = setTimeout(function () {
                 inputQueryDelay = undefined;
                 let querydata = $('#geocoder').serializeArray();
-                let iscategoryempty;
-                let iskeywordempty;
+                // let iscategoryempty;
+                // let iskeywordempty;
                 querydata.forEach(datas => {
                     if (datas.name == 'nearbysearch' && datas.value == 'on') {
                         datas.name = 'x';
@@ -192,8 +192,8 @@ function psuedoMapboxGeocoding() {
                             map.unproject({ x: map._canvas.style.width.split('px')[0], y: map._canvas.style.height.split('px')[0] }).toArray()
                         ];
                     };
-                    iscategoryempty = (datas.name == 'category' && (datas.value == '' || datas.value == null));
-                    iskeywordempty = (datas.name == 'keyword' && (datas.value == '' || datas.value == null));
+                    // iscategoryempty = (datas.name == 'category' && (datas.value == '' || datas.value == null));
+                    // iskeywordempty = (datas.name == 'keyword' && (datas.value == '' || datas.value == null));
                 });
                 querydata.push({ name: 'page', value: 1 });
 
@@ -273,6 +273,8 @@ function loadlist(idx){
     $('.listings').empty();
     addedMarkers=[];
     loadSavedRoutes(idx);
+    $('#mapcode').data('idx', idx);
+    $('#mapcode').attr('data-idx', idx);
 }
 
 function kakaoResultToFeatures(kakaoResponse) {

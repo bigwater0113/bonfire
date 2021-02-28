@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript">
-    const savedidx = '${idx}';
-    const cp = '${cp}';
-    const csrf_headerName = '${_csrf.headerName}';
-    const csrf_token = '${_csrf.token}';
+    var savedidx = '${idx}';
+    var cp = '${cp}';
+    var csrf_headerName = '${_csrf.headerName}';
+    var csrf_token = '${_csrf.token}';
 </script>
-<script   src='https://code.jquery.com/jquery-3.5.1.js'   integrity='sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc='   crossorigin='anonymous'></script>
+<!-- <script   src='https://code.jquery.com/jquery-3.5.1.js'   integrity='sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc='   crossorigin='anonymous'></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css"/>
 <script src="${cp }/resources/map/routemap.js"></script>
-<link rel="stylesheet" href="${cp }/resources/map/routemap.css"/>
+<link rel="stylesheet" href="${cp }/resources/map/routemap.css"/> -->
 
 
 <body>

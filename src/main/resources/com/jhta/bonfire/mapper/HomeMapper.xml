@@ -49,7 +49,7 @@
 		from cats c
 		full outer join feedboard fb 
 		on fb.cname=c.cname 
-		where c.cwhichboard='feedboard'
+		where c.cwhichboard='feedboard' and fb.ispost=1
 		group by c.cname
 		order by cnameCnt desc
 		)

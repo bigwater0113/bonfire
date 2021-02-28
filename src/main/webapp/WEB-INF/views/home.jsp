@@ -527,7 +527,7 @@
 					if(thumbnail!=''){
 						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
 					}else{
-						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo3.png)');
 					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();
@@ -649,7 +649,7 @@
 					if(thumbnail!=''){
 						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
 					}else{
-						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo3.png)');
 					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();
@@ -686,7 +686,7 @@
 					if(thumbnail!=''){
 						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
 					}else{
-						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo3.png)');
 					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();

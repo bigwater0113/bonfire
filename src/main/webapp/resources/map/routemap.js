@@ -63,7 +63,7 @@ $(function(){
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh-alert" width="18" height="18" viewBox="0 0 18 18" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path><line x1="12" y1="9" x2="12" y2="12"></line><line x1="12" y1="15" x2="12.01" y2="15"></line></svg> -->
                 <input type="text" class="mapboxgl-ctrl-geocoder--input" name="query" placeholder="검색" form='geocoder'>
                 <div class="suggestions-wrapper"><ul class="suggestions"></ul></div>
-                <div class="mapboxgl-ctrl-geocoder--pin-right"><button aria-label="Clear" class="mapboxgl-ctrl-geocoder--button"><svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-close" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18"><path d="M3.8 2.5c-.6 0-1.3.7-1.3 1.3 0 .3.2.7.5.8L7.2 9 3 13.2c-.3.3-.5.7-.5 1 0 .6.7 1.3 1.3 1.3.3 0 .7-.2 1-.5L9 10.8l4.2 4.2c.2.3.7.3 1 .3.6 0 1.3-.7 1.3-1.3 0-.3-.2-.7-.3-1l-4.4-4L15 4.6c.3-.2.5-.5.5-.8 0-.7-.7-1.3-1.3-1.3-.3 0-.7.2-1 .3L9 7.1 4.8 2.8c-.3-.1-.7-.3-1-.3z"></path></svg></button><svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-loading" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18" style="display: none;"><path fill="#333" d="M4.4 4.4l.8.8c2.1-2.1 5.5-2.1 7.6 0l.8-.8c-2.5-2.5-6.7-2.5-9.2 0z"></path><path opacity=".1" d="M12.8 12.9c-2.1 2.1-5.5 2.1-7.6 0-2.1-2.1-2.1-5.5 0-7.7l-.8-.8c-2.5 2.5-2.5 6.7 0 9.2s6.6 2.5 9.2 0 2.5-6.6 0-9.2l-.8.8c2.2 2.1 2.2 5.6 0 7.7z"></path></svg></div>
+                <div class="mapboxgl-ctrl-geocoder--pin-right"><button type="button" aria-label="Clear" class="mapboxgl-ctrl-geocoder--button"><svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-close" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18"><path d="M3.8 2.5c-.6 0-1.3.7-1.3 1.3 0 .3.2.7.5.8L7.2 9 3 13.2c-.3.3-.5.7-.5 1 0 .6.7 1.3 1.3 1.3.3 0 .7-.2 1-.5L9 10.8l4.2 4.2c.2.3.7.3 1 .3.6 0 1.3-.7 1.3-1.3 0-.3-.2-.7-.3-1l-4.4-4L15 4.6c.3-.2.5-.5.5-.8 0-.7-.7-1.3-1.3-1.3-.3 0-.7.2-1 .3L9 7.1 4.8 2.8c-.3-.1-.7-.3-1-.3z"></path></svg></button><svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-loading" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18" style="display: none;"><path fill="#333" d="M4.4 4.4l.8.8c2.1-2.1 5.5-2.1 7.6 0l.8-.8c-2.5-2.5-6.7-2.5-9.2 0z"></path><path opacity=".1" d="M12.8 12.9c-2.1 2.1-5.5 2.1-7.6 0-2.1-2.1-2.1-5.5 0-7.7l-.8-.8c-2.5 2.5-2.5 6.7 0 9.2s6.6 2.5 9.2 0 2.5-6.6 0-9.2l-.8.8c2.2 2.1 2.2 5.6 0 7.7z"></path></svg></div>
             </div>`
     );
     
@@ -255,7 +255,7 @@ function savenloadlist(){
                 let savenloadhtml = `
                 <li id="saveload-`+ele.idx+`" class="d-plex">
                 `+ele.route+`
-                <button id="loadlist" onclick="loadlist('`+ele.idx+`')" data-idx="`+ele.idx+`"class="btn btn-red">불러오기</button>
+                <button type="button" onclick="loadlist('`+ele.idx+`')" data-idx="`+ele.idx+`"class="btn btn-red">불러오기</button>
                 </li>
                 `;
                 $('.saveloadlist').append(savenloadhtml);
@@ -461,7 +461,7 @@ function addMarker(features) {
                 <p> `+ element.properties.category_group_name + ` </p>
                 <p> `+ element.properties.address_name + ` </p>
                 <p> `+ element.properties.distance + ` </p>
-                <a href='#' id='addmarker' class='btn' onclick="addToListings('`+ element.properties.id + `')">목적지에 추가하기</a>`
+                <button type="button" id='addmarker' class='btn' onclick="addToListings('`+ element.properties.id + `')">목적지에 추가하기</button>`
             ;
         //TODO: 목적지에 있으면 제거하기 버튼 보여주기
         let marker = new mapboxgl.Marker()
@@ -508,7 +508,7 @@ function addToListings(id) {
             </div>
             <div class="card-body">
                 <p>`+ selectedFeature.properties.address_name + `</p>
-                <button onclick="removeFromListings('`+ id + `')" class="btn btn-danger w-100">
+                <button type="button" onclick="removeFromListings('`+ id + `')" class="btn btn-danger w-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -708,6 +708,7 @@ function listingtoDataBase(){
             console.log(response);
             if (response.success) {
                 $('#mapcode').data('idx', response.idx);
+                $('#mapcode').attr('data-idx', response.idx);
             }
         },
         error:function(error) {

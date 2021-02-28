@@ -24,6 +24,7 @@ drop table mprofile;
 drop table loginrecord;
 drop table auth;
 drop table bmembers;
+drop table authorreg;
 
 -- [ drop sequence ]
 
@@ -51,3 +52,4 @@ drop sequence sbhits_seq;
 drop sequence scomment_seq;
 drop sequence srecomm_seq;
 drop sequence sfiles_seq;
+drop sequence authorreg_seq;

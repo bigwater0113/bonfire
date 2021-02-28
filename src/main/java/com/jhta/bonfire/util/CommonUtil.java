@@ -175,7 +175,7 @@ public class CommonUtil {
         Map<String, Object> properties = vo.getProperties();
         
         String type = vo.getType();
-        String geometrytype=(String) geometry.get("geometrytype");
+        String geometrytype=(String) geometry.get("type");
         ArrayList<String> corrdinates = (ArrayList<String>) geometry.get("coordinates");
         String geometrycoordinateslng = corrdinates.get(0);
         String geometrycoordinatesLat = corrdinates.get(1);

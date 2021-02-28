@@ -28,7 +28,8 @@
 				<c:if test="${id == 'admin'}">
 					<th><input type="checkbox" id="allcheck"></th>
 				</c:if>
-					<th>글번호</th>
+					<th>No.</th>
+					<th></th>
 					<th>카테고리</th>
 					<th>작성자</th>
 					<th>제목</th>
@@ -43,6 +44,14 @@
 							<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 						</c:if>
 							<td>${vo.num }</td>
+							<c:choose>
+								<c:when test="${vo.thumbnail!=null }">
+									<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+								</c:when>
+								<c:otherwise>
+									<td></td>
+								</c:otherwise>
+							</c:choose>
 							<td>${vo.cname }</td>
 							<td>${vo.id }</td>
 							<c:choose>

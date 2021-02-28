@@ -3,12 +3,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
-<h2>디테일 페이지</h2>
+<style>
+	#t_wrap{margin-top: 50px;}
+	.form-control{display:inline-block;font-size:25px;}
+	#comm{width:1020px;}
+	.btn.btn-white.w-100{display:inline-block;font-size:25px;font-weight:bold;}
+	.btn.btn-white.w-100.add{width:100%!important; margin-bottom: 6px;}
+	.btn.btn-white.w-100.btns{width:30%!important;}
+	.btn.btn-white.w-100.mod{width:48%!important;float:right;}
+	.btn.btn-white.w-100.commDel{width:5%!important;position:relative;left:1085px;top:5px;}
+	.btn.btn-white.w-100.commEdit{width:5%!important;position:relative;left:960px;top:5px;}
+</style>
 <div id="t_wrap">
 	<div id="t_content">
-		<table border="1" width="800px">
+		<table border="1" width="800px" class="table table-vcenter table-mobile-md card-table">
 			<tr>
-				<td>제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"></td>
+				<td width="150px">제목</td><td>${vo.title }<input type="hidden" value="${vo.num }" id="num"></td>
 			</tr>
 			<tr>
 				<td>작성자</td><td>${vo.id }</td>
@@ -22,45 +32,54 @@
 			</tr>
 		</table>
 
-		<div id="t_recommend">
+		<span id="t_recommend">
+		</span>
+		&nbsp;&nbsp;
+		<span id="t_scrap">
+		</span>
+	<div style="width:1200px;">
+		<div style="width:300px;float:left;">
+			<c:if test="${id != null }">
+				<input type="button" class="btn btn-white w-100 btns" id="btn_recomm" value="추천" name="btn_recomm">
+			</c:if>
+			<c:if test="${id != null && vo.id!=id}">
+				<input type="button" class="btn btn-white w-100 btns" id="btn_scrap" value="스크랩" name="btn_scrap">
+			</c:if>
 		</div>
-		
-		<div id="t_scrap">
+		<div style="width:200px;float:right;">
+			<c:if test="${feedRole == 'ROLE_AUTHOR' && vo.ispost=='-1' }">
+				<input type="button" id="btn_post" class="btn btn-white w-100 mod" value="발행" name="btn_mod" onclick="location.href='${cp}/feedboard_changeStatus?num=${vo.num }'">
+			</c:if>
+			<c:if test="${vo.id==id }">
+				<input type="button" class="btn btn-white w-100 mod" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate?num=${vo.num }&recentpage=feed'">
+			</c:if>
 		</div>
-		
-	<c:if test="${id != null }">
-		<input type="button" id="btn_recomm" value="추천" name="btn_recomm">
-	</c:if>
-	<c:if test="${id != null && vo.id!=id}">
-		<input type="button" id="btn_scrap" value="스크랩" name="btn_scrap">
-	</c:if>
-	<c:if test="${vo.id==id }">
-		<input type="button" id="btn_mod" value="수정" name="btn_mod" onclick="location.href='${cp}/feedboard_goupdate?num=${vo.num }&recentpage=feed'">
-	</c:if>
-	<c:if test="${feedRole == 'ROLE_AUTHOR' && vo.ispost=='-1' }">
-		<input type="button" id="btn_post" value="발행" name="btn_mod" onclick="location.href='${cp}/feedboard_changeStatus?num=${vo.num }'">
-	</c:if>
+		</div>
 	</div>
+	
 	
 	<c:choose>
 		<c:when test="${from == null }">
-			<a href="${cp }/feedboard_feed_selectAllbyId">목록으로</a>
+			<a href="${cp }/feedboard_feed_selectAllbyId" class="btn btn-white w-100">목록으로</a>
 		</c:when>
 		<c:otherwise>
-			<a href="${cp }/scrapboard_feed_scraplist">목록으로</a>
+			<a href="${cp }/scrapboard_feed_scraplist" class="btn btn-white w-100">목록으로</a>
 		</c:otherwise>
 	</c:choose>
 	
-	<div>
-	<h4>Comments</h4>
+	<div style="margin-top:40px;margin-bottom:20px;">
+		<span>Comments</span>
 		<div id="t_comments">
 		</div>
 	</div>
 	
 	<c:if test="${id != null }">
-		<label for="comm">아이디: </label>${id }<input type="hidden" id="cid" value="${id }"><br>
-		<label for="comm">댓글: </label><input type="text" id="comm"><input type="button" value="등록" id="btn_ins">
-		<input type="button" value="수정완료" id="btn_edit" style="display: none"><br>
+		<label for="comm" style="width: 60px;">아이디:&nbsp;</label>${id }<input type="hidden" id="cid" value="${id }"><br>
+		<label for="comm" style="width: 60px;">댓글:&nbsp;</label><input type="text" class="form-control" id="comm">
+		<div style="display:inline-block;width:110px;">
+			<input type="button" value="등록" class="btn btn-white w-100 add" id="btn_ins">
+			<input type="button" value="수정완료" class="btn btn-white w-100 add" id="btn_edit" style="display: none"><br>
+		</div>
 	</c:if>
 </div>
 <script type="text/javascript">
@@ -78,16 +97,17 @@
 				var idx=$(this).find('idx').text();
 				var id=$(this).find('id').text();
 				var content=$(this).find('content').text();
-				var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+				var str="<div style='border: 1px solid #cccccc; height: auto;'>번호:"+idx;
+				if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+					str+="<input type=\"button\"  class=\"btn btn-white w-100 commDel\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+				}
+				if(id==cid){
+					str+="<input type=\"button\" class=\"btn btn-white w-100 commEdit\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
+				}
+				str+="<br>아이디:"+id+"<br>댓글:<span style='width:1000px;word-break:break-all;'>"+content+"</span><br>";
 				str+="<input type='hidden' value='"+idx+"'>"
 				str+="<input type='hidden' value='"+id+"'>"
 				str+="<input type='hidden' value='"+content+"'>"
-				if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
-					str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
-				}
-				if(id==cid){
-					str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
-				}
 				str+="</div>";
 				$("#t_comments").append(str)
 			});
@@ -108,16 +128,17 @@
 					var idx=$(this).find('idx').text();
 					var id=$(this).find('id').text();
 					var content=$(this).find('content').text();
-					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+					var str="<div style='border: 1px solid #cccccc; height: auto;'>번호:"+idx;
+					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+						str+="<input type=\"button\" class=\"btn btn-white w-100 commDel\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+					}
+					if(id==cid){
+						str+="<input type=\"button\"class=\"btn btn-white w-100 commEdit\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
+					}
+					str+="<br>아이디:"+id+"<br>댓글:<span style='width:1000px;word-break:break-all;'>"+content+"</span><br>";
 					str+="<input type='hidden' value='"+idx+"'>"
 					str+="<input type='hidden' value='"+id+"'>"
 					str+="<input type='hidden' value='"+content+"'>"
-					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
-						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
-					}
-					if(id==cid){
-						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
-					}
 					str+="</div>";
 					$("#t_comments").append(str);
 					$("#comm").val('');
@@ -128,7 +149,7 @@
 	
 	//댓글 삭제
 	function delCom(e){
-		var idx=$(e.target).prev().prev().prev().val();
+		var idx=$(e.target).next().next().next().next().next().next().val();
 		console.log(idx);
 		var num=$("#num").val();
 		$.ajax({
@@ -140,16 +161,17 @@
 					var idx=$(this).find('idx').text();
 					var id=$(this).find('id').text();
 					var content=$(this).find('content').text();
-					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+					var str="<div style='border: 1px solid #cccccc; height: auto;'>번호:"+idx;
+					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+						str+="<input type=\"button\"class=\"btn btn-white w-100 commDel\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+					}
+					if(id==cid){
+						str+="<input type=\"button\"class=\"btn btn-white w-100 commEdit\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
+					}
+					str+="<br>아이디:"+id+"<br>댓글:<span style='width:1000px;word-break:break-all;'>"+content+"</span><br>";
 					str+="<input type='hidden' value='"+idx+"'>"
 					str+="<input type='hidden' value='"+id+"'>"
 					str+="<input type='hidden' value='"+content+"'>"
-					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
-						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
-					}
-					if(id==cid){
-						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
-					}
 					str+="</div>";
 					$("#t_comments").append(str);
 				});
@@ -159,15 +181,14 @@
 	
 	//댓글 수정하기 버튼
 	function editCom(e){
-		var content=$(e.target).prev().prev().val();
+		var content=$(e.target).next().next().next().next().next().next().next().val();
 		$("#comm").val(content);
 		$("#btn_ins").css('display','none');
 		$("#btn_edit").css('display','');
-		
 		//댓글 수정 완료 버튼
 		$("#btn_edit").unbind("click").bind("click",function() {
 			var content2=$("#comm").val();
-			var idx=$(e.target).prev().prev().prev().prev().val();
+			var idx=$(e.target).next().next().next().next().next().val();
 			var num=$("#num").val();
 			console.log(content2);
 			console.log(idx);
@@ -181,16 +202,17 @@
 	 					var idx=$(this).find('idx').text();
 	 					var id=$(this).find('id').text();
 	 					var content=$(this).find('content').text();
-	 					var str="<div style='border: 1px solid black; height: auto;'> 번호:"+idx+"<br>아이디:"+id+"<br>댓글:"+content+"<br>";
+	 					var str="<div style='border: 1px solid #cccccc; height: auto;'>번호:"+idx;
+						if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
+							str+="<input type=\"button\"class=\"btn btn-white w-100 commDel\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
+						}
+						if(id==cid){
+							str+="<input type=\"button\"class=\"btn btn-white w-100 commEdit\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
+						}
+						str+="<br>아이디:"+id+"<br>댓글:<span style='width:1000px;word-break:break-all;'>"+content+"</span><br>";
 	 					str+="<input type='hidden' value='"+idx+"'>"
 	 					str+="<input type='hidden' value='"+id+"'>"
 	 					str+="<input type='hidden' value='"+content+"'>"
-	 					if(cid=='admin' || id == cid){	//세션 아이디가 어드민이거나, 댓글 작성자 본인일 경우
-	 						str+="<input type=\"button\" value=\"삭제\" name=\"del\" onclick=\"delCom(event)\">";
-	 					}
-	 					if(id==cid){
-	 						str+="<input type=\"button\" value=\"수정\" name=\"edit\" onclick=\"editCom(event)\">";
-	 					}
 	 					str+="</div>";
 	 					$("#t_comments").append(str);
 	 					var idx='';
@@ -199,11 +221,11 @@
 						$("#btn_edit").css('display','none');
 						$("#btn_ins").css('display','');
 	 				});
+	 				$("#comm").val("");
 	 			}
 	 		});
 		});
 	}
-	
 	
 	//추천 수 표시
 	var id="<%=(String)session.getAttribute("id")%>";
@@ -237,7 +259,6 @@
 			}
 			});
 		});
-
 	//스크랩 수 표시
 	var id="<%=(String)session.getAttribute("id")%>";
 	var num=$("#num").val();

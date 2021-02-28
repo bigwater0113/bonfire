@@ -9,7 +9,7 @@
 	#join_form input{margin-bottom:10px;}
 	#join_form input[type="text"]{width:285px;}
 	#join_form input[type="email"]{width:285px;}
-	#join_form input[type="password"]{width:285px;}
+	#join_form input[type="password"]{width:390px;}
 	#join_form input[type="date"]{width:285px;}
 /* 	#join_form a{border:1px solid black; width:280px;display:inline-block; text-align:center; */
 /* 		text-decoration: none; color:black; font-weight:bold; background-color: #eeeeee;box-shadow: 2px 2px 2px black;} */
@@ -18,15 +18,15 @@
 	.btn.btn-white.w-100.zip{width:41%!important;}
 	.btn.btn-white.w-100.join{width:98%!important;}
 </style>
-<div style="width:1200px;height:710px;">
+<div style="width:1200px;height:910px;">
 	<div id="join_form">
 		<form:form method="post" action="${cp }/join" id="joinForm">
-			<label for="id">아이디</label>
-			<input type="text" name="id" id="id" class="form-control" required="required" placeholder="영문/숫자 4~8자리"><span id="idMsg"></span><br>
-			<label for="pwd">비밀번호</label>
-			<input type="password" name="pwd" id="pwd" class="form-control" required="required" placeholder="영문/숫자 4~8자리"><span id="pwdMsg"></span><br>
-			<label for="check">비밀번호확인</label>
-			<input type="password" id="check" class="form-control" required="required"><span id="checkMsg"></span><br>
+			<label for="id">아이디</label><span id="idMsg"></span><br>
+			<input type="text" name="id" id="id" class="form-control" required="required" placeholder="영문/숫자 4~8자리" style="width:390px;">
+			<label for="pwd">비밀번호</label><span id="pwdMsg"></span><br>
+			<input type="password" name="pwd" id="pwd" class="form-control" required="required" placeholder="영문/숫자 4~8자리">
+			<label for="check">비밀번호확인</label><span id="checkMsg"></span><br>
+			<input type="password" id="check" class="form-control" required="required">
 			<label for="name">이름</label>
 			<input type="text" name="name" id="name" class="form-control" required="required"><br>
 			<label for="email">이메일</label>
@@ -39,7 +39,7 @@
 			<label for="phone">핸드폰번호</label>
 			<input type="text" name="phone" id="phone" class="form-control" required="required" placeholder="-없이 숫자만 적어주세요"><span id="phoneMsg"></span><br>
 			<label for="zipNo">우편번호</label>
-			<input type="text" name="zipno" id="zipno" class="form-control" readonly style="width:115px" required="required">
+			<input type="text" name="zipno" id="zipno" class="form-control" readonly style="width:115px;" required="required">
 			<input type="button" class="btn btn-white w-100 zip" value="주소검색" onclick="goPopup();"><br>
 			<label for="roadfulladdr">도로명주소</label>
 			<input type="text" name="roadfulladdr" id="roadfulladdr" class="form-control" style="width:285px" required="required" readonly><br>

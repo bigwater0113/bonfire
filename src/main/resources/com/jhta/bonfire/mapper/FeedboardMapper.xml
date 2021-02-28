@@ -123,16 +123,16 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow}  ]]>
 	</select>
 	
-<!-- 본인만 보는 글등록(일반 회원, 작가) -->
+<!-- 작성 - 본인만 보는 글등록(일반 회원, 작가) -->
 	<insert id="addPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
-		0,-1,null,sysdate,#{cname})
+		0,-1,null,sysdate,#{cname},#{thumbnail})
 	</insert>
 
 <!-- 발행 - 1. 글작성시 발행 (작가)-->
 	<insert id="postPosting" parameterType="feedboard">
 		insert into feedboard values (feedboard_seq.nextval,#{id},#{title},#{content},0,0,
-		0,1,sysdate,sysdate,#{cname})
+		0,1,sysdate,sysdate,#{cname},#{thumbnail})
 	</insert>
 	
 <!-- 발행 - 2. 이미 등록된 글 발행 (작가)-->
@@ -247,7 +247,7 @@
 			(
 	 			select a.*,rownum rnum from 
 	 			(
-					select fb.num num,fb.title title,fb.id writer,fb.content content,fb.recommend recommend,
+					select fb.num num,fb.title title,fb.id writer,fb.content content,fb.thumbnail thumbnail,fb.recommend recommend,
 					fb.hits hits,fb.scrap scrap,fb.postdate postdate,fb.cname cname,s.id id,s.adddate adddate 
 					from feedboard fb join scrapboard s on fb.num=s.num
 					where s.id=#{id}

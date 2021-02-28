@@ -40,7 +40,11 @@ public class FeedBoardController {
 	@PostMapping(value = "/member/feedboard_add")
     public String add(String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-        FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
+        String thumbnail="";
+		if(fileName!=null) {
+			thumbnail=fileName[0];
+		}
+        FeedboardVo vo=new FeedboardVo(0, id, title, content,thumbnail, 0, 0, 0, ispost, null, null, cname);
         int a=service.insertPosting(vo, ispost);
         if(a>0) {
         	return "redirect:/feedboard_feed_selectAllbyId";
@@ -53,7 +57,11 @@ public class FeedBoardController {
 	@PostMapping(value = "/member/feedboard_post")
 	public String post(String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
 		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
-		FeedboardVo vo=new FeedboardVo(0, id, title, content, 0, 0, 0, ispost, null, null, cname);
+		String thumbnail="";
+		if(fileName!=null) {
+			thumbnail=fileName[0];
+		}
+		FeedboardVo vo=new FeedboardVo(0, id, title, content,thumbnail, 0, 0, 0, ispost, null, null, cname);
 		int a=service.insertPosting(vo, ispost);
 		if(a>0) {
 			return "redirect:/feedboard_feed_selectAllbyId";
@@ -177,12 +185,13 @@ public class FeedBoardController {
 	  public String modify_add(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost1", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
         content=CommonUtil.changePath(sc, content, "feedboard", fileName);
         FeedboardVo vv=service.selectOne(num);
+        String thumbnail=vv.getThumbnail();
         int rec=vv.getRecommend();
         int hits=vv.getHits();
         int scrap=vv.getScrap();
         Date adddate=vv.getAdddate();
         int judge=-1;
-       	FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, null, cname);
+       	FeedboardVo vo=new FeedboardVo(num, id, title, content,thumbnail, rec, hits, scrap, ispost, adddate, null, cname);
         service.modify(vo,judge);
         System.out.println(recentpage);
         if(recentpage.equals("feed")) {
@@ -197,12 +206,13 @@ public class FeedBoardController {
 	public String modify_postA(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
 		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
 		FeedboardVo vv=service.selectOne(num);
+		String thumbnail=vv.getThumbnail();
 		int rec=vv.getRecommend();
 		int hits=vv.getHits();
 		int scrap=vv.getScrap();
 		Date adddate=vv.getAdddate();
 		int judge=1;
-		FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, null, cname);
+		FeedboardVo vo=new FeedboardVo(num, id, title, content,thumbnail, rec, hits, scrap, ispost, adddate, null, cname);
 		service.modify(vo,judge);
 		 System.out.println(recentpage);
 		 if(recentpage.trim().equals("feed")) {
@@ -217,13 +227,14 @@ public class FeedBoardController {
 	public String modify_postB(String recentpage,int num,String content, String id, String title, String cname, @RequestParam(value = "ispost2", defaultValue = "0") int ispost, @RequestParam(required = false) String... fileName){
 		content=CommonUtil.changePath(sc, content, "feedboard", fileName);
 		FeedboardVo vv=service.selectOne(num);
+		String thumbnail=vv.getThumbnail();
 		int rec=vv.getRecommend();
 		int hits=vv.getHits();
 		int scrap=vv.getScrap();
 		Date adddate=vv.getAdddate();
 		Date postdate=vv.getPostdate();
 		int judge=-1;
-		FeedboardVo vo=new FeedboardVo(num, id, title, content, rec, hits, scrap, ispost, adddate, postdate, cname);
+		FeedboardVo vo=new FeedboardVo(num, id, title, content,thumbnail, rec, hits, scrap, ispost, adddate, postdate, cname);
 		service.modify(vo,judge);
 		 System.out.println(recentpage);
 		 if(recentpage.equals("feed")) {

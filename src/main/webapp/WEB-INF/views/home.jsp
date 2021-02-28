@@ -7,7 +7,7 @@
 <style>
 	
 	#home_wrap{font-size:26px;}
-	#aSearch{text-decoration: none;color:white;}
+	#aSearch{text-decoration: none;color:white;text-shadow: 2px 2px 5px black;}
 	
 	input::-webkit-input-placeholder {
 	  color: #aaaaaa;
@@ -22,7 +22,7 @@
 	  font-weight:bold;
 	}
 	#home_search{width:1200px;height:650px;margin:auto;
-		background-image:url('${cp}/resources/images/testing_banner2.jpg');background-size: 100% 100%;}
+		background-image:url('${cp}/resources/images/banner1.jpg');background-size: 100% 100%;}
 	#home_search_form{width:600px;margin:auto;position:relative;top:580px;}
 	#home_recommAuthor{width:1200px;height:800px;margin:auto;background-color: #dadcde;}
 	#home_recommAuthor_Div{width:1000px;margin:auto;padding-top:220px;}
@@ -168,6 +168,14 @@
 	var Cnt;
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
+	var bannerNum=2;
+// 	setInterval(function() {
+// 		$("#home_search").css('backgroundImage',"url('${cp}/resources/images/banner"+bannerNum+".jpg')")
+// 		bannerNum++;
+// 		if(bannerNum==7){
+// 			bannerNum=1;
+// 		}
+// 	}, 5000);
 	$(window).scroll(function(){
 		$("#home_mask").css('top',$(window).scrollTop());
 		$("#home_searchResult").css('top',$(window).scrollTop()+windowHeight/2-250);
@@ -239,35 +247,58 @@
 							let pfilenameR=$(data)[0].list[2].pfilename;
 							let idR=$(data)[0].list[2].id;
 							let nicknameR=$(data)[0].list[2].nickname;
-							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							console.log(pfilenameL);
+							if(pfilenameL==null){
+								$("#leftProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							}
 							$("#leftResult #prof_id").html(idL);
 							$("#leftResult #prof_nickname").html(nicknameL);
 							$("#centerResult").unbind('click').bind('click',function(){
 								location.href='${cp}/@'+idC;
 							});
-							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							if(pfilenameC==null){
+								$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							}
 							$("#centerResult #prof_id").html(idC);
 							$("#centerResult #prof_nickname").html(nicknameC);
-							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							if(pfilenameR==null){
+								$("#rightProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							}
 							$("#rightResult #prof_id").html(idR);
 							$("#rightResult #prof_nickname").html(nicknameR);
 						}else{
+							$("#resultLeft").show();
 							let pfilenameL=$(data)[0].list[0].pfilename;
 							let idL=$(data)[0].list[0].id;
 							let nicknameL=$(data)[0].list[0].nickname;
 							let pfilenameC=$(data)[0].list[1].pfilename;
 							let idC=$(data)[0].list[1].id;
 							let nicknameC=$(data)[0].list[1].nickname;
-							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							if(pfilenameL==null){
+								$("#leftProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							}
 							$("#leftResult #prof_id").html(idL);
 							$("#leftResult #prof_nickname").html(nicknameL);
 							$("#centerResult").unbind('click').bind('click',function(){
 								location.href='${cp}/@'+idC;
 							});
-							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							if(pfilenameC==null){
+								$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							}
 							$("#centerResult #prof_id").html(idC);
 							$("#centerResult #prof_nickname").html(nicknameC);
 							$("#resultRight").hide();
+							$("#rightResult").hide();
 						}
 						$("#rightResult").css({
 							width:180,
@@ -334,19 +365,32 @@
 							let pfilenameR=$(data)[0].list[2].pfilename;
 							let idR=$(data)[0].list[2].id;
 							let nicknameR=$(data)[0].list[2].nickname;
-							$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							if(pfilenameL==null){
+								$("#leftProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#leftProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameL);
+							}
 							$("#leftResult #prof_id").html(idL);
 							$("#leftResult #prof_nickname").html(nicknameL);
 							$("#centerResult").unbind('click').bind('click',function(){
 								location.href='${cp}/@'+idC;
 							});
-							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							if(pfilenameC==null){
+								$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							}
 							$("#centerResult #prof_id").html(idC);
 							$("#centerResult #prof_nickname").html(nicknameC);
-							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							if(pfilenameR==null){
+								$("#rightProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							}
 							$("#rightResult #prof_id").html(idR);
 							$("#rightResult #prof_nickname").html(nicknameR);
 						}else{
+							$("#resultRight").show();
 							let pfilenameC=$(data)[0].list[0].pfilename;
 							let idC=$(data)[0].list[0].id;
 							let nicknameC=$(data)[0].list[0].nickname;
@@ -356,10 +400,18 @@
 							$("#centerResult").unbind('click').bind('click',function(){
 								location.href='${cp}/@'+idC;
 							});
-							$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							if(pfilenameC==null){
+								$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+							}
 							$("#centerResult #prof_id").html(idC);
 							$("#centerResult #prof_nickname").html(nicknameC);
-							$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							if(pfilenameR==null){
+								$("#rightProfile").prop("src","${cp}/resources/images/profileIcon.png");
+							}else{
+								$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+							}
 							$("#rightResult #prof_id").html(idR);
 							$("#rightResult #prof_nickname").html(nicknameR);
 							$("#leftResult").hide();
@@ -387,7 +439,12 @@
 			success:function(data){
 				var i=1;
 				$(data).find("item").each(function(){
-					$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+					var pfilename=$(this).find('pfilename').text();
+					if(pfilename!=''){
+						$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/upload/profile/'+pfilename+')');
+					}else{
+						$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/profileIcon.png)');
+					}
 					$("#author"+(i)).css('backgroundSize', '100% 100%');
 					var id=$(this).find('id').text();
 					var nickname=$(this).find('nickname').text();
@@ -396,7 +453,9 @@
 						location.href="${cp}/@"+id;
 					});
 					$("#author"+(i++)).append(`
-							<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>소개:`+intro+`</p>
+							<div style="width : 230px; height : 230px; background-color : #5d5d5d; opacity : 0.8;"></div>
+							<div style="width : 230px; height : 230px; position : relative; top : -230px; text-align : center; color : white; text-shadow : 1px 1px 4px black;"><div style="font-size : 38px; margin-top : 40px;">`+id+`</div>
+							<div style="font-size : 20px; margin-top : 5px;">`+nickname+`</div><div style="font-size : 20px; margin : 5px auto; overflow : hidden; width : 200px; height : 60px;">`+intro+`</div></div>
 							`);
 				});
 			}
@@ -410,7 +469,12 @@
 					var i=1;
 					$(data).find("item").each(function(){
 						$("#author"+(i)).empty();
-						$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+						var pfilename=$(this).find('pfilename').text();
+						if(pfilename!=''){
+							$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/upload/profile/'+pfilename+')');
+						}else{
+							$("#author"+(i)).css('backgroundImage', 'url(${cp}/resources/images/profileIcon.png)');
+						}
 						$("#author"+(i)).css('backgroundSize', '100% 100%');
 						var id=$(this).find('id').text();
 						var nickname=$(this).find('nickname').text();
@@ -419,7 +483,9 @@
 							location.href="${cp}/@"+id;
 						});
 						$("#author"+(i++)).append(`
-								<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>소개:`+intro+`</p>
+								<div style="width : 230px; height : 230px; background-color : #5d5d5d; opacity : 0.8;"></div>
+								<div style="width : 230px; height : 230px; position : relative; top : -230px; text-align : center; color : white; text-shadow : 1px 1px 4px black;"><div style="font-size : 38px; margin-top : 40px;">`+id+`</div>
+								<div style="font-size : 20px; margin-top : 5px;">`+nickname+`</div><div style="font-size : 20px; margin : 5px auto; overflow : hidden; width : 200px; height : 60px;">`+intro+`</div></div>
 								`);
 					});
 				}
@@ -519,10 +585,18 @@
 					$("#centerResult").unbind('click').bind('click',function(){
 						location.href='${cp}/@'+idC;
 					});
-					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					if(pfilenameC==null){
+						$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+					}else{
+						$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					}
 					$("#centerResult #prof_id").html(idC);
 					$("#centerResult #prof_nickname").html(nicknameC);
-					$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+					if(pfilenameR==null){
+						$("#rightProfile").prop("src","${cp}/resources/images/profileIcon.png");
+					}else{
+						$("#rightProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameR);
+					}
 					$("#rightResult #prof_id").html(idR);
 					$("#rightResult #prof_nickname").html(nicknameR);
 				}else{
@@ -536,7 +610,11 @@
 					$("#centerResult").unbind('click').bind('click',function(){
 						location.href='${cp}/@'+idC;
 					});
-					$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					if(pfilenameC==null){
+						$("#centerProfile").prop("src","${cp}/resources/images/profileIcon.png");
+					}else{
+						$("#centerProfile").prop("src","${cp}/resources/upload/profile/"+pfilenameC);
+					}
 					$("#centerResult #prof_id").html(idC);
 					$("#centerResult #prof_nickname").html(nicknameC);
 				}

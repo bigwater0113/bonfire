@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.form-control{display:inline-block;font-size:20px;font-weight:bold;}
+.btn.btn-white.w-100{display:inline-block;font-size:22px;font-weight: bold;}
+.btn.btn-white.w-100.all{width:13%!important;}
+.btn.btn-white.w-100.search{width:20%!important;height:98%!important;}
+
+</style>
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
 </head>
 <body>
@@ -63,23 +70,26 @@
 
 <c:if test="${sessionScope.id==vo.id || sessionScope.id=='admin'}">
 
-<div>
-		<a href="${cp }/qna/delete?num=${vo.num}">삭제</a>
-		<a href="${cp }/qna/update?num=${vo.num}">수정</a>
+<div >
+		<a href="${cp }/qna/delete?num=${vo.num}" class="btn btn-white w-100 all">삭제</a>
+		<a href="${cp }/qna/update?num=${vo.num}" class="btn btn-white w-100 all">수정</a>
 </div>
 
 </c:if>
-답글목록
-<div id="commList">
 
+<div style="margin-top:40px;margin-bottom:20px;">
+<span>문의 답변 내역</span>
+<div id="commList" >
+</div>
 </div>
 
 
 <div id="commAdd">
 		<input type="hidden" value="${vo.num }" id="commnum">
 		<c:if test="${sessionScope.id=='admin'}">
-		답글 <textarea rows="6" cols="40" id="comments"></textarea>
-		<input type="button" value="등록" id="addBtn">
+		답글 <br>
+		<textarea rows="6" cols="100" id="comments" class="form-control"></textarea>
+		<input type="button" value="등록" id="addBtn" class="btn btn-white w-100 all">
 		</c:if>
 </div>
 
@@ -93,6 +103,7 @@ $(function(){
 		console.log(test);
 		$.getJSON('${cp}/qna/commm',{"comments":comments,"commnum":commnum},function(data){//1.주소2.파라미터를보내는 값
 			if(data.code=='success'){
+				document.getElementById("comments").value="";
                 getList();
             }else if(data.code=='fail'){
                 alert("ERROR");

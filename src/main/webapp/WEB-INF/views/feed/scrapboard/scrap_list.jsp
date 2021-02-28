@@ -33,33 +33,33 @@
                   <th>게시 날짜</th>
                   <th><input type="checkbox" id="allcheck"></th>
                </tr>
-               <c:forEach var="vo" items="${list }">
                 <c:choose>
-			         <c:when test="${vo.title != null}">
-                  <tr>
-                        <td>${vo.cname }</td>
-                        <td>${vo.writer}</td>
-                        <c:choose>
-								<c:when test="${vo.thumbnail!=null }">
-									<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
-								</c:when>
-								<c:otherwise>
-									<td></td>
-								</c:otherwise>
-							</c:choose>
-                        <td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
-                        <td>${vo.hits}</td>
-                        <td>${vo.recommend}</td>
-                        <td>${vo.scrap}</td>
-                        <td>${vo.postdate}</td>
-                        <td><input type="checkbox" name="checkk" value=${vo.num }></td>
-               </tr>
+	                <c:when test="${!empty list }">
+		               <c:forEach var="vo" items="${list }">
+		                  <tr>
+		                        <td>${vo.cname }</td>
+		                        <td>${vo.writer}</td>
+		                        <c:choose>
+										<c:when test="${vo.thumbnail!=null }">
+											<td><img src="${cp }/resources/feedboard/${vo.thumbnail }" style="width: 100px; height: 100px;"></td>
+										</c:when>
+										<c:otherwise>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+		                        <td><a href="${cp }/scrapboard_detail?num=${vo.num }&from=scrap">${vo.title }</a></td>
+		                        <td>${vo.hits}</td>
+		                        <td>${vo.recommend}</td>
+		                        <td>${vo.scrap}</td>
+		                        <td>${vo.postdate}</td>
+		                        <td><input type="checkbox" name="checkk" value=${vo.num }></td>
+		               </tr>
+		               </c:forEach>
 			         </c:when>
-			         <c:otherwise>
-			          		 스크랩한 게시글이 없습니다!
-		            </c:otherwise>
+				     <c:otherwise>
+				       		 <tr><td colspan="9" style="text-align: center;">스크랩한 게시글이 없습니다!</td></tr>
+			         </c:otherwise>
 		         </c:choose>
-               </c:forEach>
             </table>
          <div id="scrap_editlist" style="float:left:">
             <c:if test="${id == feedId}">

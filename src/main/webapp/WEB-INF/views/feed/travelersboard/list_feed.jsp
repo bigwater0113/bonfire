@@ -56,7 +56,9 @@
 						<th><input type="checkbox" id="allcheck"></th>
 					</c:if>
 				</tr>
-				<c:forEach var="vo" items="${list }">
+			 <c:choose>
+	                <c:when test="${!empty list }">
+		               <c:forEach var="vo" items="${list }">
 					<tr>
 							<td>${vo.cname }</td>
 							<c:choose>
@@ -81,7 +83,13 @@
 							<c:if test="${id == feedId || feedRole == 'ROLE_ADMIN'}">
 								<td><input type="checkbox" name="checkk" value=${vo.num }></td>
 							</c:if>
-				</c:forEach>
+							</tr>
+						 </c:forEach>
+			         </c:when>
+				     <c:otherwise>
+				       		 <tr><td colspan="9" style="text-align: center;">게시글이 없습니다!</td></tr>
+			         </c:otherwise>
+		         </c:choose>
 			</table>
 			<div id="feedboard_editlist" style="width:900px;">
 				<c:if test="${id == feedId}">

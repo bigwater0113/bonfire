@@ -42,12 +42,3 @@
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}.jsp"/>
 	</definition>
 </tiles-definitions>
-
-
-
-
-
-
-
-
-

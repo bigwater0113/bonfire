@@ -18,21 +18,38 @@
     <select id="getPlanMapByIdx" parameterType="int" resultType="localmap">
         select 
             TYPE, 
-            GEOMETRYTYPE, 
-            GEOMETRYCOORDINATESLNG, 
-            GEOMETRYCOORDINATESLAT, 
-            PROPERTIESADDRESS_NAME, 
-            PROPERTIESCATEGORY_GROUP_CODE, 
-            PROPERTIESCATEGORY_GROUP_NAME, 
-            PROPERTIESCATEGORY_NAME, 
-            PROPERTIESDISTANCE, 
-            PROPERTIESID, 
-            PROPERTIESPHONE, 
-            PROPERTIESPLACE_NAME, 
-            PROPERTIESPLACE_URL, 
-            PROPERTIESROAD_ADDRESS_NAME
+            G_TYPE, 
+            G_COORDINATESLNG, 
+            G_COORDINATESLAT, 
+            P_ADDRESS_NAME, 
+            P_CATEGORY_GROUP_CODE, 
+            P_CATEGORY_GROUP_NAME, 
+            P_CATEGORY_NAME, 
+            P_ID, 
+            P_PHONE, 
+            P_PLACE_NAME, 
+            P_PLACE_URL, 
+            P_ROAD_ADDRESS_NAME
         from tripplan t, localmap l 
-        where t.placeid=l.propertiesid and t.idx=#{idx}
+        where t.placeid=l.P_ID and t.idx=#{idx}
+    </select>
+    <select id="getPlanMapByUser" parameterType="string" resultType="localmap">
+        select 
+            TYPE, 
+            G_TYPE, 
+            G_COORDINATESLNG, 
+            G_COORDINATESLAT, 
+            P_ADDRESS_NAME, 
+            P_CATEGORY_GROUP_CODE, 
+            P_CATEGORY_GROUP_NAME, 
+            P_CATEGORY_NAME, 
+            P_ID, 
+            P_PHONE, 
+            P_PLACE_NAME, 
+            P_PLACE_URL, 
+            P_ROAD_ADDRESS_NAME
+        from tripplan t, localmap l 
+        where t.placeid=l.P_ID and t.id=#{id}
     </select>
 
 </mapper>

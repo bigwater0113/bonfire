@@ -1,11 +1,7 @@
 package com.jhta.bonfire.service;
 
-import java.util.HashMap;
-
 import com.jhta.bonfire.dao.LocalMapDao;
-import com.jhta.bonfire.dao.TripPlanDao;
 import com.jhta.bonfire.util.CommonUtil;
-import com.jhta.bonfire.vo.LocalMapVo;
 import com.jhta.bonfire.vo.geoJsonVo;
 
 import org.springframework.beans.factory.annotation.Autowired;

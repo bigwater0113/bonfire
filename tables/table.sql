@@ -280,6 +280,30 @@ CREATE TABLE sfiles
   orgfilename  varchar2(200),
   CONSTRAINT PK_sfiles PRIMARY KEY (idx, num)
 );
+--지도용 테이블
+create table localmap(
+    type varchar2(8),
+    g_type varchar2(10),
+    g_coordinateslng varchar2(20),
+    g_coordinatesLat varchar2(20),
+    p_address_name varchar2(500),
+    p_category_group_code varchar2(5),
+    p_category_group_name varchar2(20),
+    p_category_name varchar2(500),
+    p_id varchar2(10) PRIMARY key, 
+    p_phone varchar2(15),
+    p_place_name varchar2(100),
+    p_place_url varchar2(500),
+    p_road_address_name varchar2(500)
+);
+--지도 경로용 테이블
+create table tripplan(
+    idx varchar2(10),
+    id varchar2(40),
+    placeid varchar2(10),
+    triporder varchar2(10),
+    constraint PK_tripplan Primary key(idx, triporder)
+);
 
 -- [ 테이블 생성 끝! ]
 ---------------------------------------------------------------
@@ -458,4 +482,12 @@ ALTER TABLE follow
     FOREIGN KEY (follow)
     REFERENCES bmembers (id);
 
-      
+ALTER TABLE tripplan
+  ADD CONSTRAINT FK_localmap_TO_tripplan
+    FOREIGN KEY (placeid)
+    REFERENCES localmap (p_id);
+    
+ALTER TABLE tripplan
+  ADD CONSTRAINT FK_bmembers_TO_tripplan
+    FOREIGN KEY (id)
+    REFERENCES bmembers (id);

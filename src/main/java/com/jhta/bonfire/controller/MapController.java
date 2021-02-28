@@ -3,6 +3,7 @@ package com.jhta.bonfire.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import com.jhta.bonfire.service.LocalMapService;
 import com.jhta.bonfire.service.TripPlanService;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -31,39 +34,23 @@ public class MapController {
     @Autowired private TripPlanService planService;
     Logger logger = LoggerFactory.getLogger(getClass());
     
-    // private static HashMap<String, String> mapCategory = new HashMap<>();
-    // static{
-    //     mapCategory.put("MT1","대형마트");
-    //     mapCategory.put("CS2","편의점");
-    //     mapCategory.put("PS3","어린이집, 유치원");
-    //     mapCategory.put("SC4","학교");
-    //     mapCategory.put("AC5","학원");
-    //     mapCategory.put("PK6","주차장");
-    //     mapCategory.put("OL7","주유소, 충전소");
-    //     mapCategory.put("SW8","지하철역");
-    //     mapCategory.put("BK9","은행");
-    //     mapCategory.put("CT1","문화시설");
-    //     mapCategory.put("AG2","중개업소");
-    //     mapCategory.put("PO3","공공기관");
-    //     mapCategory.put("AT4","관광명소");
-    //     mapCategory.put("AD5","숙박");
-    //     mapCategory.put("FD6","음식점");
-    //     mapCategory.put("CE7","카페");
-    //     mapCategory.put("HP8","병원");
-    //     mapCategory.put("PM9","약국");
-    // }
-    
     @RequestMapping(value = {"/map"})
     public String tourData(
-        Model model
+        @RequestParam Optional<Integer> routeidx
+        ,Model model
     ){
-
-        return ".home.map.map";
+        routeidx.ifPresent(idx->{
+            // List<geoJsonVo> savedlist = planService.getPlanMapByIdx(idx);
+            // JSONArray json = new JSONArray();
+            // json.addAll(savedlist);
+            model.addAttribute("idx", idx);
+        });
+        return "map/map";
     }
 
-    @RequestMapping(value = {"/map/addmap"})
+    @RequestMapping(value = {"/map/api/addmap"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseBody
-    public String addmap(
+    public HashMap<String, Object> addmap(
         @RequestBody geoJsonVo vo
     ) {
         logger.info("vo", vo);
@@ -77,12 +64,12 @@ public class MapController {
             result=!result;
         }
         map.put("success", result);
-        return new JSONObject(map).toJSONString();
+        return map;
     }
 
-    @RequestMapping(value={"/map/addroutes"})
+    @RequestMapping(value={"/map/api/addroutes"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseBody
-    public String addroutes(
+    public HashMap<String, Object> addroutes(
         @RequestBody List<geoJsonVo> addedMarkers
         , @AuthenticationPrincipal Authentication authentication
     ) {
@@ -109,17 +96,48 @@ public class MapController {
                 map.put("idx", null);
             }
         }
-        return new JSONObject(map).toJSONString();
+        return map;
     }
 
-    @RequestMapping(value = {"/map/routes/{idx}"})
+    @RequestMapping(value={"/map/api/myroutes"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseBody
-    public String getroutes(
+    public JSONObject myroutes(
+        @AuthenticationPrincipal Authentication authentication
+    ) {
+        Optional<String> id = Optional.ofNullable(authentication.getName());
+        List<geoJsonVo> list=new ArrayList<>();
+        List<Integer> listidx = new ArrayList<>();
+        id.ifPresent(user->{
+            list.addAll(planService.getPlanByUser(user));
+            listidx.addAll(planService.getIdxByUser(user));
+        });
+        // JSONObject metadata = new JSONObject();
+        ArrayList<HashMap<Object, Object>> metadata=new ArrayList<>();
+        for (Integer idx : listidx) {
+            HashMap<Object, Object> idxroutemap = new HashMap<>();
+            StringBuilder sb = new StringBuilder();
+            List<geoJsonVo> idxlist=new ArrayList<>();
+            idxlist.addAll(planService.getPlanMapByIdx(idx));
+            for (geoJsonVo vo : idxlist) {
+                sb.append(vo.getProperties().get("place_name")+"->");
+            }
+            sb.delete(sb.length()-2, sb.length());
+            idxroutemap.put("idx", idx);
+            idxroutemap.put("route", sb.toString());
+            metadata.add(idxroutemap);
+        }
+        JSONObject json = new JSONObject();
+        json.put("features", list);
+        json.put("metadata", metadata);
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/map/api/routes/{idx}"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public List<geoJsonVo> getroutes(
         @PathVariable int idx
     ) {
-        List<geoJsonVo> savedlist = planService.getPlanMapByIdx(idx);
-        JSONArray json = new JSONArray();
-        json.addAll(savedlist);
-        return json.toJSONString();
+        return planService.getPlanMapByIdx(idx);
     }
 }

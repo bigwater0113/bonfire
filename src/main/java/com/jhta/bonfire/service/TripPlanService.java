@@ -27,6 +27,13 @@ public class TripPlanService {
     }
     public int getIndex() {return dao.getIndex();}
     public List<Integer> getIdxByUser(String id) {return dao.getIdxByUser(id);}
+    public List<geoJsonVo> getPlanByUser(String id) {
+        List<LocalMapVo> maps = dao.getPlanMapByUser(id);
+        List<geoJsonVo> result = new ArrayList<>();
+        for (LocalMapVo localMapVo : maps) {result.add(CommonUtil.toGeoJSON(localMapVo));}
+        return result;
+    }
+
     public List<TripPlanVo> getPlanIdxByIdx(int idx) {return dao.getPlanIdxByIdx(idx);}
     public List<geoJsonVo> getPlanMapByIdx(int idx) {
         List<LocalMapVo> maps = dao.getPlanMapByIdx(idx);

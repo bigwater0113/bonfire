@@ -28,7 +28,7 @@
 	</select>
 	<select id="popularArticle_hits" resultType="populararticlehits">
 		select * from (
-		select fb.num,fb.id,m.nickname,fb.title,fb.hits 
+		select fb.num,fb.id,m.nickname,fb.title,fb.hits, fb.thumbnail 
 		from feedboard fb join mprofile m 
 		on fb.id=m.id 
 		order by hits desc)
@@ -36,7 +36,7 @@
 	</select>
 	<select id="popularArticle_recomm" resultType="populararticlerecomm">
 		select * from (
-		select fb.num,fb.id,m.nickname,fb.title,fb.recommend 
+		select fb.num,fb.id,m.nickname,fb.title,fb.recommend, fb.thumbnail
 		from feedboard fb join mprofile m 
 		on fb.id=m.id 
 		order by recommend desc)

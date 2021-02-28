@@ -164,11 +164,15 @@ public class FeedBoardController {
 		service.insertHits(id,num);
 		FeedboardVo vo=service.selectOne(num);
 		model.addAttribute("vo",vo);
-		if(recentpage.equals("feed")) {
-        	return ".home.travelersboard.detail_feed";
-        }else {
-        	return ".home.travelersboard.detail_main";
-        }
+		if(recentpage!=null) {
+			if(recentpage.equals("feed")) {
+				return ".home.travelersboard.detail_feed";
+			}else {
+				return ".home.travelersboard.detail_main";
+			}
+		}else {
+			return ".home.travelersboard.detail_main";
+		}
 	}
 	
 	//수정페이지

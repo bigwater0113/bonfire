@@ -28,7 +28,7 @@
 				<td>카테고리</td><td>${vo.cname }</td>
 			</tr>
 			<tr>
-				<td>본문</td><td>${vo.content }</td>
+				<td colspan="2">${vo.content }</td>
 			</tr>
 		</table>
 

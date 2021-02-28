@@ -35,7 +35,7 @@
 	#home_placeList li{display: inline-block;}
 	.authorDiv{width:230px;height:230px; margin-left:10px;margin-right:10px; float:left}
 	.articleDiv{width:170px;height:170px; margin-left:5px;margin-right:5px; }
-	.placeDiv{width:285px;height:285px; margin-left:10px;margin-right:10px; }
+	.placeDiv{width:285px;height:285px; margin-left:10px;margin-right:10px; text-align: center; padding-top: 96px;}
 	.btnIcon{opacity:0.5;}
 	.btnIcon:hover{opacity:1;}
 	.aHover{color:#aaaaaa;text-decoration:none; }
@@ -108,9 +108,9 @@
     <div id="home_recommAuthor">
     	<div id="home_recommAuthor_Div">
 	   		<span>추천작가 <img src="${cp }/resources/images/refreshIcon.png" class="btnIcon" id="refreshAuthor" style="width:17px;height:15px;"></span>
-			<div >
+			<div style = "margin-top: 20px;">
 				<img src="${cp }/resources/images/leftArrowIcon2.png"  class="btnIcon" id="authorLeft"
-							style="width:80px;height:80px;position:relative;top:-80px;left:0px;">
+							style="width:60px;height:60px;position:relative;top:-100px;left:0px;">
 				<div  id="home_authors" style="width:750px;display:inline-block;overflow:hidden;position:relative;left:40px;">
 					<div id="home_authorList" style="width:5000px;float:left;position:relative;">
 						<c:forEach var="i" begin="1" end="12">
@@ -119,14 +119,14 @@
 					</div>
 				</div>
 				<img src="${cp }/resources/images/rightArrowIcon2.png"  class="btnIcon" id="authorRight"
-							style="width:80px;height:80px;position:relative;top:-80px;left:80px;">
+							style="width:60px;height:60px;position:relative;top:-100px;left:80px;">
 			</div>
 		</div>
     </div>
     <div id="home_popularArticle">
     	<div id="home_popularArticle_Div">
 	    	<ul>
-	    		<li>
+	    		<li style = "margin-bottom: 20px;">
 	    			인기글 <a href="javascript:popularHits()" class="aHover">조회</a>
 	    			<a href="javascript:popularRecomm()" class="aHover">추천</a>
 	    		</li>
@@ -145,7 +145,7 @@
     <div id="home_popularPlace">
    		<div id="home_popularPlace_Div">
 	    	<ul>
-	    		<li>인기여행지</li>
+	    		<li style = "margin-bottom: 20px;">인기여행지</li>
 	    		<li>
 		    		<ul id="home_placeList">
 		   				<li>
@@ -169,6 +169,7 @@
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
 	var bannerNum=2;
+	var isLogin="<%=(String)session.getAttribute("id")%>";
 // 	setInterval(function() {
 // 		$("#home_search").css('backgroundImage',"url('${cp}/resources/images/banner"+bannerNum+".jpg')")
 // 		bannerNum++;
@@ -522,18 +523,30 @@
 			success:function(data){
 				var i=1;
 				$(data).find("item").each(function(){
-					$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+					var thumbnail=$(this).find('thumbnail').text();
+					if(thumbnail!=''){
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
+					}else{
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();
 					var id=$(this).find('id').text();
 					var nickname=$(this).find('nickname').text();
 					var title=$(this).find('title').text();
 					$("#article"+(i)).click(function(){
-						location.href="${cp}/feedboard_detail?num="+num;
+						if(isLogin == "null"){
+							location.href="${cp}/login";
+						}else{
+							location.href="${cp}/feedboard_detail?num="+num;
+						}
 					});
 					$("#article"+(i++)).append(`
-							<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>제목:`+title+`</p>
-							`);
+							<div style="width : 170px; height : 170px; background-color : #5d5d5d; opacity : 0.8;"></div>
+							<div style="width : 170px; height : 170px; position : relative; top : -170px; text-align : center; color : white; text-shadow : 1px 1px 4px black;">
+							<div style="font-size : 23px;  margin : 5px auto; width : 150px; height : 60px; overflow : hidden; margin-top : 40px;">`+title+`</div>
+							<div style="font-size : 17px; margin : 10px auto;">by. `+id+`</div></div>`
+							);
 				});
 			}
 		});
@@ -632,18 +645,30 @@
 				var i=1;
 				$(data).find("item").each(function(){
 					$("#article"+(i)).empty();
-					$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+					var thumbnail=$(this).find('thumbnail').text();
+					if(thumbnail!=''){
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
+					}else{
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();
 					var id=$(this).find('id').text();
 					var nickname=$(this).find('nickname').text();
 					var title=$(this).find('title').text();
 					$("#article"+(i)).click(function(){
-						location.href="${cp}/feedboard_detail?num="+num;
+						if(isLogin == "null"){
+							location.href="${cp}/login";
+						}else{
+							location.href="${cp}/feedboard_detail?num="+num;
+						}
 					});
 					$("#article"+(i++)).append(`
-							<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>제목:`+title+`</p>
-							`);
+							<div style="width : 170px; height : 170px; background-color : #5d5d5d; opacity : 0.8;"></div>
+							<div style="width : 170px; height : 170px; position : relative; top : -170px; text-align : center; color : white; text-shadow : 1px 1px 4px black;">
+							<div style="font-size : 23px;  margin : 5px auto; width : 150px; height : 60px; overflow : hidden; margin-top : 40px;">`+title+`</div>
+							<div style="font-size : 17px; margin : 10px auto;">by. `+id+`</div></div>`
+							);
 				});
 			}
 		});
@@ -657,17 +682,29 @@
 				var i=1;
 				$(data).find("item").each(function(){
 					$("#article"+(i)).empty();
-					$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
+					var thumbnail=$(this).find('thumbnail').text();
+					if(thumbnail!=''){
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/feedboard/'+thumbnail+')');
+					}else{
+						$("#article"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo2.png)');
+					}
 					$("#article"+(i)).css('backgroundSize', '100% 100%');
 					var num=$(this).find('num').text();
 					var id=$(this).find('id').text();
 					var nickname=$(this).find('nickname').text();
 					var title=$(this).find('title').text();
 					$("#article"+(i)).click(function(){
-						location.href="${cp}/feedboard_detail?num="+num;
+						if(isLogin == "null"){
+							location.href="${cp}/login";
+						}else{
+							location.href="${cp}/feedboard_detail?num="+num;
+						}
 					});
 					$("#article"+(i++)).append(`
-							<p>id:`+id+`</p><p>닉네임:`+nickname+`</p><p>제목:`+title+`</p>
+							<div style="width : 170px; height : 170px; background-color : #5d5d5d; opacity : 0.8;"></div>
+							<div style="width : 170px; height : 170px; position : relative; top : -170px; text-align : center; color : white; text-shadow : 1px 1px 4px black;">
+							<div style="font-size : 23px;  margin : 5px auto; width : 150px; height : 60px; overflow : hidden; margin-top : 40px;">`+title+`</div>
+							<div style="font-size : 17px; margin : 10px auto;">by. `+id+`</div></div>
 							`);
 				});
 			}
@@ -681,15 +718,26 @@
 		success:function(data){
 			var i=1;
 			$(data).find("item").each(function(){
-				$("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/bonfire_logo.png)');
-				$("#place"+(i)).css('backgroundSize', '100% 100%');
 				var cname=$(this).find('cname').text();
+				switch(cname){
+				case "서울" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/서울.jpg)'); break;
+				case "경기" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/경기도.jpg)'); break;
+				case "경남" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/경남.jpg)'); break;
+				case "경북" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/경북.gif)'); break;
+				case "전남" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/전남.jpg)'); break;
+				case "전북" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/전북.png)'); break;
+				case "충남" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/충남.jpg)'); break;
+				case "충북" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/충북.jpg)'); break;
+				case "강원" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/강원도.png)'); break;
+				case "제주" : $("#place"+(i)).css('backgroundImage', 'url(${cp}/resources/images/제주.jpg)'); break;
+				}
+				$("#place"+(i)).css('backgroundSize', '100% 100%');
 				var cnamecnt=$(this).find('cnamecnt').text();
 				$("#place"+(i)).click(function(){
 					location.href="${cp}/feedboard_selectByRegion?cname="+cname;
 				});
 				$("#place"+(i++)).append(`
-						<p>cname:`+cname+`</p><p>cnamecnt:`+cnamecnt+`</p>
+						<span style="color : white; font-size : 70px; text-shadow : 1.5px 1.5px 1.5px black">`+cname+`</span>
 						`);
 			});
 		}

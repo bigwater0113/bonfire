@@ -6,16 +6,18 @@ public class PopularArticleRecommVo {
 	private String nickname;
 	private String title;
 	private int recommend;
+	private String thumbnail;
 	public PopularArticleRecommVo() {
 		super();
 	}
-	public PopularArticleRecommVo(int num, String id, String nickname, String title, int recommend) {
+	public PopularArticleRecommVo(int num, String id, String nickname, String title, int recommend, String thumbnail) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.nickname = nickname;
 		this.title = title;
 		this.recommend = recommend;
+		this.thumbnail = thumbnail;
 	}
 	public int getNum() {
 		return num;
@@ -46,6 +48,12 @@ public class PopularArticleRecommVo {
 	}
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	
 }

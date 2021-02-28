@@ -6,16 +6,18 @@ public class PopularArticleHitsVo {
 	private String nickname;
 	private String title;
 	private int hits;
+	private String thumbnail;
 	public PopularArticleHitsVo() {
 		super();
 	}
-	public PopularArticleHitsVo(int num, String id, String nickname, String title, int hits) {
+	public PopularArticleHitsVo(int num, String id, String nickname, String title, int hits, String thumbnail) {
 		super();
 		this.num = num;
 		this.id = id;
 		this.nickname = nickname;
 		this.title = title;
 		this.hits = hits;
+		this.thumbnail = thumbnail;
 	}
 	public int getNum() {
 		return num;
@@ -46,6 +48,12 @@ public class PopularArticleHitsVo {
 	}
 	public void setHits(int hits) {
 		this.hits = hits;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	
 }

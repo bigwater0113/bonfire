@@ -26,3 +26,17 @@
 		</form:form>
 	</div>
 </div>
+<script>
+	$(function(){
+		$("#id").keydown(function(key) {
+			if (key.keyCode == 13) {
+				$("#login_form").submit();
+			}
+		});
+		$("#pwd").keydown(function(key) {
+			if (key.keyCode == 13) {
+				$("#login_form").submit();
+			}
+		});
+	})
+</script>

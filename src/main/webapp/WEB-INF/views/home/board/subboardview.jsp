@@ -164,8 +164,8 @@ textarea.autosize {
         load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
         load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
         load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
-        load('${cp }/resources/map/routemap.js', 'js');
-        load('${cp }/resources/map/routemap.css', 'css');
+        // load('${cp }/resources/map/routemap.js', 'js');
+        // load('${cp }/resources/map/routemap.css', 'css');
         $('#mapcode').load('${cp}/map');
     }
     //---------------------

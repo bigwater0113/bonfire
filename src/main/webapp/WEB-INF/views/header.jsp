@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <!-- header.jsp -->
-<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<!-- <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script> -->
 <style>
 	#header_logo{width:300px;height:100px;float:left;}
 	#logo_txt{top:20px;}

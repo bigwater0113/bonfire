@@ -41,4 +41,9 @@
 	<definition name=".feed.*" template="/WEB-INF/views/feed/layout2.jsp" extends=".feed">
 		<put-attribute name="content" value="/WEB-INF/views/feed/{1}.jsp"/>
 	</definition>
+
+	<definition name=".board.*" template="/WEB-INF/views/home/board/layout-side.jsp" extends=".feed">
+		<put-attribute name="content" value="/WEB-INF/views/home/board/{1}.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/home/board/side.jsp"/>
+	</definition>
 </tiles-definitions>

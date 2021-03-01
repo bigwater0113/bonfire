@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- jquery 사용을 위해 import -->
-<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<!-- <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script> -->
 <!-- bootstrap을 사용하지않은 summernote-lite의 사용을 위해 import -->
 <script type="text/javascript" src="${cp }/resources/js/summernote/summernote-lite.js"></script>
 <!-- toolbar ko-KR 사용을 위해 import -->
@@ -15,6 +15,9 @@
     #editorbox{
         background-color: white;
     }
+    .btn-blue{
+        font-size: 25px !important;
+    }
 </style>
 <div>
     <div id='editorarea'>
@@ -22,20 +25,28 @@
         <div id="editorarea_body">
             <form:form id="write" action="${cp }/member/write" method="post">
                 <input type="hidden" name="boardName" value="${boardName }">
-                <div id="titlename">
-                    <input type="text" class="form-control" name="title" placeholder="제목">
+                <div id="titlename" class="form-group row">
+                    <label for="title" class="form-label col-1 col-form-label">제목</label>
+                    <div class="col">
+                        <input type="text" class="form-control" name="title" placeholder="제목">
+                    </div>
                 </div>
-                <div id="categoryname">
-                    <select class="form-select" name="cname" aria-label="category">
-                        <c:forEach items='${catlist}' var='cats'>
-                            <option selected value="${cats}">${cats}</option>
-                        </c:forEach>
-                    </select>
+                <div id="categoryname" class="form-group row">
+                    <label for="cname" class="form-label col-1 col-form-label">카테고리</label>
+                    <div class="col">
+                        <select class="form-select" name="cname" aria-label="category">
+                            <c:forEach items='${catlist}' var='cats'>
+                                <option selected value="${cats}">${cats}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
                 <div id=editorbox>
                     <textarea name="content" id="summernote"></textarea>
                 </div>
-                <button type="submit">작성하기</button>
+                <div>
+                    <button type="submit" class="btn btn-blue w-100" >작성하기</button>
+                </div>
             </form:form>
         </div>
         <div id="editorarea_foot"></div>

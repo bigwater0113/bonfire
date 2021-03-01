@@ -6,8 +6,11 @@ let map;
 let addedMarkers=[];
 
 
-if (!savedidx) {
-    if ($('#mapcode')!=null && $('#mapcode').data('idx')!=undefined) savedidx = $('#mapcode').data('idx');
+// if (!savedidx) {
+//     if ($('#mapcode')!=null && $('#mapcode').data('idx')!=undefined) savedidx = $('#mapcode').data('idx');
+// } 
+if (typeof savedidx != "undefined") {
+    if (!($('#mapcode')==null || $('#mapcode').data('idx')==undefined)) savedidx = $('#mapcode').data('idx');
 } 
 
 

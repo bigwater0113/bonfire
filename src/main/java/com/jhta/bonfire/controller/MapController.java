@@ -11,7 +11,6 @@ import com.jhta.bonfire.util.CommonUtil;
 import com.jhta.bonfire.vo.TripPlanVo;
 import com.jhta.bonfire.vo.geoJsonVo;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

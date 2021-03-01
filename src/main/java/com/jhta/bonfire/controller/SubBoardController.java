@@ -1,5 +1,7 @@
 package com.jhta.bonfire.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -62,14 +64,17 @@ public class SubBoardController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("list", service.getList(map));
         model.addAttribute("pu", pu);
+        model.addAttribute("catlist", service.catList("subscriberboard"));
         String beforeparams = "?";
 
         if (CommonUtil.isNotEmpty((Object[]) field)) {
-            for (String f : field) {beforeparams += "field=" + f + "&";}
+            for (String f : field) {
+                beforeparams += "field=" + f + "&";
+            }
         }
         beforeparams += "keyword=" + keyword + "&listSize=" + listSize + "&pageSize=" + pageSize;
         model.addAttribute("beforeparams", beforeparams);
-        return ".home.board.subboard";
+        return ".board.subboard";
     }
 
     @GetMapping(value = { "/member/write/{cname}" })
@@ -77,25 +82,19 @@ public class SubBoardController {
         model.addAttribute("cname", cname);
         model.addAttribute("boardName", "subboard");
         model.addAttribute("catlist", service.catList("subscriberboard"));
-        return ".home.board.subboardwrite";
+        return ".board.subboardwrite";
     }
 
     @PostMapping(value = { "/member/write" })
-    public String write(
-        @RequestParam String cname, 
-        @AuthenticationPrincipal Authentication authentication, 
-        Model model,
-        @RequestParam String title, 
-        @RequestParam String content, 
-        @RequestParam String boardName,
-        @RequestParam(required = false) String... fileName
-        ) 
+    public String write(@RequestParam String cname, @AuthenticationPrincipal Authentication authentication, Model model,
+            @RequestParam String title, @RequestParam String content, @RequestParam String boardName,
+            @RequestParam(required = false) String... fileName) throws UnsupportedEncodingException 
     {
         String id = authentication.getName();
         content = CommonUtil.changePath(sc, content, boardName, fileName);
         SubBoardVo vo = new SubBoardVo(0, id, title, content, null, 0, 0, cname);
         service.write(vo);
-        return "/board/"+cname+"/list/";
+        return "redirect:/board/"+URLEncoder.encode(cname, "UTF-8")+"/list/";
     }
 
     @RequestMapping(value={"/board/{cname}/article/{num}"})
@@ -111,10 +110,11 @@ public class SubBoardController {
             try{
                 service.addHit(new SbhitsVo(num, authentication.getName()));
             } catch (DuplicateKeyException|NullPointerException e) {logger.info("sameuser: "+e);}
-            
         }
+        model.addAttribute("cname", cname);
         model.addAttribute("vo", service.getData(num));
-        return ".home.board.subboardview";
+        model.addAttribute("catlist", service.catList("subscriberboard"));
+        return ".board.subboardview";
     }
 
     

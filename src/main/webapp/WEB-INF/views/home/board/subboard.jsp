@@ -8,16 +8,25 @@
     <c:if test='${field=="content" }'><c:set var="fieldcontent" value="checked='checked'" /></c:if>
 </c:forEach>
 <!-- 테스트용 드랍다운 -->
-<script src="https://unpkg.com/@popperjs/core@2"></script>
+<!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
 <!--테스트용 부트스트랩 -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+<!-- <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css"> -->
+<style type="text/css">
+    /* text-height: auto; */
+    .boardhead{
+        font-size: 25px !important;
+    }
+    button{
+        font-size: 25px imp !important
+    }
+</style>
 <div>
-    TODO:아이디 눌러서 검색, 댓글수 체크
+    <!-- TODO:아이디 눌러서 검색, 댓글수 체크 -->
     <div class="card">
         <div class="card-header">
-            TODO:tableintro
+            <!-- TODO:tableintro -->
         </div>
         <form action="${board}/" method="get">
             <div class="card-body">
@@ -34,7 +43,6 @@
                     </div>
                     <div class="ms-auto d-flex">
                         <!-- 검색조건 설정 -->
-                        search: 
                         <div class="form-selectgroup">
                             <label class="form-selectgroup-item">
                                 <input type="checkbox" name="field" value="id" ${fieldid} class="form-selectgroup-input">
@@ -75,21 +83,21 @@
             </div>
             <!-- <input type="button" name="test" value="test"> -->
             <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap datatable">
-                    <caption class="hidden">subboard</caption>
+                <table class="table table-vcenter table-mobile-md card-table text-nowrap datatable">
+                    <!-- <caption class="hidden">subboard</caption> -->
                     <colgroup span="1"></colgroup>
                     <colgroup span="3"></colgroup>
                     <colgroup span="2"></colgroup>
                     <colgroup span="1"></colgroup>
                     <thead>
                         <tr>
-                            <th>num</th>
-                            <th>cname</th>
-                            <th>title</th>
-                            <th>id</th>
-                            <th>hits</th>
-                            <th>recommend</th>
-                            <th>adddate</th>
+                            <th class="boardhead">글번호</th>
+                            <th class="boardhead">카테고리</th>
+                            <th class="boardhead">제목</th>
+                            <th class="boardhead">아이디</th>
+                            <th class="boardhead">조회수</th>
+                            <th class="boardhead">추천수</th>
+                            <th class="boardhead">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,20 +107,20 @@
                                 <td>${vo.cname}</td>
                                 <td><a href="${cp}/board/${vo.cname}/article/${vo.num}">${vo.title}</a></td>
                                 <td>
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown"> -->
 
-                                        <a href='#' class="btn dropdown-toggle">
+                                        <!-- <a href='#' class="btn dropdown-toggle"> -->
                                             ${vo.id}
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end" style="margin: 0px;">
-                                            <a class="dropdown-item" href="#">
-                                                Action
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Another action
-                                            </a>
-                                        </div>
-                                    </div>
+                                        <!-- </a> -->
+                                        <!-- <div class="dropdown-menu dropdown-menu-end" style="margin: 0px;"> -->
+                                            <!-- <a class="dropdown-item" href="#"> -->
+                                                <!-- Action -->
+                                            <!-- </a> -->
+                                            <!-- <a class="dropdown-item" href="#"> -->
+                                                <!-- Another action -->
+                                            <!-- </a> -->
+                                        <!-- </div> -->
+                                    <!-- </div> -->
                                 </td>
                                 <td>${vo.hits}</td>
                                 <td>${vo.recommend}</td>
@@ -122,46 +130,52 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer d-plex align-items-center">
-                <p>Showing ${pu.startPage} to ${pu.endPage} of ${pu.pageCount} entries </p>
-                <ul class="pagination m-0 ms-auto">
-                    <c:choose>
-                        <c:when test="${pu.startPage==1 }">
-                            <li class="page-item disabled">
-                                <!-- TODO: disabled 클래스 삽입 -->
-                                <a href="#" aria-disabled="true" class="page-link">prev</a>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a href="${board }/${pu.startPage-1}" class="page-link">prev</a></li>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <c:forEach var="p" begin="${pu.startPage}" end="${pu.endPage}">
+            <div class="card-footer ">
+                <div class="d-plex align-items-center">
+                    <div style="display: flex;">
+                        ${pu.startPage} to ${pu.endPage} of ${pu.pageCount}
+                    </div>
+                    <div style="display: flex;">
+                    <ul class="pagination m-0 ms-auto">
                         <c:choose>
-                            <c:when test="${pu.page==p }">
-                                <!-- TODO:현재글 강조 -->
-                                <li class="page-item active"><a href="${board }/${p }" class="page-link">${p }</a></li>
+                            <c:when test="${pu.startPage==1 }">
+                                <li class="page-item disabled">
+                                    <!-- TODO: disabled 클래스 삽입 -->
+                                    <a href="#" aria-disabled="true" class="page-link">prev</a>
+                                </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="page-item"><a href="${board }/${p }" class="page-link">${p }</a></li>
+                                <li class="page-item"><a href="${board }/${pu.startPage-1}" class="page-link">prev</a></li>
                             </c:otherwise>
                         </c:choose>
-                    </c:forEach>
-
-                    <c:choose>
-                        <c:when test="${pu.endPage eq pu.pageCount }">
-                            <li class="page-item disabled">
-                                <!-- TODO: disabled 클래스 삽입 -->
-                                <a href="#" aria-disabled="true" class="page-link">next</a>
-                            </li class="page-item">
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="${board }/${pu.endPage+1}" class="page-link">next</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
+    
+                        <c:forEach var="p" begin="${pu.startPage}" end="${pu.endPage}">
+                            <c:choose>
+                                <c:when test="${pu.page==p }">
+                                    <!-- TODO:현재글 강조 -->
+                                    <li class="page-item active"><a href="${board }/${p }" class="page-link">${p }</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a href="${board }/${p }" class="page-link">${p }</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+    
+                        <c:choose>
+                            <c:when test="${pu.endPage eq pu.pageCount }">
+                                <li class="page-item disabled">
+                                    <!-- TODO: disabled 클래스 삽입 -->
+                                    <a href="#" aria-disabled="true" class="page-link">next</a>
+                                </li class="page-item">
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="${board }/${pu.endPage+1}" class="page-link">next</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
                     <a class="btn" href="${cp }/member/write/${cname}/">글쓰기</a>
+                </div>
             </div>
         </form>
     </div>

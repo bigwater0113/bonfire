@@ -25,6 +25,8 @@ drop table loginrecord;
 drop table auth;
 drop table bmembers;
 drop table authorreg;
+drop table localmap;
+drop table tripplan;
 
 -- [ drop sequence ]
 

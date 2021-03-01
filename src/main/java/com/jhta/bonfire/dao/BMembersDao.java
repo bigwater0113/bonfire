@@ -59,4 +59,8 @@ public class BMembersDao {
 		return sqlSession.selectList(NAMESPACE+".selectAll");
 	}
 	
+	public String getRole(String id) {
+		return sqlSession.selectOne(NAMESPACE + ".getRole", id);
+	}
+	
 }

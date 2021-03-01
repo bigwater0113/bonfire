@@ -1,4 +1,4 @@
-package com.jhta.bonfire.controller;
+	package com.jhta.bonfire.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +40,6 @@ public class AuthorRegController {
 		model.addAttribute("field", field);
 		model.addAttribute("keyword", keyword);
 		
-		return ".feed.adminpage.authorRegList";
+		return ".feed.adminpage.adminside.authorRegList";
 	}
 }

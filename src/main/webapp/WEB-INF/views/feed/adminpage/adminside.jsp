@@ -5,7 +5,7 @@
 	li{list-style:none;}
 </style>
 <div>
-	<h3>관리자메뉴</h3>
+	<span><b>관리자메뉴</b></span>
 	<ul>
 		<li><a href="${cp }/manageMembers_List_All">회원관리</a></li>
 		<li><a href="${cp }/authorRegList">작가신청관리</a></li>

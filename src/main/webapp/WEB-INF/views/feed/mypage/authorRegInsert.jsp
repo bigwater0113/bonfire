@@ -10,23 +10,28 @@
 <script type="text/javascript" src="${cp }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <!-- summernote-lite에 css적용을 위해 css파일을 가져온다. -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/summernote/summernote-lite.css">
-
+<style>
+	#editorBox{
+		background-color: white;
+	}
+</style>
 <h1>작가신청서 등록</h1>
-<form:form id = "insert" action = "${cp }/authorReg/insert" method = "post">
-	<c:if test = "${sessionScope.id == id}">
+<div id = "insertFrom" >
+	<form:form id = "insert" action = "${cp }/authorReg/insert" method = "post">
 		신청인<br>
-		<span>${sessionScope.id }</span><br>
-		<input type = "text" name = "id" value = "${sessionScope.id }" hidden="hidden"><br>
-		한줄요약<br>
+		<span>${id }</span><br>
+		<input type = "text" name = "id" value = "${id }" hidden="hidden"><br>
+		한줄요약 (100자 미만)<br>
 		<input type = "text" name = "pres" placeholder = "자신의 글들을 한줄로 설명해주세요"><br>
 		테마<br>
 		<input type = "text" name = "theme" placeholder = "자신의 글들의 테마를 한단어로 적어주세요"><br>
 		작가 신청서<br>
-		<textarea name = "intro" id = "summernote"></textarea><br>
+		<div id = "editorBox">
+			<textarea name = "intro" id = "summernote"></textarea><br>		
+		</div>
 		<input type="submit" value="등록">
-	</c:if>
-</form:form>
-
+	</form:form>
+</div>
 <script>
         let fileName=[];
         

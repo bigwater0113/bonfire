@@ -69,6 +69,12 @@ public class AuthorRegVo {
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
+
+	@Override
+	public String toString() {
+		return "AuthorRegVo [num=" + num + ", id=" + id + ", adddate=" + adddate + ", pres=" + pres + ", theme=" + theme
+				+ ", intro=" + intro + "]";
+	}
 	
 	
 }

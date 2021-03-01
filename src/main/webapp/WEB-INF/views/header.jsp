@@ -36,11 +36,15 @@
 		<div id="profile_slide" class="dropdown-menu dropdown-menu-demo dropdown-menu-arrow">
 			
 			<span style="display:inline-block;width:180px;text-align: center;font-size:30px;">[<sec:authentication property="principal.username"/>] 님</span> <br>
+			<c:if test = "${role != 'ROLE_ADMIN' }">
 			<a href="${cp }/@${id}">마이페이지</a><br>
-			<c:if test="${id=='admin' }">
+			</c:if>
+			<c:if test="${role != 'ROLE_ADMIN' }">
 				<a href="${cp }/adminpage">관리자페이지</a><br>
 			</c:if>
-			<a href="${cp }/authorReg/insert">작가신청</a><br>
+			<c:if test="${role == 'ROLE_MEMBER' }">
+				<a href="${cp }/authorReg/insert">작가신청</a><br>
+			</c:if>
 			<a href="${cp }/logout">로그아웃</a><br>
 <%-- 			<a href="${cp }/withdraw">회원탈퇴</a><br> --%>
 			<a href="#" id="header_withdrawal">회원탈퇴</a><br>

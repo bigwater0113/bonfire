@@ -24,7 +24,7 @@ public class BMembersService {
 	public int insert(BMembersVo vo) {
 		String pwd=vo.getPwd();
 		vo.setPwd(encoder.encode(pwd));
-		dao.insert(vo);//È¸¿øÅ×ÀÌºí¿¡ Ãß°¡
+		dao.insert(vo);//È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ß°ï¿½
 		AuthVo avo=new AuthVo();
 		avo.setId(vo.getId());
 		if(vo.getId().equals("admin")) {
@@ -72,5 +72,9 @@ public class BMembersService {
 	}
 	public List<BMembersVo> selectAll(){
 		return dao.selectAll();
+	}
+	
+	public String getRole(String id) {
+		return dao.getRole(id);
 	}
 }

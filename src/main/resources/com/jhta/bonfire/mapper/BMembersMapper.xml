@@ -22,6 +22,9 @@
 	<select id="selectAll" resultType="bmembers">
 		select * from bmembers
 	</select>
+	<select id = "getRole" parameterType = "string" resultType = "string">
+		select authority from auth where id = #{id}
+	</select>
 	
 	<insert id="b_insert" parameterType="bmembers">
 		insert into bmembers values(#{id},#{pwd},#{name},#{email},#{birth},#{gender},#{phone},#{roadfulladdr},1,sysdate,#{addrdetail},#{zipno})

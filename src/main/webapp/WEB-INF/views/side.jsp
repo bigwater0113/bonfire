@@ -40,7 +40,9 @@
 		</c:if>
 		<li><a href="${cp }/feedboard_feed_selectAllbyId?id=${feedId }">여행글</a></li>
 		<li><a href="#">경로게시판</a></li>
-		<li><a href="${cp }/authorReg/insert">작가신청</a></li>
+		<c:if test="${role == 'ROLE_MEMBER' }">
+			<li><a href="${cp }/authorReg/insert">작가신청</a></li>
+		</c:if>
 		<c:if test="${feedId==id }">
 			<li><a href="${cp }/userInfo">내정보</a></li>
 		</c:if>

@@ -163,7 +163,7 @@ public class SubBoardController {
         HashMap<String, Object> map = new HashMap<>();
         // Optional<Integer> maxidx = Optional.ofNullable(service.getMax(num));
         // int idx = maxidx.orElse(0);
-        int idx = service.getMax(num);
+        int idx = service.getMax(num)+1;
         int result=0;
         if (authentication!=null){
             result = service.addComment(new SCommentVo(idx, num, authentication.getName(), content, null));

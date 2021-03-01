@@ -88,7 +88,9 @@ textarea.autosize {
                 console.log(response);
                 if (response.value=='1') $('#tglrecomm').attr('fill', 'currentColor');
                 else $('#tglrecomm').attr('fill', 'none');
-                $('#recommend').text(parseInt(recommend)+(response.value));
+                let result = parseInt(recommend)+(response.value);
+                if (result<0) result=0;
+                $('#recommend').text(result);
             }
         );
     })
@@ -139,6 +141,8 @@ textarea.autosize {
             // dataType: "dataType",
             success: function (response) {
                 console.log(response);
+                $('#article_comment').empty();
+                getComment();
             }
         });
     });

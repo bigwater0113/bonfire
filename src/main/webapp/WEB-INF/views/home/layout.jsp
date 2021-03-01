@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>layout.jsp</title>
+<title>Bonfire</title>
 <!-- 테스트용 드랍다운 -->
 <c:set var="cp" value="${pageContext.request.contextPath}" scope="application"/>
 <link rel="stylesheet" type="text/css" href="${cp }/resources/main.css">

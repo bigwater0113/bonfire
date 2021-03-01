@@ -10,7 +10,7 @@
             <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(fields, keyword)">
                 <foreach collection="fields" index="i" item="field">
                     <!-- and contains(${field}, '%'||#{keyword}||'%')>0 -->
-                    and ${field} like ('%'||#{keyword}||'%')
+                    or ${field} like ('%'||#{keyword}||'%')
                 </foreach>
             </if>
         </where>

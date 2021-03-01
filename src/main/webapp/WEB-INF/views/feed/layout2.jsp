@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>layout2.jsp</title>
+<title>Bonfire</title>
 <!-- 테스트용 드랍다운 -->
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <!--테스트용 부트스트랩 -->

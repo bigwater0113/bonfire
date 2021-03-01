@@ -279,7 +279,7 @@ CREATE TABLE srecomm
   id      VARCHAR2(40) NOT NULL,
   value   number(1)   NOT NULL,
   adddate date        ,
-  CONSTRAINT PK_srecomm PRIMARY KEY (num, id, value)
+  CONSTRAINT PK_srecomm PRIMARY KEY (num, id, value, adddate)
 );
 
 -- 구독자게시판 첨부파일

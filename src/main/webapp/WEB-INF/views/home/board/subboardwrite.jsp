@@ -18,6 +18,9 @@
     .btn-blue{
         font-size: 25px !important;
     }
+    #editorarea{
+        margin-top:20px;
+    }
 </style>
 <div>
     <div id='editorarea'>
@@ -26,13 +29,13 @@
             <form:form id="write" action="${cp }/member/write" method="post">
                 <input type="hidden" name="boardName" value="${boardName }">
                 <div id="titlename" class="form-group row">
-                    <label for="title" class="form-label col-1 col-form-label">제목</label>
+                    <label for="title" class="form-label col-2 col-form-label">제목</label>
                     <div class="col">
                         <input type="text" class="form-control" name="title" placeholder="제목">
                     </div>
                 </div>
                 <div id="categoryname" class="form-group row">
-                    <label for="cname" class="form-label col-1 col-form-label">카테고리</label>
+                    <label for="cname" class="form-label col-2 col-form-label">카테고리</label>
                     <div class="col">
                         <select class="form-select" name="cname" aria-label="category">
                             <c:forEach items='${catlist}' var='cats'>

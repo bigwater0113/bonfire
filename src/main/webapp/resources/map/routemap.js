@@ -256,6 +256,7 @@ function savenloadlist(){
                 <li id="saveload-`+ele.idx+`" class="d-plex">
                 `+ele.route+`
                 <button type="button" onclick="loadlist('`+ele.idx+`')" data-idx="`+ele.idx+`"class="btn btn-red">불러오기</button>
+                <button type="button" onclick="deletelist('`+ele.idx+`')" data-idx="`+ele.idx+`"class="btn btn-red">삭제하기</button>
                 </li>
                 `;
                 $('.saveloadlist').append(savenloadhtml);
@@ -275,6 +276,21 @@ function loadlist(idx){
     loadSavedRoutes(idx);
     $('#mapcode').data('idx', idx);
     $('#mapcode').attr('data-idx', idx);
+}
+
+function deletelist(idx){
+    $.ajax({
+        type: "get",
+        url: cp+"/map/api/delete/"+idx,
+        data: {idx: idx},
+        contentType:'application/json;charset=UTF-8',
+        beforeSend(jqXHR, settings) {
+            jqXHR.setRequestHeader(csrf_headerName, csrf_token);
+        },
+        success: function (response) {
+            if (response.success) savenloadlist();
+        }
+    });
 }
 
 function kakaoResultToFeatures(kakaoResponse) {
@@ -499,7 +515,7 @@ function addToListings(id) {
     console.log('selectedFeature', selectedFeature)
     addedMarkers.push(selectedFeature);
 
-    // selectedFeatureToDataBase(selectedFeature);
+    selectedFeatureToDataBase(selectedFeature);
 
     let addinglist = document.createElement('li');
     addinglist.innerHTML =

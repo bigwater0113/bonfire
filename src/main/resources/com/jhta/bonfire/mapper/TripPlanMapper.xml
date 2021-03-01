@@ -51,5 +51,7 @@
         from tripplan t, localmap l 
         where t.placeid=l.P_ID and t.id=#{id}
     </select>
-
+    <delete id="removePlan" parameterType="tripplan">
+        delete tripplan where idx=#{idx} and id=#{id}
+    </delete>
 </mapper>

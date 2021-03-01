@@ -20,4 +20,5 @@ public class TripPlanDao {
     public List<LocalMapVo> getPlanMapByUser(String id) {return sqlSession.selectList(NAMESPACE+".getPlanMapByUser", id);}
     public List<TripPlanVo> getPlanIdxByIdx(int idx) {return sqlSession.selectList(NAMESPACE+".getPlanIdxByIdx", idx);}
     public List<LocalMapVo> getPlanMapByIdx(int idx) {return sqlSession.selectList(NAMESPACE+".getPlanMapByIdx", idx);}
+    public int removePlan(TripPlanVo vo) {return sqlSession.delete(NAMESPACE+".removePlan", vo);}
 }

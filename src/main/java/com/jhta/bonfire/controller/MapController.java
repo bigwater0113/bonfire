@@ -140,4 +140,21 @@ public class MapController {
     ) {
         return planService.getPlanMapByIdx(idx);
     }
+
+    @RequestMapping(value={"/map/api/delete/{idx}"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public JSONObject deleteroute(
+        @PathVariable int idx
+        , @AuthenticationPrincipal Authentication authentication
+    ) {
+        JSONObject json = new JSONObject();
+        Optional<String> username = Optional.ofNullable(authentication.getName());
+        username.ifPresent(id->{
+            int result = planService.removePlan(idx, id);
+            json.put("success", (result>0)?true:false);
+            json.put("result", result);
+            json.put("idx", idx);
+        });
+        return json;
+    }
 }

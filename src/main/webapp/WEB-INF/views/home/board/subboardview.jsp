@@ -51,9 +51,11 @@ textarea.autosize {
                         <tr>
                             <td colspan="3">
                                 <form:form id="comment_write">
-                                    <!-- TODO:여기도 summernote? -->
+                                    <div class="mb-3">
+                                        <label class="form-label">댓글 <span class="form-label-description"></span></label>
+                                        <textarea class="form-control" name="content" rows="6" placeholder="댓글쓰기.."></textarea>
+                                    </div>
                                     <div>
-                                        <textarea name="content"></textarea>
                                         <button type="submit" class="btn">작성하기</button>
                                     </div>
                                 </form:form>
@@ -137,7 +139,6 @@ textarea.autosize {
         });
     });
     //추가해야할것-----------
-    if ($('#mapcode')[0]) $('#mapcode').load('${cp}/map');
     function load(filename, filetype) {
         if (filetype == "js") { //if filename is a external JavaScript file
             var fileref = document.createElement('script')
@@ -153,17 +154,20 @@ textarea.autosize {
         if (typeof fileref != "undefined")
             document.getElementsByTagName("head")[0].appendChild(fileref)
     }
-    load('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'js');
-    load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js', 'js');
-    load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'js');
-    load('https://npmcdn.com/@turf/turf@5.1.6/turf.min.js', 'js');
-    load('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', 'js');
-    load('https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js', 'js');
-    load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
-    load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
-    load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
-    load('${cp }/resources/map/routemap.js', 'js');
-    load('${cp }/resources/map/routemap.css', 'css');
+    if ($('#mapcode')[0]) {
+        load('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'js');
+        load('https://npmcdn.com/@turf/turf@5.1.6/turf.min.js', 'js');
+        load('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', 'js');
+        load('https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
+        load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
+        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
+        load('${cp }/resources/map/routemap.js', 'js');
+        load('${cp }/resources/map/routemap.css', 'css');
+        $('#mapcode').load('${cp}/map');
+    }
     //---------------------
 
 </script>

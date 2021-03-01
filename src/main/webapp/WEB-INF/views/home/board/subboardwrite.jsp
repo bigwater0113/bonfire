@@ -23,12 +23,13 @@
             <form:form id="write" action="${cp }/member/write" method="post">
                 <input type="hidden" name="boardName" value="${boardName }">
                 <div id="titlename">
-                    <input type="text" name="title">
+                    <input type="text" class="form-control" name="title" placeholder="제목">
                 </div>
                 <div id="categoryname">
-                    //TODO:db에서 가져오기
                     <select class="form-select" name="cname" aria-label="category">
-                        <option selected value="자유">자유</option>
+                        <c:forEach items='${catlist}' var='cats'>
+                            <option selected value="${cats}">${cats}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div id=editorbox>

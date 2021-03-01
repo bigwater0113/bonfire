@@ -76,6 +76,7 @@ public class SubBoardController {
     public String write(@PathVariable String cname, Model model) {
         model.addAttribute("cname", cname);
         model.addAttribute("boardName", "subboard");
+        model.addAttribute("catlist", service.catList("subscriberboard"));
         return ".home.board.subboardwrite";
     }
 

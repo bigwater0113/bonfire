@@ -41,4 +41,7 @@ public class TripPlanService {
         for (LocalMapVo localMapVo : maps) {result.add(CommonUtil.toGeoJSON(localMapVo));}
         return result;
     }
+    public int removePlan(int idx, String id) {
+        return dao.removePlan(new TripPlanVo(idx+"", id, "", ""));
+    }
 }

@@ -1,3 +1,4 @@
+-- cats
 insert into cats values('서울', 'feedboard');
 insert into cats values('강원', 'feedboard');
 insert into cats values('경기', 'feedboard');
@@ -19,3 +20,4 @@ insert into cats values('여행지추천', 'subscriberboard');
 insert into cats values('작가추천', 'subscriberboard');
 insert into cats values('자유', 'subscriberboard');
 insert into cats values('팁', 'subscriberboard');
+-- localmap

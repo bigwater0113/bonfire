@@ -62,6 +62,11 @@
        let fileName=[];
        
        $('#write').submit(function (e) { 
+        //추가해야할것-----------
+            //mapcode 내의 길고 긴 html을 제거한다.
+            $('#mapcode').empty();
+            $('#summernote').summernote('code', $('#summernote').summernote('code'));
+        //---------------------
            for (let index = 0; index < fileName.length; index++) {
                $('<input />').attr("type", "hidden")
                    .attr("name", "fileName")
@@ -74,7 +79,7 @@
 
        $(document).ready(function() {
            $('#summernote').summernote({
-               height: 400,                 // 에디터 높이
+               height: 600,                 // 에디터 높이
                minHeight: null,             // 최소 높이
                maxHeight: null,             // 최대 높이
                focus: true,				 // 처음 사이트들어왔을때 summernote에 focus를 준다. 커서 깜빡임.
@@ -97,6 +102,72 @@
            });
            // $('#summernote').summernote('code', '<p><img src="/spring/resources/upload/파이리dd.jpg" style="width: 600px;"><br></p>');
        });
+
+       //추가해야할것-----------
+        let addMapButton = $.summernote.options.buttons;
+        $.summernote.options.toolbar.push(["CustomButton", ["addMapToSummerNote"]]);
+        let addMapToSummerNote = function(context) {
+
+            function load(filename, filetype) {
+                if (filetype == "js") { //if filename is a external JavaScript file
+                    var fileref = document.createElement('script')
+                    fileref.setAttribute("type", "text/javascript")
+                    fileref.setAttribute("src", filename)
+                }
+                else if (filetype == "css") { //if filename is an external CSS file
+                    var fileref = document.createElement("link")
+                    fileref.setAttribute("rel", "stylesheet")
+                    fileref.setAttribute("type", "text/css")
+                    fileref.setAttribute("href", filename)
+                }
+                if (typeof fileref != "undefined")
+                    document.getElementsByTagName("head")[0].appendChild(fileref)
+            }
+
+            //js, css를 언로드하는 함수
+            function unload(filename, filetype) {
+                var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none" //determine element type to create nodelist from
+                var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none" //determine corresponding attribute to test for
+                var allsuspects = document.getElementsByTagName(targetelement)
+                for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
+                    if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
+                        allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+                }
+            }
+
+
+            let ui = $.summernote.ui;
+            //TODO:지도 코드
+            let mapcode = '<div id="mapcode"></div><p><br></p>';
+            let button = ui.button({
+                contents : `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="18" y1="6" x2="18" y2="6.01"></line><path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5"></path><polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15"></polyline><line x1="9" y1="4" x2="9" y2="17"></line><line x1="15" y1="15" x2="15" y2="20"></line></svg>지도 추가하기`,
+                tooltip:'지도 추가하기',
+                click: function(e) {
+                    if ($('#mapcode')[0]) {
+                        $('#mapcode').remove();
+                    } else {
+                        // load('https://code.jquery.com/jquery-3.5.1.js', 'js');
+                        load('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'js');
+                        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js', 'js');
+                        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'js');
+                        load('https://npmcdn.com/@turf/turf@5.1.6/turf.min.js', 'js');
+                        load('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', 'js');
+                        load('https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js', 'js');
+                        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
+                        load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
+                        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
+                        load('${cp }/resources/map/routemap.js', 'js');
+                        load('${cp }/resources/map/routemap.css', 'css');
+                    }
+                    context.invoke('pasteHTML', mapcode);
+                    $('#mapcode').load('${cp}/map');
+                }
+            });
+            return button.render();
+        }
+        addMapButton.addMapToSummerNote=addMapToSummerNote;
+        //--------------------- 
+
        
        function sendFile(file, el) {	// 첨부파일 data를 ajax로 컨트롤러로 보내주는 function.
            var form_data = new FormData();	//이게 뭘 의미할까..? form으로 캡슐화시키는듯..?

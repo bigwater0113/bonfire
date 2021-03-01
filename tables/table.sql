@@ -496,12 +496,12 @@ ALTER TABLE follow
 ALTER TABLE tripplan
   ADD CONSTRAINT FK_localmap_TO_tripplan
     FOREIGN KEY (placeid)
-    REFERENCES localmap (p_id);
+    REFERENCES localmap (p_id) ON DELETE CASCADE;
     
 ALTER TABLE tripplan
   ADD CONSTRAINT FK_bmembers_TO_tripplan
     FOREIGN KEY (id)
-    REFERENCES bmembers (id);
+    REFERENCES bmembers (id) ON DELETE CASCADE;
     
 ALTER TABLE authorreg
   ADD CONSTRAINT FK_bmembers_TO_authorreg

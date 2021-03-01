@@ -95,9 +95,11 @@
                             <input type="hidden" value="-1" name="ispost1">
                             <input type="submit" class="btn btn-white w-100" value="수정"
                                 formaction="${cp }/feedboard_mod_add">
+                                <c:if test="${feedRole == 'ROLE_AUTHOR' }">
                             <input type="hidden" value="1" name="ispost2">
                             <input type="submit" class="btn btn-white w-100" value="발행"
                                 formaction="${cp }/feedboard_mod_postA">
+                                </c:if>
                         </c:when>
                         <c:otherwise>
                             <input type="hidden" value="1" name="ispost2">

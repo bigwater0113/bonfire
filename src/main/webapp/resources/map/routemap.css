@@ -29,6 +29,9 @@
     border: 1px solid black;
     margin-right:1rem;
 }
+.listingsDestination *{
+    font-size: 15px;
+}
 
 /* #info {
     display: block;

@@ -3,9 +3,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style type="text/css">
-    
+table{
+    margin-top:20px;
+}
 table, th, td{
-    border: 1px solid black;
+    border: 1px solid #bbbbbb;
 }
 textarea.autosize {
     min-height: 50px;
@@ -19,21 +21,23 @@ textarea.autosize {
                 <table class="table table-vcenter">
                     <tbody>
                         <tr class="article_metadata">
-                            <td colspan="2"><h1>${vo.title}</h1></td>
-                            <td>${vo.adddate}</td>
+                            <td colspan="2">제목 : <h1 style="display: inline;">${vo.title}</h1></td>
+                            <td>작성일 : ${vo.adddate}</td>
                         </tr>
                         <tr class="article_metadata">
-                            <td>${vo.hits}</td>
+                            <td>조회수 : ${vo.hits}</td>
                             <td>
-                                <div>id : ${vo.id}</div>
+                                <div>아이디 : ${vo.id}</div>
                             </td>
                             <td>
                                 <div id="myrecomm">
+                                    추천 : 
                                     <span id="recommend"></span>
-                                    <svg id="tglrecomm" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-                                    </svg>
+                                    개
+                                        <svg id="tglrecomm" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                                        </svg>
                                     <!-- <button id="tglrecomm" class="btn btn-sm"></button> -->
                                 </div>
                             </td>

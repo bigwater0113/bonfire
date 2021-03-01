@@ -5,35 +5,6 @@
     var cp = '${cp}';
     var csrf_headerName = '${_csrf.headerName}';
     var csrf_token = '${_csrf.token}';
-
-    function load(filename, filetype) {
-        if (filetype == "js") { //if filename is a external JavaScript file
-            var fileref = document.createElement('script')
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", filename)
-        }
-        else if (filetype == "css") { //if filename is an external CSS file
-            var fileref = document.createElement("link")
-            fileref.setAttribute("rel", "stylesheet")
-            fileref.setAttribute("type", "text/css")
-            fileref.setAttribute("href", filename)
-        }
-        if (typeof fileref != "undefined")
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-    }
-    if (!$('#mapcode')[0]) {
-        load('${cp }/resources/js/jquery-3.5.1.js', 'js');
-        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js', 'js');
-        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'js');
-        load('https://npmcdn.com/@turf/turf@5.1.6/turf.min.js', 'js');
-        load('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', 'js');
-        load('https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js', 'js');
-        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
-        load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
-        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
-        // load('${cp }/resources/map/routemap.js', 'js');
-        // load('${cp }/resources/map/routemap.css', 'css');
-    }
 </script>
 <!-- 
 <script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
@@ -48,8 +19,8 @@
 <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css"/>
 -->
-<script src="${cp }/resources/map/routemap.js"></script>
-<link rel="stylesheet" href="${cp }/resources/map/routemap.css"/> 
+<!-- <script src="${cp }/resources/map/routemap.js"></script>
+<link rel="stylesheet" href="${cp }/resources/map/routemap.css"/>  -->
 
 
 <body>
@@ -90,3 +61,38 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+
+    function load(filename, filetype) {
+        if (filetype == "js") { //if filename is a external JavaScript file
+            var fileref = document.createElement('script')
+            fileref.setAttribute("type", "text/javascript")
+            fileref.setAttribute("src", filename)
+        }
+        else if (filetype == "css") { //if filename is an external CSS file
+            var fileref = document.createElement("link")
+            fileref.setAttribute("rel", "stylesheet")
+            fileref.setAttribute("type", "text/css")
+            fileref.setAttribute("href", filename)
+        }
+        if (typeof fileref != "undefined")
+            document.getElementsByTagName("head")[0].appendChild(fileref)
+    }
+    if (!$('#mapcode')[0]) {
+        load('${cp }/resources/js/jquery-3.5.1.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'js');
+        load('https://npmcdn.com/@turf/turf@5.1.6/turf.min.js', 'js');
+        load('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', 'js');
+        // load('https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js', 'js');
+        load('https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css', 'css');
+        load('https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css', 'css');
+        load('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css', 'css');
+        // load('${cp }/resources/map/routemap.js', 'js');
+        // load('${cp }/resources/map/routemap.css', 'css');
+    }
+    load('${cp }/resources/map/routemap.js', 'js');
+    load('${cp }/resources/map/routemap.css', 'css');
+    
+</script>

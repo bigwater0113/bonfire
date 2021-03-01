@@ -20,6 +20,7 @@ public class AuthorRegApproveOneController {
 		String id = service.listOne(num).getId();
 		
 		int n = service.approveOne(id);
+		service.delete(num);
 		
 		if(n>0) {
 			return "redirect:/authorRegList";

@@ -15,7 +15,7 @@
 		background-color: white;
 	}
 </style>
-<h1>작가신청서 등록</h1>
+<h1><b>작가신청서 등록</b></h1>
 <div id = "insertFrom" >
 	<form:form id = "insert" action = "${cp }/authorReg/insert" method = "post">
 		신청인<br>

@@ -58,9 +58,9 @@
 			pwd_show:false,
 			id_name:'',
 			id_email:'',
-			pwd_id:'test',
-			pwd_name:'윤태수',
-			pwd_email:'xotnwnl@naver.com',
+			pwd_id:'',
+			pwd_name:'',
+			pwd_email:'',
 			timer:300,
 			mm:0,
 			ss:0,
@@ -102,7 +102,7 @@
 					url:'${pageContext.request.contextPath}/searchPwd'
 				});
 				ajax.then(function(resp){
-					alert(resp.data);
+// 					alert(resp.data);
 					if(resp.data!=''){
 						this.pwdMsg="이메일로 인증코드를 발송하였습니다.";
 						this.sendCode=resp.data;

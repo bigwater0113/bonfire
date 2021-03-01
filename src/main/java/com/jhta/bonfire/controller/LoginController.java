@@ -74,7 +74,7 @@ public class LoginController {
 			for(int i=0;i<6;i++) {
 				code+=(int)(Math.random()*9);
 			}
-			/*
+			
 			// 메일 제목, 내용
 			String subject = "모닥불 ["+id+"]회원님의 인증코드";
 			String content = "안녕하세요. ["+id+"] 회원님의 비밀번호 변경을 위한 인증코드는 ["+code+"] 입니다.";
@@ -103,7 +103,7 @@ public class LoginController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			*/
+			
 			return code;
 		}else {
 			return "";

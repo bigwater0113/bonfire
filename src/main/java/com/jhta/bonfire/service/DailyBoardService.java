@@ -40,4 +40,8 @@ public class DailyBoardService {
 	public int update(DailyBoardVo vo) {
 		return dao.update(vo);
 	}
+	
+	public int deleteOne(int num) {
+		return dao.deleteOne(num);
+	}
 }

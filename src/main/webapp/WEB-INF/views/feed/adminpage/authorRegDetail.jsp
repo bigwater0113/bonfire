@@ -3,10 +3,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<h1>${vo.id }님의 작가 신청서</h1>
+<style>
+	.btn.btn-white.w-100{display:inline-block;font-size:25px;font-weight:bold;}
+	.btn.btn-white.w-100.approve{width:7%!important; margin-bottom: 6px;}
+	.btn.btn-white.w-100.deny{width:7%!important; margin-bottom: 6px;}
+	.btn.btn-white.w-100.listAll{width: 10%!important;}
+	
+</style>
+<h1><b>${vo.id }님의 작가 신청</b></h1>
 <form:form method = "post" onsubmit = "check(event)">
-<table border = "1" width = "800">
+<table border = "1" width = "800" class="table table-vcenter table-mobile-md card-table">
 	<tr>
 		<th>신청 날짜</th>
 		<td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${vo.adddate }"/></td>
@@ -24,12 +30,11 @@
 		<td>${vo.intro }</td>
 	</tr>
 </table>
-<input type = "submit" value = "승인" name = "approve" formaction = "${cp }/author/approveOne?num=${vo.num}">
-<input type = "submit" value = "거부" name = "deny" formaction = "${cp }/author/denyOne?num=${vo.num}">
+<input type = "submit" value = "승인" name = "approve" formaction = "${cp }/author/approveOne?num=${vo.num}" class="btn btn-white w-100 btns approve">
+<input type = "submit" value = "거부" name = "deny" formaction = "${cp }/author/denyOne?num=${vo.num}" class="btn btn-white w-100 btns deny">
+<button style = "position:relative; left:74.5%" onclick="location.href='${cp}/authorRegList'" class="btn btn-white w-100 listAll" id = "listAll" type="button">전체목록</button>
 </form:form>
-<div id = "buttons">
-	<a href="${cp }/authorRegList">목록</a>
-</div>
+
 <script>
 function check(e){
 	if(confirm("이 항목을 승인 혹은 거절 하시겠습니까?")==true) {

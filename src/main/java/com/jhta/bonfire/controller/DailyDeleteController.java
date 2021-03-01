@@ -17,6 +17,18 @@ import com.jhta.bonfire.vo.DailyBoard_Dfile_JoinVo;
 public class DailyDeleteController {
 	@Autowired DailyBoardService service;
 	
+	@GetMapping(value = "/daily/delete")
+	public String deleteOne(int num) {
+		int n = service.deleteOne(num);
+		
+		if (n>0) {
+			return "redirect:/daily_main";
+		} else {
+			return ".home.error";
+		}
+		
+	}
+	
 	@PostMapping(value = "/daily/delete")
 	public String delete(Model model, HttpSession session, HttpServletRequest req) {
 		String[] params = req.getParameterValues("checkk");

@@ -38,4 +38,8 @@ public class DailyBoardDao {
 	public int update(DailyBoardVo vo) {
 		return session.update(NAMESPACE + ".updatePost", vo);
 	}
+	
+	public int deleteOne(int num) {
+		return session.delete(NAMESPACE + ".deleteOne", num);
+	}
 }

@@ -10,19 +10,22 @@
 <script type="text/javascript" src="${cp }/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <!-- summernote-lite에 css적용을 위해 css파일을 가져온다. -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/summernote/summernote-lite.css">
-
-<h1>일기 등록</h1>
+<style>
+	.btn.btn-white.w-100{display: inline-block; float: right; width: 50%!important; font-size: 25px; font-weight: bold;}
+	.btn.btn-white.w-100.update{width: 7%!important; margin-botton: 6px;}
+</style>
+<h1><b>일기 수정</b></h1>
 <form:form id = "write" action = "${cp }/daily/update" method = "post">
 	<c:if test = "${sessionScope.id == id}">
 		<input type = "text" name = "num" value = "${vo.num }" hidden = "hidden"><br>
 		작성자<br>
 		<span>${sessionScope.id }</span><br>
-		<input type = "text" name = "id" value = "${sessionScope.id }" hidden="hidden"><br>
+		<input type = "text" name = "id" value = "${sessionScope.id }" hidden="hidden">
 		제목<br>
 		<input type = "text" name = "title" value = "${vo.title }"><br>
 		내용<br>
 		<textarea name = "content" id = "summernote">${vo.content }</textarea><br>
-		<input type="submit" value="등록">
+		<input type="submit" value="수정" class="btn btn-white w-100 update">
 	</c:if>
 </form:form>
 

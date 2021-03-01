@@ -11,16 +11,17 @@
 <!-- summernote-lite에 css적용을 위해 css파일을 가져온다. -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/summernote/summernote-lite.css">
 <style>
-	#editorBox{
-		background-color: white;
-	}
+
+	
+	.btn.btn-white.w-100{display: inline-block; float: right; width: 50%!important; font-size: 25px; font-weight: bold;}
+	.btn.btn-white.w-100.write{width: 7%!important; margin-botton: 6px;}
 </style>
 <h1><b>작가신청서 등록</b></h1>
 <div id = "insertFrom" >
 	<form:form id = "insert" action = "${cp }/authorReg/insert" method = "post">
 		신청인<br>
 		<span>${id }</span><br>
-		<input type = "text" name = "id" value = "${id }" hidden="hidden"><br>
+		<input type = "text" name = "id" value = "${id }" hidden="hidden">
 		한줄요약 (100자 미만)<br>
 		<input type = "text" name = "pres" placeholder = "자신의 글들을 한줄로 설명해주세요"><br>
 		테마<br>
@@ -29,7 +30,7 @@
 		<div id = "editorBox">
 			<textarea name = "intro" id = "summernote"></textarea><br>		
 		</div>
-		<input type="submit" value="등록">
+		<input type="submit" value="등록" class="btn btn-white w-100 write">
 	</form:form>
 </div>
 <script>

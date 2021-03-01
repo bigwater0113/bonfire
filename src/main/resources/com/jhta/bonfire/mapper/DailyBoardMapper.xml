@@ -63,6 +63,10 @@
 		delete from dailyboard where num=#{num} and id=#{id}
 	</delete>
 	
+	<delete id = "deleteOne" parameterType = "int">
+		delete from dailyboard where num = #{num}
+	</delete>
+	
 	<update id="updatePost" parameterType = "dailyboard">
 		update dailyboard 
 		set title = #{title}, content = #{content} 

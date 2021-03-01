@@ -1,6 +1,7 @@
 package com.jhta.bonfire.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.jhta.bonfire.service.AuthorRegService;
+import com.jhta.bonfire.service.FeedService;
+import com.jhta.bonfire.service.MProfileService;
 import com.jhta.bonfire.util.CommonUtil;
 import com.jhta.bonfire.vo.AuthorRegVo;
+import com.jhta.bonfire.vo.MProfileVo;
 
 @Controller
 public class AuthorRegInsertController {
 	@Autowired AuthorRegService service;
+	@Autowired MProfileService proVoService;
 	@Autowired private ServletContext sc;
 	
 	public void setService(AuthorRegService service) {
@@ -32,9 +37,12 @@ public class AuthorRegInsertController {
 	public String insertForm(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
 		String idYes = service.exists(id);
+		MProfileVo proVo = proVoService.select(id);
 		if (service.exists(id) != null) {
 			return "redirect:/@"+id;
 		} else {
+			session.setAttribute("proVo", proVo);
+			session.setAttribute("feedId", id);
 			return ".feed.mypage.authorRegInsert";
 		}
 	}
@@ -49,6 +57,7 @@ public class AuthorRegInsertController {
 		} catch (Exception e) {
 			return ".home.error";
 		}
+		System.out.println(id);
 		
 		if(n>0) {
 			return "redirect:/feedboard_feed_selectAllbyId?id="+id;

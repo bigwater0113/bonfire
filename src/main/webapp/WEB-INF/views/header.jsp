@@ -42,7 +42,8 @@
 			</c:if>
 			<a href="${cp }/authorReg/insert">작가신청</a><br>
 			<a href="${cp }/logout">로그아웃</a><br>
-			<a href="${cp }/withdraw">회원탈퇴</a><br>
+<%-- 			<a href="${cp }/withdraw">회원탈퇴</a><br> --%>
+			<a href="#" id="header_withdrawal">회원탈퇴</a><br>
 		</div>
 	</sec:authorize>
 	</div>
@@ -63,5 +64,12 @@
 		$("#profileImg").click(function(){
 			$("#profile_slide").slideToggle(500);
 		});
+		$("#header_withdrawal").click(function(){
+			if(confirm("회원 탈퇴 하시겠습니까?") == true){
+				location.href="${cp}/withdraw";
+			}
+		})
+		
+		
 	});
 </script>

@@ -71,7 +71,6 @@
 			</table>
 		</div>
 	</form:form>
-</div>
 <div style="width:900px;">
 	<div style="width:600px;margin:auto;text-align: center;">
 		<c:if test="${pu.startPage > 10}">
@@ -108,6 +107,7 @@
 			</div>
 		</form:form>
 	</div>
+</div>
 </div>
 
 <script>

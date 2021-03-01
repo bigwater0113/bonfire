@@ -32,11 +32,13 @@ pageEncoding="UTF-8"%>
 	<!-- no banner here.. -->
 		<img src="${cp }/resources/images/banner-subboard-0.jpg">
 	</div>
-	<div id="side">
-		<tiles:insertAttribute name="side"/>
-	</div>
-	<div id="content">
-		<tiles:insertAttribute name="content"/>
+	<div>
+		<div id="side">
+			<tiles:insertAttribute name="side"/>
+		</div>
+		<div id="content" style="height: auto;">
+			<tiles:insertAttribute name="content"/>
+		</div>
 	</div>
 	<div id="footer">
 		<tiles:insertAttribute name="footer"/>

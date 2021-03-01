@@ -111,7 +111,9 @@ public class CommonUtil {
                 File parent = target.getParent().toFile();
                 if (!parent.isDirectory()) parent.mkdirs();
                 try {
-                    Files.move(source, target);
+                    // Files.move(source, target);
+                    Files.copy(source, target);
+                    Files.delete(source);
                 } catch (IOException e) {
                     logger.error("filepathnotchanged", e);
                 }

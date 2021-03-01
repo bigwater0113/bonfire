@@ -27,12 +27,23 @@
 <span style="font-size:40px;">수정페이지</span>
 <form:form id="write" action="${cp }/qna/update" method="post">
 <input type="hidden" name="num" value="${vo.num }" readonly="readonly">
-<c:if test="${sessionScope.id!='admin'}">
-문의유형<br>
+<c:choose>
+<c:when test="${sessionScope.id=='admin'}">
+	문의유형
+	<select name="cname" class="form-select" style="width:130px;display:inline-block;font-size:20px;font-weight:bold;">
+		<option value="공지사항">공지사항</option>
+	</select><br>
+	</c:when>
+	<c:otherwise>
+		문의유형
 	<select name="cname" class="form-select" style="width:130px;display:inline-block;font-size:20px;font-weight:bold;">
 		<option value="작가문의">작가문의</option>
 		<option value="일반문의">일반문의</option>
 	</select><br>
+	</c:otherwise>
+</c:choose>
+<c:if test="${sessionScope.id=='admin'}">
+	<input type="checkbox" name="pin1" checked="checked">공지사항<br>
 </c:if>	
 작성자<br>
 <input type="text" name="id" value="${vo.id }" readonly="readonly" class="form-control"><br>
@@ -40,10 +51,17 @@
 <input type="text" name="title" value="${vo.title }" class="form-control"><br>
 내용<br>
 <textarea rows="5" cols="50" name="content" id="summernote">${vo.content }</textarea><br>
- <c:if test="${sessionScope.id!='admin'}">	
-비밀번호<br>
-<input type="password" name="pwd" class="form-control"><br>
-</c:if>
+<c:choose>
+	<c:when test="${sessionScope.id=='admin'}">
+	<input type="hidden" name="secret1">
+	<input type="hidden" name="pwd">
+	</c:when>
+	<c:otherwise>
+ 	<input type="checkbox" name="secret1">비밀글 여부<br>
+	비밀번호<br>
+	<input type="password" name="pwd" class="form-control"><br>
+</c:otherwise>
+</c:choose>	
 <input type="submit" value="등록" class="btn btn-white w-100 all">
 
 </form:form>

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminController {
 	@GetMapping("/adminpage")
 	public String adminpage() {
-		return ".feed.adminpage.adminside.manageMembers";
+		return "redirect:/manageMembers_List_All";
 	}
 }

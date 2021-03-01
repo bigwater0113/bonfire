@@ -67,7 +67,7 @@ public class BMembersController {
 			n=service.delete(i);
 		}
 		if(n>0) {
-			return ".feed.adminpage.adminside.manageMembers";
+			return "redirect:/manageMembers_List_All";
 		}else {
 			return ".home.error";
 		}

@@ -18,4 +18,5 @@ public class SCommentDao {
     public Integer getMax(int num) {return sqlSession.selectOne(NAMESPACE+".getMax", num);}
     public int addComment(SCommentVo vo) {return sqlSession.insert(NAMESPACE+".addComment", vo);}
     public int editComment(SCommentVo vo) {return sqlSession.update(NAMESPACE+".editComment", vo);}
+    public int deleteComment(SCommentVo vo) {return sqlSession.update(NAMESPACE+".deleteComment", vo);}
 }

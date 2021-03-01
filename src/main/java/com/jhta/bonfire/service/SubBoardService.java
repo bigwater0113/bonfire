@@ -26,4 +26,5 @@ public interface SubBoardService {
     public int getMax(int num);
     public int addComment(SCommentVo vo);
     public int editComment(SCommentVo vo);
+    public int deleteComment(SCommentVo vo);
 }

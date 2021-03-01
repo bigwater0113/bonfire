@@ -45,13 +45,17 @@ order by idx asc
 
     <update id="editComment" parameterType="scomment">
         update scomment
-        <set>
-            <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(content)">
-                content=#{content} 
-            </if>
-        </set>
-        where num=#{num} and id=#{id}
+        set content=#{content, jdbcType=VARCHAR} 
+        where num=#{num} and id=#{id} and idx=#{idx}
+        <!-- <set> -->
+            <!-- <if test="@com.jhta.bonfire.util.CommonUtil@isNotEmpty(content)"> -->
+            <!-- </if> -->
+        <!-- </set> -->
     </update>
+
+    <delete id="deleteComment" parameterType="scomment">
+        delete from scomment where num=#{num} and id=#{id} and idx=#{idx}
+    </delete>
 
 
 </mapper>

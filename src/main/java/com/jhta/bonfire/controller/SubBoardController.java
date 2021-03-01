@@ -173,5 +173,43 @@ public class SubBoardController {
         map.put("success", (result==1)? true:false);
         return map;
     }
+    
+    @RequestMapping(value={"/board/{cname}/article/{num}/commentedit"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public HashMap<String, Object> editComment(
+        @PathVariable String cname
+        , @PathVariable int num
+        , @AuthenticationPrincipal Authentication authentication
+        , @RequestParam String content
+        , @RequestParam int idx
+    ) {
+        HashMap<String, Object> map = new HashMap<>();
+        // int idx = service.getMax(num)+1;
+        Optional<String> id = Optional.ofNullable(authentication.getName());
+        id.ifPresent(user->{
+            int result = service.editComment(new SCommentVo(idx, num, authentication.getName(), content, null));
+            map.put("success", (result==1)? true:false);
+        });
 
+        map.put("idx", idx);
+        return map;
+    }
+
+    @RequestMapping(value={"/board/{cname}/article/{num}/commentdelete"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseBody
+    public HashMap<String, Object> deleteComment(
+        @PathVariable String cname
+        , @PathVariable int num
+        , @AuthenticationPrincipal Authentication authentication
+        , @RequestParam int idx
+    ) {
+        HashMap<String, Object> map = new HashMap<>();
+        Optional<String> id = Optional.ofNullable(authentication.getName());
+        id.ifPresent(user->{
+            int result = service.deleteComment(new SCommentVo(idx, num, authentication.getName(), null, null));
+            map.put("success", (result==1)? true:false);
+        });
+        map.put("idx", idx);
+        return map;
+    }
 }

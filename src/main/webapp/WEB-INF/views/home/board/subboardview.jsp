@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.username" var="user_id" />
+</sec:authorize>
 <style type="text/css">
 table{
     margin-top:20px;
@@ -11,6 +14,10 @@ table, th, td{
 }
 textarea.autosize {
     min-height: 50px;
+}
+.commentcontent{
+    background-color: white;
+    border: 1px solid #333333;
 }
 </style>
 <div>
@@ -51,21 +58,25 @@ textarea.autosize {
                     <tbody id="article_comment">
                     </tbody>
                     <!-- TODO:멤버 이상 권한 있을때 사용가능하도록 변경 -->
-                    <tbody id="article_comment_write">
-                        <tr>
-                            <td colspan="3">
-                                <form:form id="comment_write">
-                                    <div class="mb-3">
-                                        <label class="form-label">댓글 <span class="form-label-description"></span></label>
-                                        <textarea class="form-control" name="content" rows="6" placeholder="댓글쓰기.."></textarea>
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn">작성하기</button>
-                                    </div>
-                                </form:form>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <sec:authorize access="isAuthenticated()">
+                        <sec:authorize access="hasRole('ROLE_MEMBER')">
+                            <tbody id="article_comment_write">
+                                <tr>
+                                    <td colspan="3">
+                                        <form:form id="comment_write">
+                                            <div class="mb-3">
+                                                <label class="form-label">댓글 <span class="form-label-description"></span></label>
+                                                <textarea class="form-control" name="content" rows="6" placeholder="댓글쓰기.."></textarea>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn">작성하기</button>
+                                            </div>
+                                        </form:form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </sec:authorize>
+                    </sec:authorize>
                 </table>
             </div>
         </div>
@@ -73,6 +84,7 @@ textarea.autosize {
     </div>
 
 </div>
+
 <script type="text/javascript">
     let recommend = '${vo.recommend}';
     $('#recommend').text(recommend);
@@ -85,7 +97,7 @@ textarea.autosize {
     $('#tglrecomm').on('click', function(){
         $.getJSON("${cp }/board/${cname }/article/${vo.num}/recomm", {tglrecomm: $('#tglrecomm').hasClass('recommstar')?1:-1}, 
             function (response) {
-                console.log(response);
+                // console.log(response);
                 if (response.value=='1') $('#tglrecomm').attr('fill', 'currentColor');
                 else $('#tglrecomm').attr('fill', 'none');
                 let result = parseInt(recommend)+(response.value);
@@ -96,24 +108,40 @@ textarea.autosize {
     })
     
     function getComment() {
+        $('#article_comment').empty();
         $.ajax({
             type: "get",
             url: "${cp}/board/${cname}/article/${vo.num}/comment",
             // data: "data",
             // dataType: "dataType",
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 $('#article_comment').empty();
                 response.forEach(detail => {
-                    console.log(detail);
+                    // console.log(detail);
                     let html = 
                     `<tr data-idx="`+detail.idx+`">
-                        <td>
-                            <div id="username">`+detail.id+`</div>
-                            <div>`+detail.adddate+`</div>
-                            <div>추천:`+detail.value+`</div>
+                        <td colspan="3">
+                            <div class="d-flex">
+                                <div id="username">아이디 : `+detail.id+`</div>
+                                <div class="ms-auto">`+detail.adddate+`</div>
+                            </div>
+                            <div class="d-flex">
+                                <div>추천:`+detail.value+`</div>
+                                <div class="ms-auto d-flex">`;
+
+                            <sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal.username" var="user_id" />
+                            if (detail.id=='${user_id}') html+=
+                            `<button type="button" class="btn btn-edit" data-idx="`+detail.idx+`" onclick="editcomment('`+detail.idx+`')">수정</button>
+                            <button type="button" class="btn btn-delete" data-idx="`+detail.idx+`" onclick="deletecomment('`+detail.idx+`')">삭제</button>`;
+                            </sec:authorize>
+
+
+                                html+=`</div>
+                            </div>
+                            <textarea class="w-100 h-100" id="`+detail.idx+`" readonly>`+detail.content+`</textarea>
                         </td>
-                        <td colspan="2">`+detail.content+`</td>
                     </tr>`;
                     $('#article_comment').append(html);
                 });
@@ -122,6 +150,52 @@ textarea.autosize {
     };
 
     getComment();
+    
+    function editcomment(idx) {
+        let status = $("#"+idx).prop('readonly');
+        $('button[data-idx='+idx+']').contents("변경합니다");
+        if (status) {
+            $("#"+idx).prop('readonly', false);
+            if ($('button.btn-edit[data-idx="'+idx+'"]').text()=='수정') {
+                $('button.btn-edit[data-idx="'+idx+'"]').text('변경하기');
+            }else $('button.btn-edit[data-idx="'+idx+'"]').text('수정');
+        }else{
+            let content = $("#"+idx).val();
+            $.ajax({
+                type: "post",
+                url: "${cp }/board/${cname }/article/${vo.num}/commentedit",
+                // url: "http://httpbin.org/post",
+                data: [{name: "content", value:content},{name:"idx", value: idx}],
+                // contentType:'application/json;charset=UTF-8',
+                beforeSend(jqXHR, settings) {
+                    jqXHR.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+                success: function (response) {
+                    console.log(response);
+                    getComment();
+                }
+            });
+        }
+    }
+    function deletecomment(idx) {
+        $.ajax({
+            type: "post",
+            url: "${cp }/board/${cname }/article/${vo.num}/commentdelete",
+            // url: "http://httpbin.org/post",
+            data: [{name:"idx", value: idx}],
+            // contentType:'application/json;charset=UTF-8',
+            beforeSend(jqXHR, settings) {
+                jqXHR.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
+            success: function (response) {
+                // console.log(response);
+                getComment();
+            }
+        });
+    }
+
+
+
 
 
     $("textarea.autosize").on('keydown keyup', function () {
@@ -130,18 +204,19 @@ textarea.autosize {
 
     $("#comment_write").on('submit', function(e){
         e.preventDefault();
-        console.log($(comment_write).serialize());
+        // console.log($(comment_write).serialize());
         $.ajax({
-            type: "get",
+            type: "post",
             url: "${cp }/board/${cname }/article/${vo.num}/commentwrite",
             data: $(comment_write).serialize(),
             beforeSend(jqXHR, settings) {
-                console.log(settings.url)
+                // console.log(settings.url)
+                jqXHR.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
             },
             // dataType: "dataType",
             success: function (response) {
-                console.log(response);
-                $('#article_comment').empty();
+                // console.log(response);
+                // $('#article_comment').empty();
                 getComment();
             }
         });

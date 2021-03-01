@@ -93,9 +93,12 @@ public class SubBoardServiceImpl implements SubBoardService {
 
 	@Override
 	public int editComment(SCommentVo vo) {
-		return editComment(vo);
+		return sCommentDao.editComment(vo);
 	}
 
+	public int deleteComment(SCommentVo vo) {
+		return sCommentDao.deleteComment(vo);
+	}
 	
 	
 }

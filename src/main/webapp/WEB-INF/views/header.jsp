@@ -39,7 +39,7 @@
 			<c:if test = "${role != 'ROLE_ADMIN' }">
 			<a href="${cp }/@${id}">마이페이지</a><br>
 			</c:if>
-			<c:if test="${role != 'ROLE_ADMIN' }">
+			<c:if test="${role == 'ROLE_ADMIN' }">
 				<a href="${cp }/adminpage">관리자페이지</a><br>
 			</c:if>
 			<c:if test="${role == 'ROLE_MEMBER' }">

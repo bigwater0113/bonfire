@@ -20,6 +20,7 @@
 <style>
 	*{margin:0px;padding:0px;}
 	#banner img{width:100%;height:100%}
+	#side{height: 1400px;}
 </style>
 </head>
 <body>
@@ -45,12 +46,12 @@
 		</c:choose>
 		
 	</div>
-	<div id="side">
-		<tiles:insertAttribute name="side"/>
-	</div>
-	<div id="content">
-		<tiles:insertAttribute name="content"/>
-	</div>
+		<div id="side">
+			<tiles:insertAttribute name="side"/>
+		</div>
+		<div id="content">
+			<tiles:insertAttribute name="content"/>
+		</div>
 	<div id="footer">
 		<tiles:insertAttribute name="footer"/>
 	</div>
